@@ -28,9 +28,9 @@ export function crumbsFor(p: Page | Story): { label: string; href?: string }[] {
   const seg = p.path.split('/')[1];
   const c: { label: string; href?: string }[] = [];
   const s = SECTIONS[seg];
-  if (s && s.href !== p.path) c.push(s);
+  if (s) c.push(s.href !== p.path ? s : { label: s.label });
   if (p.path.startsWith('/woa/about/') && p.path !== '/woa/about/') c.push({ label: 'About', href: '/woa/about/' });
-  if (p.path.startsWith('/noas/noa-guide/') && p.path !== '/noas/noa-guide/') c.push({ label: 'NOA Guide', href: '/noas/noa-guide/' });
+  if (p.path.startsWith('/noas/noa-guide/')) c.push(p.path !== '/noas/noa-guide/' ? { label: 'NOA Guide', href: '/noas/noa-guide/' } : { label: 'NOA Guide' });
   if (p.path.startsWith('/olympians/wof/') && p.path !== '/olympians/wof/') c.push({ label: 'WOF', href: '/olympians/wof/' });
   if (/^\/oly-house\/.+\/(\d{4})\/$/.test(p.path)) { const y = p.path.match(/(\d{4})\/$/)![1]; c.push({ label: y, href: `/oly-house/${y}/` }); }
   c.push({ label: p.title });

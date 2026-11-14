@@ -74,28 +74,34 @@ export function prose(html: string, opts: { toc?: boolean } = {}): { html: strin
     let li: any = null;
     ol.nextAll().each((_, el) => {
       const isYear = yearPs.toArray().includes(el as any);
-      if (isYear) { li = $('<li></li>'); ol.append(li); $(el).addClass('tl-year'); }
-      if (li) li.append(el);
+      if (isYear) { li = $('<li><div class="tl-body"></div></li>'); ol.append(li); $(el).addClass('tl-year'); li.prepend(el); return; }
+      if (li) li.children('.tl-body').append(el);
     });
   }
+  r.find('a[href="#"]').each((_, a) => { $(a).replaceWith($(a).contents()); });
   r.find('img').attr('loading', 'lazy').attr('decoding', 'async');
   r.find('a[target="_blank"]').attr('rel', 'noopener');
   r.find('table').each((_, t) => {
-    const rows = $(t).find('tr');
-    const first = rows.first();
-    const cells = first.children('td,th');
-    const looksHead = first.find('th').length > 0 || (cells.length > 1 && cells.toArray().every(c => { const tx = $(c).text().trim(); return tx.length > 0 && tx.length < 30 && ($(c).find('strong,b').length > 0 || /^(time|activity|location|date|name|country|title)$/i.test(tx)); }));
-    if (looksHead && rows.length > 1) {
+    const T = $(t);
+    // drop rows that are completely empty
+    T.find('tr').each((_, tr) => { if (!$(tr).text().replace(/\u00a0/g, ' ').trim() && !$(tr).find('img,a').length) $(tr).remove(); });
+    const rows = T.find('tr');
+    // a single wide cell row = caption (e.g. a date in an agenda)
+    rows.each((_, tr) => { const c = $(tr).children('td,th'); if (c.length === 1 && rows.length > 1 && (+(c.attr('colspan') || 1) > 1)) $(tr).addClass('caption-row'); });
+    const cand = rows.filter((_, tr) => !$(tr).hasClass('caption-row')).first();
+    const cells = cand.children('td,th');
+    const looksHead = cand.parent().is('thead') || cand.find('th').length > 0 || (cells.length > 1 && cells.toArray().every(c => { const tx = $(c).text().trim(); return tx.length > 0 && tx.length < 30 && ($(c).find('strong,b').length > 0 || /^(time|activity|location|date|name|country|title)$/i.test(tx)); }));
+    if (looksHead && rows.length > 1 && cells.length > 1) {
       const labels = cells.toArray().map(c => $(c).text().replace(/\s+/g, ' ').trim());
-      first.addClass('thead-row');
-      rows.slice(1).each((_, tr) => { $(tr).children('td,th').each((i, td) => { if (labels[i]) $(td).attr('data-label', labels[i]); }); });
-      $(t).addClass('has-head');
+      cand.addClass('thead-row');
+      rows.not(cand).not('.caption-row').each((_, tr) => { $(tr).children('td,th').each((i, td) => { if (labels[i]) $(td).attr('data-label', labels[i]); }); });
+      T.addClass('has-head');
     }
-    $(t).wrap('<div class="table"></div>');
+    T.wrap('<div class="table"></div>');
   });
   const toc: Toc = [];
   const used = new Set<string>();
-  r.find('h2').each((_, h) => {
+  r.find('h2').not('.tab-title').each((_, h) => {
     const text = $(h).text().replace(/\s+/g, ' ').trim();
     if (!text || text.length > 90) return;
     let id = slugify(text) || 'section'; let n = 2; while (used.has(id)) id = slugify(text) + '-' + n++;

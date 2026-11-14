@@ -7,10 +7,15 @@ import { crumbsFor, type Page } from '../../lib/data';
 interface Props { page: Page }
 const { page } = Astro.props;
 const { html, toc } = prose(page.body);
-const docsInBody = new Set([...page.body.matchAll(/href="([^"]+)"/g)].map(m => m[1]));
-const downloads = page.downloads.filter(d => /\.(pdf|docx?|xlsx?|pptx?|zip)(\?|$)/i.test(d.href) || /library/.test(d.href)).filter(d => !docsInBody.has(d.href));
+const isDoc = (h: string) => /\.(pdf|docx?|xlsx?|pptx?|zip)(\?|$)/i.test(h) || /\/library\//.test(h);
+const downloads = page.downloads.filter(d => isDoc(d.href));
+// side column with more than documents (e.g. Olympian.org Email help) is shown as is
+const sideText = page.side.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+const docText = downloads.map(d => d.label).join(' ').replace(/\s+/g, ' ').trim();
+const sideRich = sideText.length > 0 && (page.downloads.some(d => !isDoc(d.href)) || sideText.length > docText.length + 2);
+const side = sideRich ? prose(page.side, { toc: false }).html : '';
 const showToc = toc.length >= 3;
-const hasAside = downloads.length > 0 || showToc;
+const hasAside = downloads.length > 0 || showToc || sideRich;
 const current = BASE + page.path;
 ---
 <PageHero title={page.title} crumbs={crumbsFor(page)} bg={b(page.bg)} />
@@ -20,8 +25,9 @@ const current = BASE + page.path;
     <div class="prose" set:html={html} />
     {hasAside && (
       <aside class="aside">
-        <div class="aside aside-sticky">
-          <Docs items={downloads} />
+        <div class:list={['aside', { 'aside-sticky': !sideRich }]}>
+          {!sideRich && <Docs items={downloads} />}
+          {sideRich && <div class="panel prose side-prose" set:html={side} />}
           {showToc && (
             <nav class="panel toc" aria-label="On this page">
               <ol>{toc.map(t => <li><a href={`#${t.id}`}>{t.text}</a></li>)}</ol>

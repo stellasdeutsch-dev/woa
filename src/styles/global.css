@@ -256,7 +256,15 @@ p { margin: 0; text-wrap: pretty; }
 /* Timeline (History) */
 .prose .timeline { list-style: none; padding: 0; margin-top: var(--sp-6); display: grid; gap: 0; }
 .prose .timeline > li { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sp-2); padding: 0 0 var(--sp-6) var(--sp-6); margin: 0; border-left: 2px solid var(--c-grey-200); }
-.prose .timeline > li::before { content: ''; position: absolute; left: -7px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--c-white); border: 2px solid var(--c-gold); }
-.prose .timeline .tl-year { font-size: var(--fs-h3); font-weight: 700; line-height: 1.2; }
-.prose .timeline > li > * + * { margin-top: .5em; }
-@media (min-width: 834px) { .prose .timeline > li { grid-template-columns: 120px minmax(0, 1fr); column-gap: var(--sp-6); } .prose .timeline .tl-year { grid-row: span 20; } .prose .timeline > li > p:not(.tl-year) { margin-top: 0; } .prose .timeline > li > p + p:not(.tl-year) { margin-top: .6em; } }
+.prose .timeline > li:last-child { padding-bottom: 0; }
+.prose .timeline > li::before { content: ''; position: absolute; left: -7px; top: 8px; width: 12px; height: 12px; border-radius: 50%; background: var(--c-white); border: 2px solid var(--c-gold); }
+.prose .timeline .tl-year { font-size: var(--fs-h3); font-weight: 700; line-height: 1.2; margin: 0; }
+.prose .tl-body > * + * { margin-top: .6em; }
+@media (min-width: 834px) { .prose .timeline > li { grid-template-columns: 120px minmax(0, 1fr); column-gap: var(--sp-6); } .prose .tl-body { padding-top: 4px; } }
+.prose blockquote img { max-width: 220px; }
+.side-prose { font-size: var(--fs-small); }
+.side-prose h2, .side-prose h3 { font-size: var(--fs-body); margin-top: 1.4em; }
+.side-prose > :first-child { margin-top: 0; }
+.table tr.caption-row td, .table tr.caption-row th { background: var(--c-black); color: var(--c-white); text-align: left; }
+.table tr.caption-row h4, .table tr.caption-row h5 { margin: 0; font-size: var(--fs-body); }
+@media (max-width: 700px) { .table tr.caption-row { border: 0; padding: 0; background: var(--c-black); color: var(--c-white); border-radius: var(--radius); } .table tr.caption-row td, .table tr.caption-row th { padding: 12px 14px; } }

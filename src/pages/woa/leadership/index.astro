@@ -13,7 +13,7 @@ const hasOly = (n: string) => /\sOLY$/.test(n);
   <section class="section-tight">
     <div class="container">
       <ul class="honorary">
-        {leadership.honorary.map(h => <li><p class="h-role">{h.role}</p><p class="h-name">{split(h.name)}{hasOly(h.name) && <small> OLY</small>}</p></li>)}
+        {leadership.honorary.map(h => <li><p class="h-name">{split(h.name)}{hasOly(h.name) && <small> OLY</small>}</p><p class="h-role">{h.role}</p></li>)}
       </ul>
     </div>
   </section>
@@ -26,18 +26,18 @@ const hasOly = (n: string) => /\sOLY$/.test(n);
             <button class="person-btn" type="button" data-person={i} aria-haspopup="dialog">
               <span class="card-media"><img src={b(x.img)} alt="" loading="lazy" /></span>
               <span class="card-body">
-                <span class="p-role">{x.role}</span>
                 <span class="card-title">{split(x.name)}{hasOly(x.name) && <small> OLY</small>}</span>
                 <span class="card-meta">{x.meta}</span>
+                <span class="p-role">{x.role}</span>
               </span>
             </button>
             <dialog class="person-dlg" id={`person-${i}`} aria-label={x.name}>
               <div class="pd-head">
                 <img src={b(x.img)} alt="" loading="lazy" />
                 <div>
-                  <p class="p-role">{x.role}</p>
                   <h3>{split(x.name)}{hasOly(x.name) && <small> OLY</small>}</h3>
                   <p class="card-meta">{x.meta}</p>
+                  <p class="p-role">{x.role}</p>
                 </div>
                 <button class="icon-btn pd-close" type="button" data-close aria-label="Close"><svg class="icon"><use href="#i-close" /></svg></button>
               </div>
@@ -62,7 +62,7 @@ const hasOly = (n: string) => /\sOLY$/.test(n);
   @media (min-width: 1024px) { .honorary { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
   .honorary li { padding: var(--sp-5); background: var(--c-grey-50); border-radius: var(--radius-lg); }
   .h-role { font-size: var(--fs-small); color: var(--c-grey-700); font-weight: 600; }
-  .h-name { margin-top: var(--sp-2); font-size: var(--fs-h4); font-weight: 700; line-height: 1.3; }
+  .h-role { margin-top: var(--sp-2); } .h-name { font-size: var(--fs-h4); font-weight: 700; line-height: 1.3; }
   small { font-size: .7em; font-weight: 700; color: var(--c-grey-600); }
   .people { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-5); grid-template-columns: repeat(2, minmax(0, 1fr)); }
   @media (min-width: 834px) { .people { grid-template-columns: repeat(3, minmax(0, 1fr)); } }

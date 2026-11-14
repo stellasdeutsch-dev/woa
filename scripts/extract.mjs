@@ -3,6 +3,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import * as cheerio from 'cheerio';
+import { mapPath } from './paths.mjs';
 
 const RAW = 'data/raw';
 const OUT = 'src/data';
@@ -20,19 +21,6 @@ const ALLOWED = {
   section: ['id', 'class'], select: ['name', 'required', 'multiple', 'id'], option: ['value', 'selected', 'disabled'], textarea: ['name', 'required', 'rows', 'placeholder'], button: ['type', 'data-tab'], u: [], span: [],
 };
 
-// Map original path+query to a static path (GitHub Pages cannot serve query variants).
-export function mapPath(p, search = '') {
-  if (!p.endsWith('/') && !path.extname(p)) p += '/';
-  const q = new URLSearchParams(search);
-  q.delete('langid');
-  if (/^\/best-practices\//.test(p)) q.delete('id');
-  if (/^\/(news|best-practices)\/$/.test(p) && q.has('StartRow')) { const n = Math.floor((+q.get('StartRow') - 1) / 19) + 1; return n > 1 ? `${p}page/${n}/` : p; }
-  if (q.has('tab')) return p + q.get('tab') + '/';
-  if (q.has('year')) return p + q.get('year') + '/';
-  if (q.has('register')) return p + 'register/';
-  if (q.has('gdpr')) return p + 'gdpr/';
-  return p;
-}
 function ytId(src) { const m = String(src).match(/(?:embed\/|v=|youtu\.be\/)([\w-]{6,})/); return m ? m[1] : null; }
 
 function rewriteUrl(u) {
@@ -62,7 +50,7 @@ function clean($, root, shift = 1) {
     $(ul).replaceWith(`<div class="tabset"><div class="tabset-nav">${tabs.map(t => `<button type="button" data-tab="${t.id}">${t.label}</button>`).join('')}</div>${panels.join('')}</div>`);
   });
   // spam-trap field (hidden on the original) and language switch that has no target here
-  $r.find('input[name="Rating"]').each((_, el) => { $(el).prev('br').remove(); $(el).prevAll('label').first().remove(); $(el).prevAll('br').first().remove(); $(el).remove(); });
+  $r.find('input[name="Rating"]').each((_, el) => { const l = $(el).prevAll('label').first(); if (/^\s*Rating\s*$/.test(l.text())) l.remove(); $(el).remove(); });
   $r.find('.language-selector').remove();
   $r.find('iframe').each((_, el) => {
     const src = $(el).attr('src') || '';

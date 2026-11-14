@@ -32,7 +32,7 @@ const amountFor = (t: string) => { const a = amounts.find(x => x.includes(t.repl
       <div class="section-head"><h2>{p.title} {title}</h2></div>
       <div class="prose lead-block" set:html={via} />
       <ul class="amounts">
-        {amounts.map(a => { const [k, v] = a.split(/\s[–-]\s/); return <li><span class="amount fact">{v}</span><span class="amount-k">{k}</span></li>; })}
+        {amounts.map(a => { const m = a.match(/^(.*?\s[–-]\s)(.*)$/); return <li><span class="amount-k">{m ? m[1] : ''}</span><span class="amount fact">{m ? m[2] : a}</span></li>; })}
       </ul>
       <div class="prose apply" set:html={apply} />
       <div class="grid grid-3 cats">
