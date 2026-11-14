@@ -202,6 +202,8 @@ const unique = [];
 for (const pg of ordered) { const k = pg.title + '|' + pg.body; if (pg.body.length > 200 && byBody.has(k)) { redirects.push({ from: pg.path, to: byBody.get(k) }); continue; } byBody.set(k, pg.path); unique.push(pg); }
 pages.length = 0; pages.push(...unique.filter(p => p.path !== '/olympians/noa-directory/'));
 redirects.push({ from: '/olympians/noa-directory/', to: '/noas/noa-directory/' });
+// links on the original that point to a page without its year / with a typo
+redirects.push({ from: '/oly-house/leave-your-mark/', to: '/oly-house/leave-your-mark/2020/' }, { from: '/oly-house/oly-day/', to: '/oly-house/oly-day/2020/' }, { from: '/olympians/oly-art/', to: '/olympians/oly-arts/' });
 fs.writeFileSync(`${OUT}/redirects.json`, JSON.stringify(redirects, null, 1));
 // point links straight at canonical pages
 const redirMap = new Map(redirects.map(r => ['{{BASE}}' + r.from, '{{BASE}}' + r.to]));

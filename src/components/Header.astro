@@ -96,9 +96,9 @@ const isCur = (href: string, children?: { href: string }[]) => {
   .mobile-menu { margin: 0; width: 100%; max-width: 100%; height: 100%; max-height: 100%; padding: 0; border: 0; background: var(--c-white); color: var(--c-ink); overflow-y: auto; }
   .mobile-menu[open] { display: flex; flex-direction: column; }
   .mobile-menu::backdrop { background: rgba(0, 0, 0, .4); }
-  .mm-head { display: flex; align-items: center; justify-content: space-between; height: var(--header-h); padding-inline: var(--gutter); border-bottom: 1px solid var(--c-grey-200); }
+  .mm-head { flex: none; display: flex; align-items: center; justify-content: space-between; height: var(--header-h); padding-inline: var(--gutter); border-bottom: 1px solid var(--c-grey-200); }
   .mm-head .logo img { height: 56px; }
-  .mm-list { list-style: none; margin: 0; padding: var(--sp-3) var(--gutter); }
+  .mm-list { flex: none; list-style: none; margin: 0; padding: var(--sp-3) var(--gutter); }
   .mm-list > li { border-bottom: 1px solid var(--c-grey-200); }
   .mm-list summary, .mm-top { display: flex; align-items: center; justify-content: space-between; min-height: 60px; font-size: 1.25rem; font-weight: 700; cursor: pointer; list-style: none; transition: color var(--t); }
   .mm-list summary::-webkit-details-marker { display: none; }

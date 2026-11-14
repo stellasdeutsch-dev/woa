@@ -2629,5 +2629,127 @@
    "{{BASE}}/news/2057/olympian-community-called-on-to-support-nepal-following-devastating-floods/"
   ],
   "desc": "Olympians and Paralympians from the South West chapter of the US Olympians and Paralympians Association came to the Medisend HQ in Dallas to help load up two containers of medical supplies which will be flown to Sierra Leone as part of the World Olympians Association’s  #TargetEbola campaign. The Dallas Olympians and Paralympians joined in with members of the Sierra Leone community in Dallas and other volunteers to help label and load nearly 2,000 boxes which contained such vital supplies as surgical and examination gloves, gowns, protective masks, goggles, syringes and iv infusion sets."
+ },
+ {
+  "path": "/ioa-2019/",
+  "orig": "/ioa-2019/",
+  "title": "Nomination for 59th IOA International Session for Young Participants Athens, Greece. 1–15 June 2019",
+  "section": "IOA 2019",
+  "date": null,
+  "bg": null,
+  "tabs": [],
+  "body": "<h2>Registration is now closed for this event.</h2>",
+  "side": "",
+  "downloads": [],
+  "related": [],
+  "desc": ""
+ },
+ {
+  "path": "/grants-battle/",
+  "orig": "/grants-battle/",
+  "title": "Grants Challenge",
+  "section": "World Olympians Forum, 2019",
+  "date": null,
+  "bg": "{{BASE}}/backgrounds/59.webp",
+  "tabs": [],
+  "body": "<p>This is now closed for applications</p>",
+  "side": "",
+  "downloads": [],
+  "related": [],
+  "desc": ""
+ },
+ {
+  "path": "/tokyo-2020/",
+  "orig": "/tokyo-2020/",
+  "title": "Tokyo 2020",
+  "section": "",
+  "date": null,
+  "bg": "{{BASE}}/backgrounds/69.webp",
+  "tabs": [],
+  "body": "<h2>OLY House Tokyo 2020</h2>\n<p>We’re creating an exclusive online destination that Olympians of all ages, nations and sports can call their own during Games time.</p>\n<p>We’ll be sharing more information on our Games time activities in the coming weeks so stay tuned via our website, <a href=\"https://twitter.com/worldolympians\">Twitter</a> and <a href=\"https://www.facebook.com/WorldOlympiansAssociation\">Facebook</a> to find out more.</p>",
+  "side": "<p>Select language</p>\n\t\t\t\t\t<ul>\n\t\t\t\t\t\t<li><a href=\"{{BASE}}/tokyo-2020/\">English</a></li>\n\t\t\t\t\t\t<li><a href=\"{{BASE}}/tokyo-2020/\">Français</a></li>\n\t\t\t\t\t\t<li><a href=\"{{BASE}}/tokyo-2020/\">Español</a></li>\n\t\t\t\t\t\t<li><a href=\"{{BASE}}/tokyo-2020/\">日本語</a></li>\n\t\t\t\t\t</ul>",
+  "downloads": [
+   {
+    "label": "English",
+    "href": "{{BASE}}/tokyo-2020/"
+   },
+   {
+    "label": "Français",
+    "href": "{{BASE}}/tokyo-2020/"
+   },
+   {
+    "label": "Español",
+    "href": "{{BASE}}/tokyo-2020/"
+   },
+   {
+    "label": "日本語",
+    "href": "{{BASE}}/tokyo-2020/"
+   }
+  ],
+  "related": [],
+  "desc": ""
+ },
+ {
+  "path": "/olympians/oly-arts/",
+  "orig": "/olympians/oly-arts/",
+  "title": "Call for Proposals for Tokyo 2020 Olympians Arts Project",
+  "section": "OLY Arts",
+  "date": null,
+  "bg": "{{BASE}}/backgrounds/71.webp",
+  "tabs": [],
+  "body": "<h3>This has now closed</h3>",
+  "side": "<p>Select Language</p>\n\t\t\t\t\t<ul>\n\t\t\t\t\t\t<li><a href=\"{{BASE}}/olympians/oly-arts/\">English</a></li>\n\t\t\t\t\t\t<li><a href=\"{{BASE}}/olympians/oly-arts/\">Français</a></li>\n\t\t\t\t\t\t<li><a href=\"{{BASE}}/olympians/oly-arts/\">Español</a></li>\n\t\t\t\t\t\t<li><a href=\"{{BASE}}/olympians/oly-arts/\">日本語</a></li>\n\t\t\t\t\t</ul>\n\t\t\t\t\t\t\t<p>Click <a href=\"{{BASE}}/library/oly_art/oly_arts_tokyo_2020_project_brief_en.pdf\" class=\"doc\">HERE</a> to download the creative brief</p>",
+  "downloads": [
+   {
+    "label": "English",
+    "href": "{{BASE}}/olympians/oly-arts/"
+   },
+   {
+    "label": "Français",
+    "href": "{{BASE}}/olympians/oly-arts/"
+   },
+   {
+    "label": "Español",
+    "href": "{{BASE}}/olympians/oly-arts/"
+   },
+   {
+    "label": "日本語",
+    "href": "{{BASE}}/olympians/oly-arts/"
+   },
+   {
+    "label": "HERE",
+    "href": "{{BASE}}/library/oly_art/oly_arts_tokyo_2020_project_brief_en.pdf"
+   }
+  ],
+  "related": [],
+  "desc": ""
+ },
+ {
+  "path": "/waos/",
+  "orig": "/waos/",
+  "title": "World Academy of Sport",
+  "section": "",
+  "date": null,
+  "bg": null,
+  "tabs": [],
+  "body": "<h3>Sorry, applications have now closed.</h3>",
+  "side": "",
+  "downloads": [],
+  "related": [],
+  "desc": ""
+ },
+ {
+  "path": "/registration/",
+  "orig": "/registration/",
+  "title": "2019 World Olympians Forum",
+  "section": "NOA",
+  "date": null,
+  "bg": null,
+  "tabs": [],
+  "body": "<h2>Registration is now closed for the 2019 World Olympians Forum</h2>",
+  "side": "",
+  "downloads": [],
+  "related": [],
+  "desc": ""
  }
 ]

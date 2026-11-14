@@ -48,7 +48,23 @@
   "to": "/olympians/olympian-org-email/"
  },
  {
+  "from": "/grants/",
+  "to": "/noas/grants/"
+ },
+ {
   "from": "/olympians/noa-directory/",
   "to": "/noas/noa-directory/"
+ },
+ {
+  "from": "/oly-house/leave-your-mark/",
+  "to": "/oly-house/leave-your-mark/2020/"
+ },
+ {
+  "from": "/oly-house/oly-day/",
+  "to": "/oly-house/oly-day/2020/"
+ },
+ {
+  "from": "/olympians/oly-art/",
+  "to": "/olympians/oly-arts/"
  }
 ]

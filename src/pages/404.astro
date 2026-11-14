@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import { url, NAV } from '../lib/site';
+---
+<Base title="Page not found" noindex search={false}>
+  <section class="section">
+    <div class="container nf">
+      <h1>Page not found</h1>
+      <div class="nf-actions">
+        <a class="btn" href={url('/')}>Home<svg class="icon icon-arrow"><use href="#i-arrow" /></svg></a>
+        <button class="btn btn-outline" type="button" data-open-search><svg class="icon"><use href="#i-search" /></svg>Search</button>
+      </div>
+      <ul class="nf-links">{NAV.map(n => <li><a class="link-arrow" href={url(n.href)}>{n.label}<svg class="icon"><use href="#i-arrow" /></svg></a></li>)}</ul>
+    </div>
+  </section>
+</Base>
+<style>
+  .nf { display: grid; gap: var(--sp-6); justify-items: start; }
+  .nf h1 { font-size: var(--fs-h1); }
+  .nf-actions { display: flex; flex-wrap: wrap; gap: var(--sp-3); }
+  .nf-links { list-style: none; margin: var(--sp-5) 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--sp-3) var(--sp-6); }
+</style>

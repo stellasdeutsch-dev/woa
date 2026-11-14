@@ -4518,5 +4518,45 @@
   "path": "/%E2%80%9Dmailto:/",
   "status": 200,
   "final": "https://olympians.org/%E2%80%9Dmailto:/"
+ },
+ {
+  "path": "/grants/",
+  "status": 200,
+  "final": "https://olympians.org/noas/grants/"
+ },
+ {
+  "path": "/olympians-party/",
+  "status": 200,
+  "final": "https://olympians.org/olympians-party/"
+ },
+ {
+  "path": "/ioa-2019/",
+  "status": 200,
+  "final": "https://olympians.org/ioa-2019/"
+ },
+ {
+  "path": "/grants-battle/",
+  "status": 200,
+  "final": "https://olympians.org/grants-challenge/"
+ },
+ {
+  "path": "/tokyo-2020/",
+  "status": 200,
+  "final": "https://olympians.org/tokyo-2020/"
+ },
+ {
+  "path": "/olympians/oly-arts/",
+  "status": 200,
+  "final": "https://olympians.org/olympians/oly-arts/"
+ },
+ {
+  "path": "/waos/",
+  "status": 200,
+  "final": "https://olympians.org/waos/"
+ },
+ {
+  "path": "/registration/",
+  "status": 200,
+  "final": "https://olympians.org/registration/"
  }
 ]
