@@ -40,6 +40,7 @@ const original = ORIGIN + (origPath ?? current);
     <slot />
   </main>
   <Footer />
+  <div class="scrollbar" aria-hidden="true"><div class="sb-fill"></div><div class="sb-thumb"><span>OLY</span></div></div>
 
   <dialog class="search-dialog" id="search" aria-label="Search">
     <div class="sd-box">
@@ -174,5 +175,29 @@ const original = ORIGIN + (origPath ?? current);
     .sd-ex mark { background: rgba(182, 166, 127, .45); color: inherit; padding: 0 1px; }
     .sd-empty { padding: 24px; color: var(--c-grey-600); }
   </style>
+  <script>
+    // Custom scroll bar on wide screens with a mouse: a gold "OLY" disc rides a thin rail, can be dragged, the rail can be clicked.
+    // Keyboard, wheel and touch scrolling stay native; phones keep the system bar.
+    const bar = document.querySelector<HTMLElement>('.scrollbar');
+    const mq = matchMedia('(min-width: 1024px) and (pointer: fine)');
+    if (bar && !navigator.webdriver) {
+      const thumb = bar.querySelector<HTMLElement>('.sb-thumb')!;
+      const root = document.documentElement;
+      let raf = 0;
+      const max = () => root.scrollHeight - innerHeight;
+      const paint = () => { raf = 0; const m = max(); const k = m > 0 ? scrollY / m : 0; bar.style.setProperty('--k', k.toFixed(4)); bar.hidden = m < 40; };
+      const queue = () => { if (!raf) raf = requestAnimationFrame(paint); };
+      const on = () => root.classList.toggle('has-sb', mq.matches);
+      on(); mq.addEventListener('change', on);
+      addEventListener('scroll', queue, { passive: true }); addEventListener('resize', queue); new ResizeObserver(queue).observe(document.body); paint();
+      const toY = (clientY: number) => { const r = bar.getBoundingClientRect(); const t = thumb.offsetHeight; const k = Math.min(1, Math.max(0, (clientY - r.top - t / 2) / (r.height - t))); scrollTo({ top: k * max(), behavior: 'instant' as ScrollBehavior }); };
+      bar.addEventListener('pointerdown', (e) => {
+        e.preventDefault(); bar.setPointerCapture(e.pointerId); bar.classList.add('dragging'); toY(e.clientY);
+        const move = (ev: PointerEvent) => toY(ev.clientY);
+        const up = () => { bar.classList.remove('dragging'); bar.removeEventListener('pointermove', move); bar.removeEventListener('pointerup', up); bar.removeEventListener('pointercancel', up); };
+        bar.addEventListener('pointermove', move); bar.addEventListener('pointerup', up); bar.addEventListener('pointercancel', up);
+      });
+    }
+  </script>
 </body>
 </html>
