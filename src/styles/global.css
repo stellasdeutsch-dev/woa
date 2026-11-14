@@ -273,3 +273,9 @@ p { margin: 0; text-wrap: pretty; }
 .media-ph img { width: 30% !important; height: auto !important; object-fit: contain !important; opacity: .6; }
 @media (min-width: 1024px) { .side-below { columns: 2; column-gap: var(--sp-8); } .side-below > * { break-inside: avoid; } }
 .side-below h2, .side-below h3 { font-size: var(--fs-h4); }
+/* people lists with photos (WOF speakers, attendees) */
+.prose ul:has(> li > img:first-child) { list-style: none; padding: 0; display: grid; gap: var(--sp-4); grid-template-columns: repeat(auto-fill, minmax(min(100%, 170px), 1fr)); }
+.prose ul:has(> li > img:first-child) > li { margin: 0; padding: var(--sp-3); border: 1px solid var(--c-grey-200); border-radius: var(--radius-lg); font-size: var(--fs-small); line-height: 1.4; transition: border-color var(--t); }
+.prose ul:has(> li > img:first-child) > li:hover { border-color: var(--c-black); }
+.prose ul:has(> li > img:first-child) > li > img { width: 100%; aspect-ratio: 1; object-fit: cover; margin-bottom: var(--sp-3); }
+.prose ul:has(> li > img:first-child) > li::marker { content: none; }

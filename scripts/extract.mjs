@@ -12,6 +12,7 @@ const index = JSON.parse(fs.readFileSync('data/crawl-index.json', 'utf8'));
 const fileFor = (p) => path.join(RAW, (p === '/' ? 'index' : p.replace(/^\/|\/$/g, '').replace(/[\/?=&]/g, '__')) + '.html');
 const DOC = /\.(pdf|docx?|xlsx?|pptx?|zip)$/i;
 const neededAssets = new Set();
+const externalImgs = new Set();
 
 const ALLOWED = {
   p: [], h1: [], h2: [], h3: [], h4: [], h5: [], h6: [], ul: [], ol: [], li: [], a: ['href', 'target'],
@@ -52,6 +53,16 @@ function clean($, root, shift = 1) {
   // spam-trap field (hidden on the original) and language switch that has no target here
   $r.find('input[name="Rating"]').each((_, el) => { const l = $(el).prevAll('label').first(); if (/^\s*Rating\s*$/.test(l.text())) l.remove(); $(el).remove(); });
   $r.find('.language-selector').remove();
+  // photos given as CSS backgrounds (WOF speakers/attendees) -> real images, stored locally
+  $r.find('[style*="background-image"]').each((_, el) => {
+    const m = ($(el).attr('style') || '').match(/url\(['"]?([^'")]+)/); if (!m) return;
+    let src = m[1];
+    const u = new URL(src, 'https://olympians.org/');
+    if (u.hostname === 'crm.thewoa.org') { externalImgs.add(u.href); src = '/crm' + u.pathname; }
+    $(el).replaceWith(`<img src="${src}" alt="">`);
+  });
+  // stray "?" characters left between list items on the original
+  $r.find('li').each((_, li) => { $(li).contents().each((_, c) => { if (c.type === 'text' && c.data.trim() === '?') $(c).remove(); }); });
   $r.find('iframe').each((_, el) => {
     const src = $(el).attr('src') || '';
     const id = ytId(src);
@@ -200,5 +211,6 @@ fs.writeFileSync(`${OUT}/pages.json`, JSON.stringify(pages, null, 1));
 fs.writeFileSync(`${OUT}/news.json`, JSON.stringify(news));
 fs.writeFileSync(`${OUT}/practices.json`, JSON.stringify(practices));
 fs.writeFileSync(`${OUT}/noas.json`, JSON.stringify(noas, null, 1));
+fs.writeFileSync('data/external-images.json', JSON.stringify([...externalImgs].sort(), null, 1));
 fs.writeFileSync('data/needed-assets.json', JSON.stringify([...neededAssets].sort(), null, 1));
 console.log({ pages: pages.length, news: news.length, practices: practices.length, noas: noas.length, assets: neededAssets.size });

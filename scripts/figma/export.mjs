@@ -13,7 +13,7 @@ fs.mkdirSync(outDir, { recursive: true });
 const FIGMA_CSS = `
   html { scroll-behavior: auto !important; }
   ::-webkit-scrollbar { display: none; }
-  .skip { display: none !important; }
+  .skip, #cookie-bar { display: none !important; }
   .noa-list > li:nth-child(n+13) { display: none !important; }
   .prose .timeline > li:nth-child(n+9) { display: none !important; }
   .prose .table tr:nth-child(n+14) { display: none !important; }
@@ -127,7 +127,24 @@ function collect() {
     const uniform = bw.every(v => v === bw[0]) && bw[0] > 0 && bc.every(c => c && bc[0] && c.hex === bc[0].hex);
     const isCircle = cs.borderTopLeftRadius.includes('%') && parseFloat(cs.borderTopLeftRadius) >= 50 && Math.abs(b.w - b.h) < 1;
     const label = el.matches('button, .btn, .pill, a.btn') ? 'Button' : el.matches('input, select, textarea') ? 'Field' : el.matches('.card, article, li') ? 'Card' : el.matches('section, header, footer, nav') ? 'Background' : 'Rectangle';
-    if (bg || uniform) {
+    const bgm = cs.backgroundImage && cs.backgroundImage.match(/url\("?([^")]+)"?\)/);
+    let bgImg = bgm && window.__bg && window.__bg.get(bgm[1]);
+    if (bgImg && (bgImg.naturalWidth < 40 || bgImg.naturalHeight < 40) && !/cover|contain/.test(cs.backgroundSize)) bgImg = null;
+    if (bg && bgImg) { rectEl(b, bg, { name: 'Background', rx: radius }); }
+    if (bgImg && b.w > 2 && b.h > 2) {
+      const scale = 1.25; const cv = document.createElement('canvas'); cv.width = Math.round(b.w * scale); cv.height = Math.round(b.h * scale);
+      const ctx = cv.getContext('2d'); const iw = bgImg.naturalWidth, ih = bgImg.naturalHeight;
+      const size = cs.backgroundSize; let dw, dh;
+      if (size === 'cover' || size.includes('%') || size === 'auto' && false) { const r = Math.max(b.w / iw, b.h / ih); dw = iw * r; dh = ih * r; }
+      else if (size === 'contain') { const r = Math.min(b.w / iw, b.h / ih); dw = iw * r; dh = ih * r; }
+      else if (size === 'auto' || size === 'auto auto') { dw = iw; dh = ih; }
+      else { const parts = size.split(' ').map(parseFloat); dw = parts[0] || iw; dh = parts[1] || (dw / iw * ih); }
+      const pos = cs.backgroundPosition.split(' ');
+      const px = (v, free) => v.endsWith('%') ? free * parseFloat(v) / 100 : parseFloat(v) || 0;
+      const dx = px(pos[0] || '50%', b.w - dw), dy = px(pos[1] || '50%', b.h - dh);
+      try { ctx.drawImage(bgImg, dx * scale, dy * scale, dw * scale, dh * scale); push(`<image id="Photo / ${esc(nameOf(decodeURIComponent(bgm[1].split('/').pop().split('?')[0]).replace(/\.[a-z]+$/i, ''), 40))}" x="${fmt(b.x)}" y="${fmt(b.y)}" width="${fmt(b.w)}" height="${fmt(b.h)}" preserveAspectRatio="none" href="${/\.(png|svg)(\?|$)/i.test(bgm[1]) ? cv.toDataURL('image/png') : cv.toDataURL('image/jpeg', 0.8)}"/>`); } catch (e) {}
+    }
+    if ((bg && !bgImg) || uniform) {
       if (isCircle) {
         push(`<ellipse id="${label === 'Rectangle' ? 'Circle' : label}" cx="${fmt(b.x + b.w / 2)}" cy="${fmt(b.y + b.h / 2)}" rx="${fmt(b.w / 2 - (uniform ? bw[0] / 2 : 0))}" ry="${fmt(b.h / 2 - (uniform ? bw[0] / 2 : 0))}" ${bg ? `fill="${bg.hex}"${bg.a < 1 ? ` fill-opacity="${bg.a}"` : ''}` : 'fill="none"'}${uniform ? ` stroke="${bc[0].hex}" stroke-width="${bw[0]}"` : ''}/>`);
       } else rectEl(b, bg, { rx: cs.borderTopLeftRadius.includes('%') ? Math.min(b.w, b.h) / 2 : radius, stroke: uniform ? bc[0] : null, sw: bw[0], name: label });
@@ -201,6 +218,7 @@ function collect() {
     const raw = tn.textContent; if (!raw.trim()) return;
     const col = parseColor(cs.color); if (!col) return;
     const fs = parseFloat(cs.fontSize);
+    for (let a = el; a && a !== document.body; a = a.parentElement) { const ti = parseFloat(getComputedStyle(a).textIndent); if (ti < -500) return; }
     const tokens = [];
     const re = /\S+/g; let m;
     while ((m = re.exec(raw))) {
@@ -335,6 +353,12 @@ for (const spec of specs) {
     await page.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 700) { window.scrollTo(0, y); await new Promise(r => setTimeout(r, 80)); } window.scrollTo(0, 0); });
     await page.evaluate(async () => { await Promise.all([...document.images].map(i => i.complete ? 0 : new Promise(r => { i.onload = i.onerror = r; setTimeout(r, 5000); }))); await document.fonts.ready; });
     await page.waitForTimeout(200);
+    await page.evaluate(async () => {
+      const urls = new Set();
+      for (const el of document.querySelectorAll('*')) { const bi = getComputedStyle(el).backgroundImage; for (const m of bi.matchAll(/url\("?([^")]+)"?\)/g)) if (!m[1].startsWith('data:')) urls.add(m[1]); }
+      window.__bg = new Map();
+      await Promise.all([...urls].map(u => new Promise(r => { const im = new Image(); im.onload = () => { window.__bg.set(u, im); r(); }; im.onerror = r; im.src = u; setTimeout(r, 6000); })));
+    });
     const { W: w, H, body, errors } = await page.evaluate(collect);
     if (errors.length) console.log('ERRORS', errors.length, errors.slice(0, 5));
     const name = `${slug} — ${W}`;
