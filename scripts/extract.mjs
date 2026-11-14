@@ -1,11 +1,17 @@
 // Turn crawled olympians.org HTML into clean JSON content for the Astro site.
 // Text is kept verbatim; only markup is cleaned.
+// LANG_SITE=fr|es node scripts/extract.mjs reads data/raw-<lang>/ and writes src/data/<name>.<lang>.json;
+// page links in that language get the /<lang> prefix (pages missing in it point to English).
 import fs from 'node:fs';
 import path from 'node:path';
 import * as cheerio from 'cheerio';
 import { mapPath } from './paths.mjs';
 
-const RAW = 'data/raw';
+const LANG = process.env.LANG_SITE || '';
+const SUF = LANG ? '.' + LANG : '';
+const PFX = LANG ? '/' + LANG : '';
+const RAW = LANG ? `data/raw-${LANG}` : 'data/raw';
+const NOA_DIR = LANG ? `data/noa-${LANG}` : 'data/noa';
 const OUT = 'src/data';
 fs.mkdirSync(OUT, { recursive: true });
 const index = JSON.parse(fs.readFileSync('data/crawl-index.json', 'utf8'));
@@ -33,7 +39,7 @@ function rewriteUrl(u) {
     if (url.hostname === 'olympians.org' || url.hostname === 'www.olympians.org') {
       let p = decodeURI(url.pathname);
       if (DOC.test(p) || /\.(jpe?g|png|gif|webp|svg)$/i.test(p)) { neededAssets.add(p); return '{{BASE}}' + encodeURI(p); }
-      return '{{BASE}}' + mapPath(p, url.search) + url.hash;
+      return '{{BASE}}' + PFX + mapPath(p, url.search) + url.hash;
     }
     return url.href;
   } catch { return u; }
@@ -151,7 +157,7 @@ for (const { path: p, status } of index) {
   const bpM = p.match(/^\/best-practices\/([^/?]+)\/?/);
   if (/Page not found/i.test(title)) continue;
   const [pp, qq] = p.split('?');
-  const rec = { path: mapPath(pp, qq ? '?' + qq : ''), orig: p, title, section, date, bg, tabs, body, side: sideHtml, downloads, related: relatedLinks, desc };
+  const rec = { path: PFX + mapPath(pp, qq ? '?' + qq : ''), orig: p, title, section, date, bg, tabs, body, side: sideHtml, downloads, related: relatedLinks, desc };
   if (newsM) news.push({ ...rec, id: +newsM[1] });
   else if (bpM && bpM[1] !== 'submissions') practices.push({ ...rec, slug: bpM[1] });
   else pages.push(rec);
@@ -160,7 +166,7 @@ for (const { path: p, status } of index) {
 // NOA directory
 const noas = fs.readFileSync('data/noa/list.txt', 'utf8').trim().split('\n').map(l => {
   const [code, country] = l.split('|');
-  const $ = cheerio.load(fs.readFileSync(`data/noa/c_${code}.html`, 'utf8'));
+  const $ = cheerio.load(fs.readFileSync(fs.existsSync(`${NOA_DIR}/c_${code}.html`) ? `${NOA_DIR}/c_${code}.html` : `data/noa/c_${code}.html`, 'utf8'));
   const flag = $('.flag img').attr('src'); if (flag) neededAssets.add(flag);
   const h1 = $('h1').first(); const name = text($, h1.find('strong'));
   const fields = $('h3').map((_, h) => { const label = text($, $(h).find('strong').first()); $(h).find('strong').first().remove(); $(h).find('br').first().remove();
@@ -185,7 +191,7 @@ const noas = fs.readFileSync('data/noa/list.txt', 'utf8').trim().split('\n').map
     $(li).find('img').remove(); h.remove();
     return { name, meta, role, img: '{{BASE}}' + img, bio: clean($, li, 1) };
   }).get();
-  fs.writeFileSync(`${OUT}/leadership.json`, JSON.stringify({ honorary, people }, null, 1));
+  fs.writeFileSync(`${OUT}/leadership${SUF}.json`, JSON.stringify({ honorary, people }, null, 1));
 }
 
 const excerpt = (html) => { const $ = cheerio.load(html); const t = $('p').map((_, p) => text($, p)).get().find(s => s.length > 40) || ''; return t; };
@@ -194,9 +200,11 @@ for (const n of practices) { const id = (n.path.match(/id=(\d+)/) || [])[1]; con
 news.sort((a, b) => (b.date || '').localeCompare(a.date || '') || b.id - a.id);
 practices.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
 
+let redirects = [];
+if (!LANG) {
 // de-duplicate alias pages (same body) -> redirects
 const NAV_ORDER = ['/woa/about/', '/noas/noa-guide/', '/noas/noa-directory/', '/noas/grants/', '/olympians/oly/', '/olympians/olympians-for-life/', '/olympians/olympian-org-email/register/'];
-const byBody = new Map(); const redirects = [];
+const byBody = new Map();
 const ordered = [...pages].sort((a, b) => { const ia = NAV_ORDER.indexOf(a.path), ib = NAV_ORDER.indexOf(b.path); return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib); });
 const unique = [];
 for (const pg of ordered) { const k = pg.title + '|' + pg.body; if (pg.body.length > 200 && byBody.has(k)) { redirects.push({ from: pg.path, to: byBody.get(k) }); continue; } byBody.set(k, pg.path); unique.push(pg); }
@@ -204,15 +212,24 @@ pages.length = 0; pages.push(...unique.filter(p => p.path !== '/olympians/noa-di
 redirects.push({ from: '/olympians/noa-directory/', to: '/noas/noa-directory/' });
 // links on the original that point to a page without its year / with a typo
 redirects.push({ from: '/oly-house/leave-your-mark/', to: '/oly-house/leave-your-mark/2020/' }, { from: '/oly-house/oly-day/', to: '/oly-house/oly-day/2020/' }, { from: '/olympians/oly-art/', to: '/olympians/oly-arts/' });
-fs.writeFileSync(`${OUT}/redirects.json`, JSON.stringify(redirects, null, 1));
-// point links straight at canonical pages
+} else {
+  // same alias pages as in English
+  redirects = JSON.parse(fs.readFileSync(`${OUT}/redirects.json`, 'utf8')).map(r => ({ from: PFX + r.from, to: PFX + r.to }));
+  const gone = new Set(redirects.map(r => r.from));
+  const keep = pages.filter(p => !gone.has(p.path)); pages.length = 0; pages.push(...keep);
+}
+fs.writeFileSync(`${OUT}/redirects${SUF}.json`, JSON.stringify(redirects, null, 1));
+// point links straight at canonical pages; in FR/ES a page that has no translation links to English
 const redirMap = new Map(redirects.map(r => ['{{BASE}}' + r.from, '{{BASE}}' + r.to]));
-const fixLinks = (str) => str.replace(/\{\{BASE\}\}[^"'\s)]+/g, (m) => { const [p0, h] = m.split('#'); return (redirMap.get(p0) || p0) + (h ? '#' + h : ''); });
+const have = new Set([...pages, ...news, ...practices].map(r => r.path));
+const listing = /^\/(fr|es)\/(news|best-practices)\/(page\/\d+\/|\d{4}\/)?$/;
+const toEn = (p0) => { if (!LANG || !p0.startsWith('{{BASE}}' + PFX + '/')) return p0; const p = p0.slice(8); if (have.has(p) || listing.test(p) || p === PFX + '/' || redirMap.has(p0)) return p0; return '{{BASE}}' + p.slice(PFX.length); };
+const fixLinks = (str) => str.replace(/\{\{BASE\}\}[^"'\s)]+/g, (m) => { const [p0, h] = m.split('#'); return toEn(redirMap.get(p0) || p0) + (h ? '#' + h : ''); });
 for (const coll of [pages, news, practices]) for (const r of coll) { r.body = fixLinks(r.body); r.side = fixLinks(r.side); r.tabs.forEach(t => t.href = fixLinks(t.href)); r.related = r.related.map(fixLinks); r.downloads.forEach(d => d.href = fixLinks(d.href)); }
-fs.writeFileSync(`${OUT}/pages.json`, JSON.stringify(pages, null, 1));
-fs.writeFileSync(`${OUT}/news.json`, JSON.stringify(news));
-fs.writeFileSync(`${OUT}/practices.json`, JSON.stringify(practices));
-fs.writeFileSync(`${OUT}/noas.json`, JSON.stringify(noas, null, 1));
-fs.writeFileSync('data/external-images.json', JSON.stringify([...externalImgs].sort(), null, 1));
-fs.writeFileSync('data/needed-assets.json', JSON.stringify([...neededAssets].sort(), null, 1));
-console.log({ pages: pages.length, news: news.length, practices: practices.length, noas: noas.length, assets: neededAssets.size });
+fs.writeFileSync(`${OUT}/pages${SUF}.json`, JSON.stringify(pages, null, 1));
+fs.writeFileSync(`${OUT}/news${SUF}.json`, JSON.stringify(news));
+fs.writeFileSync(`${OUT}/practices${SUF}.json`, JSON.stringify(practices));
+fs.writeFileSync(`${OUT}/noas${SUF}.json`, JSON.stringify(noas, null, 1));
+fs.writeFileSync(`data/external-images${SUF}.json`, JSON.stringify([...externalImgs].sort(), null, 1));
+fs.writeFileSync(`data/needed-assets${SUF}.json`, JSON.stringify([...neededAssets].sort(), null, 1));
+console.log({ lang: LANG || 'en', pages: pages.length, news: news.length, practices: practices.length, noas: noas.length, assets: neededAssets.size });

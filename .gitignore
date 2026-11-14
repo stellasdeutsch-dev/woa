@@ -5,3 +5,7 @@ data/raw/
 data/noa/
 .DS_Store
 public/_img/
+data/raw-*/
+data/noa-*/
+data/*.fr.json
+data/*.es.json

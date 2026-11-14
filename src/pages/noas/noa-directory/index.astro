@@ -3,12 +3,10 @@ import Base from '../../../layouts/Base.astro';
 import PageHero from '../../../components/PageHero.astro';
 import { page, noas } from '../../../lib/data';
 import { b } from '../../../lib/site';
-import world from '../../../data/worldmap.json';
 
 const p = page('/noas/noa-directory/');
 const list = [...noas].sort((a, z) => a.country.localeCompare(z.country));
 const letters = [...new Set(list.map(n => n.country[0].toUpperCase()))];
-const codes = new Set(list.map(n => n.code));
 const ICON: Record<string, string> = { Address: 'pin', Email: 'mail', Phone: 'phone', Website: 'globe', President: 'user', Chairperson: 'user' };
 const telHref = (v: string) => 'tel:' + v.replace(/[^\d+]/g, '');
 ---
@@ -27,19 +25,8 @@ const telHref = (v: string) => 'tel:' + v.replace(/[^\d+]/g, '');
         <div class="pills letters" role="group" aria-label="Letters">
           {letters.map(l => <button class="pill" type="button" data-letter={l} aria-pressed="false">{l}</button>)}
         </div>
-        <div class="pills view-toggle" role="group" aria-label="View">
-          <button class="pill" type="button" data-view="list" aria-pressed="true"><svg class="icon icon-sm"><use href="#i-list" /></svg>List</button>
-          <button class="pill" type="button" data-view="map" aria-pressed="false"><svg class="icon icon-sm"><use href="#i-map" /></svg>Map</button>
-        </div>
       </div>
 
-      <div class="map-wrap" hidden>
-        <svg class="world" viewBox={`0 0 ${world.w} ${world.h}`} role="img" aria-label="Map">
-          {world.paths.map(c => codes.has(c.code)
-            ? <path d={c.d} class="has-noa" data-code={c.code} tabindex="0"><title>{c.name}</title></path>
-            : <path d={c.d} />)}
-        </svg>
-      </div>
 
       <p class="dir-empty" hidden>No results</p>
       <div class="noa-groups">
@@ -101,23 +88,10 @@ const telHref = (v: string) => 'tel:' + v.replace(/[^\d+]/g, '');
     empty.hidden = shown > 0;
     document.querySelectorAll<HTMLElement>('.noa-group').forEach(g => { g.hidden = !g.querySelector('.noa:not([hidden])'); });
     letterBtns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.letter === letter)));
-    document.querySelectorAll('.world .has-noa').forEach(p => p.classList.toggle('is-active', (p as HTMLElement).dataset.code === code));
   }
   q.addEventListener('input', () => { code = ''; apply(); });
   letterBtns.forEach(b => b.addEventListener('click', () => { letter = letter === b.dataset.letter ? '' : b.dataset.letter!; code = ''; apply(); }));
-  // view toggle
-  const mapWrap = document.querySelector('.map-wrap') as HTMLElement;
-  document.querySelectorAll<HTMLButtonElement>('[data-view]').forEach(b => b.addEventListener('click', () => {
-    const map = b.dataset.view === 'map';
-    mapWrap.hidden = !map;
-    document.querySelectorAll('[data-view]').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
-    if (!map) { code = ''; apply(); }
-  }));
-  const pick = (c: string) => { code = code === c ? '' : c; letter = ''; q.value = ''; apply(); const el = document.querySelector(`.noa[data-code="${c}"]`); if (code && el) { (el.querySelector('details') as HTMLDetailsElement).open = true; } };
-  document.querySelectorAll<SVGPathElement>('.world .has-noa').forEach(p => {
-    p.addEventListener('click', () => pick(p.dataset.code!));
-    p.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(p.dataset.code!); } });
-  });
+  const pick = (c: string) => { code = c; letter = ''; q.value = ''; apply(); const el = document.querySelector(`.noa[data-code="${c}"]`); if (el) { (el.querySelector('details') as HTMLDetailsElement).open = true; } };
   // deep link #noa-xx
   try { const h = decodeURIComponent(location.hash); const m = h.match(/^#noa-([a-z]{2})$/); if (m) pick(m[1].toUpperCase()); } catch {}
 </script>
@@ -128,12 +102,6 @@ const telHref = (v: string) => 'tel:' + v.replace(/[^\d+]/g, '');
   .dir-controls { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--sp-4); margin-bottom: var(--sp-6); }
   .letters { flex: 1 1 520px; }
   .letters .pill { padding: 0; width: 40px; }
-  .map-wrap { margin-bottom: var(--sp-6); padding: var(--sp-5); background: var(--c-grey-50); border-radius: var(--radius-lg); }
-  .world { width: 100%; height: auto; }
-  .world path { fill: var(--c-grey-200); stroke: var(--c-white); stroke-width: .4; }
-  .world .has-noa { fill: var(--c-gold); cursor: pointer; transition: fill var(--t); outline: none; }
-  .world .has-noa:hover, .world .has-noa:focus-visible { fill: var(--c-ink); }
-  .world .has-noa.is-active { fill: var(--c-black); }
   .noa-group { scroll-margin-top: calc(var(--header-h) + 24px); }
   .noa-group[hidden] { display: none; }
   .noa-group + .noa-group { margin-top: var(--sp-7); }
