@@ -20,9 +20,9 @@ const rows = [L.email, L.life, L.skills];
       <figure class="ld-oly-mark"><img src={b('{{BASE}}/backgrounds/94.webp')} alt="Be OLY" loading="lazy" /></figure>
       <div class="ld-copy">
         <h2>{L.oly.title}</h2>
-        <p class="ld-statement-sm scrub" set:html={words(L.oly.ps[1])} />
+        <p class="ld-statement-sm scrub" set:html={words(L.oly.ps[0])} />
+        <p class="muted-light">{L.oly.ps[1]}</p>
         <p class="muted-light">{L.oly.ps[2]}</p>
-        <p class="muted-light">{L.oly.ps[0]}</p>
         <a class="btn btn-gold" href={url(L.oly.href)}><svg class="icon"><use href="#i-oly" /></svg>{L.oly.title}</a>
       </div>
     </div>

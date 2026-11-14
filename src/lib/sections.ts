@@ -46,7 +46,8 @@ function build(lang: Lang) {
   const olympism = all('/woa/olympism/', 'p');
   const olyAll = all('/olympians/oly/', 'p').filter(t => t.length > 30);
   // English page starts with "Join thousands…"; French and Spanish start with the main sentence
-  const oly = lang === 'en' ? [olyAll[1], olyAll[2], olyAll[0]] : [olyAll[0], olyAll[1], olyAll[2]];
+  // French/Spanish: the shortest of the opening paragraphs goes big, the others follow in their order
+  const oly = lang === 'en' ? [olyAll[1], olyAll[2], olyAll[0]] : (() => { const first = olyAll.slice(0, 3); const big = [...first].sort((a, b) => a.length - b.length)[0]; return [big, ...first.filter(x => x !== big)]; })();
   const email = all('/olympians/olympian-org-email/', 'h2, p');
   const health = all('/olympians/health/', 'p');
   const life = all('/olympians/olympians-for-life/', 'p');

@@ -30,13 +30,16 @@ const yearSent = sentences.filter(t => yearRx.test(t));
 const restSent = sentences.filter(t => !yearRx.test(t)).join(' ');
 const YEAR_ICON: Record<string, string> = { '1894': 'columns', '1896': 'torch', '1924': 'snow' };
 const s4 = items[3];
-const stat = s4.ps[0].match(/more than ([\d,]+) living Olympians/);
+const stat = s4.ps[0].match(/(?:more than|plus de|más de)\s+(\d{1,3}(?:[ ,. ]\d{3})+)/i);
 const s5 = items[4];
 const strongSplit = (h: string) => { const m = h.match(/^<strong>(.*?)<\/strong>\s*(.*)$/s); return m ? { t: m[1].replace(/[:.]\s*$/, '').trim(), d: m[2] } : { t: '', d: h }; };
 const values = s5.ps.map(strongSplit);
 const VALUE_ICON: Record<string, string> = { Excellence: 'excellence', Friendship: 'friendship', Respect: 'respect' };
 const s6 = items[5];
 const principles = s6.ps.slice(1).map(strongSplit);
+// icons are chosen by meaning from the English titles; French/Spanish cards are in the same order
+const ICON_ORDER = (() => { const E = dataFor('en').page('/woa/olympism/'); const $e = cheerio.load(E.body); const li = $e('ol > li').toArray(); const st = (h: string) => (h.match(/^<strong>(.*?)<\/strong>/s)?.[1] || '').replace(/[:.]\s*$/, '').trim(); return { values: $e(li[4]).find('p').toArray().map(p => st($e(p).html()!.trim())), principles: $e(li[5]).find('p').toArray().slice(1).map(p => st($e(p).html()!.trim())) }; })();
+const CHARTER = { en: 'Olympic Charter', fr: 'Charte Olympique', es: 'Carta Olímpica' }[lang];
 const PRINCIPLE_ICON: Record<string, string> = { 'Non-Discrimination': 'equal', Sustainability: 'leaf', Humanism: 'humanism', Universality: 'globe', Solidarity: 'solidarity', 'Alliance between sport, education and culture': 'alliance' };
 const ext = (h: string) => (h.match(/\.([a-z0-9]+)(\?|$)/i)?.[1] || '').toUpperCase();
 ---
@@ -64,7 +67,7 @@ const ext = (h: string) => (h.match(/\.([a-z0-9]+)(\?|$)/i)?.[1] || '').toUpperC
       {q1 && (
         <div class="ol-quote-row">
           <p class="ol-quote-intro" set:html={q1.before} />
-          <figure class="vb-quote"><svg class="icon"><use href="#i-quote" /></svg><blockquote set:html={q1.quote} /><figcaption>Olympic Charter</figcaption></figure>
+          <figure class="vb-quote"><svg class="icon"><use href="#i-quote" /></svg><blockquote set:html={q1.quote} /><figcaption>{CHARTER}</figcaption></figure>
         </div>
       )}
     </div>
@@ -121,7 +124,7 @@ const ext = (h: string) => (h.match(/\.([a-z0-9]+)(\?|$)/i)?.[1] || '').toUpperC
     <div class="container">
       <div class="vb-title"><span class="vb-num">5</span><h2>{s5.title}</h2></div>
       <ul class="vb-cards cols-3">
-        {values.map(v => <li class="vb-card"><span class="vb-ico"><svg class="icon"><use href={`#i-${VALUE_ICON[v.t] ?? 'values'}`} /></svg></span><h3>{v.t}</h3><p set:html={v.d} /></li>)}
+        {values.map((v, i) => <li class="vb-card"><span class="vb-ico"><svg class="icon"><use href={`#i-${VALUE_ICON[v.t] ?? VALUE_ICON[ICON_ORDER.values[i]] ?? 'values'}`} /></svg></span><h3>{v.t}</h3><p set:html={v.d} /></li>)}
       </ul>
     </div>
   </section>
@@ -131,7 +134,7 @@ const ext = (h: string) => (h.match(/\.([a-z0-9]+)(\?|$)/i)?.[1] || '').toUpperC
       <div class="vb-title"><span class="vb-num">6</span><h2>{s6.title}</h2></div>
       <p class="lead ol-wide" set:html={s6.ps[0]} />
       <ul class="vb-cards cols-3 ol-principles">
-        {principles.map(v => <li class="vb-card"><span class="vb-ico"><svg class="icon"><use href={`#i-${PRINCIPLE_ICON[v.t] ?? 'values'}`} /></svg></span><h3>{v.t}</h3><p set:html={v.d} /></li>)}
+        {principles.map((v, i) => <li class="vb-card"><span class="vb-ico"><svg class="icon"><use href={`#i-${PRINCIPLE_ICON[v.t] ?? PRINCIPLE_ICON[ICON_ORDER.principles[i]] ?? 'values'}`} /></svg></span><h3>{v.t}</h3><p set:html={v.d} /></li>)}
       </ul>
     </div>
   </section>

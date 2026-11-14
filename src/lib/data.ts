@@ -38,14 +38,15 @@ const DATA: Record<Lang, LangData> = {
   es: mk('es', pagesEs, newsEs, practicesEs, noasEs, redirectsEs, leadershipEs),
 };
 export const dataFor = (lang: Lang) => DATA[lang];
+const EN_PAGES = new Set(DATA.en.pages.map(p => p.path));
 
 // translated news / best practices <-> English article (see scripts/xlang.mjs)
 const XL = xlangRaw as Record<'fr' | 'es', Record<string, string>>;
 const EN_TO: Record<'fr' | 'es', Map<string, string>> = { fr: new Map(Object.entries(XL.fr).map(([k, v]) => [v, k])), es: new Map(Object.entries(XL.es).map(([k, v]) => [v, k])) };
 // where the language switch goes from a given path (site paths, without base). Falls back to the section list.
 export function altPath(path: string, from: Lang, to: Lang): string {
-  if (from === to) return path;
   if (/^\/((fr|es)\/)?404/.test(path)) return L('/', to);
+  if (from === to) return path;
   let en = path;
   if (from !== 'en') {
     const story = XL[from][path];
@@ -56,6 +57,11 @@ export function altPath(path: string, from: Lang, to: Lang): string {
   if (to === 'en') return en;
   const story = EN_TO[to].get(en);
   if (story) return story;
+  // list pages: page numbers and years differ between languages -> the first page of the list
+  const list = en.match(/^\/(news|best-practices)\/(page\/\d+|year\/\d{4})\/$/);
+  if (list) return L(`/${list[1]}/`, to);
+  // a page that exists only in English (e.g. Milano Cortina 2026) -> home page of that language
+  if (EN_PAGES.has(en) && !DATA[to].pages.some(p => p.path === L(en, to))) return L('/', to);
   // an article that has no translation: go to the list of that language
   if (/^\/news\/\d+\//.test(en)) return L('/news/', to);
   if (/^\/best-practices\/(?!page\/|year\/|submissions\/)[^/]+\/$/.test(en)) return L('/best-practices/', to);

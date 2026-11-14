@@ -567,7 +567,7 @@ p { margin: 0; text-wrap: pretty; }
 .ld-hero { min-height: calc(100svh - var(--header-h)); display: flex; flex-direction: column; justify-content: flex-end; }
 .ld-hero .hero-bg::after { background: rgba(0, 0, 0, .52); }
 .ld-hero-inner { display: grid; gap: var(--sp-5); padding-block: 120px var(--sp-7); }
-.ld-hero .ld-title { max-width: none; font-size: clamp(4rem, 1rem + 12vw, 12rem); line-height: .9; letter-spacing: -0.045em; }
+.ld-hero .ld-title { max-width: none; font-size: clamp(2.75rem, 0.5rem + 10vw, 12rem); line-height: .9; letter-spacing: -0.045em; }
 .ld-lead { max-width: 46ch; font-size: clamp(1.25rem, 1rem + 1vw, 1.875rem); line-height: 1.35; font-weight: 500; color: #f2f2f2; }
 .ld-jump { border-top: 1px solid rgba(255, 255, 255, .22); }
 .ld-jump ul { list-style: none; margin: 0; padding: var(--sp-4) 0; display: flex; flex-wrap: wrap; gap: var(--sp-2); }
@@ -757,3 +757,8 @@ main > section:nth-of-type(n+3), .site-footer { content-visibility: auto; contai
 html.lite *, html.lite *::before, html.lite *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 html.lite .scrollbar { display: none !important; }
 html.lite { scrollbar-width: auto !important; }
+html.still main > section, html.still .site-footer { content-visibility: visible; }
+.door-title, .ld-hero .ld-title, .ld-band h2, .ld-tile-body strong { hyphens: manual; overflow-wrap: normal; }
+/* long button labels (French, Spanish) wrap on narrow screens instead of pushing the page sideways */
+.btn { max-width: 100%; }
+@media (max-width: 639px) { .btn { white-space: normal; text-align: center; line-height: 1.25; padding-block: 10px; } }

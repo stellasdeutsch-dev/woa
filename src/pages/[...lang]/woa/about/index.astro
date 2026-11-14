@@ -9,6 +9,14 @@ import { LANG_PARAMS, pageLang, t as tFor, L as Lx } from '../../../../lib/i18n'
 export function getStaticPaths() { return LANG_PARAMS; }
 const lang = pageLang(Astro.params); const tr = tFor(lang); const D = dataFor(lang);
 const page = D.page;
+import { sections } from '../../../../lib/sections';
+import { navLabel, stripLang as stripL, fmtNum } from '../../../../lib/i18n';
+const enValues = cheerio.load(dataFor('en').page('/woa/about/values/').body)('h2').map((_, h) => cheerio.load(h).text().trim()).get();
+// tab labels of the About page in the page's language ("Buts", "Valeurs", "Historique" …)
+const tab = (enPath: string, en: string) => page('/woa/about/').tabs.find(x => stripL(x.href.replace('{{BASE}}', '')) === enPath)?.label ?? en;
+const aboutTitle = navLabel('/woa/about/', 'About', lang);
+const STATS = sections(lang).STATS;
+const loc = (h: string) => url(Lx(h, lang));
 import { b, url, prose, BASE } from '../../../../lib/site';
 
 const p = page('/woa/about/');
@@ -29,8 +37,8 @@ const stat1 = leadText.match(/over ([\d,]+) living Olympians/);
 const stat2 = paras[0]?.match(/There are (\d+) National Olympians Associations/);
 const facts = (s: string) => s.replace(/(over [\d,]+ living Olympians|\d+ National Olympians Associations \(NOAs\))/g, '<strong class="fact">$1</strong>');
 ---
-<Base title="About" origPath={p.orig} image={b(p.bg)}>
-  <PageHero title="About" crumbs={[{ label: 'WOA', href: '/woa/' }, { label: 'About' }]} bg={b(p.bg)} lead={leadText} />
+<Base title={aboutTitle} origPath={p.orig} image={b(p.bg)}>
+  <PageHero title={aboutTitle} crumbs={[{ label: 'WOA', href: '/woa/' }, { label: aboutTitle }]} bg={b(p.bg)} lead={leadText} />
   <Tabs tabs={p.tabs} current={BASE + Lx('/woa/about/', lang)} />
 
   <section class="section">
@@ -41,8 +49,7 @@ const facts = (s: string) => s.replace(/(over [\d,]+ living Olympians|\d+ Nation
       </div>
       <aside class="aside">
         <dl class="about-stats">
-          {stat1 && <div><dt class="stat-num">{stat1[1]}+</dt><dd class="stat-label">living Olympians throughout the world</dd></div>}
-          {stat2 && <div><dt class="stat-num">{stat2[1]}</dt><dd class="stat-label">National Olympians Associations (NOAs)</dd></div>}
+          {STATS.map((st, i) => <div><dt class="stat-num">{fmtNum(+st.n, lang)}{i === 0 ? '+' : ''}</dt><dd class="stat-label">{st.text}</dd></div>)}
         </dl>
         <Docs items={p.downloads} />
       </aside>
@@ -52,12 +59,12 @@ const facts = (s: string) => s.replace(/(over [\d,]+ living Olympians|\d+ Nation
 
   <section class="section bg-dark">
     <div class="container mv">
-      <a class="mv-card" href={url('/woa/about/mission/')}>
-        <span class="mv-head"><svg class="icon icon-lg"><use href="#i-mission" /></svg><h2>Mission</h2></span>
+      <a class="mv-card" href={loc('/woa/about/mission/')}>
+        <span class="mv-head"><svg class="icon icon-lg"><use href="#i-mission" /></svg><h2>{tab('/woa/about/mission/', 'Mission')}</h2></span>
         <p>{mission}</p>
       </a>
-      <a class="mv-card" href={url('/woa/about/vision/')}>
-        <span class="mv-head"><svg class="icon icon-lg"><use href="#i-vision" /></svg><h2>Vision</h2></span>
+      <a class="mv-card" href={loc('/woa/about/vision/')}>
+        <span class="mv-head"><svg class="icon icon-lg"><use href="#i-vision" /></svg><h2>{tab('/woa/about/vision/', 'Vision')}</h2></span>
         <p>{vision}</p>
       </a>
     </div>
@@ -65,7 +72,7 @@ const facts = (s: string) => s.replace(/(over [\d,]+ living Olympians|\d+ Nation
 
   <section class="section">
     <div class="container">
-      <div class="section-head"><h2>Goals</h2><a class="link-arrow" href={url('/woa/about/goals/')}>Goals<svg class="icon"><use href="#i-arrow" /></svg></a></div>
+      <div class="section-head"><h2>{tab('/woa/about/goals/', 'Goals')}</h2><a class="link-arrow" href={loc('/woa/about/goals/')}>{tab('/woa/about/goals/', 'Goals')}<svg class="icon"><use href="#i-arrow" /></svg></a></div>
       <ol class="goals">
         {goals.map((g, i) => <li><span class="goal-num">{i + 1}</span><p>{g}</p></li>)}
       </ol>
@@ -74,19 +81,19 @@ const facts = (s: string) => s.replace(/(over [\d,]+ living Olympians|\d+ Nation
 
   <section class="section bg-grey">
     <div class="container">
-      <div class="section-head"><h2>Values</h2><a class="link-arrow" href={url('/woa/about/values/')}>Values<svg class="icon"><use href="#i-arrow" /></svg></a></div>
+      <div class="section-head"><h2>{tab('/woa/about/values/', 'Values')}</h2><a class="link-arrow" href={loc('/woa/about/values/')}>{tab('/woa/about/values/', 'Values')}<svg class="icon"><use href="#i-arrow" /></svg></a></div>
       <ul class="values">
-        {values.map(v => <li><svg class="icon icon-xl"><use href={`#i-${VALUE_ICONS[v] ?? 'values'}`} /></svg><h3>{v}</h3></li>)}
+        {values.map((v, i) => <li><svg class="icon icon-xl"><use href={`#i-${VALUE_ICONS[enValues[i]] ?? 'values'}`} /></svg><h3>{v}</h3></li>)}
       </ul>
     </div>
   </section>
 
   <section class="section">
     <div class="container">
-      <a class="history-banner" href={url('/woa/about/history/')}>
+      <a class="history-banner" href={loc('/woa/about/history/')}>
         <svg class="icon icon-xl"><use href="#i-history" /></svg>
-        <div><h2>History</h2><p class="hist-years"><span>{years[0]}</span><span class="hist-line" aria-hidden="true"></span><span>{years.at(-1)}</span></p></div>
-        <span class="link-arrow">History<svg class="icon"><use href="#i-arrow" /></svg></span>
+        <div><h2>{tab('/woa/about/history/', 'History')}</h2><p class="hist-years"><span>{years[0]}</span><span class="hist-line" aria-hidden="true"></span><span>{years.at(-1)}</span></p></div>
+        <span class="link-arrow">{tab('/woa/about/history/', 'History')}<svg class="icon"><use href="#i-arrow" /></svg></span>
       </a>
     </div>
   </section>

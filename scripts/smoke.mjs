@@ -2,10 +2,14 @@
 import { chromium } from 'playwright';
 import fs from 'node:fs';
 const base = process.argv[2] || 'http://localhost:4321/woa';
-const pages = JSON.parse(fs.readFileSync('src/data/pages.json', 'utf8')).map(p => p.path);
-const news = JSON.parse(fs.readFileSync('src/data/news.json', 'utf8')).filter((_, i) => i % 35 === 0).map(n => n.path);
-const bp = JSON.parse(fs.readFileSync('src/data/practices.json', 'utf8')).filter((_, i) => i % 20 === 0).map(n => n.path);
-const urls = ['/', '/woa/', '/olympians/', '/noas/', '/news/', '/news/page/2/', '/news/year/2016/', '/best-practices/', ...pages, ...news, ...bp];
+const SUF = process.env.LANG_PREFIX ? '.' + process.env.LANG_PREFIX.replace('/', '') : '';
+const strip = (p) => p.replace(/^\/(fr|es)(?=\/)/, '');
+const pages = JSON.parse(fs.readFileSync(`src/data/pages${SUF}.json`, 'utf8')).map(p => strip(p.path));
+const news = JSON.parse(fs.readFileSync(`src/data/news${SUF}.json`, 'utf8')).filter((_, i) => i % 35 === 0).map(n => strip(n.path));
+const bp = JSON.parse(fs.readFileSync(`src/data/practices${SUF}.json`, 'utf8')).filter((_, i) => i % 20 === 0).map(n => strip(n.path));
+const PFX = process.env.LANG_PREFIX || ''; // e.g. /fr — the same pages in another language
+const urls0 = ['/', '/woa/', '/olympians/', '/noas/', '/news/', '/news/page/2/', '/news/year/2016/', '/best-practices/', ...pages, ...news, ...bp];
+const urls = urls0.map(u => PFX + u);
 const browser = await chromium.launch({ args: ['--mute-audio'] });
 const problems = [];
 for (const w of (process.env.WIDTHS || "390,1440").split(",").map(Number)) {
@@ -26,5 +30,5 @@ for (const w of (process.env.WIDTHS || "390,1440").split(",").map(Number)) {
   await ctx.close();
 }
 await browser.close();
-console.log(`checked ${urls.length} pages x 2 widths, problems: ${problems.length}`);
+console.log(`checked ${urls.length} pages x ${(process.env.WIDTHS || "390,1440").split(",").length} widths, problems: ${problems.length}`);
 for (const p of problems.slice(0, 40)) console.log(JSON.stringify(p));

@@ -9,6 +9,3 @@ data/raw-*/
 data/noa-*/
 data/*.fr.json
 data/*.es.json
-src/data/*.fr.json
-src/data/*.es.json
-src/data/xlang.json

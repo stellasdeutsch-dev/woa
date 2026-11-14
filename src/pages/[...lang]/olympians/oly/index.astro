@@ -34,15 +34,19 @@ const video = (p.body.match(/data-yt="([\w-]+)"/) || [])[1];
 const { html: videoHtml } = prose(video ? `<div class="video" data-yt="${video}"></div>` : '');
 const gallery = $('ul > li > img').map((_, i) => $(i).attr('src')).get();
 const ICONS = ['oly', 'excellence'];
+// a long opening sentence (French, Spanish) would cover the "Be OLY" mark on the photo: it moves under the first screen
+const longJoin = join.replace(/<[^>]+>/g, '').length > 160;
+import { navLabel } from '../../../../lib/i18n';
 ---
 <Base title={p.title} origPath={p.orig} image={b(p.bg)}>
-  <PageHero title={p.title} crumbs={[{ label: 'Olympians', href: '/olympians/' }, { label: 'OLY' }]} bg={b(p.bg)}>
-    <p class="lead" set:html={join} />
+  <PageHero title={p.title} crumbs={[{ label: navLabel('/olympians/', 'Olympians', lang), href: '/olympians/' }, { label: 'OLY' }]} bg={b(p.bg)}>
+    {!longJoin && <p class="lead" set:html={join} />}
     <div><a class="btn btn-gold" href="#register"><svg class="icon"><use href="#i-oly" /></svg>{legend}</a></div>
   </PageHero>
 
   <section class="section">
     <div class="container">
+      {longJoin && <p class="oly-join" set:html={join} />}
       <div class="grid grid-2 benefits">
         {benefits.map((h, i) => (
           <div class="benefit"><span class="topic-icon"><svg class="icon icon-lg"><use href={`#i-${ICONS[i]}`} /></svg></span><p set:html={h} /></div>
@@ -70,6 +74,7 @@ const ICONS = ['oly', 'excellence'];
 </Base>
 
 <style>
+  .oly-join { max-width: 60ch; margin-bottom: var(--sp-7); font-size: var(--fs-lead); line-height: 1.5; font-weight: 500; }
   .benefits { gap: var(--sp-5); }
   .benefit { display: grid; gap: var(--sp-5); align-content: start; padding: clamp(24px, 4vw, 40px); border: 1px solid var(--c-grey-200); border-radius: var(--radius-lg); transition: border-color var(--t); }
   .benefit:hover { border-color: var(--c-black); }

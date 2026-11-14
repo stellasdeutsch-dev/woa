@@ -51,7 +51,8 @@ export const fmtDate = (iso?: string | null) => {
 export const slugify = (s: string) => s.toLowerCase().replace(/<[^>]+>/g, '').replace(/&[a-z]+;/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60);
 
 export function videoHtml(id: string) {
-  return `<div class="video"><button type="button" class="video-btn" data-yt="${id}" aria-label="Play video"><img src="${BASE}/yt/${id}.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="video-play"><svg class="icon"><use href="#i-play"/></svg></span></button></div>`;
+  const thumb = fs.existsSync(`public/yt/${id}.jpg`) ? `<img src="${BASE}/yt/${id}.jpg" alt="" loading="lazy" onerror="this.remove()">` : '';
+  return `<div class="video"><button type="button" class="video-btn" data-yt="${id}" aria-label="Play video">${thumb}<span class="video-play"><svg class="icon"><use href="#i-play"/></svg></span></button></div>`;
 }
 
 export type Toc = { id: string; text: string }[];

@@ -2,7 +2,7 @@
 import Base from '../../../../layouts/Base.astro';
 import PageHero from '../../../../components/PageHero.astro';
 import { dataFor } from '../../../../lib/data';
-import { LANG_PARAMS, pageLang, t as tFor, L as Lx } from '../../../../lib/i18n';
+import { LANG_PARAMS, pageLang, t as tFor, L as Lx, navLabel } from '../../../../lib/i18n';
 export function getStaticPaths() { return LANG_PARAMS; }
 const lang = pageLang(Astro.params); const tr = tFor(lang); const D = dataFor(lang);
 const page = D.page; const noas = D.noas;
@@ -11,15 +11,18 @@ import { b, realFlag } from '../../../../lib/site';
 const p = page('/noas/noa-directory/');
 const list = [...noas].sort((a, z) => a.country.localeCompare(z.country));
 const letters = [...new Set(list.map(n => n.country[0].toUpperCase()))];
-const ICON: Record<string, string> = { Address: 'pin', Email: 'mail', Phone: 'phone', Website: 'globe', President: 'user', Chairperson: 'user' };
+const ICON: Record<string, string> = { Address: 'pin', Adresse: 'pin', 'Dirección': 'pin', Email: 'mail', Phone: 'phone', 'Téléphone': 'phone', 'Teléfono': 'phone', Website: 'globe', 'Sitio web': 'globe', President: 'user', Chairperson: 'user' };
+const isPhone = (l: string) => /^(Phone|Téléphone|Teléfono)$/.test(l);
+// wording on olympians.org in each language
+const W = { en: { contact: 'Contact Details', order: 'in alphabetical order' }, fr: { contact: 'Coordonnées', order: 'par ordre alphabétique' }, es: { contact: 'Información de contacto', order: 'en orden alfabético' } }[lang];
 const telHref = (v: string) => 'tel:' + v.replace(/[^\d+]/g, '');
 ---
 <Base title={p.title} origPath={p.orig} image={b(p.bg)}>
-  <PageHero title={p.title} crumbs={[{ label: 'NOAs', href: '/noas/' }, { label: p.title }]} bg={b(p.bg)} compact>
+  <PageHero title={p.title} crumbs={[{ label: navLabel('/noas/', 'NOAs', lang), href: '/noas/' }, { label: p.title }]} bg={b(p.bg)} compact>
     <div class="dir-search">
       <svg class="icon"><use href="#i-search" /></svg>
-      <label class="sr-only" for="noa-q">Search</label>
-      <input id="noa-q" type="search" placeholder="Search" autocomplete="off" />
+      <label class="sr-only" for="noa-q">{tr.search}</label>
+      <input id="noa-q" type="search" placeholder={tr.search} autocomplete="off" />
     </div>
   </PageHero>
 
@@ -32,7 +35,7 @@ const telHref = (v: string) => 'tel:' + v.replace(/[^\d+]/g, '');
       </div>
 
 
-      <p class="dir-empty" hidden>No results</p>
+      <p class="dir-empty" hidden>{tr.noResults}</p>
       <div class="noa-groups">
         {letters.map(L => (
           <section class="noa-group" data-group={L} aria-labelledby={`letter-${L}`}>
@@ -44,12 +47,12 @@ const telHref = (v: string) => 'tel:' + v.replace(/[^\d+]/g, '');
                     <summary class="noa-head">
                       <span class="flag">{realFlag(n.code) && <img src={realFlag(n.code)!.src} alt="" width={realFlag(n.code)!.w} height={realFlag(n.code)!.h} loading="lazy" />}</span>
                       <span class="noa-titles"><h3>{n.country}</h3><span class="noa-name">{n.name}</span></span>
-                      {n.olyCount !== null && <span class="noa-count" aria-hidden="true"><svg class="icon"><use href="#i-oly" /></svg>{n.olyCount.toLocaleString('en-GB')}</span>}
+                      {n.olyCount !== null && <span class="noa-count" aria-hidden="true"><svg class="icon"><use href="#i-oly" /></svg>{n.olyCount.toLocaleString({ en: 'en-GB', fr: 'fr-FR', es: 'es-ES' }[lang])}</span>}
                       <svg class="icon noa-chev"><use href="#i-chevron" /></svg>
                     </summary>
                     <div class="noa-body">
-                      {n.olyCount !== null && <p class="noa-oly"><span class="fact">{n.olyCount.toLocaleString('en-GB')}</span> <span>Number of Olympians registered for OLY</span></p>}
-                      <p class="noa-sub">Contact Details</p>
+                      {n.olyCount !== null && <p class="noa-oly"><span class="fact">{n.olyCount.toLocaleString({ en: 'en-GB', fr: 'fr-FR', es: 'es-ES' }[lang])}</span> <span>Number of Olympians registered for OLY</span></p>}
+                      <p class="noa-sub">{W.contact}</p>
                       <dl>
                         {n.fields.filter((f: any) => !/registered for OLY/.test(f.label)).map((f: any) => (
                           <div class="noa-field">
@@ -57,7 +60,7 @@ const telHref = (v: string) => 'tel:' + v.replace(/[^\d+]/g, '');
                             <dd>
                               {f.links.length > 0
                                 ? f.links.map((l: any) => <a href={l.href} target={/^https?:/.test(l.href) ? '_blank' : undefined} rel="noopener">{l.text}</a>)
-                                : f.label === 'Phone' ? f.value.map((v: string) => <a href={telHref(v)}>{v}</a>)
+                                : isPhone(f.label) ? f.value.map((v: string) => <a href={telHref(v)}>{v}</a>)
                                 : f.value.map((v: string) => <span>{v}</span>)}
                             </dd>
                           </div>
@@ -71,7 +74,7 @@ const telHref = (v: string) => 'tel:' + v.replace(/[^\d+]/g, '');
           </section>
         ))}
       </div>
-      <p class="muted dir-order">in alphabetical order</p>
+      <p class="muted dir-order">{W.order}</p>
     </div>
   </section>
 </Base>

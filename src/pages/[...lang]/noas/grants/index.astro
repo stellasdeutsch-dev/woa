@@ -3,7 +3,7 @@ import * as cheerio from 'cheerio';
 import Base from '../../../../layouts/Base.astro';
 import PageHero from '../../../../components/PageHero.astro';
 import { dataFor } from '../../../../lib/data';
-import { LANG_PARAMS, pageLang, t as tFor, L as Lx } from '../../../../lib/i18n';
+import { LANG_PARAMS, pageLang, t as tFor, L as Lx, navLabel } from '../../../../lib/i18n';
 export function getStaticPaths() { return LANG_PARAMS; }
 const lang = pageLang(Astro.params); const tr = tFor(lang); const D = dataFor(lang);
 const page = D.page;
@@ -24,10 +24,13 @@ const dates = $('table tr').map((_, tr) => ({ when: $(tr).find('td').eq(0).text(
 // eligibility + criteria: everything after the table
 const tail = $('table').first().nextAll().toArray().map(h).join('');
 const CAT_ICON: Record<string, string> = { 'Development Grants': 'grant', 'Service to Society': 'solidarity', 'Service to Olympians': 'life' };
+const CAT_ORDER = ['grant', 'solidarity', 'life'];
+// "Ideas can be suggested by any Olympian…" in the page's language
+const ideasNote = $('p').map((_, el) => $(el).text().trim()).get().find(t => /suggested by any Olympian|suggérées par tout Olympien|puede sugerir ideas/i.test(t)) ?? '';
 const amountFor = (t: string) => { const a = amounts.find(x => x.includes(t.replace(' Grants', ''))); return a ? (a.split(/\s[–-]\s/)[1] || '') : ''; };
 ---
 <Base title={`${p.section} | ${title}`} origPath={p.orig} image={b(p.bg)}>
-  <PageHero title={p.section} crumbs={[{ label: 'NOAs', href: '/noas/' }, { label: p.section }]} bg={b(p.bg)}>
+  <PageHero title={p.section} crumbs={[{ label: navLabel('/noas/', 'NOAs', lang), href: '/noas/' }, { label: p.section }]} bg={b(p.bg)}>
     <div class="lead" set:html={aim} />
   </PageHero>
 
@@ -40,9 +43,9 @@ const amountFor = (t: string) => { const a = amounts.find(x => x.includes(t.repl
       </ul>
       <div class="prose apply" set:html={apply} />
       <div class="grid grid-3 cats">
-        {cats.map(c => (
+        {cats.map((c, i) => (
           <article class="cat">
-            <span class="topic-icon"><svg class="icon icon-lg"><use href={`#i-${CAT_ICON[c.title] ?? 'grant'}`} /></svg></span>
+            <span class="topic-icon"><svg class="icon icon-lg"><use href={`#i-${CAT_ICON[c.title] ?? CAT_ORDER[i] ?? 'grant'}`} /></svg></span>
             <h3>{c.title}</h3>
             <div class="prose cat-text" set:html={c.html} />
           </article>
@@ -65,7 +68,7 @@ const amountFor = (t: string) => { const a = amounts.find(x => x.includes(t.repl
       <div class="prose" set:html={tail} />
       <aside class="panel apply-panel">
         <svg class="icon icon-xl"><use href="#i-directory" /></svg>
-        <p>Ideas can be suggested by any Olympian but your application must be submitted through your NOA.</p>
+        <p>{ideasNote}</p>
         <a class="btn" href={url('/noas/noa-directory/')}>NOA Directory<svg class="icon icon-arrow"><use href="#i-arrow" /></svg></a>
       </aside>
     </div>

@@ -15,26 +15,30 @@ const ps = $.root().children('p');
 const intro = $.html(ps.eq(0));
 const scale = ps.eq(1).text().trim();
 // "more than 3000 retired Olympians from 131 countries, representing 57 Olympic sports"
-const m = scale.match(/more than (\d+) retired Olympians from (\d+) countries, representing (\d+) Olympic sports/);
+import { sections } from '../../../../lib/sections';
+import { navLabel } from '../../../../lib/i18n';
+// three numbers from that sentence, with the words that follow each one (in the page's language)
+const stats = sections(lang).OLYMPIANS.health.stats;
+// "Key findings include:" — the paragraph right before the list
+const findingsHead = $('ul').first().prevAll('p').first().text().trim();
 const findings = $('ul li').map((_, li) => $(li).text().trim()).get();
 const pct = (s: string) => [...s.matchAll(/(\d+(?:\.\d+)?)%/g)].map(x => parseFloat(x[1]));
 const injury = findings.find(f => /knee/.test(f)) || '';
 const injuryParts = [...injury.matchAll(/(knee|lumbar spine|shoulder\/clavicle) \((\d+(?:\.\d+)?)%\)/g)].map(x => ({ label: x[1], v: parseFloat(x[2]) }));
 const gender = findings.find(f => /Female/.test(f)) || '';
 const g = gender.match(/Female injury \((\d+(?:\.\d+)?)%\).*male \((\d+(?:\.\d+)?)%\)/);
-const rest = $.root().children().toArray().slice(3).map(e => $.html(e)).join('');
+const kids = $.root().children().toArray(); const ulIdx = kids.findIndex(e => (e as any).tagName === 'ul');
+const rest = kids.slice(ulIdx >= 0 ? ulIdx + 1 : 3).map(e => $.html(e)).join('');
 const { html: restHtml } = prose(rest);
 ---
 <Base title={p.title} origPath={p.orig} image={b(p.bg)}>
-  <PageHero title={p.title} crumbs={[{ label: 'Olympians', href: '/olympians/' }, { label: 'Health' }]} bg={b(p.bg)} />
+  <PageHero title={p.title} crumbs={[{ label: navLabel('/olympians/', 'Olympians', lang), href: '/olympians/' }, { label: 'Health' }]} bg={b(p.bg)} />
   <section class="section">
     <div class="container">
       <div class="prose lead-p" set:html={intro} />
-      {m && (
+      {stats.length === 3 && (
         <dl class="h-stats">
-          <div><dt class="stat-num">{m[1]}+</dt><dd class="stat-label">retired Olympians</dd></div>
-          <div><dt class="stat-num">{m[2]}</dt><dd class="stat-label">countries</dd></div>
-          <div><dt class="stat-num">{m[3]}</dt><dd class="stat-label">Olympic sports</dd></div>
+          {stats.map(([n, label], i) => <div><dt class="stat-num">{n}{i === 0 ? '+' : ''}</dt><dd class="stat-label">{label}</dd></div>)}
         </dl>
       )}
       <p class="scale">{scale}</p>
@@ -42,7 +46,7 @@ const { html: restHtml } = prose(rest);
   </section>
   <section class="section bg-grey">
     <div class="container">
-      <div class="section-head"><h2>Key findings include:</h2></div>
+      <div class="section-head"><h2>{findingsHead}</h2></div>
       <div class="findings">
         {findings.filter(f => f !== injury && f !== gender).map(f => { const nums = pct(f); return (
           <figure class="finding">

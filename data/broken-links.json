@@ -1,8 +1,17 @@
 {
- "/”mailto:/": [
-  "/news/10/calling-olympians-in-sochi/index.html"
- ],
  "/olympians-party/": [
+  "/es/news/1012/participe-en-la-celebraci-n-oly-de-la-woa-en-pyeongchang/index.html",
+  "/es/news/1021/para-los-atletas-ol-mpicos-pyeongchang-2018-es-un-catalizador-para-inspirar-a-los-j-venes/index.html",
+  "/es/news/1027/camino-a-pyeongchang-2018-atletas-ol-mpicos-coreanos-ayudan-a-organizar-los-juegos/index.html",
+  "/es/news/1033/la-woa-felicita-a-los-atletas-ol-mpicos-alcaldes-de-pyeongchang-2018/index.html",
+  "/es/news/1039/camino-a-pyeongchang-2018-de-estrella-en-la-pista-a-cronista-de-esqu-/index.html",
+  "/es/news/1042/camino-a-pyeongchang-2018-de-remera-ol-mpica-a-voluntaria-en-la-villa/index.html",
+  "/fr/news/1011/venez-assister--la-c-l-bration-oly-de-la-woa--pyeongchang/index.html",
+  "/fr/news/1020/les-olympiens-se-servent-de-pyeongchang-2018-comme-source-d-inspiration-pour-les-jeunes/index.html",
+  "/fr/news/1026/pyeongchang-2018--les-olympiens-cor-ens-aident--lorganisation-des-jeux/index.html",
+  "/fr/news/1032/la-woa-f-licite-les-maires-olympiens-de-pyeongchang-2018/index.html",
+  "/fr/news/1038/pyeongchang-2018--une-star-du-ski--la-t-l-vision/index.html",
+  "/fr/news/1041/pyeongchang-2018--un-rameur-olympique-b-n-vole-au-village/index.html",
   "/news/1010/join-woa-s-oly-celebration-in-pyeongchang/index.html",
   "/news/1019/olympians-use-pyeongchang-2018-as-a-catalyst-to-inspire-youth/index.html",
   "/news/1025/path-to-pyeongchang-2018-korean-olympians-helping-run-the-games/index.html",
@@ -10,19 +19,55 @@
   "/news/1037/path-to-pyeongchang-2018-from-slope-star-to-skiing-broadcaster/index.html",
   "/news/1040/path-to-pyeongchang-2018-from-olympic-rower-to-village-volunteer/index.html"
  ],
- "/library/noa_guide/noa_start_up_guide.pdf": [
-  "/news/1702/woa-welcomes-new-members-brazil-liberia-and-spain/index.html"
- ],
- "/yt/xHwYat8XChA.jpg": [
-  "/news/457/nocs-offered-the-use-of-olympians-reunion-centre-in-rio/index.html"
- ],
- "/yt/Emawq64b0DU.jpg": [
-  "/news/630/olympians-urged-to-back-likeagirl-campaign/index.html"
+ "/development-grants/": [
+  "/es/news/538/la-woa-lanza-subsidios-para-el-desarrollo-de-noas-2016/index.html",
+  "/fr/news/537/lancement-des-subventions-2016-de-la-woa-pour-le-d-veloppement-des-ano/index.html"
  ],
  "/library/woa_constitution_2015_en.pdf": [
+  "/es/noas/noa-guide/index.html",
+  "/fr/noas/noa-guide/index.html",
   "/noas/noa-guide/index.html"
  ],
+ "/oly-house/a-message-from-president-joel-bouzou/": [
+  "/es/oly-house/2020/index.html"
+ ],
  "/e-oly-house-milano-cortina-2026/": [
+  "/es/oly-house/gamestime-olympian-reunions/index.html",
+  "/es/oly-house/gamestime-olympian-reunions/index.html",
+  "/es/oly-house/gamestime-olympian-reunions/index.html",
+  "/es/oly-house/gamestime-olympian-reunions/index.html",
+  "/es/oly-house/gamestime-olympian-reunions/index.html",
+  "/es/oly-house/gamestime-olympian-reunions/index.html",
+  "/es/oly-house/gamestime-olympian-reunions/index.html",
+  "/es/oly-house/gamestime-olympian-reunions/index.html",
+  "/es/oly-house/gamestime-olympian-reunions/index.html",
+  "/es/oly-house/olympian-reunions/index.html",
+  "/es/oly-house/olympian-reunions/index.html",
+  "/es/oly-house/olympian-reunions/index.html",
+  "/es/oly-house/olympian-reunions/index.html",
+  "/es/oly-house/olympian-reunions/index.html",
+  "/es/oly-house/olympian-reunions/index.html",
+  "/es/oly-house/olympian-reunions/index.html",
+  "/es/oly-house/olympian-reunions/index.html",
+  "/es/oly-house/olympian-reunions/index.html",
+  "/fr/oly-house/gamestime-olympian-reunions/index.html",
+  "/fr/oly-house/gamestime-olympian-reunions/index.html",
+  "/fr/oly-house/gamestime-olympian-reunions/index.html",
+  "/fr/oly-house/gamestime-olympian-reunions/index.html",
+  "/fr/oly-house/gamestime-olympian-reunions/index.html",
+  "/fr/oly-house/gamestime-olympian-reunions/index.html",
+  "/fr/oly-house/gamestime-olympian-reunions/index.html",
+  "/fr/oly-house/gamestime-olympian-reunions/index.html",
+  "/fr/oly-house/gamestime-olympian-reunions/index.html",
+  "/fr/oly-house/olympian-reunions/index.html",
+  "/fr/oly-house/olympian-reunions/index.html",
+  "/fr/oly-house/olympian-reunions/index.html",
+  "/fr/oly-house/olympian-reunions/index.html",
+  "/fr/oly-house/olympian-reunions/index.html",
+  "/fr/oly-house/olympian-reunions/index.html",
+  "/fr/oly-house/olympian-reunions/index.html",
+  "/fr/oly-house/olympian-reunions/index.html",
+  "/fr/oly-house/olympian-reunions/index.html",
   "/oly-house/gamestime-olympian-reunions/index.html",
   "/oly-house/gamestime-olympian-reunions/index.html",
   "/oly-house/gamestime-olympian-reunions/index.html",
@@ -43,6 +88,26 @@
   "/oly-house/olympian-reunions/index.html"
  ],
  "/oly-house-milano-cortina-2026-hub/": [
+  "/es/oly-house/gamestime-olympian-reunions/index.html",
+  "/es/oly-house/gamestime-olympian-reunions/index.html",
+  "/es/oly-house/gamestime-olympian-reunions/index.html",
+  "/es/oly-house/gamestime-olympian-reunions/index.html",
+  "/es/oly-house/gamestime-olympian-reunions/index.html",
+  "/es/oly-house/olympian-reunions/index.html",
+  "/es/oly-house/olympian-reunions/index.html",
+  "/es/oly-house/olympian-reunions/index.html",
+  "/es/oly-house/olympian-reunions/index.html",
+  "/es/oly-house/olympian-reunions/index.html",
+  "/fr/oly-house/gamestime-olympian-reunions/index.html",
+  "/fr/oly-house/gamestime-olympian-reunions/index.html",
+  "/fr/oly-house/gamestime-olympian-reunions/index.html",
+  "/fr/oly-house/gamestime-olympian-reunions/index.html",
+  "/fr/oly-house/gamestime-olympian-reunions/index.html",
+  "/fr/oly-house/olympian-reunions/index.html",
+  "/fr/oly-house/olympian-reunions/index.html",
+  "/fr/oly-house/olympian-reunions/index.html",
+  "/fr/oly-house/olympian-reunions/index.html",
+  "/fr/oly-house/olympian-reunions/index.html",
   "/oly-house/gamestime-olympian-reunions/index.html",
   "/oly-house/gamestime-olympian-reunions/index.html",
   "/oly-house/gamestime-olympian-reunions/index.html",
@@ -55,10 +120,42 @@
   "/oly-house/olympian-reunions/index.html"
  ],
  "/oly-house-milano-cortina-2026/": [
+  "/es/oly-house/gamestime-olympian-reunions/index.html",
+  "/es/oly-house/olympian-reunions/index.html",
+  "/fr/oly-house/gamestime-olympian-reunions/index.html",
+  "/fr/oly-house/olympian-reunions/index.html",
   "/oly-house/gamestime-olympian-reunions/index.html",
   "/oly-house/olympian-reunions/index.html"
  ],
  "/registration-oly-house-milano-cortina-2026/": [
+  "/es/oly-house/gamestime-olympian-reunions/index.html",
+  "/es/oly-house/gamestime-olympian-reunions/index.html",
+  "/es/oly-house/gamestime-olympian-reunions/index.html",
+  "/es/oly-house/gamestime-olympian-reunions/index.html",
+  "/es/oly-house/gamestime-olympian-reunions/index.html",
+  "/es/oly-house/gamestime-olympian-reunions/index.html",
+  "/es/oly-house/gamestime-olympian-reunions/index.html",
+  "/es/oly-house/olympian-reunions/index.html",
+  "/es/oly-house/olympian-reunions/index.html",
+  "/es/oly-house/olympian-reunions/index.html",
+  "/es/oly-house/olympian-reunions/index.html",
+  "/es/oly-house/olympian-reunions/index.html",
+  "/es/oly-house/olympian-reunions/index.html",
+  "/es/oly-house/olympian-reunions/index.html",
+  "/fr/oly-house/gamestime-olympian-reunions/index.html",
+  "/fr/oly-house/gamestime-olympian-reunions/index.html",
+  "/fr/oly-house/gamestime-olympian-reunions/index.html",
+  "/fr/oly-house/gamestime-olympian-reunions/index.html",
+  "/fr/oly-house/gamestime-olympian-reunions/index.html",
+  "/fr/oly-house/gamestime-olympian-reunions/index.html",
+  "/fr/oly-house/gamestime-olympian-reunions/index.html",
+  "/fr/oly-house/olympian-reunions/index.html",
+  "/fr/oly-house/olympian-reunions/index.html",
+  "/fr/oly-house/olympian-reunions/index.html",
+  "/fr/oly-house/olympian-reunions/index.html",
+  "/fr/oly-house/olympian-reunions/index.html",
+  "/fr/oly-house/olympian-reunions/index.html",
+  "/fr/oly-house/olympian-reunions/index.html",
   "/oly-house/gamestime-olympian-reunions/index.html",
   "/oly-house/gamestime-olympian-reunions/index.html",
   "/oly-house/gamestime-olympian-reunions/index.html",
@@ -75,9 +172,23 @@
   "/oly-house/olympian-reunions/index.html"
  ],
  "/join-us-milano-cortina-2026/home-oly-house-paris-2024/": [
+  "/es/oly-house/gamestime-olympian-reunions/index.html",
+  "/es/oly-house/gamestime-olympian-reunions/index.html",
+  "/es/oly-house/olympian-reunions/index.html",
+  "/es/oly-house/olympian-reunions/index.html",
+  "/fr/oly-house/gamestime-olympian-reunions/index.html",
+  "/fr/oly-house/gamestime-olympian-reunions/index.html",
+  "/fr/oly-house/olympian-reunions/index.html",
+  "/fr/oly-house/olympian-reunions/index.html",
   "/oly-house/gamestime-olympian-reunions/index.html",
   "/oly-house/gamestime-olympian-reunions/index.html",
   "/oly-house/olympian-reunions/index.html",
   "/oly-house/olympian-reunions/index.html"
+ ],
+ "/”mailto:/": [
+  "/news/10/calling-olympians-in-sochi/index.html"
+ ],
+ "/library/noa_guide/noa_start_up_guide.pdf": [
+  "/news/1702/woa-welcomes-new-members-brazil-liberia-and-spain/index.html"
  ]
 }

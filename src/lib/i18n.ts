@@ -2,9 +2,8 @@
 // Menu labels are copied from the original site in each language; the remaining words are service words (search, close…).
 export type Lang = 'en' | 'fr' | 'es';
 export const ALL_LANGS: Lang[] = ['en', 'fr', 'es'];
-// languages that are built and shown in the switcher. French and Spanish are ready but on hold (client's decision, 14.11.2026):
-// add 'fr', 'es' here (and run the FR/ES crawl + extract scripts) to publish them.
-export const LANGS: Lang[] = ['en'];
+// languages that are built and shown in the switcher (French and Spanish data: scripts/crawl-lang*.mjs + LANG_SITE=fr|es extract + xlang)
+export const LANGS: Lang[] = ['en', 'fr', 'es'];
 export const LANG_NAME: Record<Lang, string> = { en: 'English', fr: 'Français', es: 'Español' };
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
