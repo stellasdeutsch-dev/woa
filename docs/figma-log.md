@@ -12,6 +12,7 @@
 | Design System | 3:4 |
 | Сайт как есть | 3:5 |
 | Архив | 3:6 |
+| Кейсы: 25 сайтов | 46:2 |
 
 ## Screens: секции и кадры (1440 / 834 / 390)
 | Страница сайта | секция | 1440 | 834 | 390 |
@@ -94,3 +95,6 @@
 - NOAs и NOA Directory заменены кадрами с настоящими флагами и номерами глав на иконках; старые в «Архив» → «Screens v5».
 - Секции «Français» (44:14896) и «Español» (44:14911): главная и NOAs на трёх ширинах.
 - Design System → Components: набор «Scroll bar» (45:77) — Rest / Moving / Hover.
+
+## Кейсы: 25 сайтов (46:2), 14.11.2026
+Отчёт 46:3: сводка «12 приёмов» (что уже есть на сайте, что предлагаю) и 25 карточек: два скриншота (первый экран и секция ниже, 1440), три приёма, вывод «Для WOA». Группы: олимпийское движение (AOC, IPC, World Athletics, Team USA, Team GB, LA28, World Rugby, World Aquatics, Athlete365), сети участников (Rotary, Nobel Prize, UNICEF, MSF, UNESCO, Rhodes Trust), подача историй (Apple, Nike, Patagonia, Red Bull, charity: water), чистота интерфейса (Stripe, Linear, GOV.UK, Airbnb.org, WWF). olympics.com и ifrc.org не пустили автоматический браузер, заменены. Баннеры cookie убраны из страницы перед снимком, ничего не принималось.
