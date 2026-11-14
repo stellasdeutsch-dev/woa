@@ -535,12 +535,14 @@ p { margin: 0; text-wrap: pretty; }
   :root { interpolate-size: allow-keywords; }
   details::details-content { height: 0; overflow: clip; transition: height 250ms var(--ease-out), content-visibility 250ms allow-discrete; }
   details[open]::details-content { height: auto; }
-  /* search and menu windows */
-  .search-dialog, .mobile-menu { transition: opacity 180ms var(--ease-out), transform 180ms var(--ease-out), overlay 180ms allow-discrete, display 180ms allow-discrete; opacity: 0; transform: scale(.98); }
-  .search-dialog[open], .mobile-menu[open] { opacity: 1; transform: none; }
-  @starting-style { .search-dialog[open], .mobile-menu[open] { opacity: 0; transform: scale(.98); } }
-  .search-dialog::backdrop, .mobile-menu::backdrop { transition: background-color 180ms, overlay 180ms allow-discrete, display 180ms allow-discrete; }
-  @starting-style { .search-dialog[open]::backdrop, .mobile-menu[open]::backdrop { background-color: transparent; } }
+  /* search, menu and leadership windows: each enters along the axis it is swiped away on (src/lib/swipe.ts) */
+  .search-dialog, .mobile-menu, .person-dlg { transition: opacity 200ms var(--ease-out), translate 200ms var(--ease-out), overlay 200ms allow-discrete, display 200ms allow-discrete; opacity: 0; }
+  .search-dialog, .person-dlg { translate: 0 16px; }
+  .mobile-menu { translate: 32px 0; }
+  .search-dialog[open], .mobile-menu[open], .person-dlg[open] { opacity: 1; translate: none; }
+  @starting-style { .search-dialog[open], .person-dlg[open] { opacity: 0; translate: 0 16px; } .mobile-menu[open] { opacity: 0; translate: 32px 0; } }
+  .search-dialog::backdrop, .mobile-menu::backdrop, .person-dlg::backdrop { transition: background-color 200ms, overlay 200ms allow-discrete, display 200ms allow-discrete; }
+  @starting-style { .search-dialog[open]::backdrop, .mobile-menu[open]::backdrop, .person-dlg[open]::backdrop { background-color: transparent; } }
   /* page to page: a short cross-fade; the header (with the logo) stays still */
   @view-transition { navigation: auto; }
   ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 200ms; }
@@ -800,3 +802,8 @@ html.still main > section, html.still .site-footer { content-visibility: visible
 @media (prefers-reduced-motion: reduce) { .vb-doc.has-cover:hover .vb-cover img { transform: none; } }
 .w2 { color: var(--c-grey-600); }
 .bg-dark .w2 { color: #8d8d8d; }
+
+/* swipe to close (src/lib/swipe.ts): the backdrop fades with the distance pulled */
+@property --swipe-bd { syntax: '<number>'; inherits: true; initial-value: 1; }
+dialog::backdrop { opacity: var(--swipe-bd, 1); }
+.mobile-menu { touch-action: pan-y; }

@@ -111,6 +111,7 @@ const original = ORIGIN + (origPath ?? stripLang(current));
     }
   </script>
   <script>
+    import { swipeToClose } from '../lib/swipe';
     const body = document.body;
     const BASE = body.dataset.base || '';
     document.documentElement.classList.add('js');
@@ -128,6 +129,7 @@ const original = ORIGIN + (origPath ?? stripLang(current));
     menuBtn?.addEventListener('click', () => { menu?.showModal(); menuBtn.setAttribute('aria-expanded', 'true'); });
     document.querySelector('[data-close-menu]')?.addEventListener('click', () => menu?.close());
     menu?.addEventListener('close', () => menuBtn?.setAttribute('aria-expanded', 'false'));
+    if (menu) swipeToClose(menu, 'x', { edge: true });
     matchMedia('(min-width: 1200px)').addEventListener('change', (e) => { if (e.matches) menu?.close(); });
 
     // Video: load youtube-nocookie only on click
@@ -158,6 +160,7 @@ const original = ORIGIN + (origPath ?? stripLang(current));
     document.querySelectorAll('[data-open-search]').forEach((b) => b.addEventListener('click', open));
     document.querySelector('[data-close-search]')?.addEventListener('click', () => dlg.close());
     dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
+    swipeToClose(dlg, 'y');
     document.addEventListener('keydown', (e) => { if (e.key === '/' && !dlg.open && !(e.target as HTMLElement).closest('input,textarea,select')) { e.preventDefault(); open(); } });
     const TYPE_ORDER: Record<string, number> = { Page: 0, 'Best Practice': 2, News: 3 };
     async function run(q: string) {
