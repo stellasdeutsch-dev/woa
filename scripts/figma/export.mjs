@@ -20,6 +20,7 @@ const FIGMA_CSS = `
   .prose .table + .table + .table { display: none !important; }
   main > section.section-tight .grid-3 > :nth-child(n+10) { display: none !important; }
   .pager { display: none !important; }
+  .prose ul:has(> li > img:first-child) > li:nth-child(n+25) { display: none !important; }
   *, *::before, *::after { transition: none !important; animation: none !important; }
 `;
 

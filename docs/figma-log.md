@@ -35,6 +35,11 @@
 | Best Practices | 4:836 | 5:12011 | 5:12256 | 5:12490 |
 | SkillsBuild | 4:837 | 5:12720 | 5:12878 | 5:13027 |
 
+| WOF Attendees | 14:1621 | 14:275 | 14:586 | 14:894 |
+| Page not found | 14:1622 | 14:2 | 14:186 | 14:102 |
+
+Прототип: 1470 переходов по клику (меню, подвал, крошки, кнопки), старт: Home 1440 / 834 / 390.
+
 Старые версии кадров (v1) лежат в «Архив», секция «Screens v1 — 14.11.2026».
 
 ## Как обновлять
@@ -42,3 +47,23 @@
 2. `node scripts/figma/export.mjs http://localhost:4321/woa <out> "Home=/" ...` — SVG на каждую ширину.
 3. `upload_assets` → POST SVG → `scripts/figma/fix-text.js` с id новых кадров → заменить старый кадр на том же месте секции.
 Кадры собраны из SVG: у слоёв привязки SCALE, менять размер кадра только через `resizeWithoutConstraints`.
+
+## User Flow (3:2)
+- Audiences — секция 11:2
+- User flows — секция 11:148
+
+## Wireframes (3:3)
+Серые копии всех кадров Screens в той же раскладке (секции с теми же названиями). Фото заменены серыми плашками «Image placeholder».
+
+## Design System (3:4)
+- Коллекция переменных «WOA tokens» (VariableCollectionId:7:2): c-black, c-ink, c-gold, c-white, c-grey-50…700, c-error, c-overlay, sp-1…sp-10, gutter, container, header-h, radius, radius-lg — имена и значения как в `src/styles/global.css`.
+- Текстовые стили: Display, H1–H4, Lead, Body, Body / Bold, Small, Small / SemiBold, Caption, Stat number, Nav, Button (Montserrat, размеры замерены при 1440).
+- Эффект «Card hover».
+- Секции: Colors 8:2, Typography 8:56, Icons 8:100 (52 компонента «Icon / …»), Components 9:2.
+- Компоненты: Button 9:57 (Primary/Outline/Gold × Default/Hover), Pill / Tab 9:64, Search field 9:65, Form field 9:79, Document row 9:94, Topic card 9:111, News card 9:132, Table row 9:150 (Desktop/Phone), Stat 9:151.
+
+## Сайт как есть (3:5)
+Копия olympians.org (7 страниц × 3 ширины): Home 12:5030, About 12:5031, OLY 12:5032, NOA Directory 12:5033, Grants 12:5034, News 12:5035, News article 12:5036. Шрифт Verlag заменён на Jost (Verlag не входит в Figma); цветные тонировки плиток главной не перенесены.
+
+## Архив (3:6)
+«Screens v1 — 14.11.2026» и «Сайт как есть v1 — 14.11.2026» — первые версии, заменённые исправленными.
