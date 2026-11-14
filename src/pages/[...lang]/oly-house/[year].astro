@@ -1,0 +1,11 @@
+---
+import Base from '../../../layouts/Base.astro';
+import OlyHouse from '../../../components/templates/OlyHouse.astro';
+import { dataFor } from '../../../lib/data';
+import { LANGS, langParam, pageLang } from '../../../lib/i18n';
+export function getStaticPaths() { return LANGS.flatMap(l => ['2024', '2022', '2020'].map(year => ({ params: { lang: langParam(l), year } }))); }
+const lang = pageLang(Astro.params);
+const year = Astro.params.year!;
+const p = dataFor(lang).page(`/oly-house/${year}/`);
+---
+<Base title={`${p.title} ${year}`} origPath={p.orig}><OlyHouse page={p} year={year} /></Base>

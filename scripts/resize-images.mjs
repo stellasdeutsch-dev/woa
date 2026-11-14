@@ -1,5 +1,6 @@
 // Makes smaller WebP copies of large photos for srcset: public/_img/<width>/<original path>.webp
 // Runs before `astro build` (see package.json). Existing copies newer than the source are skipped.
+// manifest.json: { "/path.jpg": { w: width, c: "#dominant colour" } }
 // The logo gets a 144px-high PNG (same artwork, only scaled; never recoloured or cropped).
 import fs from 'node:fs';
 import path from 'node:path';
@@ -20,7 +21,9 @@ const widths = {};
 const jobs = files.map(src => async () => {
   let meta;
   try { meta = await sharp(src).metadata(); } catch { failed++; return; }
-  widths['/' + path.relative(ROOT, src)] = meta.width;
+  // width + dominant colour (shown as a placeholder while the photo loads)
+  let c = null; try { const st = await sharp(src).resize(32, 32, { fit: 'inside' }).stats(); const d = st.dominant; c = '#' + [d.r, d.g, d.b].map(v => v.toString(16).padStart(2, '0')).join(''); } catch {}
+  widths['/' + path.relative(ROOT, src)] = { w: meta.width, c };
   for (const w of WIDTHS) {
     if (!meta.width || meta.width <= w * 1.15) continue;
     const dst = path.join(OUT, String(w), path.relative(ROOT, src)) + '.webp';

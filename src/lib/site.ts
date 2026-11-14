@@ -133,13 +133,15 @@ export const imgOk = (src?: string | null) => {
 };
 
 // srcset from the smaller WebP copies made by scripts/resize-images.mjs (falls back to the original only)
-let imgWidths: Record<string, number> | null = null;
+let imgWidths: Record<string, { w: number; c: string | null } | number> | null = null;
+const imgInfo = (p: string) => { if (!imgWidths) { try { imgWidths = JSON.parse(fs.readFileSync('public/_img/manifest.json', 'utf8')); } catch { imgWidths = {}; } } const v = imgWidths![p]; return typeof v === 'number' ? { w: v, c: null } : v; };
+// dominant colour of a photo, used as its background until it loads (slow connections see colour, not a white hole)
+export const phColor = (src?: string | null) => { if (!src) return undefined; const p = decodeURI(src.replace('{{BASE}}', '').replace(BASE, '')); const c = imgInfo(p)?.c; return c ? `background-color:${c}` : undefined; };
 export const srcset = (src?: string | null) => {
   if (!src) return undefined;
   const p = decodeURI(src.replace('{{BASE}}', '').replace(BASE, ''));
   if (/^https?:/.test(p)) return undefined;
-  if (!imgWidths) { try { imgWidths = JSON.parse(fs.readFileSync('public/_img/manifest.json', 'utf8')); } catch { imgWidths = {}; } }
-  const w = imgWidths![p]; if (!w) return undefined;
+  const w = imgInfo(p)?.w; if (!w) return undefined;
   const parts = [480, 960].filter(x => w > x * 1.15 && fs.existsSync(`public/_img/${x}${p}.webp`)).map(x => `${BASE}/_img/${x}${encodeURI(p)}.webp ${x}w`);
   return parts.length ? [...parts, `${b(src)} ${w}w`].join(', ') : undefined;
 };
@@ -148,3 +150,20 @@ export const LOGO = `${BASE}/_img/logo-144.png`;
 // Split a sentence into word spans for the scroll "light up" effect (text stays one readable line for screen readers).
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 export const words = (s: string) => s.split(/\s+/).filter(Boolean).map(w => `<span class="w">${esc(w)}</span>`).join(' ');
+
+// Menu in a given language: labels as on olympians.org, links with the language prefix
+import { type Lang, L as Lp, navLabel as navL } from './i18n';
+export const navFor = (lang: Lang): NavItem[] => NAV.map(n => ({ ...n, label: navL(n.href, n.label, lang), href: Lp(n.href, lang), children: n.children?.map(c => ({ ...c, label: navL(c.href, c.label, lang), href: Lp(c.href, lang) })) }));
+
+// Real national flags in their own proportions (public/flags-real/<iso>.svg, from flagcdn.com;
+// Chinese Taipei uses the flag it competes under in the Olympic Movement). Height is fixed, width follows the flag.
+const flagRatio = new Map<string, number>();
+export const realFlag = (code: string, h = 36) => {
+  const c = code.toLowerCase(); const file = `public/flags-real/${c}.svg`;
+  if (!flagRatio.has(c)) {
+    let r = 1.5;
+    try { const svg = fs.readFileSync(file, 'utf8'); const vb = svg.match(/viewBox="([^"]+)"/)?.[1].trim().split(/[\s,]+/).map(Number); if (vb && vb[2] > 0 && vb[3] > 0) r = vb[2] / vb[3]; } catch { return null; }
+    flagRatio.set(c, r);
+  }
+  return { src: `${BASE}/flags-real/${c}.svg`, w: Math.round(h * flagRatio.get(c)!), h };
+};

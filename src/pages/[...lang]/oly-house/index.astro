@@ -1,0 +1,10 @@
+---
+import Base from '../../../layouts/Base.astro';
+import OlyHouse from '../../../components/templates/OlyHouse.astro';
+import { dataFor } from '../../../lib/data';
+import { LANG_PARAMS, pageLang } from '../../../lib/i18n';
+export function getStaticPaths() { return LANG_PARAMS; }
+const lang = pageLang(Astro.params);
+const p = dataFor(lang).page('/oly-house/');
+---
+<Base title={p.title} origPath={p.orig}><OlyHouse page={p} /></Base>

@@ -2,21 +2,28 @@
 import Base from '../layouts/Base.astro';
 import ContentPage from '../components/templates/ContentPage.astro';
 import Article from '../components/templates/Article.astro';
-import { pages, news, practices, redirects, type Story } from '../lib/data';
+import { dataFor, type Story } from '../lib/data';
 import { url, b, textOf } from '../lib/site';
+import { LANGS, stripLang } from '../lib/i18n';
 
 export function getStaticPaths() {
   const SPECIAL = new Set(['/woa/olympism/', '/noas/noa-guide/member-engagement/', '/oly-house/a-message-from-president-joel-bouzou/2020/', '/woa/about/', '/woa/leadership/', '/woa/contact-us/', '/olympians/oly/', '/olympians/health/', '/noas/grants/', '/noas/noa-directory/', '/oly-house/', '/oly-house/2024/', '/oly-house/2022/', '/oly-house/2020/', '/news/', '/best-practices/']);
   const strip = (p: string) => p.replace(/^\/|\/$/g, '');
   const out: any[] = [];
-  for (const p of pages) if (!SPECIAL.has(p.path)) out.push({ params: { slug: strip(p.path) }, props: { kind: 'page', item: p } });
-  news.forEach((n, i) => out.push({ params: { slug: strip(n.path) }, props: { kind: 'news', item: n, i } }));
-  practices.forEach((n, i) => out.push({ params: { slug: strip(n.path) }, props: { kind: 'bp', item: n, i } }));
-  const taken = new Set(out.map(o => o.params.slug));
-  for (const r of redirects) if (!taken.has(strip(r.from))) out.push({ params: { slug: strip(r.from) }, props: { kind: 'redirect', to: r.to } });
+  // the same pages in English, French (/fr/…) and Spanish (/es/…); the hand-made pages live in [...lang]/
+  for (const lang of LANGS) {
+    const { pages, news, practices, redirects } = dataFor(lang);
+    const start = out.length;
+    for (const p of pages) if (!SPECIAL.has(stripLang(p.path))) out.push({ params: { slug: strip(p.path) }, props: { kind: 'page', item: p, lang } });
+    news.forEach((n, i) => out.push({ params: { slug: strip(n.path) }, props: { kind: 'news', item: n, i, lang } }));
+    practices.forEach((n, i) => out.push({ params: { slug: strip(n.path) }, props: { kind: 'bp', item: n, i, lang } }));
+    const taken = new Set(out.slice(start).map(o => o.params.slug));
+    for (const r of redirects) if (!taken.has(strip(r.from))) out.push({ params: { slug: strip(r.from) }, props: { kind: 'redirect', to: r.to, lang } });
+  }
   return out;
 }
-const { kind, item, i, to } = Astro.props as any;
+const { kind, item, i, to, lang } = Astro.props as any;
+const { news, practices } = dataFor(lang);
 let related: Story[] = [];
 if (kind === 'news') {
   const byPath = new Map(news.map(n => [n.path, n]));
@@ -27,7 +34,7 @@ if (kind === 'bp') related = practices.filter(p => p.path !== item.path).slice(M
 const list = kind === 'news' ? news : practices;
 ---
 {kind === 'redirect' ? (
-  <html lang="en"><head><meta charset="utf-8" /><meta http-equiv="refresh" content={`0; url=${url(to)}`} /><link rel="canonical" href={url(to)} /><meta name="robots" content="noindex" /><title>World Olympians Association</title></head><body><a href={url(to)}>{url(to)}</a></body></html>
+  <html lang={lang}><head><meta charset="utf-8" /><meta http-equiv="refresh" content={`0; url=${url(to)}`} /><link rel="canonical" href={url(to)} /><meta name="robots" content="noindex" /><title>World Olympians Association</title></head><body><a href={url(to)}>{url(to)}</a></body></html>
 ) : kind === 'page' ? (
   <Base title={item.title} origPath={item.orig} description={item.desc || undefined} image={b(item.bg)}>
     <ContentPage page={item} />

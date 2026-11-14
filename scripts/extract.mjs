@@ -14,7 +14,7 @@ const RAW = LANG ? `data/raw-${LANG}` : 'data/raw';
 const NOA_DIR = LANG ? `data/noa-${LANG}` : 'data/noa';
 const OUT = 'src/data';
 fs.mkdirSync(OUT, { recursive: true });
-const index = JSON.parse(fs.readFileSync('data/crawl-index.json', 'utf8'));
+const index = JSON.parse(fs.readFileSync(LANG ? `data/crawl-index.${LANG}.json` : 'data/crawl-index.json', 'utf8'));
 const fileFor = (p) => path.join(RAW, (p === '/' ? 'index' : p.replace(/^\/|\/$/g, '').replace(/[\/?=&]/g, '__')) + '.html');
 const DOC = /\.(pdf|docx?|xlsx?|pptx?|zip)$/i;
 const neededAssets = new Set();

@@ -1,0 +1,25 @@
+---
+import Base from '../../../layouts/Base.astro';
+import StoryList from '../../../components/templates/StoryList.astro';
+import { dataFor } from '../../../lib/data';
+import { b, url } from '../../../lib/site';
+import { LANG_PARAMS, pageLang, navLabel, L } from '../../../lib/i18n';
+export function getStaticPaths() { return LANG_PARAMS; }
+const lang = pageLang(Astro.params);
+const all = dataFor(lang).practices;
+const title = navLabel('/best-practices/', 'Best Practices', lang);
+// link text on olympians.org in each language
+const SUBMIT = { en: 'To submit a best practice, click here', fr: 'Pour soumettre une bonne pratique, cliquez ici', es: 'Para enviar una buena práctica, haz click aquí' }[lang];
+const PER = 18;
+---
+<Base title={title} type="Page" search={false}>
+  <StoryList title={title} base="/best-practices/" all={all} items={all.slice(0, PER + 1)} page={1} pages={Math.ceil((all.length - 1) / PER)} bg={b(all[0].img)}>
+    <a class="submit-bp" href={url(L('/best-practices/submissions/', lang))}><svg class="icon icon-lg"><use href="#i-practice" /></svg><span>{SUBMIT}</span><svg class="icon icon-arrow"><use href="#i-arrow" /></svg></a>
+  </StoryList>
+</Base>
+<style>
+  .submit-bp { display: flex; align-items: center; gap: var(--sp-4); margin-bottom: var(--sp-6); padding: var(--sp-5) var(--sp-6); background: var(--c-gold); color: var(--c-black); border-radius: var(--radius-lg); font-weight: 700; font-size: var(--fs-h4); transition: background var(--t), color var(--t); }
+  .submit-bp .icon-arrow { margin-left: auto; transition: transform var(--t); }
+  .submit-bp:hover { background: var(--c-black); color: var(--c-white); }
+  .submit-bp:hover .icon-arrow { transform: translateX(4px); }
+</style>

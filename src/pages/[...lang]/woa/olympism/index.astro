@@ -1,0 +1,162 @@
+---
+// Olympism: the long Q&A text page told as a landing. Every sentence comes from the original page;
+// the layout only splits it into scenes (photo, quote, years, cards).
+import * as cheerio from 'cheerio';
+import Base from '../../../../layouts/Base.astro';
+import PageHero from '../../../../components/PageHero.astro';
+import { dataFor, crumbsFor } from '../../../../lib/data';
+import { LANG_PARAMS, pageLang, t as tFor, L as Lx } from '../../../../lib/i18n';
+export function getStaticPaths() { return LANG_PARAMS; }
+const lang = pageLang(Astro.params); const tr = tFor(lang); const D = dataFor(lang);
+const page = D.page;
+import { b, url } from '../../../../lib/site';
+
+const p = page('/woa/olympism/');
+const $ = cheerio.load(p.body.replaceAll('{{BASE}}', import.meta.env.BASE_URL.replace(/\/$/, '')));
+const items = $('ol > li').toArray().map(li => {
+  const $li = $(li);
+  return { title: $li.find('h2').first().text().trim(), ps: $li.find('p').toArray().map(el => $(el).html()!.trim()) };
+});
+const ids = ['what', 'why', 'achieved', 'woa', 'values', 'principles'];
+// a paragraph that ends with a quotation: text before it + the quotation itself
+const splitQuote = (h: string) => { const m = h.match(/^(.*?)\s*<em>[“"]?(.*?)[”"]?<\/em>(.*)$/s); return m ? { before: m[1], quote: m[2], after: m[3] } : null; };
+const s1 = items[0]; const q1 = splitQuote(s1.ps[2]);
+const s2 = items[1]; const q2 = splitQuote(s2.ps[0]);
+// years: the three sentences with dates become cards, the rest of the paragraph stays as text
+const s3 = items[2];
+const sentences = s3.ps[0].split(/(?<=\.)\s+/);
+const yearRx = /\b(1894|1896|1924)\b/;
+const yearSent = sentences.filter(t => yearRx.test(t));
+const restSent = sentences.filter(t => !yearRx.test(t)).join(' ');
+const YEAR_ICON: Record<string, string> = { '1894': 'columns', '1896': 'torch', '1924': 'snow' };
+const s4 = items[3];
+const stat = s4.ps[0].match(/more than ([\d,]+) living Olympians/);
+const s5 = items[4];
+const strongSplit = (h: string) => { const m = h.match(/^<strong>(.*?)<\/strong>\s*(.*)$/s); return m ? { t: m[1].replace(/[:.]\s*$/, '').trim(), d: m[2] } : { t: '', d: h }; };
+const values = s5.ps.map(strongSplit);
+const VALUE_ICON: Record<string, string> = { Excellence: 'excellence', Friendship: 'friendship', Respect: 'respect' };
+const s6 = items[5];
+const principles = s6.ps.slice(1).map(strongSplit);
+const PRINCIPLE_ICON: Record<string, string> = { 'Non-Discrimination': 'equal', Sustainability: 'leaf', Humanism: 'humanism', Universality: 'globe', Solidarity: 'solidarity', 'Alliance between sport, education and culture': 'alliance' };
+const ext = (h: string) => (h.match(/\.([a-z0-9]+)(\?|$)/i)?.[1] || '').toUpperCase();
+---
+<Base title={p.title} origPath={p.orig} image={b(p.bg)} description={p.desc || undefined}>
+  <PageHero title={p.title} crumbs={crumbsFor(p, lang)} bg={b(p.bg)} />
+
+  <section class="section-tight bg-grey">
+    <div class="container">
+      <ol class="vb-index">
+        {items.map((it, i) => <li><a href={`#${ids[i]}`}><span class="vb-num">{i + 1}</span><span>{it.title}</span><svg class="icon"><use href="#i-chevron" /></svg></a></li>)}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" id={ids[0]}>
+    <div class="container">
+      <div class="vb-split">
+        <div class="vb-text">
+          <div class="vb-title"><span class="vb-num">1</span><h2>{s1.title}</h2></div>
+          <p class="lead-p" set:html={s1.ps[0]} />
+          <p set:html={s1.ps[1]} />
+        </div>
+        <figure class="vb-media"><img src={b('{{BASE}}/backgrounds/18.webp')} alt="" loading="lazy" /></figure>
+      </div>
+      {q1 && (
+        <div class="ol-quote-row">
+          <p class="ol-quote-intro" set:html={q1.before} />
+          <figure class="vb-quote"><svg class="icon"><use href="#i-quote" /></svg><blockquote set:html={q1.quote} /><figcaption>Olympic Charter</figcaption></figure>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <section class="section bg-grey" id={ids[1]}>
+    <div class="container">
+      <div class="vb-split rev">
+        <div class="vb-text">
+          <div class="vb-title"><span class="vb-num">2</span><h2>{s2.title}</h2></div>
+          <p set:html={q2 ? q2.before : s2.ps[0]} />
+        </div>
+        <figure class="vb-media"><img src={b('{{BASE}}/backgrounds/62.webp')} alt="" loading="lazy" /></figure>
+      </div>
+      {q2 && <figure class="vb-quote ol-quote-wide"><svg class="icon"><use href="#i-quote" /></svg><blockquote set:html={q2.quote} /><figcaption>Pierre de Coubertin</figcaption></figure>}
+    </div>
+  </section>
+
+  <section class="section" id={ids[2]}>
+    <div class="container">
+      <div class="vb-title"><span class="vb-num">3</span><h2>{s3.title}</h2></div>
+      <div class="vb-text ol-wide"><p class="lead-p" set:html={restSent} /></div>
+      <ol class="vb-years ol-years">
+        {yearSent.map(t => { const y = t.match(yearRx)![1]; return <li><svg class="icon icon-xl"><use href={`#i-${YEAR_ICON[y]}`} /></svg><span class="vb-year">{y}</span><p set:html={t} /></li>; })}
+      </ol>
+      <div class="ol-cols">
+        {s3.ps.slice(1).map(h => <p set:html={h} />)}
+      </div>
+      <ul class="vb-chips ol-orgs">
+        <li><a href="https://www.wada-ama.org" target="_blank" rel="noopener"><svg class="icon"><use href="#i-external" /></svg>World Anti-Doping Agency (WADA)</a></li>
+        <li><a href="https://www.righttoplay.com" target="_blank" rel="noopener"><svg class="icon"><use href="#i-external" /></svg>Right to Play</a></li>
+        <li><a href="https://www.generationsforpeace.org" target="_blank" rel="noopener"><svg class="icon"><use href="#i-external" /></svg>Generations for Peace</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section bg-grey" id={ids[3]}>
+    <div class="container">
+      <div class="vb-title"><span class="vb-num">4</span><h2>{s4.title}</h2></div>
+      <div class="ol-woa">
+        <div class="vb-stat">
+          {stat && <span class="stat-num">{stat[1]}+</span>}
+          <p set:html={s4.ps[0]} />
+        </div>
+        <ul class="vb-cards">
+          <li class="vb-card"><span class="vb-ico"><svg class="icon"><use href="#i-guide" /></svg></span><p set:html={s4.ps[1]} /></li>
+          <li class="vb-card"><span class="vb-ico"><svg class="icon"><use href="#i-solidarity" /></svg></span><p set:html={s4.ps[2]} /></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-dark" id={ids[4]}>
+    <div class="container">
+      <div class="vb-title"><span class="vb-num">5</span><h2>{s5.title}</h2></div>
+      <ul class="vb-cards cols-3">
+        {values.map(v => <li class="vb-card"><span class="vb-ico"><svg class="icon"><use href={`#i-${VALUE_ICON[v.t] ?? 'values'}`} /></svg></span><h3>{v.t}</h3><p set:html={v.d} /></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id={ids[5]}>
+    <div class="container">
+      <div class="vb-title"><span class="vb-num">6</span><h2>{s6.title}</h2></div>
+      <p class="lead ol-wide" set:html={s6.ps[0]} />
+      <ul class="vb-cards cols-3 ol-principles">
+        {principles.map(v => <li class="vb-card"><span class="vb-ico"><svg class="icon"><use href={`#i-${PRINCIPLE_ICON[v.t] ?? 'values'}`} /></svg></span><h3>{v.t}</h3><p set:html={v.d} /></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section-tight bg-grey">
+    <div class="container">
+      <ul class="vb-docs">
+        {p.downloads.map(d => <li><a class="vb-doc" href={b(d.href)} target="_blank" rel="noopener"><span class="vb-ico"><svg class="icon"><use href="#i-doc" /></svg></span><span class="vb-doc-name">{d.label}<span class="vb-doc-type">{ext(d.href)}</span></span><svg class="icon"><use href="#i-download" /></svg></a></li>)}
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .ol-quote-row { display: grid; gap: var(--sp-5); margin-top: var(--sp-8); }
+  .ol-quote-intro { font-size: var(--fs-lead); line-height: 1.55; }
+  .ol-quote-wide { margin-top: var(--sp-8); }
+  .ol-wide { margin-bottom: var(--sp-7); }
+  .ol-years { margin-bottom: var(--sp-7); }
+  .ol-years p { color: var(--c-grey-700); }
+  .ol-cols { display: grid; gap: var(--sp-5); grid-template-columns: minmax(0, 1fr); }
+  @media (min-width: 1024px) { .ol-cols { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-7); } }
+  .ol-orgs { margin-top: var(--sp-6); }
+  .ol-woa { display: grid; gap: var(--sp-4); grid-template-columns: minmax(0, 1fr); }
+  @media (min-width: 1024px) { .ol-woa { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); } }
+  .ol-woa .vb-cards { grid-template-columns: minmax(0, 1fr); }
+  @media (min-width: 640px) { .ol-woa .vb-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+</style>

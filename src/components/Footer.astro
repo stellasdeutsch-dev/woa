@@ -1,6 +1,8 @@
 ---
-import { NAV, SOCIAL, EMAIL, url, LOGO } from '../lib/site';
-const year = 2026;
+import { navFor, SOCIAL, EMAIL, url, LOGO } from '../lib/site';
+import { langOf, L, t } from '../lib/i18n';
+const lang = langOf(Astro.url.pathname); const tr = t(lang);
+const NAV = navFor(lang);
 const groups = NAV.filter(n => n.children);
 const singles = NAV.filter(n => !n.children);
 ---
@@ -8,7 +10,7 @@ const singles = NAV.filter(n => !n.children);
   <div class="container">
     <div class="f-top">
       <div class="f-brand">
-        <a class="f-logo" href={url('/')} aria-label="World Olympians Association — Home">
+        <a class="f-logo" href={url(L('/', lang))} aria-label={`${tr.org} — ${tr.home}`}>
           <img src={LOGO} alt="World Olympians Association" width="124" height="144" loading="lazy" />
         </a>
         <a class="f-mail" href={`mailto:${EMAIL}`}><svg class="icon"><use href="#i-mail" /></svg>{EMAIL}</a>
@@ -16,7 +18,7 @@ const singles = NAV.filter(n => !n.children);
           {SOCIAL.map(s => <li><a class="icon-btn" href={s.href} target="_blank" rel="noopener" aria-label={s.label}><svg class="icon"><use href={`#i-${s.icon}`} /></svg></a></li>)}
         </ul>
       </div>
-      <nav class="f-nav" aria-label="Footer">
+      <nav class="f-nav" aria-label={tr.footer}>
         {groups.map(g => (
           <div>
             <h2><a href={url(g.href)}>{g.label}</a></h2>
@@ -24,14 +26,14 @@ const singles = NAV.filter(n => !n.children);
           </div>
         ))}
         <div>
-          <h2 class="sr-only">More</h2>
+          <h2 class="sr-only">{tr.more}</h2>
           <ul class="f-singles">{singles.map(s => <li><a href={url(s.href)}>{s.label}</a></li>)}</ul>
         </div>
       </nav>
     </div>
     <div class="f-bottom">
-      <p>© {year} World Olympians Association. All rights reserved</p>
-      <a href={url('/privacy-policy/')}>WOA Privacy Policy</a>
+      <p>{tr.copyright}</p>
+      <a href={url(L('/privacy-policy/', lang))}>{tr.privacy}</a>
     </div>
   </div>
 </footer>

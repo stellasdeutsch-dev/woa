@@ -1,8 +1,15 @@
 ---
-import { NAV, url, LOGO, b, srcset } from '../lib/site';
-import { SECTIONS } from '../lib/sections';
-const sec = (href: string) => SECTIONS.find(x => x.href === href);
+import { navFor, url, LOGO, b, srcset, phColor } from '../lib/site';
+import { sections } from '../lib/sections';
+import { altPath } from '../lib/data';
+import { langOf, L, t, LANGS, LANG_NAME } from '../lib/i18n';
 const { current = '' } = Astro.props as { current?: string };
+const lang = langOf(Astro.url.pathname); const tr = t(lang);
+const NAV = navFor(lang);
+const SECTIONS = sections(lang).SECTIONS;
+const sec = (href: string) => SECTIONS.find(x => x.href === href);
+// the same page in the other languages
+const alts = LANGS.map(l => ({ l, name: LANG_NAME[l], href: url(altPath(current, lang, l)) }));
 const isCur = (href: string, children?: { href: string }[]) => {
   const top = href.split('/')[1];
   if (children) return current.startsWith(href) || children.some(c => current.startsWith(c.href));
@@ -11,10 +18,10 @@ const isCur = (href: string, children?: { href: string }[]) => {
 ---
 <header class="site-header" id="top">
   <div class="container header-row">
-    <a class="logo" href={url('/')} aria-label="World Olympians Association — Home">
-      <img src={LOGO} alt="World Olympians Association" width="124" height="144" />
+    <a class="logo" href={url(L('/', lang))} aria-label={`${tr.org} — ${tr.home}`}>
+      <img src={LOGO} alt={tr.org} width="124" height="144" />
     </a>
-    <nav class="main-nav" aria-label="Main">
+    <nav class="main-nav" aria-label={tr.main}>
       <ul>
         {NAV.map(item => (
           <li class={item.children ? 'has-sub' : ''}>
@@ -26,7 +33,7 @@ const isCur = (href: string, children?: { href: string }[]) => {
                 <div class="container mega-inner">
                   {sec(item.href) && (
                     <a class="mega-feature" href={url(item.href)}>
-                      <span class="mega-photo"><img src={b(sec(item.href)!.img)} srcset={srcset(sec(item.href)!.img)} sizes="360px" alt="" loading="lazy" /></span>
+                      <span class="mega-photo"><img src={b(sec(item.href)!.img)} srcset={srcset(sec(item.href)!.img)} style={phColor(sec(item.href)!.img)} sizes="360px" alt="" loading="lazy" /></span>
                       <span class="mega-title">{item.label}<svg class="icon"><use href="#i-arrow" /></svg></span>
                       <span class="mega-lead">{sec(item.href)!.lead}</span>
                     </a>
@@ -44,19 +51,25 @@ const isCur = (href: string, children?: { href: string }[]) => {
       </ul>
     </nav>
     <div class="header-actions">
-      <button class="icon-btn" type="button" data-open-search aria-label="Search"><svg class="icon"><use href="#i-search" /></svg></button>
-      <a class="btn btn-sm header-cta" href={url('/olympians/oly/')}><svg class="icon"><use href="#i-oly" /></svg>Register for OLY</a>
-      <button class="icon-btn menu-btn" type="button" data-open-menu aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><svg class="icon"><use href="#i-menu" /></svg></button>
+      {alts.length > 1 && <div class="lang-switch">
+        <button class="lang-btn" type="button" aria-label={tr.language} aria-haspopup="true"><svg class="icon"><use href="#i-globe" /></svg><span>{lang.toUpperCase()}</span></button>
+        <ul class="lang-menu">
+          {alts.map(a => <li><a href={a.href} hreflang={a.l} lang={a.l} aria-current={a.l === lang ? 'true' : undefined}>{a.name}</a></li>)}
+        </ul>
+      </div>}
+      <button class="icon-btn" type="button" data-open-search aria-label={tr.search}><svg class="icon"><use href="#i-search" /></svg></button>
+      <a class="btn btn-sm header-cta" href={url(L('/olympians/oly/', lang))}><svg class="icon"><use href="#i-oly" /></svg>{tr.registerOly}</a>
+      <button class="icon-btn menu-btn" type="button" data-open-menu aria-label={tr.menu} aria-expanded="false" aria-controls="mobile-menu"><svg class="icon"><use href="#i-menu" /></svg></button>
     </div>
   </div>
 </header>
 
-<dialog class="mobile-menu" id="mobile-menu" aria-label="Menu">
+<dialog class="mobile-menu" id="mobile-menu" aria-label={tr.menu}>
   <div class="mm-head">
-    <a class="logo" href={url('/')} aria-label="World Olympians Association — Home"><img src={LOGO} alt="World Olympians Association" width="124" height="144" /></a>
-    <button class="icon-btn" type="button" data-close-menu aria-label="Close"><svg class="icon"><use href="#i-close" /></svg></button>
+    <a class="logo" href={url(L('/', lang))} aria-label={`${tr.org} — ${tr.home}`}><img src={LOGO} alt={tr.org} width="124" height="144" /></a>
+    <button class="icon-btn" type="button" data-close-menu aria-label={tr.close}><svg class="icon"><use href="#i-close" /></svg></button>
   </div>
-  <nav aria-label="Main">
+  <nav aria-label={tr.main}>
     <ul class="mm-list">
       {NAV.map(item => item.children ? (
         <li>
@@ -74,8 +87,9 @@ const isCur = (href: string, children?: { href: string }[]) => {
     </ul>
   </nav>
   <div class="mm-foot">
-    <a class="btn" href={url('/olympians/oly/')}><svg class="icon"><use href="#i-oly" /></svg>Register for OLY</a>
-    <a class="btn btn-outline" href={url('/noas/noa-directory/')}><svg class="icon"><use href="#i-directory" /></svg>NOA Directory</a>
+    <a class="btn" href={url(L('/olympians/oly/', lang))}><svg class="icon"><use href="#i-oly" /></svg>{tr.registerOly}</a>
+    <a class="btn btn-outline" href={url(L('/noas/noa-directory/', lang))}><svg class="icon"><use href="#i-directory" /></svg>{NAV[2].children![1].label}</a>
+    {alts.length > 1 && <ul class="mm-langs">{alts.map(a => <li><a href={a.href} hreflang={a.l} lang={a.l} aria-current={a.l === lang ? 'true' : undefined}>{a.name}</a></li>)}</ul>}
   </div>
 </dialog>
 
@@ -108,6 +122,20 @@ const isCur = (href: string, children?: { href: string }[]) => {
   .mega-list a { display: flex; align-items: center; gap: 14px; min-height: 56px; padding: 8px 14px; border-radius: var(--radius); font-weight: 600; transition: background var(--t); }
   .mega-list a .icon { width: 30px; height: 30px; flex: none; }
   .mega-list a:hover, .mega-list a[aria-current="page"] { background: var(--c-grey-50); }
+  .lang-switch { position: relative; }
+  .lang-btn { display: inline-flex; align-items: center; gap: 6px; height: 44px; padding: 0 10px; border: 0; border-radius: var(--radius); background: transparent; font: inherit; font-weight: 700; font-size: var(--fs-small); color: inherit; cursor: pointer; transition: background var(--t); }
+  .lang-btn:hover, .lang-switch:focus-within .lang-btn { background: var(--c-grey-50); }
+  .lang-menu { position: absolute; right: 0; top: 100%; min-width: 160px; margin: 0; padding: 6px; list-style: none; background: var(--c-white); border: 1px solid var(--c-grey-200); border-radius: var(--radius-lg); box-shadow: var(--shadow); opacity: 0; visibility: hidden; transform: translateY(4px); transition: opacity var(--t), transform var(--t), visibility var(--t); z-index: 5; }
+  .lang-switch:hover .lang-menu, .lang-switch:focus-within .lang-menu { opacity: 1; visibility: visible; transform: none; }
+  .lang-menu a { display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: var(--radius); font-weight: 600; font-size: var(--fs-small); transition: background var(--t); }
+  .lang-menu a:hover { background: var(--c-grey-50); }
+  .lang-menu a[aria-current] { font-weight: 800; }
+  .lang-menu a[aria-current]::after { content: ''; width: 6px; height: 6px; margin-left: auto; border-radius: 50%; background: var(--c-gold); }
+  @media (max-width: 1199px) { .lang-switch { display: none; } }
+  .mm-langs { list-style: none; margin: 0; padding: 0; display: flex; gap: var(--sp-2); }
+  .mm-langs a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border: 1px solid var(--c-grey-200); border-radius: 999px; font-weight: 600; font-size: var(--fs-small); transition: border-color var(--t); }
+  .mm-langs a:hover { border-color: var(--c-black); }
+  .mm-langs a[aria-current] { border-color: var(--c-black); font-weight: 800; }
   .header-actions { margin-left: auto; display: flex; align-items: center; gap: var(--sp-2); }
   .header-cta { display: none; }
   @media (min-width: 640px) { .header-cta { display: inline-flex; } }

@@ -655,18 +655,21 @@ p { margin: 0; text-wrap: pretty; }
 .ld-tile:hover .ld-tile-body .icon { transform: translateX(6px); }
 
 /* every NOA flag */
-.ld-flags { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(56px, 1fr)); gap: 10px; }
-.ld-flags a { display: block; border-radius: 4px; overflow: hidden; box-shadow: 0 0 0 1px var(--c-grey-200); transition: transform var(--t), box-shadow var(--t); }
-.ld-flags img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
-.ld-flags a:hover { transform: scale(1.12); box-shadow: 0 0 0 2px var(--c-black); position: relative; z-index: 1; }
+.ld-flags { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); gap: 8px; }
+.ld-flags a { display: grid; place-items: center; height: 56px; border-radius: var(--radius); transition: background var(--t), transform var(--t); }
+.ld-flags img { display: block; max-width: 60px; max-height: 40px; width: auto; height: auto; box-shadow: 0 0 0 1px var(--c-grey-200); }
+.ld-flags a:hover { background: var(--c-grey-100); transform: scale(1.08); position: relative; z-index: 1; }
 
 /* NOA guide chapters */
 .ld-chapters { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-3); grid-template-columns: minmax(0, 1fr); }
 @media (min-width: 640px) { .ld-chapters { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (min-width: 1200px) { .ld-chapters { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-.ld-chapters a { display: grid; grid-template-columns: auto auto minmax(0, 1fr); align-items: center; gap: var(--sp-3); min-height: 72px; padding: var(--sp-3) var(--sp-4); background: var(--c-white); border: 1px solid var(--c-grey-200); border-radius: var(--radius-lg); font-weight: 600; transition: border-color var(--t), transform var(--t); }
+.ld-chapters a { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: var(--sp-3); min-height: 72px; padding: var(--sp-3) var(--sp-4); background: var(--c-white); border: 1px solid var(--c-grey-200); border-radius: var(--radius-lg); font-weight: 600; transition: border-color var(--t), transform var(--t); }
 .ld-chapters a:hover { border-color: var(--c-black); transform: translateY(-2px); }
-.ld-chapters .icon { width: 30px; height: 30px; }
+.ld-chapters li { display: grid; }
+.ld-ch-mark { position: relative; display: grid; place-items: center; width: 48px; height: 48px; }
+.ld-ch-mark .icon { width: 36px; height: 36px; }
+.ld-ch-num { position: absolute; top: -2px; right: -4px; display: grid; place-items: center; min-width: 20px; height: 20px; padding: 0 5px; border-radius: 999px; background: var(--c-black); color: var(--c-white); font-size: 11px; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; box-shadow: 0 0 0 2px var(--c-white); }
 
 /* grants */
 .ld-grants { display: grid; gap: var(--sp-8); grid-template-columns: minmax(0, 1fr); align-items: center; }
@@ -715,12 +718,42 @@ html { scrollbar-color: var(--c-gold) transparent; }
 html.has-sb { scrollbar-width: none; }
 html.has-sb::-webkit-scrollbar { display: none; }
 .scrollbar { display: none; }
-html.has-sb .scrollbar { --k: 0; --sbt: 44px; display: block; position: fixed; z-index: 60; right: 4px; top: calc(var(--header-h) + 12px); bottom: 12px; width: 52px; cursor: pointer; touch-action: none; }
+html.has-sb .scrollbar { --k: 0; --st: 0px; --sbt: 44px; display: block; position: fixed; z-index: 60; right: 4px; top: calc(var(--header-h) + 14px); bottom: 14px; width: 56px; cursor: pointer; touch-action: none; }
 html.has-sb .scrollbar[hidden] { display: none; }
-.scrollbar::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; translate: -50% 0; background: rgba(128, 128, 128, .35); border-radius: 2px; transition: width var(--t), background var(--t); }
-.sb-fill { position: absolute; left: 50%; top: 0; width: 2px; translate: -50% 0; height: calc(var(--k) * (100% - var(--sbt)) + var(--sbt) / 2); background: var(--c-gold); border-radius: 2px; }
-.sb-thumb { position: absolute; left: 50%; top: calc(var(--k) * (100% - var(--sbt))); width: var(--sbt); height: var(--sbt); translate: -50% 0; display: grid; place-items: center; border-radius: 50%; background: var(--c-gold); color: var(--c-black); box-shadow: 0 0 0 3px var(--c-white), 0 4px 14px rgba(0, 0, 0, .18); font-weight: 800; font-size: 11px; letter-spacing: .04em; transition: scale var(--t), background var(--t), color var(--t); }
+.scrollbar::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; translate: -50% 0; background: rgba(128, 128, 128, .35); border-radius: 2px; transform-origin: top; transition: width var(--t), background var(--t); }
+.sb-fill { position: absolute; left: 50%; top: 0; width: 2px; translate: -50% 0; height: calc(var(--k) * (100% - var(--sbt)) + var(--sbt) / 2); background: var(--c-gold); border-radius: 2px; transform-origin: top; }
+.sb-dots i { position: absolute; left: 50%; top: calc(var(--p) * (100% - var(--sbt)) + var(--sbt) / 2); width: 8px; height: 8px; translate: -50% -50%; border-radius: 50%; background: var(--c-white); box-shadow: 0 0 0 1.5px rgba(128, 128, 128, .55); transition: background 300ms var(--ease-out), box-shadow 300ms var(--ease-out), scale 300ms cubic-bezier(.34, 1.56, .64, 1); }
+.sb-dots i.on { background: var(--c-gold); box-shadow: 0 0 0 1.5px var(--c-gold); scale: 1.25; }
+.sb-thumb { position: absolute; left: 50%; top: calc(var(--k) * (100% - var(--sbt)) - var(--st) / 2); width: var(--sbt); height: calc(var(--sbt) + var(--st)); translate: -50% 0; display: grid; place-items: center; border-radius: 999px; background: var(--c-gold); color: var(--c-black); box-shadow: 0 0 0 3px var(--c-white), 0 6px 18px rgba(0, 0, 0, .2); font-weight: 800; font-size: 11px; letter-spacing: .04em; transition: height 520ms cubic-bezier(.34, 1.56, .64, 1), top 520ms cubic-bezier(.34, 1.56, .64, 1), scale var(--t), background var(--t), color var(--t); }
+.scrollbar.moving .sb-thumb, .scrollbar.dragging .sb-thumb { transition: height 90ms linear, top 0ms, scale var(--t), background var(--t), color var(--t); }
+.sb-ring { position: absolute; left: 50%; top: 50%; width: 56px; height: 56px; translate: -50% -50%; rotate: -90deg; overflow: visible; pointer-events: none; opacity: 0; transition: opacity 300ms var(--ease-out); }
+.sb-ring circle { fill: none; stroke: var(--c-gold); stroke-width: 2.5; stroke-linecap: round; stroke-dasharray: 163.4; stroke-dashoffset: calc(163.4 * (1 - var(--k))); }
+.scrollbar.moving .sb-ring, .scrollbar:hover .sb-ring, .scrollbar.dragging .sb-ring { opacity: 1; }
+.sb-oly, .sb-pct { grid-area: 1 / 1; transition: opacity 200ms var(--ease-out), translate 200ms var(--ease-out); }
+.sb-pct { opacity: 0; translate: 0 4px; font-variant-numeric: tabular-nums; font-size: 10px; }
+.scrollbar:hover .sb-oly, .scrollbar.dragging .sb-oly { opacity: 0; translate: 0 -4px; }
+.scrollbar:hover .sb-pct, .scrollbar.dragging .sb-pct { opacity: 1; translate: 0 0; }
 .scrollbar:hover::before { width: 4px; background: rgba(128, 128, 128, .55); }
-.scrollbar:hover .sb-thumb, .scrollbar.dragging .sb-thumb { scale: 1.12; background: var(--c-black); color: var(--c-gold); }
+.scrollbar:hover .sb-thumb, .scrollbar.dragging .sb-thumb { scale: 1.1; background: var(--c-black); color: var(--c-gold); }
 .scrollbar.dragging { cursor: grabbing; }
-@media (prefers-reduced-motion: reduce) { .scrollbar .sb-thumb, .scrollbar::before { transition: none; } .scrollbar:hover .sb-thumb, .scrollbar.dragging .sb-thumb { scale: 1; } }
+@media (prefers-reduced-motion: no-preference) {
+  /* on arrival the rail draws downwards and the disc drops in with a small bounce */
+  html.has-sb .scrollbar:not(.sb-in)::before, html.has-sb .scrollbar:not(.sb-in) .sb-fill { transform: scaleY(0); }
+  html.has-sb .scrollbar.sb-in::before, html.has-sb .scrollbar.sb-in .sb-fill { transform: scaleY(1); transition: transform 900ms var(--ease-out), width var(--t), background var(--t); }
+  html.has-sb .scrollbar.sb-in .sb-thumb { animation: sb-drop 800ms cubic-bezier(.34, 1.56, .64, 1) 250ms both; }
+  html.has-sb .scrollbar.sb-in .sb-dots i { animation: sb-pop 400ms cubic-bezier(.34, 1.56, .64, 1) both; animation-delay: calc(400ms + var(--p) * 600ms); }
+  @keyframes sb-drop { from { opacity: 0; translate: -50% -40px; } to { opacity: 1; translate: -50% 0; } }
+  @keyframes sb-pop { from { scale: 0; } }
+}
+@media (prefers-reduced-motion: reduce) { .scrollbar .sb-thumb, .scrollbar::before, .sb-dots i, .sb-ring, .sb-oly, .sb-pct { transition: none; } .scrollbar:hover .sb-thumb, .scrollbar.dragging .sb-thumb, .sb-dots i.on { scale: 1; } }
+
+/* ---------- Weak connections ---------- */
+/* photos keep their dominant colour until loaded, then fade in */
+img.lz-wait { opacity: 0; }
+@media (prefers-reduced-motion: no-preference) { img.lz-in { animation: lz-fade 450ms var(--ease-out); } @keyframes lz-fade { from { opacity: 0; } } }
+/* lower parts of a page are rendered only when they come near the screen */
+main > section:nth-of-type(n+3), .site-footer { content-visibility: auto; contain-intrinsic-size: auto 900px; }
+/* lite mode (data saver / 2G / 3G): no motion at all */
+html.lite *, html.lite *::before, html.lite *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+html.lite .scrollbar { display: none !important; }
+html.lite { scrollbar-width: auto !important; }

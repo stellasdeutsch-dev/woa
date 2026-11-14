@@ -4,8 +4,10 @@ import Tabs from '../Tabs.astro';
 import Docs from '../Docs.astro';
 import { prose, b, BASE } from '../../lib/site';
 import { crumbsFor, type Page } from '../../lib/data';
+import { langOf, t } from '../../lib/i18n';
 interface Props { page: Page }
 const { page } = Astro.props;
+const lang = langOf(Astro.url.pathname);
 const legal = /privacy-policy/.test(page.path);
 const { html, toc } = prose(page.body, { visual: true, legal, faq: /\/faq\//.test(page.path) });
 const current = BASE + page.path;
@@ -30,7 +32,7 @@ const hasAside = showToc || (sideRich && !sideBelow);
 const docsTop = !hasAside || (sideRich && !sideBelow) ? downloads : [];
 const ext = (h: string) => (h.match(/\.([a-z0-9]+)(\?|$)/i)?.[1] || '').toUpperCase();
 ---
-<PageHero title={page.title} crumbs={crumbsFor(page)} bg={b(page.bg)} />
+<PageHero title={page.title} crumbs={crumbsFor(page, lang)} bg={b(page.bg)} />
 {page.tabs.length > 1 && <Tabs tabs={page.tabs} current={current} />}
 <section class="section-tight">
   <div class:list={['container', 'page-layout', { 'has-aside': hasAside }]}>
@@ -53,7 +55,7 @@ const ext = (h: string) => (h.match(/\.([a-z0-9]+)(\?|$)/i)?.[1] || '').toUpperC
           {showToc && downloads.length > 0 && <Docs items={downloads} />}
           {sideRich && !sideBelow && <div class="panel prose side-prose" set:html={side} />}
           {showToc && (
-            <nav class="panel toc" aria-label="On this page">
+            <nav class="panel toc" aria-label={t(lang).onPage}>
               <ol>{toc.map(t => <li><a href={`#${t.id}`}>{t.text}</a></li>)}</ol>
             </nav>
           )}
@@ -65,7 +67,7 @@ const ext = (h: string) => (h.match(/\.([a-z0-9]+)(\?|$)/i)?.[1] || '').toUpperC
 {(prevTab || nextTab) && (
   <section class="section-tight vb-pager-wrap">
     <div class="container">
-      <nav class="vb-pager" aria-label="Section">
+      <nav class="vb-pager" aria-label={t(lang).section}>
         {prevTab ? <a class="prev vb-link" href={b(prevTab.href)}><svg class="icon"><use href="#i-arrow-left" /></svg>{prevTab.label}</a> : <span />}
         {nextTab && <a class="next vb-link" href={b(nextTab.href)}>{nextTab.label}<svg class="icon"><use href="#i-arrow" /></svg></a>}
       </nav>

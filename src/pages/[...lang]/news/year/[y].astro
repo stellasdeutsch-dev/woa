@@ -1,0 +1,18 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import StoryList from '../../../../components/templates/StoryList.astro';
+import { dataFor } from '../../../../lib/data';
+import { b } from '../../../../lib/site';
+import { LANGS, langParam, pageLang, navLabel } from '../../../../lib/i18n';
+export function getStaticPaths() {
+  return LANGS.flatMap(l => [...new Set(dataFor(l).news.map(s => s.date!.slice(0, 4)))].map(y => ({ params: { lang: langParam(l), y } })));
+}
+const lang = pageLang(Astro.params);
+const news = dataFor(lang).news;
+const y = Astro.params.y!;
+const items = news.filter(s => s.date!.startsWith(y));
+const title = navLabel('/news/', 'News', lang);
+---
+<Base title={`${title} ${y}`} type="Page" search={false}>
+  <StoryList title={title} base="/news/" all={news} items={items} year={y} bg={b(items[0].img)} />
+</Base>

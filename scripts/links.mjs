@@ -2,7 +2,7 @@
 import fs from 'node:fs'; import path from 'node:path';
 const BASE = '/woa';
 const files = []; const walk = d => { for (const f of fs.readdirSync(d)) { const p = path.join(d, f); fs.statSync(p).isDirectory() ? walk(p) : p.endsWith('.html') && files.push(p); } }; walk('dist');
-const bad = new Map(); let checked = 0;
+const bad = new Map(); let checked = 0; const LIMIT = +(process.env.LIMIT || 30);
 for (const f of files) {
   const html = fs.readFileSync(f, 'utf8');
   for (const m of html.matchAll(/(?:href|src)="(\/woa\/[^"#?]*)/g)) {
@@ -12,5 +12,5 @@ for (const f of files) {
   }
 }
 console.log(`pages: ${files.length}, links checked: ${checked}, missing targets: ${bad.size}`);
-for (const [u, from] of [...bad].slice(0, 30)) console.log(' ', u, '<-', from.length, 'pages, e.g.', from[0]);
+for (const [u, from] of [...bad].slice(0, LIMIT)) console.log(' ', u, '<-', from.length, 'pages, e.g.', from[0]);
 fs.writeFileSync('data/broken-links.json', JSON.stringify(Object.fromEntries(bad), null, 1));

@@ -7,19 +7,28 @@ import IconSprite from '../components/IconSprite.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { url, BASE, ORIGIN } from '../lib/site';
+import { altPath } from '../lib/data';
+import { langOf, t, LANGS, stripLang } from '../lib/i18n';
 
 interface Props { title: string; description?: string; current?: string; image?: string | null; origPath?: string; type?: string; noindex?: boolean; search?: boolean }
 const { title, description = 'The member organisation of Olympians - for Olympians. Bringing Olympic values to life.', current = Astro.url.pathname.replace(BASE, ''), image, origPath, type = 'Page', noindex = false, search = true } = Astro.props;
-const fullTitle = title === 'World Olympians Association' ? title : `${title} | World Olympians Association`;
+const lang = langOf(Astro.url.pathname); const tr = t(lang);
+const fullTitle = title === 'World Olympians Association' || title === tr.org ? title : `${title} | ${tr.org}`;
+const alternates = LANGS.map(l => ({ l, href: new URL(url(altPath(current, lang, l)), Astro.site).href }));
 const ogImage = image ? new URL(image, Astro.site).href : new URL(url('/images/og-image-logo.jpg'), Astro.site).href;
-const original = ORIGIN + (origPath ?? current);
+const original = ORIGIN + (origPath ?? stripLang(current));
 ---
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="preload" href={fontLatin} as="font" type="font/woff2" crossorigin />
+  <script is:inline>
+    // Slow connection or data saver: "lite" mode — smaller photos, no motion (see global.css and the script at the end of <body>)
+    (function () { try { var c = navigator.connection || {}; if (c.saveData || /2g|3g/.test(c.effectiveType || '') || matchMedia('(prefers-reduced-data: reduce)').matches) { document.documentElement.classList.add('lite');
+      new MutationObserver(function (ms) { ms.forEach(function (m) { m.addedNodes.forEach(function (n) { if (n.tagName === 'IMG' && n.srcset) n.sizes = '480px'; }); }); }).observe(document.documentElement, { childList: true, subtree: true }); } } catch (e) {} })();
+  </script>
   <title>{fullTitle}</title>
   <meta name="description" content={description} />
   <meta property="og:title" content={fullTitle} />
@@ -28,35 +37,47 @@ const original = ORIGIN + (origPath ?? current);
   <meta property="og:type" content="website" />
   <meta name="theme-color" content="#ffffff" />
   {noindex && <meta name="robots" content="noindex" />}
+  {alternates.length > 1 && alternates.map(a => <link rel="alternate" hreflang={a.l} href={a.href} />)}
   <link rel="icon" type="image/png" sizes="32x32" href={url('/favicon-32x32.png')} />
   <link rel="icon" type="image/png" sizes="16x16" href={url('/favicon-16x16.png')} />
   <link rel="apple-touch-icon" sizes="180x180" href={url('/apple-touch-icon.png')} />
 </head>
-<body data-base={BASE} data-original={original}>
+<body data-base={BASE} data-original={original} data-no-results={tr.noResults}>
   <IconSprite />
-  <a class="skip" href="#main">Skip to content</a>
+  <a class="skip" href="#main">{tr.skip}</a>
   <Header current={current} />
   <main id="main" data-pagefind-body={search ? '' : undefined} data-pagefind-meta={search ? `type:${type}` : undefined}>
     <slot />
   </main>
   <Footer />
-  <div class="scrollbar" aria-hidden="true"><div class="sb-fill"></div><div class="sb-thumb"><span>OLY</span></div></div>
+  <div class="scrollbar" aria-hidden="true"><div class="sb-fill"></div><div class="sb-dots"></div><div class="sb-thumb"><svg class="sb-ring" viewBox="0 0 56 56"><circle cx="28" cy="28" r="26" /></svg><span class="sb-oly">OLY</span><span class="sb-pct"></span></div></div>
 
-  <dialog class="search-dialog" id="search" aria-label="Search">
+  <dialog class="search-dialog" id="search" aria-label={tr.search}>
     <div class="sd-box">
       <form class="sd-form" role="search" onsubmit="return false">
         <svg class="icon"><use href="#i-search" /></svg>
-        <label class="sr-only" for="sd-q">Search</label>
-        <input id="sd-q" type="search" placeholder="Search" autocomplete="off" spellcheck="false" />
-        <button class="icon-btn" type="button" data-close-search aria-label="Close"><svg class="icon"><use href="#i-close" /></svg></button>
+        <label class="sr-only" for="sd-q">{tr.search}</label>
+        <input id="sd-q" type="search" placeholder={tr.search} autocomplete="off" spellcheck="false" />
+        <button class="icon-btn" type="button" data-close-search aria-label={tr.close}><svg class="icon"><use href="#i-close" /></svg></button>
       </form>
       <div class="sd-results" aria-live="polite"></div>
     </div>
   </dialog>
 
   <script>
+    // Photos fade in once loaded (their dominant colour shows meanwhile); in lite mode the 480px copy is used
+    const lite = document.documentElement.classList.contains('lite');
+    for (const img of document.querySelectorAll<HTMLImageElement>('img')) {
+      if (lite && img.srcset) img.sizes = '480px';
+      if (img.complete || navigator.webdriver || lite) continue;
+      img.classList.add('lz-wait');
+      const done = () => { img.classList.add('lz-in'); img.classList.remove('lz-wait'); };
+      img.addEventListener('load', done, { once: true }); img.addEventListener('error', done, { once: true });
+    }
+  </script>
+  <script>
     // Motion: reveal blocks below the fold and count up big numbers. Skipped for reduced motion and automated browsers (Figma export, tests).
-    const still = matchMedia('(prefers-reduced-motion: reduce)').matches || navigator.webdriver;
+    const still = matchMedia('(prefers-reduced-motion: reduce)').matches || navigator.webdriver || document.documentElement.classList.contains('lite');
     if (navigator.webdriver) document.documentElement.classList.add('still');
     if (!still && 'IntersectionObserver' in window) {
       const SEL = '.section-head, .grid > *, .vb-cards > li, .vb-index > li, .vb-step, .vb-panels > .vb-panel, .vb-docs > li, .big-stats > div, .noa-group, .steps > li, .goals > li, .values > li, .mv-card, .vb-quote, .vb-split > *, .vb-years > li, .me-factors > li, .vb-list > li, .vb-faq, .vb-answer, .house-banner, .oly-feature > *';
@@ -82,7 +103,7 @@ const original = ORIGIN + (origPath ?? current);
           if (!e.isIntersecting) continue;
           const el = e.target as HTMLElement; co.unobserve(el);
           const end = +el.dataset.count!; const suffix = el.dataset.suffix || ''; const t0 = performance.now(); const D = 1200;
-          const step = (t: number) => { const k = Math.min(1, (t - t0) / D); const v = Math.round(end * (1 - Math.pow(1 - k, 3))); el.textContent = v.toLocaleString('en-GB') + suffix; if (k < 1) requestAnimationFrame(step); };
+          const step = (t: number) => { const k = Math.min(1, (t - t0) / D); const v = Math.round(end * (1 - Math.pow(1 - k, 3))); el.textContent = v.toLocaleString({ fr: 'fr-FR', es: 'es-ES' }[el.dataset.locale || ''] || 'en-GB') + suffix; if (k < 1) requestAnimationFrame(step); };
           requestAnimationFrame(step);
         }
       }, { threshold: 0.6 });
@@ -151,7 +172,7 @@ const original = ORIGIN + (origPath ?? current);
         const ea = (a.meta.title || '').toLowerCase() === ql ? -10 : 0, eb = (b.meta.title || '').toLowerCase() === ql ? -10 : 0;
         return (ea + (TYPE_ORDER[a.meta.type] ?? 1)) - (eb + (TYPE_ORDER[b.meta.type] ?? 1));
       });
-      if (!data.length) { out.innerHTML = `<p class="sd-empty">No results</p>`; return; }
+      if (!data.length) { out.innerHTML = `<p class="sd-empty">${document.body.dataset.noResults || 'No results'}</p>`; return; }
       out.innerHTML = `<ul>${data.slice(0, 20).map((d: any) => `<li><a href="${esc(d.url)}"><span class="sd-type">${esc(d.meta.type || '')}</span><span class="sd-title">${esc(d.meta.title || '')}</span><span class="sd-ex">${d.excerpt}</span></a></li>`).join('')}</ul>`;
     }
     input.addEventListener('input', () => { clearTimeout(timer); timer = window.setTimeout(() => run(input.value), 160); });
@@ -177,20 +198,47 @@ const original = ORIGIN + (origPath ?? current);
   </style>
   <script>
     // Custom scroll bar on wide screens with a mouse: a gold "OLY" disc rides a thin rail, can be dragged, the rail can be clicked.
-    // Keyboard, wheel and touch scrolling stay native; phones keep the system bar.
+    // Moving fast stretches the disc into a pill that springs back; a ring around it fills with progress; dots on the rail mark
+    // the page's sections and light up once passed. Keyboard, wheel and touch scrolling stay native; phones keep the system bar.
     const bar = document.querySelector<HTMLElement>('.scrollbar');
     const mq = matchMedia('(min-width: 1024px) and (pointer: fine)');
+    const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (bar && !navigator.webdriver) {
       const thumb = bar.querySelector<HTMLElement>('.sb-thumb')!;
+      const pct = bar.querySelector<HTMLElement>('.sb-pct')!;
+      const dotsBox = bar.querySelector<HTMLElement>('.sb-dots')!;
       const root = document.documentElement;
-      let raf = 0;
+      let raf = 0, lastY = scrollY, lastT = performance.now(), idle = 0;
+      let marks: { k: number; el: HTMLElement }[] = [];
       const max = () => root.scrollHeight - innerHeight;
-      const paint = () => { raf = 0; const m = max(); const k = m > 0 ? scrollY / m : 0; bar.style.setProperty('--k', k.toFixed(4)); bar.hidden = m < 40; };
+      const layoutDots = () => {
+        const m = max(); dotsBox.textContent = ''; marks = [];
+        if (m <= 0) return;
+        const secs = [...document.querySelectorAll<HTMLElement>('main > section, main > article, main .article > section')].filter(s => s.offsetHeight > innerHeight * 0.35);
+        for (const s of secs.slice(1, 16)) {
+          const k = Math.min(1, Math.max(0, (s.getBoundingClientRect().top + scrollY - innerHeight * 0.3) / m));
+          const d = document.createElement('i'); d.style.setProperty('--p', k.toFixed(4)); dotsBox.append(d); marks.push({ k, el: d });
+        }
+      };
+      const paint = () => {
+        raf = 0; const m = max(); const k = m > 0 ? Math.min(1, scrollY / m) : 0;
+        bar.style.setProperty('--k', k.toFixed(4)); bar.hidden = m < 40;
+        pct.textContent = Math.round(k * 100) + '%';
+        for (const d of marks) d.el.classList.toggle('on', k >= d.k - 0.002);
+        // speed -> stretch (px), springs back when scrolling stops
+        const now = performance.now(); const v = Math.abs(scrollY - lastY) / Math.max(16, now - lastT); lastY = scrollY; lastT = now;
+        if (!calm && v > 0.05) { bar.style.setProperty('--st', Math.min(36, v * 14).toFixed(1) + 'px'); bar.classList.add('moving'); clearTimeout(idle); idle = window.setTimeout(() => { bar.classList.remove('moving'); bar.style.setProperty('--st', '0px'); }, 140); }
+      };
       const queue = () => { if (!raf) raf = requestAnimationFrame(paint); };
       const on = () => root.classList.toggle('has-sb', mq.matches);
       on(); mq.addEventListener('change', on);
-      addEventListener('scroll', queue, { passive: true }); addEventListener('resize', queue); new ResizeObserver(queue).observe(document.body); paint();
-      const toY = (clientY: number) => { const r = bar.getBoundingClientRect(); const t = thumb.offsetHeight; const k = Math.min(1, Math.max(0, (clientY - r.top - t / 2) / (r.height - t))); scrollTo({ top: k * max(), behavior: 'instant' as ScrollBehavior }); };
+      addEventListener('scroll', queue, { passive: true });
+      addEventListener('resize', () => { layoutDots(); queue(); });
+      new ResizeObserver(() => { layoutDots(); queue(); }).observe(document.body);
+      addEventListener('load', () => { layoutDots(); queue(); });
+      layoutDots(); paint();
+      requestAnimationFrame(() => bar.classList.add('sb-in'));
+      const toY = (clientY: number) => { const r = bar.getBoundingClientRect(); const t = thumb.offsetWidth; const k = Math.min(1, Math.max(0, (clientY - r.top - t / 2) / (r.height - t))); scrollTo({ top: k * max(), behavior: 'instant' as ScrollBehavior }); };
       bar.addEventListener('pointerdown', (e) => {
         e.preventDefault(); bar.setPointerCapture(e.pointerId); bar.classList.add('dragging'); toY(e.clientY);
         const move = (ev: PointerEvent) => toY(ev.clientY);

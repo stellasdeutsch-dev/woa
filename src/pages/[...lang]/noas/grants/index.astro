@@ -1,0 +1,99 @@
+---
+import * as cheerio from 'cheerio';
+import Base from '../../../../layouts/Base.astro';
+import PageHero from '../../../../components/PageHero.astro';
+import { dataFor } from '../../../../lib/data';
+import { LANG_PARAMS, pageLang, t as tFor, L as Lx } from '../../../../lib/i18n';
+export function getStaticPaths() { return LANG_PARAMS; }
+const lang = pageLang(Astro.params); const tr = tFor(lang); const D = dataFor(lang);
+const page = D.page;
+import { b, url } from '../../../../lib/site';
+
+const p = page('/noas/grants/');
+const $ = cheerio.load(b(p.body), null, false);
+const h = (el: any) => $.html(el);
+const title = $('h2').first().text().trim(); // "Grants Programme"
+const ps = $.root().children('p');
+const aim = h(ps.eq(0));
+const via = h(ps.eq(1));
+const amounts = $.root().children('ul').first().children('li').map((_, li) => $(li).text().trim()).get();
+const apply = h(ps.eq(2));
+const cats = $.root().children('ul').eq(1).children('li').map((_, li) => ({ title: $(li).find('h4').first().text().trim(), html: $(li).find('h4').first().nextAll().toArray().map(h).join('') })).get();
+const datesTitle = $('h3').filter((_, x) => /Important Dates/.test($(x).text())).first().text().trim();
+const dates = $('table tr').map((_, tr) => ({ when: $(tr).find('td').eq(0).text().replace(/\s+/g, ' ').trim(), what: $(tr).find('td').eq(1).text().replace(/\s+/g, ' ').trim() })).get();
+// eligibility + criteria: everything after the table
+const tail = $('table').first().nextAll().toArray().map(h).join('');
+const CAT_ICON: Record<string, string> = { 'Development Grants': 'grant', 'Service to Society': 'solidarity', 'Service to Olympians': 'life' };
+const amountFor = (t: string) => { const a = amounts.find(x => x.includes(t.replace(' Grants', ''))); return a ? (a.split(/\s[–-]\s/)[1] || '') : ''; };
+---
+<Base title={`${p.section} | ${title}`} origPath={p.orig} image={b(p.bg)}>
+  <PageHero title={p.section} crumbs={[{ label: 'NOAs', href: '/noas/' }, { label: p.section }]} bg={b(p.bg)}>
+    <div class="lead" set:html={aim} />
+  </PageHero>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head"><h2>{p.title} {title}</h2></div>
+      <div class="prose lead-block" set:html={via} />
+      <ul class="amounts">
+        {amounts.map(a => { const m = a.match(/^(.*?\s[–-]\s)(.*)$/); return <li><span class="amount-k">{m ? m[1] : ''}</span><span class="amount fact">{m ? m[2] : a}</span></li>; })}
+      </ul>
+      <div class="prose apply" set:html={apply} />
+      <div class="grid grid-3 cats">
+        {cats.map(c => (
+          <article class="cat">
+            <span class="topic-icon"><svg class="icon icon-lg"><use href={`#i-${CAT_ICON[c.title] ?? 'grant'}`} /></svg></span>
+            <h3>{c.title}</h3>
+            <div class="prose cat-text" set:html={c.html} />
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-grey">
+    <div class="container">
+      <div class="section-head"><h2>{datesTitle}</h2></div>
+      <ol class="steps">
+        {dates.map((d, i) => <li><span class="step-num">{i + 1}</span><p class="step-when"><svg class="icon icon-sm"><use href="#i-calendar" /></svg><span class="fact">{d.when}</span></p><p class="step-what">{d.what}</p></li>)}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container criteria">
+      <div class="prose" set:html={tail} />
+      <aside class="panel apply-panel">
+        <svg class="icon icon-xl"><use href="#i-directory" /></svg>
+        <p>Ideas can be suggested by any Olympian but your application must be submitted through your NOA.</p>
+        <a class="btn" href={url('/noas/noa-directory/')}>NOA Directory<svg class="icon icon-arrow"><use href="#i-arrow" /></svg></a>
+      </aside>
+    </div>
+  </section>
+</Base>
+<style>
+  .lead-block { font-size: var(--fs-lead); max-width: none; }
+  .amounts { list-style: none; margin: var(--sp-6) 0; padding: 0; display: grid; gap: var(--sp-4); grid-template-columns: minmax(0, 1fr); }
+  @media (min-width: 834px) { .amounts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .amounts li { display: grid; gap: var(--sp-3); padding: var(--sp-6); background: var(--c-black); color: var(--c-white); border-radius: var(--radius-lg); }
+  .amounts .fact { color: var(--c-white); justify-self: start; font-size: var(--fs-h3); box-shadow: inset 0 -0.35em 0 rgba(182, 166, 127, .65); }
+  .amount-k { color: var(--c-grey-400); font-weight: 600; }
+  .apply { margin-bottom: var(--sp-7); }
+  .cat { display: grid; gap: var(--sp-4); align-content: start; padding: var(--sp-6); border: 1px solid var(--c-grey-200); border-radius: var(--radius-lg); transition: border-color var(--t), transform var(--t); }
+  .cat:hover { border-color: var(--c-black); transform: translateY(-2px); }
+  .cat h3 { font-size: var(--fs-h4); }
+  .cat-text { font-size: var(--fs-small); }
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-4); grid-template-columns: minmax(0, 1fr); counter-reset: s; }
+  @media (min-width: 640px) { .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 1100px) { .steps { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .steps li { position: relative; display: grid; gap: var(--sp-3); align-content: start; padding: var(--sp-6) var(--sp-5); background: var(--c-white); border-radius: var(--radius-lg); border: 1px solid var(--c-grey-200); transition: border-color var(--t); }
+  .steps li:hover { border-color: var(--c-black); }
+  .step-num { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--c-black); color: var(--c-white); font-weight: 700; line-height: 1; }
+  .step-when { display: flex; align-items: center; gap: 8px; font-size: var(--fs-small); }
+  .step-when .icon { color: var(--c-gold); flex: none; }
+  .step-what { font-weight: 600; line-height: 1.4; }
+  .criteria { display: grid; gap: var(--sp-7); grid-template-columns: minmax(0, 1fr); align-items: start; }
+  @media (min-width: 1024px) { .criteria { grid-template-columns: minmax(0, 1fr) 340px; gap: var(--sp-8); } .apply-panel { position: sticky; top: calc(var(--header-h) + 24px); } }
+  .apply-panel { display: grid; gap: var(--sp-4); justify-items: start; }
+  .apply-panel .icon-xl { color: var(--c-gold); }
+</style>

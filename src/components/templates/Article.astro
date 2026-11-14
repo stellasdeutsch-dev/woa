@@ -2,29 +2,33 @@
 import StoryCard from '../StoryCard.astro';
 import { prose, b, fmtDate, url, ORIGIN, imgOk } from '../../lib/site';
 import { crumbsFor, type Story } from '../../lib/data';
+import { langOf, L, t, fmtDateL, navLabel } from '../../lib/i18n';
 interface Props { story: Story; related: Story[]; kind: 'News' | 'Best Practice'; listHref: string; prev?: Story; next?: Story }
-const { story, related, kind, listHref, prev, next } = Astro.props;
+const { story, related, kind, prev, next } = Astro.props;
+const lang = langOf(Astro.url.pathname); const tr = t(lang);
+const listHref = L(Astro.props.listHref, lang);
+const listLabel = kind === 'News' ? navLabel('/news/', 'News', lang) : navLabel('/best-practices/', 'Best Practices', lang);
 let { html } = prose(story.body, { toc: false });
 // the lead image is shown above; drop an identical trailing copy
 const img = imgOk(story.img) ? b(story.img) : '';
 const shareUrl = encodeURIComponent(new URL(url(story.path), Astro.site).href);
 const shareText = encodeURIComponent(story.title);
-const crumbs = crumbsFor(story);
+const crumbs = crumbsFor(story, lang);
 ---
 <article class="article">
   <header class="container art-head">
-    <nav class="crumbs crumbs-dark" aria-label="Breadcrumb">
-      <a href={url('/')}>Home</a>
+    <nav class="crumbs crumbs-dark" aria-label={tr.breadcrumb}>
+      <a href={url(L('/', lang))}>{tr.home}</a>
       {crumbs.slice(0, -1).map(c => (<><svg class="icon"><use href="#i-chevron" /></svg><a href={url(c.href!)}>{c.label}</a></>))}
     </nav>
     <h1>{story.title}</h1>
     <div class="art-meta">
-      {story.date && <p class="card-meta art-date"><svg class="icon"><use href="#i-calendar" /></svg><time datetime={story.date}>{fmtDate(story.date)}</time></p>}
-      <div class="share" aria-label="Share">
+      {story.date && <p class="card-meta art-date"><svg class="icon"><use href="#i-calendar" /></svg><time datetime={story.date}>{fmtDateL(story.date, lang)}</time></p>}
+      <div class="share" aria-label={tr.share}>
         <a class="icon-btn" href={`https://twitter.com/intent/tweet?url=${shareUrl}&text=${shareText}`} target="_blank" rel="noopener" aria-label="X"><svg class="icon"><use href="#i-x" /></svg></a>
         <a class="icon-btn" href={`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`} target="_blank" rel="noopener" aria-label="Facebook"><svg class="icon"><use href="#i-facebook" /></svg></a>
         <a class="icon-btn" href={`https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`} target="_blank" rel="noopener" aria-label="LinkedIn"><svg class="icon"><use href="#i-linkedin" /></svg></a>
-        <button class="icon-btn" type="button" data-copy-link aria-label="Copy link"><svg class="icon"><use href="#i-link" /></svg></button>
+        <button class="icon-btn" type="button" data-copy-link aria-label={tr.copyLink}><svg class="icon"><use href="#i-link" /></svg></button>
       </div>
     </div>
   </header>
@@ -42,7 +46,7 @@ const crumbs = crumbsFor(story);
 {related.length > 0 && (
   <section class="section bg-grey" data-pagefind-ignore>
     <div class="container">
-      <div class="section-head"><h2>{kind === 'News' ? 'News' : 'Best Practices'}</h2><a class="link-arrow" href={url(listHref)}>{kind === 'News' ? 'News' : 'Best Practices'}<svg class="icon"><use href="#i-arrow" /></svg></a></div>
+      <div class="section-head"><h2>{listLabel}</h2><a class="link-arrow" href={url(listHref)}>{listLabel}<svg class="icon"><use href="#i-arrow" /></svg></a></div>
       <div class="grid grid-3">{related.slice(0, 3).map(r => <StoryCard item={r} />)}</div>
     </div>
   </section>

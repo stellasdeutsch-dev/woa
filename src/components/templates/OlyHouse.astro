@@ -4,8 +4,10 @@ import { iconFor } from '../../lib/visual';
 import PageHero from '../PageHero.astro';
 import { b } from '../../lib/site';
 import type { Page } from '../../lib/data';
+import { langOf, L } from '../../lib/i18n';
 interface Props { page: Page; year?: string }
 const { page: p, year } = Astro.props;
+const lang = langOf(Astro.url.pathname);
 const $ = cheerio.load(b(p.body), null, false);
 const root = $.root();
 const gamesLink = root.children('a').first();
@@ -32,7 +34,7 @@ const [first, ...others] = tiles;
 const lastH4 = $('h4').last();
 const recent = lastH4.length && !lastH4.next('ul').length && lastH4.find('a').length ? { href: lastH4.find('a').attr('href'), text: lastH4.text().replace(/→/, '').trim() } : null;
 ---
-<PageHero title={year ? `${p.title} ${year}` : p.title} crumbs={year ? [{ label: 'OLY House', href: '/oly-house/' }, { label: year }] : []} compact />
+<PageHero title={year ? `${p.title} ${year}` : p.title} crumbs={year ? [{ label: 'OLY House', href: L('/oly-house/', lang) }, { label: year }] : []} compact />
 <section class="section">
   <div class="container">
     <div class="oh-top">

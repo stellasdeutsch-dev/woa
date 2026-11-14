@@ -1,0 +1,15 @@
+---
+import Base from '../../../layouts/Base.astro';
+import StoryList from '../../../components/templates/StoryList.astro';
+import { dataFor } from '../../../lib/data';
+import { b } from '../../../lib/site';
+import { LANG_PARAMS, pageLang, navLabel } from '../../../lib/i18n';
+export function getStaticPaths() { return LANG_PARAMS; }
+const lang = pageLang(Astro.params);
+const all = dataFor(lang).news;
+const PER = 18;
+const title = navLabel('/news/', 'News', lang);
+---
+<Base title={title} type="Page" search={false}>
+  <StoryList title={title} base="/news/" all={all} items={all.slice(0, PER + 1)} page={1} pages={Math.ceil((all.length - 1) / PER)} bg={b(all[0].img)} />
+</Base>

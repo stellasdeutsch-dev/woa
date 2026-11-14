@@ -1,0 +1,93 @@
+---
+// President's message as an editorial letter: author card, pull quote, the activities he lists as cards
+// linking to their OLY House pages, signature. Text is the original letter.
+import * as cheerio from 'cheerio';
+import Base from '../../../../../layouts/Base.astro';
+import PageHero from '../../../../../components/PageHero.astro';
+import Tabs from '../../../../../components/Tabs.astro';
+import { dataFor, crumbsFor } from '../../../../../lib/data';
+import { LANG_PARAMS, pageLang, t as tFor, L as Lx } from '../../../../../lib/i18n';
+export function getStaticPaths() { return LANG_PARAMS; }
+const lang = pageLang(Astro.params); const tr = tFor(lang); const D = dataFor(lang);
+const page = D.page;
+import { b, url, BASE } from '../../../../../lib/site';
+
+const p = page('/oly-house/a-message-from-president-joel-bouzou/2020/');
+const $ = cheerio.load(b(p.body), null, false);
+const kicker = $('h3').first().text().trim();
+const heading = $('h2').first().html()!.trim();
+const ps = $('p').toArray();
+const introP = $(ps[0]).html()!;
+const greet = $(ps[1]).text().trim();
+const signP = ps.at(-1)!;
+const regards = $(ps.at(-2)!).text().trim();
+const letter = ps.slice(2, -2).map(n => $(n).html()!.trim());
+// pull quote: the paragraph about the community, its first sentence
+const commIdx = letter.findIndex(h => h.startsWith('We are a community'));
+const pull = commIdx >= 0 ? letter[commIdx].split(/(?<=\.)\s+/)[0] : '';
+// the paragraph listing OLY House activities is followed by cards for them
+const actIdx = letter.findLastIndex(h => /Leave your Mark|OLY Day/.test(h));
+const signLines = $(signP).text().split(/\n|(?=President)|(?=World Olympians)/).map(s => s.replace(/\s+/g, ' ').trim()).filter(Boolean);
+const tab = (href: string) => p.tabs.find(t => t.href.endsWith(href))!;
+const ACTS = ['/oly-house/leave-your-mark/2020/', '/oly-house/olympians-for-life/2020/', '/oly-house/international-day-of-friendship/2020/', '/oly-house/1964-reunion/2020/', '/oly-house/oly-day/2020/'];
+const acts = ACTS.map(h => ({ href: h, label: tab(h)?.label ?? page(h).title, img: b(page(h).bg), icon: { '/oly-house/leave-your-mark/2020/': 'pin', '/oly-house/olympians-for-life/2020/': 'life', '/oly-house/international-day-of-friendship/2020/': 'friendship', '/oly-house/1964-reunion/2020/': 'history', '/oly-house/oly-day/2020/': 'oly' }[h]! }));
+const air = page('/airbnb-festival/');
+acts.push({ href: '/airbnb-festival/', label: air.title, img: b(air.bg), icon: 'house' });
+---
+<Base title={p.title} origPath={p.orig} image={b(p.bg)} description={p.desc || undefined}>
+  <PageHero title={p.title} crumbs={crumbsFor(p, lang)} bg={b('{{BASE}}/backgrounds/82.webp')} compact />
+  <Tabs tabs={p.tabs} current={BASE + p.path} />
+
+  <section class="section">
+    <div class="container vb-letter">
+      <aside class="vb-author">
+        <img src={b(p.bg)} alt="Joël Bouzou OLY" width="1600" height="750" />
+        <div>
+          <p class="vb-author-name">{signLines[0]}</p>
+          <p class="vb-author-role">{signLines.slice(1).join(', ')}</p>
+          <p class="pl-kicker"><svg class="icon"><use href="#i-house" /></svg>{kicker}</p>
+        </div>
+      </aside>
+      <article class="vb-letter-body">
+        <h2 class="pl-h" set:html={heading} />
+        <p class="intro" set:html={introP} />
+        <p class="greet">{greet}</p>
+        {letter.map((h, i) => (
+          <>
+            {i === commIdx && pull && <figure class="vb-quote"><svg class="icon"><use href="#i-quote" /></svg><blockquote set:html={pull} /><figcaption>{signLines[0]}</figcaption></figure>}
+            <p set:html={h} />
+            {i === actIdx && (
+              <ul class="vb-tiles pl-acts">
+                {acts.map(a => (
+                  <li><a class="card" href={url(a.href)}>
+                    <div class="card-media"><img src={a.img} alt="" loading="lazy" /></div>
+                    <div class="card-body"><span class="pl-act-title"><span class="vb-ico"><svg class="icon"><use href={`#i-${a.icon}`} /></svg></span><span class="card-title">{a.label}</span></span></div>
+                  </a></li>
+                ))}
+              </ul>
+            )}
+          </>
+        ))}
+        <div class="vb-sign">
+          <p>{regards}</p>
+          <strong>{signLines[0]}</strong>
+          {signLines.slice(1).map(l => <span class="vb-author-role">{l}</span>)}
+        </div>
+      </article>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .pl-h { font-size: var(--fs-h2); line-height: 1.2; }
+  .pl-h :global(small) { font-size: .6em; font-weight: 600; }
+  .pl-kicker { display: inline-flex; align-items: center; gap: 8px; margin-top: var(--sp-4); padding: 6px 14px; border-radius: 999px; background: var(--c-grey-50); font-weight: 600; font-size: var(--fs-small); }
+  .pl-kicker .icon { width: 20px; height: 20px; }
+  .pl-acts { margin-block: var(--sp-6); }
+  @media (min-width: 1200px) { .pl-acts { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .pl-acts .card-media { aspect-ratio: 16 / 9; }
+  .pl-act-title { display: flex; align-items: center; gap: var(--sp-3); }
+  .pl-act-title .vb-ico { width: 40px; height: 40px; }
+  .pl-act-title .vb-ico .icon { width: 36px; height: 36px; stroke-width: 1.5; }
+  .pl-acts .card-title { font-size: 1rem; }
+</style>

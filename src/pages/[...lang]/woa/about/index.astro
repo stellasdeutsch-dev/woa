@@ -1,0 +1,132 @@
+---
+import * as cheerio from 'cheerio';
+import Base from '../../../../layouts/Base.astro';
+import PageHero from '../../../../components/PageHero.astro';
+import Tabs from '../../../../components/Tabs.astro';
+import Docs from '../../../../components/Docs.astro';
+import { dataFor } from '../../../../lib/data';
+import { LANG_PARAMS, pageLang, t as tFor, L as Lx } from '../../../../lib/i18n';
+export function getStaticPaths() { return LANG_PARAMS; }
+const lang = pageLang(Astro.params); const tr = tFor(lang); const D = dataFor(lang);
+const page = D.page;
+import { b, url, prose, BASE } from '../../../../lib/site';
+
+const p = page('/woa/about/');
+const $ = cheerio.load(p.body);
+const leadText = $('h2').first().text().trim();
+const paras = $('p').map((_, el) => $(el).text().trim()).get().filter(Boolean);
+const video = (p.body.match(/data-yt="([\w-]+)"/) || [])[1];
+const { html: videoBlock } = prose(video ? `<div class="video" data-yt="${video}"></div>` : '');
+const mission = cheerio.load(page('/woa/about/mission/').body)('h2').first().text().trim();
+const vision = cheerio.load(page('/woa/about/vision/').body)('h2').first().text().trim();
+const goals = cheerio.load(page('/woa/about/goals/').body).text().split(/\s*\d+\.\s+/).map(s => s.trim()).filter(Boolean);
+const values = cheerio.load(page('/woa/about/values/').body)('h2').map((_, h) => cheerio.load(h).text().trim()).get();
+const VALUE_ICONS: Record<string, string> = { Excellence: 'excellence', Integrity: 'integrity', Respect: 'respect', Friendship: 'friendship', Solidarity: 'solidarity', Inspiration: 'inspiration' };
+// History: first and latest milestone years for the teaser
+const hist = cheerio.load(page('/woa/about/history/').body);
+const years = hist('p strong').map((_, s) => hist(s).text().trim()).get().filter(t => /^\d{4}$/.test(t));
+const stat1 = leadText.match(/over ([\d,]+) living Olympians/);
+const stat2 = paras[0]?.match(/There are (\d+) National Olympians Associations/);
+const facts = (s: string) => s.replace(/(over [\d,]+ living Olympians|\d+ National Olympians Associations \(NOAs\))/g, '<strong class="fact">$1</strong>');
+---
+<Base title="About" origPath={p.orig} image={b(p.bg)}>
+  <PageHero title="About" crumbs={[{ label: 'WOA', href: '/woa/' }, { label: 'About' }]} bg={b(p.bg)} lead={leadText} />
+  <Tabs tabs={p.tabs} current={BASE + Lx('/woa/about/', lang)} />
+
+  <section class="section">
+    <div class="container about-intro">
+      <div class="prose">
+        <h2 class="sr-only">Introduction</h2>
+        {paras.map(t => <p set:html={facts(t)} />)}
+      </div>
+      <aside class="aside">
+        <dl class="about-stats">
+          {stat1 && <div><dt class="stat-num">{stat1[1]}+</dt><dd class="stat-label">living Olympians throughout the world</dd></div>}
+          {stat2 && <div><dt class="stat-num">{stat2[1]}</dt><dd class="stat-label">National Olympians Associations (NOAs)</dd></div>}
+        </dl>
+        <Docs items={p.downloads} />
+      </aside>
+    </div>
+    {video && <div class="container about-video" set:html={videoBlock} />}
+  </section>
+
+  <section class="section bg-dark">
+    <div class="container mv">
+      <a class="mv-card" href={url('/woa/about/mission/')}>
+        <span class="mv-head"><svg class="icon icon-lg"><use href="#i-mission" /></svg><h2>Mission</h2></span>
+        <p>{mission}</p>
+      </a>
+      <a class="mv-card" href={url('/woa/about/vision/')}>
+        <span class="mv-head"><svg class="icon icon-lg"><use href="#i-vision" /></svg><h2>Vision</h2></span>
+        <p>{vision}</p>
+      </a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head"><h2>Goals</h2><a class="link-arrow" href={url('/woa/about/goals/')}>Goals<svg class="icon"><use href="#i-arrow" /></svg></a></div>
+      <ol class="goals">
+        {goals.map((g, i) => <li><span class="goal-num">{i + 1}</span><p>{g}</p></li>)}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section bg-grey">
+    <div class="container">
+      <div class="section-head"><h2>Values</h2><a class="link-arrow" href={url('/woa/about/values/')}>Values<svg class="icon"><use href="#i-arrow" /></svg></a></div>
+      <ul class="values">
+        {values.map(v => <li><svg class="icon icon-xl"><use href={`#i-${VALUE_ICONS[v] ?? 'values'}`} /></svg><h3>{v}</h3></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <a class="history-banner" href={url('/woa/about/history/')}>
+        <svg class="icon icon-xl"><use href="#i-history" /></svg>
+        <div><h2>History</h2><p class="hist-years"><span>{years[0]}</span><span class="hist-line" aria-hidden="true"></span><span>{years.at(-1)}</span></p></div>
+        <span class="link-arrow">History<svg class="icon"><use href="#i-arrow" /></svg></span>
+      </a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .about-intro { display: grid; gap: var(--sp-7); grid-template-columns: minmax(0, 1fr); }
+  @media (min-width: 1024px) { .about-intro { grid-template-columns: minmax(0, 1fr) 340px; gap: var(--sp-8); } }
+  .about-intro .prose p:first-of-type { font-size: var(--fs-lead); line-height: 1.55; }
+  .about-stats { display: grid; gap: var(--sp-4); margin: 0; }
+  @media (min-width: 640px) and (max-width: 1023px) { .about-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .about-stats > div { padding: var(--sp-6); background: var(--c-grey-50); border-radius: var(--radius-lg); }
+  .about-stats dd { margin: var(--sp-3) 0 0; }
+  .about-video { margin-top: var(--sp-8); }
+  .mv { display: grid; gap: var(--sp-5); grid-template-columns: minmax(0, 1fr); }
+  @media (min-width: 834px) { .mv { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .mv-card { display: grid; gap: var(--sp-5); align-content: start; padding: clamp(24px, 4vw, 48px); border: 1px solid #333; border-radius: var(--radius-lg); transition: border-color var(--t), background var(--t); }
+  .mv-card:hover { border-color: var(--c-gold); background: var(--c-ink); }
+  .mv-head { display: flex; align-items: center; gap: var(--sp-4); color: var(--c-gold); }
+  .mv-head h2 { color: var(--c-white); font-size: var(--fs-h3); }
+  .mv-card p { font-size: var(--fs-h3); font-weight: 600; line-height: 1.35; }
+  .goals { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-4); grid-template-columns: minmax(0, 1fr); counter-reset: g; }
+  @media (min-width: 640px) { .goals { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 1024px) { .goals { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+  .goals li { display: grid; gap: var(--sp-4); align-content: start; padding: var(--sp-5); border: 1px solid var(--c-grey-200); border-radius: var(--radius-lg); transition: border-color var(--t), transform var(--t); }
+  .goals li:hover { border-color: var(--c-black); transform: translateY(-2px); }
+  .goal-num { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: var(--c-gold); color: var(--c-black); font-weight: 700; font-size: 1.25rem; line-height: 1; }
+  .goals p { font-weight: 600; line-height: 1.4; hyphens: manual; }
+  .values { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-4); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @media (min-width: 834px) { .values { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (min-width: 1200px) { .values { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+  .values li { display: grid; justify-items: center; gap: var(--sp-4); padding: var(--sp-6) var(--sp-4); background: var(--c-white); border: 1px solid var(--c-grey-200); border-radius: var(--radius-lg); text-align: center; transition: border-color var(--t), transform var(--t); }
+  .values li:hover { border-color: var(--c-black); transform: translateY(-2px); }
+  .values .icon { color: var(--c-gold); }
+  .values h3 { font-size: var(--fs-h4); }
+  .history-banner { display: grid; gap: var(--sp-5); align-items: center; grid-template-columns: minmax(0, 1fr); padding: clamp(24px, 4vw, 48px); border: 1px solid var(--c-grey-200); border-radius: var(--radius-lg); transition: border-color var(--t), box-shadow var(--t); }
+  @media (min-width: 834px) { .history-banner { grid-template-columns: auto minmax(0, 1fr) auto; gap: var(--sp-7); } }
+  .history-banner:hover { border-color: var(--c-black); box-shadow: var(--shadow); }
+  .history-banner .icon-xl { color: var(--c-gold); }
+  .history-banner h2 { font-size: var(--fs-h2); }
+  .hist-years { display: flex; align-items: center; gap: var(--sp-4); margin-top: var(--sp-3); font-size: var(--fs-h3); font-weight: 700; }
+  .hist-line { flex: 1; max-width: 240px; height: 2px; background: var(--c-gold); }
+</style>

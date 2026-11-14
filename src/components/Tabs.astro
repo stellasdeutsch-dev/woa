@@ -1,9 +1,11 @@
 ---
 import { b } from '../lib/site';
+import { langOf, t } from '../lib/i18n';
 interface Props { tabs: { label: string; href: string }[]; current: string }
 const { tabs, current } = Astro.props;
+const tr = t(langOf(Astro.url.pathname));
 ---
-<nav class="tabs" aria-label="Section">
+<nav class="tabs" aria-label={tr.section}>
   <div class="container">
     <ul>
       {tabs.map(t => { const h = b(t.href); return <li><a href={h} aria-current={h.replace(/\/$/, '') === current.replace(/\/$/, '') ? 'page' : undefined}>{t.label}</a></li>; })}

@@ -1,0 +1,142 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import PageHero from '../../../../components/PageHero.astro';
+import { dataFor } from '../../../../lib/data';
+import { LANG_PARAMS, pageLang, t as tFor, L as Lx } from '../../../../lib/i18n';
+export function getStaticPaths() { return LANG_PARAMS; }
+const lang = pageLang(Astro.params); const tr = tFor(lang); const D = dataFor(lang);
+const page = D.page; const noas = D.noas;
+import { b, realFlag } from '../../../../lib/site';
+
+const p = page('/noas/noa-directory/');
+const list = [...noas].sort((a, z) => a.country.localeCompare(z.country));
+const letters = [...new Set(list.map(n => n.country[0].toUpperCase()))];
+const ICON: Record<string, string> = { Address: 'pin', Email: 'mail', Phone: 'phone', Website: 'globe', President: 'user', Chairperson: 'user' };
+const telHref = (v: string) => 'tel:' + v.replace(/[^\d+]/g, '');
+---
+<Base title={p.title} origPath={p.orig} image={b(p.bg)}>
+  <PageHero title={p.title} crumbs={[{ label: 'NOAs', href: '/noas/' }, { label: p.title }]} bg={b(p.bg)} compact>
+    <div class="dir-search">
+      <svg class="icon"><use href="#i-search" /></svg>
+      <label class="sr-only" for="noa-q">Search</label>
+      <input id="noa-q" type="search" placeholder="Search" autocomplete="off" />
+    </div>
+  </PageHero>
+
+  <section class="section-tight">
+    <div class="container">
+      <div class="dir-controls">
+        <div class="pills letters" role="group" aria-label="Letters">
+          {letters.map(l => <button class="pill" type="button" data-letter={l} aria-pressed="false">{l}</button>)}
+        </div>
+      </div>
+
+
+      <p class="dir-empty" hidden>No results</p>
+      <div class="noa-groups">
+        {letters.map(L => (
+          <section class="noa-group" data-group={L} aria-labelledby={`letter-${L}`}>
+            <h2 class="noa-letter" id={`letter-${L}`}>{L}</h2>
+            <ul class="noa-list">
+              {list.filter(n => n.country[0].toUpperCase() === L).map(n => (
+                <li class="noa" id={`noa-${n.code.toLowerCase()}`} data-code={n.code} data-letter={L} data-q={`${n.country} ${n.name}`.toLowerCase()}>
+                  <details>
+                    <summary class="noa-head">
+                      <span class="flag">{realFlag(n.code) && <img src={realFlag(n.code)!.src} alt="" width={realFlag(n.code)!.w} height={realFlag(n.code)!.h} loading="lazy" />}</span>
+                      <span class="noa-titles"><h3>{n.country}</h3><span class="noa-name">{n.name}</span></span>
+                      {n.olyCount !== null && <span class="noa-count" aria-hidden="true"><svg class="icon"><use href="#i-oly" /></svg>{n.olyCount.toLocaleString('en-GB')}</span>}
+                      <svg class="icon noa-chev"><use href="#i-chevron" /></svg>
+                    </summary>
+                    <div class="noa-body">
+                      {n.olyCount !== null && <p class="noa-oly"><span class="fact">{n.olyCount.toLocaleString('en-GB')}</span> <span>Number of Olympians registered for OLY</span></p>}
+                      <p class="noa-sub">Contact Details</p>
+                      <dl>
+                        {n.fields.filter((f: any) => !/registered for OLY/.test(f.label)).map((f: any) => (
+                          <div class="noa-field">
+                            <dt><svg class="icon icon-sm"><use href={`#i-${ICON[f.label] ?? 'about'}`} /></svg>{f.label}</dt>
+                            <dd>
+                              {f.links.length > 0
+                                ? f.links.map((l: any) => <a href={l.href} target={/^https?:/.test(l.href) ? '_blank' : undefined} rel="noopener">{l.text}</a>)
+                                : f.label === 'Phone' ? f.value.map((v: string) => <a href={telHref(v)}>{v}</a>)
+                                : f.value.map((v: string) => <span>{v}</span>)}
+                            </dd>
+                          </div>
+                        ))}
+                      </dl>
+                    </div>
+                  </details>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))}
+      </div>
+      <p class="muted dir-order">in alphabetical order</p>
+    </div>
+  </section>
+</Base>
+
+<script>
+  const q = document.getElementById('noa-q') as HTMLInputElement;
+  const items = [...document.querySelectorAll<HTMLElement>('.noa')];
+  const letterBtns = [...document.querySelectorAll<HTMLButtonElement>('[data-letter]')];
+  const empty = document.querySelector('.dir-empty') as HTMLElement;
+  let letter = ''; let code = '';
+  function apply() {
+    const s = q.value.trim().toLowerCase();
+    let shown = 0;
+    for (const el of items) {
+      const ok = (!s || el.dataset.q!.includes(s)) && (!letter || el.dataset.letter === letter) && (!code || el.dataset.code === code);
+      el.hidden = !ok; if (ok) shown++;
+    }
+    empty.hidden = shown > 0;
+    document.querySelectorAll<HTMLElement>('.noa-group').forEach(g => { g.hidden = !g.querySelector('.noa:not([hidden])'); });
+    letterBtns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.letter === letter)));
+  }
+  q.addEventListener('input', () => { code = ''; apply(); });
+  letterBtns.forEach(b => b.addEventListener('click', () => { letter = letter === b.dataset.letter ? '' : b.dataset.letter!; code = ''; apply(); }));
+  const pick = (c: string) => { code = c; letter = ''; q.value = ''; apply(); const el = document.querySelector(`.noa[data-code="${c}"]`); if (el) { (el.querySelector('details') as HTMLDetailsElement).open = true; } };
+  // deep link #noa-xx
+  try { const h = decodeURIComponent(location.hash); const m = h.match(/^#noa-([a-z]{2})$/); if (m) pick(m[1].toUpperCase()); } catch {}
+</script>
+
+<style>
+  .dir-search { display: flex; align-items: center; gap: 12px; max-width: 560px; margin-top: var(--sp-3); padding: 0 16px; background: var(--c-white); color: var(--c-black); border-radius: var(--radius); }
+  .dir-search input { flex: 1; min-width: 0; min-height: 56px; border: 0; outline: none; background: transparent; font-size: 1.125rem; }
+  .dir-controls { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--sp-4); margin-bottom: var(--sp-6); }
+  .letters { flex: 1 1 520px; }
+  .letters .pill { padding: 0; width: 40px; }
+  .noa-group { scroll-margin-top: calc(var(--header-h) + 24px); }
+  .noa-group[hidden] { display: none; }
+  .noa-group + .noa-group { margin-top: var(--sp-7); }
+  .noa-letter { font-size: var(--fs-h2); margin-bottom: var(--sp-4); padding-bottom: var(--sp-3); border-bottom: 1px solid var(--c-grey-200); }
+  .noa-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-2) var(--sp-4); grid-template-columns: minmax(0, 1fr); align-items: start; }
+  @media (min-width: 834px) { .noa-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .noa { border: 1px solid var(--c-grey-200); border-radius: var(--radius-lg); background: var(--c-white); transition: border-color var(--t); }
+  .noa[hidden] { display: none; }
+  .noa:hover, .noa:has(details[open]) { border-color: var(--c-black); }
+  .noa-head { display: grid; grid-template-columns: 56px minmax(0, 1fr) auto 24px; gap: var(--sp-4); align-items: center; min-height: 72px; padding: var(--sp-3) var(--sp-4); cursor: pointer; list-style: none; }
+  .noa-head::-webkit-details-marker { display: none; }
+  .flag { display: grid; place-items: center; width: 56px; height: 40px; }
+  .flag img { display: block; max-width: 56px; max-height: 36px; width: auto; height: auto; box-shadow: 0 0 0 1px var(--c-grey-200); }
+  .noa-titles { display: grid; min-width: 0; }
+  .noa h3 { font-size: var(--fs-h4); line-height: 1.3; }
+  .noa-name { color: var(--c-grey-700); font-size: var(--fs-small); line-height: 1.4; }
+  .noa-count { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .noa-count .icon { width: 28px; height: 28px; }
+  .noa-chev { transition: transform var(--t); }
+  .noa details[open] .noa-chev { transform: rotate(180deg); }
+  .noa-body { padding: 0 var(--sp-4) var(--sp-5) calc(var(--sp-4) + 56px + var(--sp-4)); display: grid; gap: var(--sp-3); }
+  @media (max-width: 639px) { .noa-body { padding-left: var(--sp-4); } .noa-head { grid-template-columns: 40px minmax(0, 1fr) auto 20px; gap: var(--sp-3); } .flag { width: 40px; height: 30px; } .flag img { max-width: 40px; max-height: 28px; } }
+  .noa-sub { font-weight: 600; font-size: var(--fs-small); }
+  .noa-oly { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; font-size: var(--fs-xs); color: var(--c-grey-700); }
+  .noa-oly .fact { font-size: 1.375rem; }
+  .noa dl { margin: 0; display: grid; gap: var(--sp-3); }
+  .noa-field dt { display: flex; align-items: center; gap: 8px; font-size: var(--fs-xs); font-weight: 600; color: var(--c-grey-600); }
+  .noa-field dt .icon { width: 16px; height: 16px; }
+  .noa-field dd { margin: 4px 0 0 24px; display: grid; font-size: var(--fs-small); line-height: 1.5; }
+  .noa-field dd a { overflow-wrap: anywhere; text-decoration: underline; text-decoration-color: var(--c-gold); text-underline-offset: 3px; transition: color var(--t); }
+  .noa-field dd a:hover { color: var(--c-grey-600); }
+  .dir-empty { padding: var(--sp-7) 0; color: var(--c-grey-600); }
+  .dir-order { margin-top: var(--sp-6); font-size: var(--fs-small); }
+</style>
