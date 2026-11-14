@@ -1,10 +1,42 @@
 [
  {
+  "original": "/woa/olympism/",
+  "target": "/woa/olympism/",
+  "exists": true,
+  "missing": [
+   "excellence:",
+   "friendship:",
+   "respect:",
+   "humanism.",
+   "solidarity."
+  ]
+ },
+ {
   "original": "/olympians/wof/?tab=e-wof",
   "target": "/olympians/wof/e-wof/",
   "exists": true,
   "missing": [
    "e -wof"
+  ]
+ },
+ {
+  "original": "/noas/noa-guide/member-engagement/",
+  "target": "/noas/noa-guide/member-engagement/",
+  "exists": true,
+  "missing": [
+   "business card template",
+   "1. design",
+   "2. channel",
+   "3. message",
+   "4. frequency"
+  ]
+ },
+ {
+  "original": "/noas/noa-guide/leadership-and-governance/",
+  "target": "/noas/noa-guide/leadership-and-governance/",
+  "exists": true,
+  "missing": [
+   "3. planning"
   ]
  }
 ]

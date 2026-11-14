@@ -6,7 +6,9 @@ import { prose, b, BASE } from '../../lib/site';
 import { crumbsFor, type Page } from '../../lib/data';
 interface Props { page: Page }
 const { page } = Astro.props;
-const { html, toc } = prose(page.body);
+const legal = /privacy-policy/.test(page.path);
+const { html, toc } = prose(page.body, { visual: true, legal, faq: /\/faq\//.test(page.path) });
+const current = BASE + page.path;
 const isDoc = (h: string) => /\.(pdf|docx?|xlsx?|pptx?|zip)(\?|$)/i.test(h) || /\/library\//.test(h);
 const downloads = page.downloads.filter(d => isDoc(d.href));
 // side column with more than documents (e.g. Olympian.org Email help) is shown as is
@@ -16,19 +18,39 @@ const sideRich = sideText.length > 0 && (page.downloads.some(d => !isDoc(d.href)
 const side = sideRich ? prose(page.side, { toc: false }).html : '';
 // long help text from the side column reads better as its own block under the content
 const sideBelow = sideRich && sideText.length > 600;
-const showToc = toc.length >= 3;
-const hasAside = downloads.length > 0 || showToc || (sideRich && !sideBelow);
-const current = BASE + page.path;
+// three or more sections: a visual index on top instead of a side list (legal texts keep the side list)
+const topIndex = toc.length >= 3 && !legal;
+const showToc = toc.length >= 3 && legal;
+// neighbours in the section tabs (NOA Guide chapters, OLY House pages)
+const ti = page.tabs.findIndex(t => b(t.href).replace(/\/$/, '') === current.replace(/\/$/, ''));
+const prevTab = ti > 0 ? page.tabs[ti - 1] : null;
+const nextTab = ti >= 0 && ti < page.tabs.length - 1 ? page.tabs[ti + 1] : null;
+// documents become cards above the text so the text keeps the full width; only a rich side text or a legal contents list keeps the side column
+const hasAside = showToc || (sideRich && !sideBelow);
+const docsTop = !hasAside || (sideRich && !sideBelow) ? downloads : [];
+const ext = (h: string) => (h.match(/\.([a-z0-9]+)(\?|$)/i)?.[1] || '').toUpperCase();
 ---
 <PageHero title={page.title} crumbs={crumbsFor(page)} bg={b(page.bg)} />
 {page.tabs.length > 1 && <Tabs tabs={page.tabs} current={current} />}
 <section class="section-tight">
   <div class:list={['container', 'page-layout', { 'has-aside': hasAside }]}>
-    <div class="prose" set:html={html} />
+    <div class="content-main">
+      {topIndex && (
+        <ol class="vb-index vb-index-top">
+          {toc.map((t, i) => <li><a class="vb-link" href={`#${t.id}`}><span class="vb-num">{i + 1}</span><span>{t.text}</span><svg class="icon"><use href="#i-chevron" /></svg></a></li>)}
+        </ol>
+      )}
+      {docsTop.length > 0 && (
+        <ul class="vb-docs cols-3 docs-top">
+          {docsTop.map(d => <li><a class="vb-doc" href={b(d.href)} target="_blank" rel="noopener"><span class="vb-ico"><svg class="icon"><use href="#i-doc" /></svg></span><span class="vb-doc-name">{d.label}<span class="vb-doc-type">{ext(d.href)}</span></span><svg class="icon"><use href="#i-download" /></svg></a></li>)}
+        </ul>
+      )}
+      <div class="prose" set:html={html} />
+    </div>
     {hasAside && (
       <aside class="aside">
         <div class:list={['aside', { 'aside-sticky': !sideRich }]}>
-          {(!sideRich || sideBelow) && <Docs items={downloads} />}
+          {showToc && downloads.length > 0 && <Docs items={downloads} />}
           {sideRich && !sideBelow && <div class="panel prose side-prose" set:html={side} />}
           {showToc && (
             <nav class="panel toc" aria-label="On this page">
@@ -40,6 +62,16 @@ const current = BASE + page.path;
     )}
   </div>
 </section>
+{(prevTab || nextTab) && (
+  <section class="section-tight vb-pager-wrap">
+    <div class="container">
+      <nav class="vb-pager" aria-label="Section">
+        {prevTab ? <a class="prev vb-link" href={b(prevTab.href)}><svg class="icon"><use href="#i-arrow-left" /></svg>{prevTab.label}</a> : <span />}
+        {nextTab && <a class="next vb-link" href={b(nextTab.href)}>{nextTab.label}<svg class="icon"><use href="#i-arrow" /></svg></a>}
+      </nav>
+    </div>
+  </section>
+)}
 {sideBelow && (
   <section class="section-tight bg-grey">
     <div class="container"><div class="prose side-below" set:html={side} /></div>

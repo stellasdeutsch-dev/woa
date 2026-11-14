@@ -6,7 +6,7 @@ import { pages, news, practices, redirects, type Story } from '../lib/data';
 import { url, b, textOf } from '../lib/site';
 
 export function getStaticPaths() {
-  const SPECIAL = new Set(['/woa/about/', '/woa/leadership/', '/woa/contact-us/', '/olympians/oly/', '/olympians/health/', '/noas/grants/', '/noas/noa-directory/', '/oly-house/', '/oly-house/2024/', '/oly-house/2022/', '/oly-house/2020/', '/news/', '/best-practices/']);
+  const SPECIAL = new Set(['/woa/olympism/', '/noas/noa-guide/member-engagement/', '/oly-house/a-message-from-president-joel-bouzou/2020/', '/woa/about/', '/woa/leadership/', '/woa/contact-us/', '/olympians/oly/', '/olympians/health/', '/noas/grants/', '/noas/noa-directory/', '/oly-house/', '/oly-house/2024/', '/oly-house/2022/', '/oly-house/2020/', '/news/', '/best-practices/']);
   const strip = (p: string) => p.replace(/^\/|\/$/g, '');
   const out: any[] = [];
   for (const p of pages) if (!SPECIAL.has(p.path)) out.push({ params: { slug: strip(p.path) }, props: { kind: 'page', item: p } });

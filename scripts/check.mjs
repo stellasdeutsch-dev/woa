@@ -13,7 +13,7 @@ const fileFor = (p) => path.join(RAW, (p === '/' ? 'index' : p.replace(/^\/|\/$/
 const norm = (s) => s.replace(/­/g, '').replace(/[‘’‚′]/g, "'").replace(/[“”„″]/g, '"').replace(/[–—]/g, '-').replace(/\s+/g, ' ').replace(/\s*([,.;:!?)])/g, '$1').trim().toLowerCase();
 
 const SKIP_PATH = /^\/(news|best-practices)\/(\?StartRow=\d+)?$|^\/$|^\/%E2/;
-const results = []; let total = 0, missing = 0;
+const results = []; let total = 0, missing = 0, rearranged = 0;
 const distText = new Map();
 const textOfDist = (p) => {
   if (distText.has(p)) return distText.get(p);
@@ -52,10 +52,16 @@ for (const { path: p, status } of index) {
   const miss = [];
   for (const blk of blocks) {
     total++;
+    if (page && !page.includes(blk)) {
+      // visual pages may split one paragraph (quote, year cards, do/don't pairs): accept when every fragment is present
+      const frags = blk.split(/[.;:!?“”"()]|\brather than\b|\bnot,/).map(s => s.trim()).filter(s => s.length >= 12);
+      if (frags.length && frags.every(f => page.includes(f))) { rearranged++; continue; }
+    }
     if (!page || !page.includes(blk)) { miss.push(blk); missing++; }
   }
   if (miss.length || !page) results.push({ original: p, target, exists: !!page, missing: miss });
 }
 fs.writeFileSync('data/completeness.json', JSON.stringify(results, null, 1));
-console.log(`blocks checked: ${total}, missing: ${missing}, pages with gaps: ${results.length}`);
+console.log(`blocks checked: ${total}, missing: ${missing}, split across blocks: ${rearranged}, pages with gaps: ${results.length}`);
+if (process.env.FULL) for (const r of results) for (const m of r.missing) console.log('  ', r.target, '|', m.slice(0, 160));
 for (const r of results.slice(0, 40)) console.log(`- ${r.original} -> ${r.target}${r.exists ? '' : ' (PAGE MISSING)'}: ${r.missing.length} missing` + (r.missing[0] ? ` e.g. "${r.missing[0].slice(0, 90)}"` : ''));

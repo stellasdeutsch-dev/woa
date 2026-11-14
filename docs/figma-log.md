@@ -6,6 +6,7 @@
 | Страница | id |
 |---|---|
 | Screens | 0:1 |
+| Визуал для текстовых страниц | 17:2 |
 | User Flow | 3:2 |
 | Wireframes | 3:3 |
 | Design System | 3:4 |
@@ -67,3 +68,17 @@
 
 ## Архив (3:6)
 «Screens v1 — 14.11.2026» и «Сайт как есть v1 — 14.11.2026» — первые версии, заменённые исправленными.
+
+## Визуал для текстовых страниц (17:2), 14.11.2026
+Образцы с других сайтов и три текстовые страницы до и после. Тексты дословные, поменялась подача.
+| Секция | id | Было | Стало 1440 | Стало 390 |
+|---|---|---|---|---|
+| Примеры с других сайтов (IOC, Atlassian, GOV.UK, Apple, Stripe) | 20:2 | | | |
+| Olympism | 20:20 | 18:2687 | 18:1914 | 18:1145 |
+| NOA Guide — Member Engagement | 20:26 | 18:2689 | 24:2 | 24:534 |
+| OLY House 2020 — A message from the President | 20:32 | 18:2690 | 18:1653 | 18:2379 |
+
+Код: `src/pages/woa/olympism/`, `src/pages/noas/noa-guide/member-engagement/`, `src/pages/oly-house/a-message-from-president-joel-bouzou/2020/`, блоки `.vb-*` в `src/styles/global.css`.
+
+## Иконки: стиль сайта
+Смысловые иконки: линия 1.75 плюс золотой круг (r 7.5, центр 15/15, #b6a67f, 55%) под рисунком. Служебные (стрелки, закрыть, меню, поиск, контакты, соцсети, цитата) без круга. Design System → Icons (8:100): у 29 старых добавлен слой Accent, добавлено 25 новых (quote, tip, design, channel, message, frequency, social, newsletter, website, target, heart, chat, gift, pen, clock, bell, equal, leaf, humanism, alliance, columns, torch, snow, letter, email).
