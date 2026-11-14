@@ -11,6 +11,8 @@ const L = SX.OLYMPIANS;
 import { url, b, srcset, phColor, words } from '../../../lib/site';
 const s = SX.SECTIONS.find(x => x.key === 'olympians')!;
 const rows = [L.email, L.life, L.skills];
+// the first sentence of each page's opening paragraph (the full text is on the page itself)
+const firstSentence = (t: string) => (t.match(/^.+?[.!?](?=\s+[A-ZÀ-ÖØ-Þ¿¡«“"]|$)/) || [t])[0];
 ---
 <Base title={s.title} image={b(s.img)} description={s.lead}>
   <SectionHero s={s} />
@@ -28,19 +30,22 @@ const rows = [L.email, L.life, L.skills];
     </div>
   </section>
 
-  {rows.map((r, i) => (
-    <section class:list={['section', { 'bg-grey': i % 2 === 1 }]}>
-      <div class:list={['container', 'ld-row', { rev: i % 2 === 1 }]}>
-        <figure class="ld-media"><img src={b(r.img)} srcset={srcset(r.img)} style={phColor(r.img)} sizes="(min-width: 1024px) 55vw, 100vw" alt="" loading="lazy" /></figure>
-        <div class="ld-copy">
-          <h2>{r.title}</h2>
-          {'head' in r && <p class="lead"><strong>{(r as any).head}</strong></p>}
-          <p class="lead">{r.text}</p>
-          <a class="btn" href={url(r.href)}>{r.title}<svg class="icon icon-arrow"><use href="#i-arrow" /></svg></a>
-        </div>
-      </div>
-    </section>
-  ))}
+  <section class="section bg-grey">
+    <div class="container">
+      <ul class="ld-offers">
+        {rows.map(r => (
+          <li><a class="ld-offer" href={url(r.href)}>
+            <span class="ld-offer-photo"><img src={b(r.img)} srcset={srcset(r.img)} style={phColor(r.img)} sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" alt="" loading="lazy" /></span>
+            <span class="ld-offer-body">
+              <strong class="ld-offer-title">{r.title}</strong>
+              <span class="ld-offer-text">{'head' in r ? (r as any).head : firstSentence(r.text)}</span>
+              <svg class="icon ld-offer-arrow"><use href="#i-arrow" /></svg>
+            </span>
+          </a></li>
+        ))}
+      </ul>
+    </div>
+  </section>
 
   <section class="section bg-dark">
     <div class="container">

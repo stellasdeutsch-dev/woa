@@ -1,15 +1,21 @@
 ---
+// Documents as cards; PDFs get the first page as a cover after the build (scripts/doc-covers-html.mjs)
 import { b } from '../lib/site';
 interface Props { items: { label: string; href: string }[]; title?: string }
 const { items, title } = Astro.props;
+const ext = (h: string) => (h.match(/\.([a-z0-9]+)(\?|$)/i)?.[1] || '').toUpperCase();
 ---
 {items.length > 0 && (
-  <div class="panel">
+  <div class="docs-box">
     {title && <h2>{title}</h2>}
-    <ul class="docs">
+    <ul class="vb-docs one-col">
       {items.map(d => (
-        <li><a class="doc-row" href={b(d.href)} target="_blank" rel="noopener"><svg class="icon icon-doc"><use href="#i-doc" /></svg><span>{d.label}</span><svg class="icon icon-download"><use href="#i-download" /></svg></a></li>
+        <li><a class="vb-doc" href={b(d.href)} target="_blank" rel="noopener"><span class="vb-ico"><svg class="icon"><use href="#i-doc" /></svg></span><span class="vb-doc-name">{d.label}{ext(d.href) && <span class="vb-doc-type">{ext(d.href)}</span>}</span><svg class="icon"><use href="#i-download" /></svg></a></li>
       ))}
     </ul>
   </div>
 )}
+<style>
+  .docs-box h2 { font-size: var(--fs-h4); margin-bottom: var(--sp-3); }
+  .vb-docs.one-col { grid-template-columns: minmax(0, 1fr) !important; }
+</style>

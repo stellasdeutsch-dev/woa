@@ -8,7 +8,7 @@ export function getStaticPaths() { return LANG_PARAMS; }
 const lang = pageLang(Astro.params);
 const SX = sections(lang);
 const L = SX.WOA;
-import { url, b, srcset, phColor, words, EMAIL, imgOk } from '../../../lib/site';
+import { url, b, srcset, phColor, words, words2, EMAIL, imgOk } from '../../../lib/site';
 const s = SX.SECTIONS.find(x => x.key === 'woa')!;
 ---
 <Base title={s.title} image={b(s.img)} description={s.lead}>
@@ -16,7 +16,7 @@ const s = SX.SECTIONS.find(x => x.key === 'woa')!;
 
   <section class="section ld-statement-wrap">
     <div class="container">
-      <p class="ld-statement scrub" set:html={words(L.about.text)} />
+      <p class="ld-statement scrub" set:html={words2(L.about.text)} />
     </div>
   </section>
 

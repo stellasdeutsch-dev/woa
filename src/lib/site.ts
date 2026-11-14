@@ -150,7 +150,11 @@ export const LOGO = `${BASE}/_img/logo-144.png`;
 
 // Split a sentence into word spans for the scroll "light up" effect (text stays one readable line for screen readers).
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-export const words = (s: string) => s.split(/\s+/).filter(Boolean).map(w => `<span class="w">${esc(w)}</span>`).join(' ');
+// numbers written with a space between thousands ("100 000") stay one word
+const glue = (s: string) => s.replace(/(\d)[ \u00a0\u202f](?=\d{3}(?!\d))/g, '$1\u00a0');
+export const words = (s: string) => glue(s).split(/[ \t\n\r]+/).filter(Boolean).map(w => `<span class="w">${esc(w)}</span>`).join(' ');
+// same, but words after the first sentence are marked as the quieter second tone
+export const words2 = (s: string) => { const m = s.match(/^(.+?[.!?])\s+(.+)$/s); if (!m) return words(s); return words(m[1]) + ' ' + glue(m[2]).split(/[ \t\n\r]+/).filter(Boolean).map(w => `<span class="w w2">${esc(w)}</span>`).join(' '); };
 
 // Menu in a given language: labels as on olympians.org, links with the language prefix
 import { type Lang, L as Lp, navLabel as navL } from './i18n';

@@ -19,7 +19,7 @@ const via = h(ps.eq(1));
 const amounts = $.root().children('ul').first().children('li').map((_, li) => $(li).text().trim()).get();
 const apply = h(ps.eq(2));
 const cats = $.root().children('ul').eq(1).children('li').map((_, li) => ({ title: $(li).find('h4').first().text().trim(), html: $(li).find('h4').first().nextAll().toArray().map(h).join('') })).get();
-const datesTitle = $('h3').filter((_, x) => /Important Dates/.test($(x).text())).first().text().trim();
+const datesTitle = $('table').first().prevAll('h3').first().text().trim();
 const dates = $('table tr').map((_, tr) => ({ when: $(tr).find('td').eq(0).text().replace(/\s+/g, ' ').trim(), what: $(tr).find('td').eq(1).text().replace(/\s+/g, ' ').trim() })).get();
 // eligibility + criteria: everything after the table
 const tail = $('table').first().nextAll().toArray().map(h).join('');

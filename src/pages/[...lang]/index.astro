@@ -2,7 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import StoryCard from '../../components/StoryCard.astro';
 import { dataFor } from '../../lib/data';
-import { url, b, srcset, phColor, words } from '../../lib/site';
+import { url, b, srcset, phColor, words, imgOk } from '../../lib/site';
 import { sections } from '../../lib/sections';
 import { LANG_PARAMS, pageLang, t, L, navLabel, fmtDateL, fmtNum } from '../../lib/i18n';
 export function getStaticPaths() { return LANG_PARAMS; }
@@ -17,6 +17,15 @@ const doors = ['olympians', 'noas', 'woa'].map(k => SX.SECTIONS.find(s => s.key 
 const more = latest.slice(0, 3);
 const OLY = SX.OLYMPIANS.oly;
 const newsLabel = navLabel('/news/', 'News', lang);
+const ticker = D.news.slice(0, 3);
+// ways to take part: links and their labels as they already appear on the site
+const SUBMIT = { en: 'To submit a best practice, click here', fr: 'Pour soumettre une bonne pratique, cliquez ici', es: 'Para enviar una buena práctica, haz click aquí' }[lang];
+const ACTIONS = [
+  { href: '/olympians/oly/', icon: 'oly', label: OLY.title, tone: 'gold' },
+  { href: '/noas/noa-directory/', icon: 'directory', label: navLabel('/noas/noa-directory/', 'NOA Directory', lang), tone: 'black' },
+  { href: '/noas/grants/', icon: 'grant', label: navLabel('/noas/grants/', 'Grants', lang), tone: 'ink' },
+  { href: '/best-practices/submissions/', icon: 'practice', label: SUBMIT, tone: 'light' },
+];
 ---
 <Base title={tr.org} type="Page">
   <!-- 1. Opening: one sentence, full screen -->
@@ -30,7 +39,19 @@ const newsLabel = navLabel('/news/', 'News', lang);
         <a class="btn btn-outline btn-lg" href={loc('/woa/')}>WOA<svg class="icon icon-arrow"><use href="#i-arrow" /></svg></a>
       </div>
     </div>
-    <a class="home-scroll" href="#numbers" aria-label={tr.scroll}><svg class="icon"><use href="#i-chevron" /></svg></a>
+    <nav class="home-ticker" aria-label={newsLabel}>
+      <div class="container ticker-row">
+        <a class="ticker-head" href={loc('/news/')}><svg class="icon"><use href="#i-news" /></svg>{newsLabel}<svg class="icon icon-arrow"><use href="#i-arrow" /></svg></a>
+        <ul class="ticker-list">
+          {ticker.map(n => (
+            <li><a href={url(n.path)}>
+              {imgOk(n.img) && <img src={b(n.img)} srcset={srcset(n.img)} style={phColor(n.img)} sizes="72px" alt="" loading="lazy" width="72" height="72" />}
+              <span><time datetime={n.date}>{fmtDateL(n.date, lang)}</time><strong>{n.title}</strong></span>
+            </a></li>
+          ))}
+        </ul>
+      </div>
+    </nav>
   </section>
 
   <!-- 2. Numbers -->
@@ -81,20 +102,12 @@ const newsLabel = navLabel('/news/', 'News', lang);
     </div>
   </section>
 
-  <!-- 6. News: one big story and three more -->
-  <section class="section">
+  <!-- 6. Ways to take part -->
+  <section class="section-tight">
     <div class="container">
-      <div class="section-head"><h2>{newsLabel}</h2><a class="link-arrow" href={loc('/news/')}>{newsLabel}<svg class="icon"><use href="#i-arrow" /></svg></a></div>
-      <a class="news-lead" href={url(lead.path)}>
-        <span class="news-lead-photo"><img src={b(lead.img)} srcset={srcset(lead.img)} style={phColor(lead.img)} sizes="(min-width: 1024px) 60vw, 100vw" alt="" loading="lazy" /></span>
-        <span class="news-lead-body">
-          <span class="news-date"><svg class="icon icon-sm"><use href="#i-calendar" /></svg>{fmtDateL(lead.date, lang)}</span>
-          <strong class="news-lead-title">{lead.title}</strong>
-          <span class="news-lead-text">{lead.excerpt}</span>
-          <span class="link-arrow">{tr.readMore}<svg class="icon"><use href="#i-arrow" /></svg></span>
-        </span>
-      </a>
-      <div class="grid grid-3 news-more">{more.map(n => <StoryCard item={n} />)}</div>
+      <ul class="home-actions">
+        {ACTIONS.map(x => <li><a class={`act act-${x.tone}`} href={loc(x.href)}><svg class="icon act-icon"><use href={`#i-${x.icon}`} /></svg><span class="act-label">{x.label}</span><svg class="icon act-arrow"><use href="#i-arrow" /></svg></a></li>)}
+      </ul>
     </div>
   </section>
 
@@ -118,6 +131,46 @@ const newsLabel = navLabel('/news/', 'News', lang);
   .home-open-inner { padding-block: 120px clamp(72px, 10vh, 128px); display: grid; gap: var(--sp-5); }
   .home-open-title { font-size: clamp(2.5rem, 1rem + 4.2vw, 5.5rem); line-height: 1.02; letter-spacing: -0.035em; max-width: 17ch; }
   .home-open-lead { max-width: 44ch; font-size: var(--fs-lead); line-height: 1.45; color: #f0f0f0; }
+  .home-open { flex-direction: column; justify-content: flex-end; align-items: stretch; }
+  .home-open-inner { padding-bottom: var(--sp-7) !important; }
+  .home-ticker { position: relative; background: rgba(0, 0, 0, .62); border-top: 1px solid rgba(255, 255, 255, .18); }
+  .ticker-row { display: grid; gap: var(--sp-4) var(--sp-6); grid-template-columns: minmax(0, 1fr); align-items: center; padding-block: var(--sp-5); }
+  @media (min-width: 1024px) { .ticker-row { grid-template-columns: auto minmax(0, 1fr); } }
+  .ticker-head { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; color: var(--c-gold); transition: color var(--t); }
+  .ticker-head:hover { color: var(--c-white); }
+  .ticker-head:hover .icon-arrow { transform: translateX(4px); }
+  .ticker-head .icon-arrow { transition: transform var(--t); }
+  .ticker-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-4); grid-template-columns: minmax(0, 1fr); }
+  @media (min-width: 834px) { .ticker-list { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--sp-5); } }
+  @media (max-width: 833px) { .ticker-list li:nth-child(n+2) { display: none; } }
+  .ticker-list a { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: var(--sp-3); align-items: center; color: var(--c-white); }
+  .ticker-list img { width: 72px; height: 72px; object-fit: cover; border-radius: var(--radius); }
+  .ticker-list span { display: grid; gap: 4px; }
+  .ticker-list time { font-size: var(--fs-xs); color: #cfcfcf; }
+  .ticker-list strong { font-size: var(--fs-small); line-height: 1.35; transition: color var(--t); }
+  .ticker-list a:hover strong { color: var(--c-gold); }
+  .home-actions { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-4); grid-template-columns: minmax(0, 1fr); }
+  @media (min-width: 640px) { .home-actions { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 1200px) { .home-actions { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .home-actions li { display: grid; }
+  .act { display: grid; grid-template-rows: auto 1fr auto; gap: var(--sp-5); min-height: 240px; padding: var(--sp-6); border-radius: var(--radius-lg); transition: transform var(--t), background var(--t), color var(--t); }
+  .act-icon { width: 48px; height: 48px; }
+  .act-label { align-self: end; font-size: var(--fs-h3); font-weight: 700; line-height: 1.2; letter-spacing: -0.01em; }
+  .act-arrow { width: 28px; height: 28px; transition: transform var(--t); }
+  .act:hover { transform: translateY(-4px); }
+  .act:hover .act-arrow { transform: translateX(6px); }
+  .act-gold { background: var(--c-gold); color: var(--c-black); }
+  .act-black { background: var(--c-black); color: var(--c-white); }
+  .act-black .act-icon { color: var(--c-gold); }
+  .act-ink { background: var(--c-ink); color: var(--c-white); }
+  .act-ink .act-icon { color: var(--c-gold); }
+  .act-light { background: var(--c-white); color: var(--c-black); box-shadow: inset 0 0 0 1.5px var(--c-black); }
+  .act-gold:hover { background: var(--c-black); color: var(--c-gold); }
+  .act-black:hover, .act-ink:hover { background: var(--c-gold); color: var(--c-black); }
+  .act-black:hover .act-icon, .act-ink:hover .act-icon { color: var(--c-black); }
+  .act-light:hover { background: var(--c-black); color: var(--c-white); }
+  @media (max-width: 639px) { .act { min-height: 0; grid-template-rows: none; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: var(--sp-4); padding: var(--sp-5); } .act-icon { width: 36px; height: 36px; } .act-label { align-self: center; font-size: var(--fs-h4); } }
+  @media (prefers-reduced-motion: reduce) { .act:hover, .act:hover .act-arrow, .ticker-head:hover .icon-arrow { transform: none; } }
   .home-scroll { position: absolute; left: 50%; bottom: 20px; translate: -50% 0; display: grid; place-items: center; width: 48px; height: 48px; border: 1px solid rgba(255, 255, 255, .5); border-radius: 50%; color: var(--c-white); transition: background var(--t), color var(--t); }
   .home-scroll:hover { background: var(--c-white); color: var(--c-black); }
   .stats-band { padding-block: clamp(96px, 60px + 8vw, 200px); }

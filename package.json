@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "astro dev",
-    "build": "node scripts/resize-images.mjs && astro build && pagefind --site dist --glob \"**/*.html\"",
+    "build": "node scripts/resize-images.mjs && astro build && node scripts/doc-covers-html.mjs && pagefind --site dist --glob \"**/*.html\"",
     "preview": "astro preview",
     "extract": "node scripts/extract.mjs",
     "check": "node scripts/check.mjs"

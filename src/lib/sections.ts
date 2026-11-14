@@ -58,7 +58,10 @@ function build(lang: Lang) {
     const $ = load('/noas/grants/');
     // "NOA Development – $1,000USD grants per annum" / "Développement des ANO : subventions de 1 000 USD par an"
     const items = $('ul').first().find('li').map((_, li) => { const s = T($(li).text()); const m = s.match(/^(.*?)\s+[–:-]\s+(.*)$/) || s.match(/^(.*?):\s*(.*)$/); return m ? { label: m[1], amount: m[2] } : { label: '', amount: s }; }).get();
-    return { aim: T($('p').first().text()), items };
+    // "Important Dates" table: the heading right before it and its rows (date, what happens)
+    const table = $('table').first();
+    const dates = { title: T(table.prevAll('h3').first().text()), items: table.find('tr').map((_, tr) => ({ when: T($(tr).find('td').eq(0).text()), what: T($(tr).find('td').eq(1).text()) })).get().filter(x => x.when && x.what) };
+    return { aim: T($('p').first().text()), items, dates };
   })();
   // the three numbers written in the health study text (3000 Olympians, 131 countries, 57 sports)
   const HEALTH_RX: Record<Lang, RegExp> = {
@@ -90,7 +93,7 @@ function build(lang: Lang) {
   const NOAS = {
     guide: { title: nav('/noas/noa-guide/', 'NOA Guide'), href: loc('/noas/noa-guide/'), text: guideP, chapters: D.page('/noas/noa-guide/').tabs.slice(1).map((t, i) => ({ label: t.label, href: t.href.replace('{{BASE}}', ''), key: dataFor('en').page('/noas/noa-guide/').tabs[i + 1]?.label ?? '' })), img: '{{BASE}}/backgrounds/61.webp' },
     directory: { title: nav('/noas/noa-directory/', 'NOA Directory'), href: loc('/noas/noa-directory/'), flags: D.noas.filter(n => n.flag).map(n => ({ flag: n.flag as string, country: n.country as string, code: (n.code as string).toLowerCase() })) },
-    grants: { title: nav('/noas/grants/', 'Grants'), href: loc('/noas/grants/'), text: grants.aim, items: grants.items, img: '{{BASE}}/backgrounds/46.webp' },
+    grants: { title: nav('/noas/grants/', 'Grants'), href: loc('/noas/grants/'), text: grants.aim, items: grants.items, dates: grants.dates, img: '{{BASE}}/backgrounds/46.webp' },
     practices: { title: nav('/best-practices/', 'Best Practices'), href: loc('/best-practices/'), items: D.practices.slice(0, 3) },
   };
   // "There are over 100,000 living Olympians throughout the world." -> number + the words after it, up to the end of the sentence
