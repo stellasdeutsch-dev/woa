@@ -1,4 +1,5 @@
 import * as cheerio from 'cheerio';
+import fs from 'node:fs';
 
 export const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
 export const url = (p: string) => (/^(https?:|mailto:|tel:|#)/.test(p) ? p : BASE + (p.startsWith('/') ? p : '/' + p));
@@ -112,3 +113,11 @@ export function prose(html: string, opts: { toc?: boolean } = {}): { html: strin
 }
 
 export const textOf = (html: string) => cheerio.load(html).text().replace(/\s+/g, ' ').trim();
+
+// Some files on olympians.org are missing (the server answers with an error page); skip those images.
+export const imgOk = (src?: string | null) => {
+  if (!src) return false;
+  const p = src.replace('{{BASE}}', '').replace(BASE, '');
+  if (/^https?:/.test(p)) return true;
+  try { return fs.statSync('public' + decodeURI(p)).size > 0; } catch { return false; }
+};

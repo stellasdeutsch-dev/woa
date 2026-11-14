@@ -2,7 +2,7 @@
 import Base from '../../../layouts/Base.astro';
 import PageHero from '../../../components/PageHero.astro';
 import { page, leadership } from '../../../lib/data';
-import { b, prose } from '../../../lib/site';
+import { b, prose, imgOk } from '../../../lib/site';
 
 const p = page('/woa/leadership/');
 const split = (n: string) => n.replace(/\s+OLY$/, '');
@@ -24,7 +24,7 @@ const hasOly = (n: string) => /\sOLY$/.test(n);
         {leadership.people.map((x, i) => (
           <li class="person card">
             <button class="person-btn" type="button" data-person={i} aria-haspopup="dialog">
-              <span class="card-media"><img src={b(x.img)} alt="" loading="lazy" /></span>
+              <span class="card-media">{imgOk(x.img) ? <img src={b(x.img)} alt="" loading="lazy" /> : <span class="media-ph"><svg class="icon icon-xl"><use href="#i-user" /></svg></span>}</span>
               <span class="card-body">
                 <span class="card-title">{split(x.name)}{hasOly(x.name) && <small> OLY</small>}</span>
                 <span class="card-meta">{x.meta}</span>
@@ -33,7 +33,7 @@ const hasOly = (n: string) => /\sOLY$/.test(n);
             </button>
             <dialog class="person-dlg" id={`person-${i}`} aria-label={x.name}>
               <div class="pd-head">
-                <img src={b(x.img)} alt="" loading="lazy" />
+                {imgOk(x.img) ? <img src={b(x.img)} alt="" loading="lazy" /> : <span class="media-ph pd-ph"><svg class="icon icon-lg"><use href="#i-user" /></svg></span>}
                 <div>
                   <h3>{split(x.name)}{hasOly(x.name) && <small> OLY</small>}</h3>
                   <p class="card-meta">{x.meta}</p>
@@ -76,6 +76,7 @@ const hasOly = (n: string) => /\sOLY$/.test(n);
   .person-dlg { width: min(820px, calc(100% - 24px)); max-height: 88vh; padding: 0; border: 0; border-radius: var(--radius-lg); box-shadow: 0 24px 64px rgba(0, 0, 0, .3); }
   .person-dlg::backdrop { background: rgba(0, 0, 0, .55); }
   .pd-head { position: sticky; top: 0; display: grid; grid-template-columns: 96px minmax(0, 1fr) auto; gap: var(--sp-5); align-items: center; padding: var(--sp-5); background: var(--c-white); border-bottom: 1px solid var(--c-grey-200); }
+  .pd-ph { width: 96px; height: 96px; border-radius: 50%; }
   .pd-head img { width: 96px; height: 96px; object-fit: cover; border-radius: 50%; }
   .pd-head h3 { font-size: var(--fs-h3); }
   .pd-close { align-self: start; }

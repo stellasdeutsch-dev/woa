@@ -1,11 +1,11 @@
 ---
-import { b, fmtDate } from '../lib/site';
+import { b, fmtDate, imgOk } from '../lib/site';
 interface Props { item: { path: string; title: string; date?: string | null; img?: string | null; excerpt?: string }; size?: 'lg' | 'md'; showExcerpt?: boolean; headingLevel?: 'h2' | 'h3' }
 const { item, size = 'md', showExcerpt = true, headingLevel = 'h3' } = Astro.props;
 const H = headingLevel;
 ---
 <article class:list={['card', 'story', `story-${size}`]}>
-  <div class="card-media">{item.img && <img src={b(item.img)} alt="" loading="lazy" decoding="async" />}</div>
+  <div class="card-media">{imgOk(item.img) ? <img src={b(item.img)} alt="" loading="lazy" decoding="async" /> : <span class="media-ph"><img src={b('{{BASE}}/images/world-olympians-association-logo-v2.png')} alt="" loading="lazy" /></span>}</div>
   <div class="card-body">
     {item.date && <p class="card-meta"><svg class="icon"><use href="#i-calendar" /></svg><time datetime={item.date}>{fmtDate(item.date)}</time></p>}
     <H class="card-title"><a class="card-link" href={b('{{BASE}}' + item.path)}>{item.title}</a></H>

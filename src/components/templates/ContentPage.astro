@@ -14,8 +14,10 @@ const sideText = page.side.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
 const docText = downloads.map(d => d.label).join(' ').replace(/\s+/g, ' ').trim();
 const sideRich = sideText.length > 0 && (page.downloads.some(d => !isDoc(d.href)) || sideText.length > docText.length + 2);
 const side = sideRich ? prose(page.side, { toc: false }).html : '';
+// long help text from the side column reads better as its own block under the content
+const sideBelow = sideRich && sideText.length > 600;
 const showToc = toc.length >= 3;
-const hasAside = downloads.length > 0 || showToc || sideRich;
+const hasAside = downloads.length > 0 || showToc || (sideRich && !sideBelow);
 const current = BASE + page.path;
 ---
 <PageHero title={page.title} crumbs={crumbsFor(page)} bg={b(page.bg)} />
@@ -26,8 +28,8 @@ const current = BASE + page.path;
     {hasAside && (
       <aside class="aside">
         <div class:list={['aside', { 'aside-sticky': !sideRich }]}>
-          {!sideRich && <Docs items={downloads} />}
-          {sideRich && <div class="panel prose side-prose" set:html={side} />}
+          {(!sideRich || sideBelow) && <Docs items={downloads} />}
+          {sideRich && !sideBelow && <div class="panel prose side-prose" set:html={side} />}
           {showToc && (
             <nav class="panel toc" aria-label="On this page">
               <ol>{toc.map(t => <li><a href={`#${t.id}`}>{t.text}</a></li>)}</ol>
@@ -38,3 +40,8 @@ const current = BASE + page.path;
     )}
   </div>
 </section>
+{sideBelow && (
+  <section class="section-tight bg-grey">
+    <div class="container"><div class="prose side-below" set:html={side} /></div>
+  </section>
+)}

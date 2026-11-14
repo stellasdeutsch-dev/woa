@@ -1,12 +1,12 @@
 ---
 import StoryCard from '../StoryCard.astro';
-import { prose, b, fmtDate, url, ORIGIN } from '../../lib/site';
+import { prose, b, fmtDate, url, ORIGIN, imgOk } from '../../lib/site';
 import { crumbsFor, type Story } from '../../lib/data';
 interface Props { story: Story; related: Story[]; kind: 'News' | 'Best Practice'; listHref: string; prev?: Story; next?: Story }
 const { story, related, kind, listHref, prev, next } = Astro.props;
 let { html } = prose(story.body, { toc: false });
 // the lead image is shown above; drop an identical trailing copy
-const img = b(story.img);
+const img = imgOk(story.img) ? b(story.img) : '';
 const shareUrl = encodeURIComponent(new URL(url(story.path), Astro.site).href);
 const shareText = encodeURIComponent(story.title);
 const crumbs = crumbsFor(story);
