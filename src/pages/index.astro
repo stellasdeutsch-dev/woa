@@ -3,7 +3,8 @@ import * as cheerio from 'cheerio';
 import Base from '../layouts/Base.astro';
 import StoryCard from '../components/StoryCard.astro';
 import { news, practices, page, noas } from '../lib/data';
-import { url, b, fmtDate, srcset } from '../lib/site';
+import { url, b, fmtDate, srcset, words } from '../lib/site';
+import { SECTIONS, MISSION } from '../lib/sections';
 
 // All copy below is taken verbatim from olympians.org pages.
 const $ = (html: string) => cheerio.load(html);
@@ -16,9 +17,7 @@ const olyPs = oly('p').map((_, p) => oly(p).text().replace(/\s+/g, ' ').trim()).
 const email = $(page('/olympians/olympian-org-email/').body);
 const emailTitle = email('h2').first().text().trim();
 const health = $(page('/olympians/health/').body);
-const healthP = health('p').first().text().trim();
 const life = $(page('/olympians/olympians-for-life/').body);
-const lifeP = life('p').first().text().trim();
 const grants = $(page('/noas/grants/').body);
 const grantItems = grants('ul').first().find('li').map((_, li) => grants(li).text().trim()).get();
 const grantAim = grants('p').first().text().trim();
@@ -32,36 +31,27 @@ const skillsP = skills('h4:contains("Advance Your Career Prospects")').next('p')
 const stat1 = aboutLead.match(/over ([\d,]+) living Olympians/);
 const stat2 = aboutPs[0]?.match(/There are (\d+) National Olympians Associations \(NOAs\) spread across all five continents/);
 const [lead, ...latest] = news;
-const flags = noas.filter(n => n.flag).slice(0, 999);
+const [heroLine, heroRest] = (() => { const m = aboutLead.match(/^(.*?\.)\s+(.*)$/); return m ? [m[1], m[2]] : [aboutLead, '']; })();
+const doors = ['olympians', 'noas', 'woa'].map(k => SECTIONS.find(s => s.key === k)!);
+const more = latest.slice(0, 3);
 ---
 <Base title="World Olympians Association" type="Page">
-  <!-- Lead story -->
-  <section class="hero home-hero">
-    <div class="hero-bg"><img src={b(lead.img)} srcset={srcset(lead.img)} sizes="100vw" alt="" fetchpriority="high" /></div>
-    <div class="container hero-inner home-hero-inner">
-      <p class="hero-date"><svg class="icon icon-sm"><use href="#i-calendar" /></svg>{fmtDate(lead.date)}</p>
-      <h1><a href={url(lead.path)}>{lead.title}</a></h1>
-      <p class="lead">{lead.excerpt}</p>
+  <!-- 1. Opening: one sentence, full screen -->
+  <section class="hero home-open">
+    <div class="hero-bg"><img src={b('{{BASE}}/backgrounds/47.webp')} srcset={srcset('{{BASE}}/backgrounds/47.webp')} sizes="100vw" alt="" fetchpriority="high" /></div>
+    <div class="container home-open-inner">
+      <h1 class="home-open-title" set:html={words(heroLine)} />
+      {heroRest && <p class="home-open-lead">{heroRest}</p>}
       <div class="hero-actions">
-        <a class="btn btn-gold" href={url(lead.path)}>Read More<svg class="icon icon-arrow"><use href="#i-arrow" /></svg></a>
-        <a class="btn btn-outline" href={url('/news/')}><svg class="icon"><use href="#i-news" /></svg>News</a>
+        <a class="btn btn-gold btn-lg" href={url('/olympians/oly/')}><svg class="icon"><use href="#i-oly" /></svg>Register for OLY</a>
+        <a class="btn btn-outline btn-lg" href={url('/woa/')}>WOA<svg class="icon icon-arrow"><use href="#i-arrow" /></svg></a>
       </div>
     </div>
+    <a class="home-scroll" href="#numbers" aria-label="Scroll"><svg class="icon"><use href="#i-chevron" /></svg></a>
   </section>
 
-  <!-- Who we are -->
-  <section class="section">
-    <div class="container intro">
-      <div class="intro-text">
-        <h2 class="intro-title">{aboutLead}</h2>
-        <p class="lead muted">{mission}</p>
-        <a class="link-arrow" href={url('/woa/about/')}>About<svg class="icon"><use href="#i-arrow" /></svg></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- One screen, two numbers -->
-  <section class="section bg-grey stats-band">
+  <!-- 2. Numbers -->
+  <section class="section bg-dark stats-band" id="numbers">
     <div class="container">
       <dl class="big-stats">
         {stat1 && <div><dt class="big-num" data-count={stat1[1].replace(/,/g, '')} data-suffix="+">{stat1[1]}+</dt><dd>living Olympians throughout the world</dd></div>}
@@ -70,131 +60,119 @@ const flags = noas.filter(n => n.flag).slice(0, 999);
     </div>
   </section>
 
-  <!-- Olympians -->
-  <section class="section bg-dark">
+  <!-- 3. Mission, lighting up word by word while scrolling -->
+  <section class="section home-mission">
     <div class="container">
-      <div class="section-head"><h2>Olympians</h2></div>
-      <div class="oly-feature">
-        <div class="oly-media"><img src={url('/images/oly_1.jpg')} alt="" loading="lazy" /></div>
-        <div class="oly-copy">
-          <h3>Register for OLY</h3>
-          <p class="lead">{olyPs[1]}</p>
-          <p class="muted-light">{olyPs[2]}</p>
-          <div class="hero-actions"><a class="btn btn-gold" href={url('/olympians/oly/')}><svg class="icon"><use href="#i-oly" /></svg>Register for OLY</a></div>
-        </div>
-      </div>
-      <div class="grid grid-4 topic-grid">
-        <a class="card topic-card" href={url('/olympians/olympian-org-email/')}><div class="card-body"><span class="topic-icon"><svg class="icon icon-lg"><use href="#i-at" /></svg></span><h3 class="card-title">Olympian.org Email</h3><p class="card-text">{emailTitle}</p><span class="card-foot"><svg class="icon"><use href="#i-arrow" /></svg></span></div></a>
-        <a class="card topic-card" href={url('/olympians/health/')}><div class="card-body"><span class="topic-icon"><svg class="icon icon-lg"><use href="#i-health" /></svg></span><h3 class="card-title">Health</h3><p class="card-text">{healthP}</p><span class="card-foot"><svg class="icon"><use href="#i-arrow" /></svg></span></div></a>
-        <a class="card topic-card" href={url('/olympians/olympians-for-life/')}><div class="card-body"><span class="topic-icon"><svg class="icon icon-lg"><use href="#i-life" /></svg></span><h3 class="card-title">Olympians for Life</h3><p class="card-text">{lifeP}</p><span class="card-foot"><svg class="icon"><use href="#i-arrow" /></svg></span></div></a>
-        <a class="card topic-card" href={url('/skillsbuild/')}><div class="card-body"><span class="topic-icon"><svg class="icon icon-lg"><use href="#i-skills" /></svg></span><h3 class="card-title">{skillsTitle}</h3><p class="card-text">{skillsP}</p><span class="card-foot"><svg class="icon"><use href="#i-arrow" /></svg></span></div></a>
+      <p class="ld-statement scrub" set:html={words(MISSION)} />
+      <a class="link-arrow" href={url('/woa/about/mission/')}>Mission<svg class="icon"><use href="#i-arrow" /></svg></a>
+    </div>
+  </section>
+
+  <!-- 4. Three doors -->
+  <section class="section-tight home-doors-wrap">
+    <div class="container">
+      <ul class="home-doors">
+        {doors.map(d => (
+          <li><a class="door" href={url(d.href)}>
+            <span class="door-photo"><img src={b(d.img)} srcset={srcset(d.img)} sizes="(min-width: 1024px) 33vw, 100vw" alt="" loading="lazy" /></span>
+            <span class="door-body">
+              <strong class="door-title">{d.title}<svg class="icon"><use href="#i-arrow" /></svg></strong>
+              <span class="door-lead">{d.lead}</span>
+              <span class="door-links">{d.children.slice(0, 4).map(c => <span>{c.label}</span>)}</span>
+            </span>
+          </a></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 5. OLY -->
+  <section class="section bg-dark ld-oly">
+    <div class="container ld-oly-inner">
+      <figure class="ld-oly-mark"><img src={b('{{BASE}}/backgrounds/94.webp')} alt="Be OLY" loading="lazy" /></figure>
+      <div class="ld-copy">
+        <h2>Register for OLY</h2>
+        <p class="ld-statement-sm scrub" set:html={words(olyPs[1])} />
+        <p class="muted-light">{olyPs[2]}</p>
+        <a class="btn btn-gold" href={url('/olympians/oly/')}><svg class="icon"><use href="#i-oly" /></svg>Register for OLY</a>
       </div>
     </div>
   </section>
 
-  <!-- NOAs -->
+  <!-- 6. News: one big story and three more -->
   <section class="section">
-    <div class="container">
-      <div class="section-head"><h2>NOAs</h2><a class="link-arrow" href={url('/noas/noa-directory/')}>NOA Directory<svg class="icon"><use href="#i-arrow" /></svg></a></div>
-      <div class="noa-grid">
-        <a class="card topic-card noa-dir" href={url('/noas/noa-directory/')}>
-          <div class="card-body">
-            <span class="topic-icon"><svg class="icon icon-lg"><use href="#i-directory" /></svg></span>
-            <h3 class="card-title">NOA Directory</h3>
-            <ul class="flag-wall" aria-hidden="true">{flags.slice(0, 40).map(n => <li><img src={b(n.flag)} alt="" loading="lazy" width="36" height="27" /></li>)}</ul>
-            <span class="card-foot"><svg class="icon"><use href="#i-arrow" /></svg></span>
-          </div>
-        </a>
-        <a class="card topic-card" href={url('/noas/noa-guide/')}><div class="card-body"><span class="topic-icon"><svg class="icon icon-lg"><use href="#i-guide" /></svg></span><h3 class="card-title">NOA Guide</h3><p class="card-text">{guideP}</p><span class="card-foot"><svg class="icon"><use href="#i-arrow" /></svg></span></div></a>
-        <a class="card topic-card grants-card" href={url('/noas/grants/')}>
-          <div class="card-body">
-            <span class="topic-icon"><svg class="icon icon-lg"><use href="#i-grant" /></svg></span>
-            <h3 class="card-title">Grants</h3>
-            <p class="card-text">{grantAim}</p>
-            <ul class="grant-list">{grantItems.map(g => { const m = g.match(/^(.*?)\s*[–-]\s*(.*)$/); return <li><span>{m ? m[1] : g}</span>{m && <strong class="fact">{m[2]}</strong>}</li>; })}</ul>
-            <span class="card-foot"><svg class="icon"><use href="#i-arrow" /></svg></span>
-          </div>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- News -->
-  <section class="section bg-grey">
     <div class="container">
       <div class="section-head"><h2>News</h2><a class="link-arrow" href={url('/news/')}>News<svg class="icon"><use href="#i-arrow" /></svg></a></div>
-      <div class="grid grid-3">{latest.slice(0, 3).map(n => <StoryCard item={n} />)}</div>
-    </div>
-  </section>
-
-  <!-- OLY House -->
-  <section class="section">
-    <div class="container">
-      <a class="house-banner" href={url('/oly-house/')}>
-        <div class="house-logo"><img src={url('/images/logo-milano-cortina-2026.svg')} alt="Milano Cortina 2026" loading="lazy" /></div>
-        <div class="house-copy">
-          <h2>OLY House</h2>
-          <p class="lead">Welcome to OLY House Milano Cortina 2026</p>
-          <p class="muted">A destination for Olympians of all ages, nations and sports during the Games</p>
-          <span class="link-arrow">OLY House<svg class="icon"><use href="#i-arrow" /></svg></span>
-        </div>
+      <a class="news-lead" href={url(lead.path)}>
+        <span class="news-lead-photo"><img src={b(lead.img)} srcset={srcset(lead.img)} sizes="(min-width: 1024px) 60vw, 100vw" alt="" loading="lazy" /></span>
+        <span class="news-lead-body">
+          <span class="news-date"><svg class="icon icon-sm"><use href="#i-calendar" /></svg>{fmtDate(lead.date)}</span>
+          <strong class="news-lead-title">{lead.title}</strong>
+          <span class="news-lead-text">{lead.excerpt}</span>
+          <span class="link-arrow">Read More<svg class="icon"><use href="#i-arrow" /></svg></span>
+        </span>
       </a>
+      <div class="grid grid-3 news-more">{more.map(n => <StoryCard item={n} />)}</div>
     </div>
   </section>
 
-  <!-- Best practices -->
-  <section class="section bg-grey">
-    <div class="container">
-      <div class="section-head"><h2>Best Practices</h2><a class="link-arrow" href={url('/best-practices/')}>Best Practices<svg class="icon"><use href="#i-arrow" /></svg></a></div>
-      <div class="grid grid-3">{practices.slice(0, 3).map(n => <StoryCard item={n} />)}</div>
+  <!-- 7. OLY House -->
+  <section class="hero ld-band home-house">
+    <div class="hero-bg"><img src={b('{{BASE}}/backgrounds/63.webp')} srcset={srcset('{{BASE}}/backgrounds/63.webp')} sizes="100vw" alt="" loading="lazy" /></div>
+    <div class="container ld-band-inner">
+      <span class="house-mark"><img src={url('/images/logo-milano-cortina-2026.svg')} alt="Milano Cortina 2026" loading="lazy" /></span>
+      <h2>OLY House</h2>
+      <p class="lead">Welcome to OLY House Milano Cortina 2026</p>
+      <p>A destination for Olympians of all ages, nations and sports during the Games</p>
+      <a class="btn btn-gold" href={url('/oly-house/')}><svg class="icon"><use href="#i-house" /></svg>OLY House</a>
     </div>
   </section>
 </Base>
 
 <style>
-  .home-hero { min-height: min(78vh, 760px); display: flex; align-items: flex-end; }
-  .home-hero-inner { padding-block: 120px 72px; }
-  .home-hero h1 { font-size: var(--fs-display); max-width: 20ch; }
-  .home-hero h1 a { transition: color var(--t); }
-  .home-hero h1 a:hover { color: var(--c-gold); }
-  .hero-date { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; color: #f0f0f0; }
-  .hero-actions { display: flex; flex-wrap: wrap; gap: var(--sp-3); margin-top: var(--sp-3); }
-  .intro { display: grid; }
-  .intro-text { max-width: 1000px; }
-  .intro-title { font-size: clamp(1.75rem, 1rem + 3.4vw, 4rem) !important; line-height: 1.12 !important; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: var(--sp-3); margin-top: var(--sp-4); }
+  .home-open { min-height: calc(100svh - var(--header-h)); display: flex; align-items: flex-end; }
+  .home-open .hero-bg::after { background: rgba(0, 0, 0, .5); }
+  .home-open-inner { padding-block: 120px clamp(72px, 10vh, 128px); display: grid; gap: var(--sp-5); }
+  .home-open-title { font-size: clamp(2.5rem, 1rem + 4.2vw, 5.5rem); line-height: 1.02; letter-spacing: -0.035em; max-width: 17ch; }
+  .home-open-lead { max-width: 44ch; font-size: var(--fs-lead); line-height: 1.45; color: #f0f0f0; }
+  .home-scroll { position: absolute; left: 50%; bottom: 20px; translate: -50% 0; display: grid; place-items: center; width: 48px; height: 48px; border: 1px solid rgba(255, 255, 255, .5); border-radius: 50%; color: var(--c-white); transition: background var(--t), color var(--t); }
+  .home-scroll:hover { background: var(--c-white); color: var(--c-black); }
+  .stats-band { padding-block: clamp(96px, 60px + 8vw, 200px); }
   .big-stats { display: grid; gap: var(--sp-8); grid-template-columns: minmax(0, 1fr); margin: 0; text-align: center; }
-  @media (min-width: 834px) { .big-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } .big-stats > div + div { border-left: 1px solid var(--c-grey-300); } }
+  @media (min-width: 834px) { .big-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } .big-stats > div + div { border-left: 1px solid #3a3a3a; } }
   .big-stats > div { display: grid; gap: var(--sp-4); justify-items: center; padding-inline: var(--sp-5); }
-  .big-num { font-size: clamp(3.5rem, 1rem + 7vw, 7rem); font-weight: 700; line-height: 1; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
-  .big-stats dd { margin: 0; max-width: 28ch; font-size: var(--fs-lead); line-height: 1.45; color: var(--c-grey-700); }
-  .intro-text { display: grid; gap: var(--sp-5); justify-items: start; }
-  .intro-title { font-size: var(--fs-h2); line-height: 1.2; }
-  .stats { display: grid; gap: var(--sp-6); margin: 0; }
-  @media (min-width: 640px) and (max-width: 1023px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  .stats > div { padding: var(--sp-6); border-radius: var(--radius-lg); background: var(--c-grey-50); }
-  .stats dd { margin: var(--sp-3) 0 0; }
-  .oly-feature { display: grid; gap: var(--sp-6); grid-template-columns: minmax(0, 1fr); align-items: center; margin-bottom: var(--sp-7); }
-  @media (min-width: 834px) { .oly-feature { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--sp-8); } }
-  .oly-media { border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 4 / 3; }
-  .oly-media img { width: 100%; height: 100%; object-fit: cover; }
-  .oly-copy { display: grid; gap: var(--sp-4); }
-  .oly-copy h3 { font-size: var(--fs-h2); }
-  .muted-light { color: var(--c-grey-400); }
-  .topic-grid .card-body { gap: var(--sp-4); }
-  .noa-grid { display: grid; gap: var(--sp-5); grid-template-columns: minmax(0, 1fr); }
-  @media (min-width: 834px) { .noa-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .noa-dir { grid-row: span 2; } }
-  @media (min-width: 1200px) { .noa-grid { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1fr); } .noa-dir { grid-row: auto; } }
-  .noa-grid .card-body { gap: var(--sp-4); }
-  .flag-wall { list-style: none; margin: var(--sp-2) 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(36px, 1fr)); gap: 8px; }
-  .flag-wall img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 3px; box-shadow: 0 0 0 1px var(--c-grey-200); }
-  .grant-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-3); }
-  .grant-list li { display: grid; gap: 2px; padding: var(--sp-3) 0; border-top: 1px solid var(--c-grey-200); font-size: var(--fs-small); }
-  .grant-list strong { justify-self: start; }
-  .house-banner { display: grid; gap: var(--sp-6); grid-template-columns: minmax(0, 1fr); align-items: center; padding: clamp(24px, 5vw, 64px); border: 1px solid var(--c-grey-200); border-radius: var(--radius-lg); transition: border-color var(--t), box-shadow var(--t); }
-  @media (min-width: 834px) { .house-banner { grid-template-columns: 260px minmax(0, 1fr); gap: var(--sp-8); } }
-  .house-banner:hover { border-color: var(--c-black); box-shadow: var(--shadow); }
-  .house-banner:hover .link-arrow { gap: 12px; }
-  .house-logo img { width: 100%; max-width: 260px; height: auto; }
-  .house-copy { display: grid; gap: var(--sp-3); justify-items: start; }
-  .house-copy h2 { font-size: var(--fs-h2); }
+  .big-stats .big-num { font-size: clamp(3.5rem, 1rem + 6vw, 7.5rem); color: var(--c-gold); }
+  .big-stats dd { margin: 0; max-width: 26ch; font-size: var(--fs-lead); line-height: 1.45; color: #d8d8d8; }
+  .home-mission .container { display: grid; gap: var(--sp-6); justify-items: start; }
+  .home-doors { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-4); grid-template-columns: minmax(0, 1fr); }
+  @media (min-width: 1024px) { .home-doors { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .door { position: relative; display: flex; align-items: flex-end; min-height: clamp(420px, 60vw, 640px); border-radius: var(--radius-lg); overflow: hidden; color: var(--c-white); isolation: isolate; }
+  @media (min-width: 1024px) { .door { min-height: 680px; } }
+  .door-photo { position: absolute; inset: 0; z-index: -1; }
+  .door-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s cubic-bezier(.2, .7, .2, 1); }
+  .door-photo::after { content: ''; position: absolute; inset: 0; background: rgba(0, 0, 0, .52); transition: background var(--t); }
+  .door:hover .door-photo img { transform: scale(1.06); }
+  .door:hover .door-photo::after { background: rgba(0, 0, 0, .62); }
+  .door-body { display: grid; gap: var(--sp-4); padding: clamp(24px, 3vw, 40px); }
+  .door-title { display: inline-flex; align-items: center; gap: 14px; font-size: clamp(2.25rem, 1rem + 3vw, 3.5rem); line-height: 1; letter-spacing: -0.02em; }
+  .door-title .icon { width: 32px; height: 32px; transition: transform var(--t); }
+  .door:hover .door-title .icon { transform: translateX(6px); }
+  .door-lead { font-size: var(--fs-small); line-height: 1.55; color: #ececec; }
+  .door-links { display: flex; flex-wrap: wrap; gap: 8px; }
+  .door-links span { padding: 6px 12px; border: 1px solid rgba(255, 255, 255, .45); border-radius: 999px; font-size: var(--fs-xs); font-weight: 600; }
+  .news-lead { display: grid; gap: var(--sp-5); grid-template-columns: minmax(0, 1fr); align-items: center; margin-bottom: var(--sp-7); }
+  @media (min-width: 1024px) { .news-lead { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--sp-8); } }
+  .news-lead-photo { display: block; aspect-ratio: 16 / 10; border-radius: var(--radius-lg); overflow: hidden; }
+  .news-lead-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s cubic-bezier(.2, .7, .2, 1); }
+  .news-lead:hover .news-lead-photo img { transform: scale(1.04); }
+  .news-lead-body { display: grid; gap: var(--sp-4); justify-items: start; }
+  .news-date { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: var(--fs-small); color: var(--c-grey-700); }
+  .news-lead-title { font-size: var(--fs-h2); line-height: 1.12; letter-spacing: -0.02em; transition: color var(--t); }
+  .news-lead:hover .news-lead-title { color: var(--c-grey-600); }
+  .news-lead:hover .link-arrow { gap: 12px; }
+  .news-lead-text { color: var(--c-grey-700); font-size: var(--fs-lead); line-height: 1.5; }
+  @media (min-width: 834px) { .news-more { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .house-mark { display: inline-block; padding: 16px 20px; background: var(--c-white); border-radius: var(--radius-lg); }
+  .house-mark img { display: block; width: 220px; height: auto; }
 </style>

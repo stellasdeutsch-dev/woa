@@ -1,0 +1,87 @@
+---
+// WOA section landing. Sentences come from About, Mission, Vision, History, Olympism, Leadership.
+import Base from '../../layouts/Base.astro';
+import SectionHero from '../../components/landing/SectionHero.astro';
+import { sectionOf, WOA_LANDING as L } from '../../lib/sections';
+import { url, b, srcset, words, EMAIL, imgOk } from '../../lib/site';
+const s = sectionOf('woa');
+---
+<Base title={s.title} image={b(s.img)} description={s.lead}>
+  <SectionHero s={s} />
+
+  <section class="section ld-statement-wrap">
+    <div class="container">
+      <p class="ld-statement scrub" set:html={words(L.about.text)} />
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container ld-row">
+      <figure class="ld-media"><img src={b(L.about.img)} srcset={srcset(L.about.img)} sizes="(min-width: 1024px) 55vw, 100vw" alt="" loading="lazy" /></figure>
+      <div class="ld-copy">
+        <h2>{L.about.title}</h2>
+        <p class="lead">{L.about.more}</p>
+        <a class="btn" href={url(L.about.href)}>{L.about.title}<svg class="icon icon-arrow"><use href="#i-arrow" /></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-dark">
+    <div class="container ld-mv">
+      <a class="ld-mv-item" href={url(L.mission.href)}>
+        <h2>{L.mission.title}</h2>
+        <p class="scrub" set:html={words(L.mission.text)} />
+        <span class="link-arrow">{L.mission.title}<svg class="icon"><use href="#i-arrow" /></svg></span>
+      </a>
+      <a class="ld-mv-item" href={url(L.vision.href)}>
+        <h2>{L.vision.title}</h2>
+        <p class="scrub" set:html={words(L.vision.text)} />
+        <span class="link-arrow">{L.vision.title}<svg class="icon"><use href="#i-arrow" /></svg></span>
+      </a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head"><h2>{L.history.title}</h2><a class="link-arrow" href={url(L.history.href)}>{L.history.title}<svg class="icon"><use href="#i-arrow" /></svg></a></div>
+      <ol class="ld-years">
+        {[...L.history.items, L.history.last].map(h => <li><span class="ld-year">{h.year}</span><p>{h.text}</p></li>)}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section bg-grey">
+    <div class="container ld-row rev">
+      <figure class="ld-media"><img src={b(L.olympism.img)} srcset={srcset(L.olympism.img)} sizes="(min-width: 1024px) 55vw, 100vw" alt="" loading="lazy" /></figure>
+      <div class="ld-copy">
+        <h2>{L.olympism.title}</h2>
+        <p class="lead">{L.olympism.text}</p>
+        <p>{L.olympism.more}</p>
+        <a class="btn" href={url(L.olympism.href)}>{L.olympism.title}<svg class="icon icon-arrow"><use href="#i-arrow" /></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head"><h2>{L.leadership.title}</h2><a class="link-arrow" href={url(L.leadership.href)}>{L.leadership.title}<svg class="icon"><use href="#i-arrow" /></svg></a></div>
+      <ul class="ld-people">
+        {L.leadership.people.map(p => (
+          <li><a href={url(L.leadership.href)}>
+            <span class="ld-portrait">{imgOk(p.img) ? <img src={b(p.img)} alt="" loading="lazy" /> : <span class="media-ph"><svg class="icon icon-xl"><use href="#i-user" /></svg></span>}</span>
+            <strong>{p.name}</strong><span>{p.role}</span>
+          </a></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="hero ld-band">
+    <div class="hero-bg"><img src={b(L.contact.img)} srcset={srcset(L.contact.img)} sizes="100vw" alt="" loading="lazy" /></div>
+    <div class="container ld-band-inner">
+      <h2>{L.contact.title}</h2>
+      <a class="ld-band-mail" href={`mailto:${EMAIL}`}><svg class="icon"><use href="#i-mail" /></svg>{EMAIL}</a>
+      <a class="btn btn-gold" href={url(L.contact.href)}>{L.contact.title}<svg class="icon icon-arrow"><use href="#i-arrow" /></svg></a>
+    </div>
+  </section>
+</Base>

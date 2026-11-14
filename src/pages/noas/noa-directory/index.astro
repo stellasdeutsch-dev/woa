@@ -11,7 +11,7 @@ const ICON: Record<string, string> = { Address: 'pin', Email: 'mail', Phone: 'ph
 const telHref = (v: string) => 'tel:' + v.replace(/[^\d+]/g, '');
 ---
 <Base title={p.title} origPath={p.orig} image={b(p.bg)}>
-  <PageHero title={p.title} crumbs={[{ label: 'NOAs', href: '/noas/noa-guide/' }, { label: p.title }]} bg={b(p.bg)} compact>
+  <PageHero title={p.title} crumbs={[{ label: 'NOAs', href: '/noas/' }, { label: p.title }]} bg={b(p.bg)} compact>
     <div class="dir-search">
       <svg class="icon"><use href="#i-search" /></svg>
       <label class="sr-only" for="noa-q">Search</label>

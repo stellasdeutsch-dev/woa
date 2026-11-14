@@ -9,7 +9,7 @@ const split = (n: string) => n.replace(/\s+OLY$/, '');
 const hasOly = (n: string) => /\sOLY$/.test(n);
 ---
 <Base title={p.title} origPath={p.orig} image={b(p.bg)}>
-  <PageHero title={p.title} crumbs={[{ label: 'WOA', href: '/woa/about/' }, { label: p.title }]} bg={b(p.bg)} />
+  <PageHero title={p.title} crumbs={[{ label: 'WOA', href: '/woa/' }, { label: p.title }]} bg={b(p.bg)} />
   <section class="section-tight">
     <div class="container">
       <ul class="honorary">

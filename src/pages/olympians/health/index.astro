@@ -22,7 +22,7 @@ const rest = $.root().children().toArray().slice(3).map(e => $.html(e)).join('')
 const { html: restHtml } = prose(rest);
 ---
 <Base title={p.title} origPath={p.orig} image={b(p.bg)}>
-  <PageHero title={p.title} crumbs={[{ label: 'Olympians', href: '/olympians/oly/' }, { label: 'Health' }]} bg={b(p.bg)} />
+  <PageHero title={p.title} crumbs={[{ label: 'Olympians', href: '/olympians/' }, { label: 'Health' }]} bg={b(p.bg)} />
   <section class="section">
     <div class="container">
       <div class="prose lead-p" set:html={intro} />

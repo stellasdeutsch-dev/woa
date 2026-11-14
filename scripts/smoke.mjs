@@ -5,7 +5,7 @@ const base = process.argv[2] || 'http://localhost:4321/woa';
 const pages = JSON.parse(fs.readFileSync('src/data/pages.json', 'utf8')).map(p => p.path);
 const news = JSON.parse(fs.readFileSync('src/data/news.json', 'utf8')).filter((_, i) => i % 35 === 0).map(n => n.path);
 const bp = JSON.parse(fs.readFileSync('src/data/practices.json', 'utf8')).filter((_, i) => i % 20 === 0).map(n => n.path);
-const urls = ['/', '/news/', '/news/page/2/', '/news/year/2016/', '/best-practices/', ...pages, ...news, ...bp];
+const urls = ['/', '/woa/', '/olympians/', '/noas/', '/news/', '/news/page/2/', '/news/year/2016/', '/best-practices/', ...pages, ...news, ...bp];
 const browser = await chromium.launch({ args: ['--mute-audio'] });
 const problems = [];
 for (const w of (process.env.WIDTHS || "390,1440").split(",").map(Number)) {

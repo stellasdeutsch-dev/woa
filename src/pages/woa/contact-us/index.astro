@@ -6,7 +6,7 @@ import { b, url, EMAIL, SOCIAL } from '../../../lib/site';
 const p = page('/woa/contact-us/');
 ---
 <Base title={p.title} origPath={p.orig} image={b(p.bg)}>
-  <PageHero title={p.title} crumbs={[{ label: 'WOA', href: '/woa/about/' }, { label: p.title }]} bg={b(p.bg)} compact />
+  <PageHero title={p.title} crumbs={[{ label: 'WOA', href: '/woa/' }, { label: p.title }]} bg={b(p.bg)} compact />
   <section class="section">
     <div class="container contact">
       <div class="form-card prose" set:html={b(p.body)} />

@@ -1,0 +1,22 @@
+---
+// Full-screen opening of a section landing: photo, section name, one verbatim sentence, links to its pages.
+import { url, b, srcset } from '../../lib/site';
+import type { Section } from '../../lib/sections';
+interface Props { s: Section }
+const { s } = Astro.props;
+---
+<section class="hero ld-hero">
+  <div class="hero-bg"><img src={b(s.img)} srcset={srcset(s.img)} sizes="100vw" alt="" fetchpriority="high" /></div>
+  <div class="container ld-hero-inner">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href={url('/')}>Home</a><svg class="icon"><use href="#i-chevron" /></svg><span>{s.title}</span></nav>
+    <h1 class="ld-title">{s.title}</h1>
+    <p class="ld-lead">{s.lead}</p>
+  </div>
+  <nav class="ld-jump" aria-label={s.title}>
+    <div class="container">
+      <ul>
+        {s.children.map(c => <li><a href={url(c.href)}><svg class="icon"><use href={`#i-${c.icon}`} /></svg>{c.label}</a></li>)}
+      </ul>
+    </div>
+  </nav>
+</section>

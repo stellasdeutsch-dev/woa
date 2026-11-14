@@ -15,20 +15,20 @@ export const redirects = redirectsRaw as { from: string; to: string }[];
 export const leadership = leadershipRaw as { honorary: { name: string; role: string }[]; people: { name: string; meta: string; role: string; img: string; bio: string }[] };
 export const page = (p: string) => pages.find(x => x.path === p)!;
 
-const SECTIONS: Record<string, { label: string; href: string }> = {
-  woa: { label: 'WOA', href: '/woa/about/' },
-  olympians: { label: 'Olympians', href: '/olympians/oly/' },
-  noas: { label: 'NOAs', href: '/noas/noa-guide/' },
-  news: { label: 'News', href: '/news/' },
-  'oly-house': { label: 'OLY House', href: '/oly-house/' },
-  'best-practices': { label: 'Best Practices', href: '/best-practices/' },
-  grants: { label: 'Grants', href: '/noas/grants/' },
+const SECTIONS: Record<string, { label: string; href: string }[]> = {
+  woa: [{ label: 'WOA', href: '/woa/' }],
+  olympians: [{ label: 'Olympians', href: '/olympians/' }],
+  noas: [{ label: 'NOAs', href: '/noas/' }],
+  news: [{ label: 'News', href: '/news/' }],
+  'oly-house': [{ label: 'Olympians', href: '/olympians/' }, { label: 'OLY House', href: '/oly-house/' }],
+  skillsbuild: [{ label: 'Olympians', href: '/olympians/' }],
+  'best-practices': [{ label: 'NOAs', href: '/noas/' }, { label: 'Best Practices', href: '/best-practices/' }],
+  grants: [{ label: 'NOAs', href: '/noas/' }],
 };
 export function crumbsFor(p: Page | Story): { label: string; href?: string }[] {
   const seg = p.path.split('/')[1];
   const c: { label: string; href?: string }[] = [];
-  const s = SECTIONS[seg];
-  if (s) c.push(s.href !== p.path ? s : { label: s.label });
+  for (const s of SECTIONS[seg] ?? []) c.push(s.href !== p.path ? s : { label: s.label });
   if (p.path.startsWith('/woa/about/') && p.path !== '/woa/about/') c.push({ label: 'About', href: '/woa/about/' });
   if (p.path.startsWith('/noas/noa-guide/')) c.push(p.path !== '/noas/noa-guide/' ? { label: 'NOA Guide', href: '/noas/noa-guide/' } : { label: 'NOA Guide' });
   if (p.path.startsWith('/olympians/wof/') && p.path !== '/olympians/wof/') c.push({ label: 'WOF', href: '/olympians/wof/' });

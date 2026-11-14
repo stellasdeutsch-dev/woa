@@ -26,7 +26,7 @@ const stat2 = paras[0]?.match(/There are (\d+) National Olympians Associations/)
 const facts = (s: string) => s.replace(/(over [\d,]+ living Olympians|\d+ National Olympians Associations \(NOAs\))/g, '<strong class="fact">$1</strong>');
 ---
 <Base title="About" origPath={p.orig} image={b(p.bg)}>
-  <PageHero title="About" crumbs={[{ label: 'WOA', href: '/woa/about/' }, { label: 'About' }]} bg={b(p.bg)} lead={leadText} />
+  <PageHero title="About" crumbs={[{ label: 'WOA', href: '/woa/' }, { label: 'About' }]} bg={b(p.bg)} lead={leadText} />
   <Tabs tabs={p.tabs} current={BASE + '/woa/about/'} />
 
   <section class="section">

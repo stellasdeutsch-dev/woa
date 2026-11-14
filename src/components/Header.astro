@@ -1,9 +1,11 @@
 ---
-import { NAV, url, LOGO } from '../lib/site';
+import { NAV, url, LOGO, b, srcset } from '../lib/site';
+import { SECTIONS } from '../lib/sections';
+const sec = (href: string) => SECTIONS.find(x => x.href === href);
 const { current = '' } = Astro.props as { current?: string };
 const isCur = (href: string, children?: { href: string }[]) => {
   const top = href.split('/')[1];
-  if (children) return children.some(c => current.startsWith(c.href)) || (current.split('/')[1] === top && top !== '');
+  if (children) return current.startsWith(href) || children.some(c => current.startsWith(c.href));
   return current.startsWith(href);
 };
 ---
@@ -20,12 +22,21 @@ const isCur = (href: string, children?: { href: string }[]) => {
               {item.label}{item.children && <svg class="icon icon-sm"><use href="#i-chevron" /></svg>}
             </a>
             {item.children && (
-              <div class="sub">
-                <ul>
-                  {item.children.map(c => (
-                    <li><a href={url(c.href)} aria-current={current.startsWith(c.href) ? 'page' : undefined}><svg class="icon"><use href={`#i-${c.icon}`} /></svg><span>{c.label}</span></a></li>
-                  ))}
-                </ul>
+              <div class="mega">
+                <div class="container mega-inner">
+                  {sec(item.href) && (
+                    <a class="mega-feature" href={url(item.href)}>
+                      <span class="mega-photo"><img src={b(sec(item.href)!.img)} srcset={srcset(sec(item.href)!.img)} sizes="360px" alt="" loading="lazy" /></span>
+                      <span class="mega-title">{item.label}<svg class="icon"><use href="#i-arrow" /></svg></span>
+                      <span class="mega-lead">{sec(item.href)!.lead}</span>
+                    </a>
+                  )}
+                  <ul class="mega-list">
+                    {item.children!.map(c => (
+                      <li><a href={url(c.href)} aria-current={current.startsWith(c.href) ? 'page' : undefined}><svg class="icon"><use href={`#i-${c.icon}`} /></svg><span>{c.label}</span></a></li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             )}
           </li>
@@ -52,6 +63,7 @@ const isCur = (href: string, children?: { href: string }[]) => {
           <details open={isCur(item.href, item.children)}>
             <summary>{item.label}<svg class="icon"><use href="#i-chevron" /></svg></summary>
             <ul>
+              <li><a class="mm-landing" href={url(item.href)} aria-current={current === item.href ? 'page' : undefined}><svg class="icon"><use href="#i-arrow" /></svg>{item.label}</a></li>
               {item.children.map(c => <li><a href={url(c.href)} aria-current={current.startsWith(c.href) ? 'page' : undefined}><svg class="icon"><use href={`#i-${c.icon}`} /></svg>{c.label}</a></li>)}
             </ul>
           </details>
@@ -74,19 +86,28 @@ const isCur = (href: string, children?: { href: string }[]) => {
   .logo img { height: 64px; width: auto; }
   .main-nav { flex: 1; display: none; }
   .main-nav > ul { display: flex; justify-content: center; gap: 2px; list-style: none; margin: 0; padding: 0; }
-  .main-nav > ul > li { position: relative; }
-  .main-nav > ul > li > a { display: inline-flex; align-items: center; gap: 4px; height: 44px; padding: 0 12px; border-radius: var(--radius); font-weight: 600; font-size: 0.9375rem; white-space: nowrap; transition: background var(--t), color var(--t); }
+  .main-nav > ul > li { display: flex; align-items: center; height: var(--header-h); }
+  .main-nav > ul > li > a { display: inline-flex; align-items: center; gap: 6px; height: 44px; padding: 0 16px; border-radius: var(--radius); font-weight: 600; font-size: 1rem; white-space: nowrap; transition: background var(--t), color var(--t); }
   .main-nav > ul > li > a .icon { transition: transform var(--t); }
   .main-nav > ul > li > a:hover, .main-nav li.has-sub:hover > a, .main-nav li.has-sub:focus-within > a { background: var(--c-grey-50); }
   .main-nav > ul > li > a[aria-current="page"] { box-shadow: inset 0 -3px 0 var(--c-gold); }
   .main-nav li.has-sub:hover > a .icon, .main-nav li.has-sub:focus-within > a .icon { transform: rotate(180deg); }
-  .sub { position: absolute; top: 100%; left: 50%; min-width: 260px; padding-top: 10px; opacity: 0; visibility: hidden; transform: translate(-50%, 6px); transition: opacity var(--t), transform var(--t), visibility var(--t); }
-  .has-sub:hover .sub, .has-sub:focus-within .sub { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
-  .sub ul { list-style: none; margin: 0; padding: 8px; background: var(--c-white); border: 1px solid var(--c-grey-200); border-radius: var(--radius-lg); box-shadow: var(--shadow); }
-  .sub a { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: var(--radius); font-weight: 600; font-size: var(--fs-small); transition: background var(--t); }
-  .sub a .icon { color: var(--c-gold); }
-  .sub a:hover { background: var(--c-grey-50); }
-  .sub a[aria-current="page"] { background: var(--c-grey-50); }
+  .mega { position: absolute; left: 0; right: 0; top: 100%; background: var(--c-white); border-top: 1px solid var(--c-grey-200); border-bottom: 1px solid var(--c-grey-200); box-shadow: 0 24px 40px rgba(0, 0, 0, .08); opacity: 0; visibility: hidden; transform: translateY(-6px); transition: opacity var(--t), transform var(--t), visibility var(--t); }
+  .has-sub:hover .mega, .has-sub:focus-within .mega { opacity: 1; visibility: visible; transform: none; }
+  .mega-inner { display: grid; grid-template-columns: 420px minmax(0, 1fr); gap: var(--sp-8); padding-block: var(--sp-6) var(--sp-7); }
+  .mega-feature { display: grid; grid-template-columns: 140px minmax(0, 1fr); grid-template-rows: auto 1fr; gap: 6px var(--sp-4); align-items: start; padding: var(--sp-3); margin: calc(var(--sp-3) * -1); border-radius: var(--radius-lg); transition: background var(--t); }
+  .mega-feature:hover { background: var(--c-grey-50); }
+  .mega-photo { grid-row: span 2; aspect-ratio: 1; border-radius: var(--radius); overflow: hidden; }
+  .mega-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease, ease); }
+  .mega-feature:hover .mega-photo img { transform: scale(1.06); }
+  .mega-title { display: inline-flex; align-items: center; gap: 10px; font-size: 1.75rem; font-weight: 700; line-height: 1.1; }
+  .mega-title .icon { transition: transform var(--t); }
+  .mega-feature:hover .mega-title .icon { transform: translateX(4px); }
+  .mega-lead { font-size: var(--fs-small); line-height: 1.5; color: var(--c-grey-700); }
+  .mega-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px var(--sp-5); align-content: start; }
+  .mega-list a { display: flex; align-items: center; gap: 14px; min-height: 56px; padding: 8px 14px; border-radius: var(--radius); font-weight: 600; transition: background var(--t); }
+  .mega-list a .icon { width: 30px; height: 30px; flex: none; }
+  .mega-list a:hover, .mega-list a[aria-current="page"] { background: var(--c-grey-50); }
   .header-actions { margin-left: auto; display: flex; align-items: center; gap: var(--sp-2); }
   .header-cta { display: none; }
   @media (min-width: 640px) { .header-cta { display: inline-flex; } }
@@ -107,7 +128,7 @@ const isCur = (href: string, children?: { href: string }[]) => {
   .mm-list details[open] summary .icon { transform: rotate(180deg); }
   .mm-list details ul { list-style: none; margin: 0 0 var(--sp-4); padding: 0; display: grid; gap: 2px; }
   .mm-list details a { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: var(--radius); font-weight: 600; transition: background var(--t); }
-  .mm-list details a .icon { color: var(--c-gold); }
+  .mm-landing { font-weight: 700 !important; }
   .mm-list details a:hover, .mm-list a[aria-current="page"] { background: var(--c-grey-50); }
   .mm-foot { margin-top: auto; padding: var(--sp-5) var(--gutter) var(--sp-7); display: grid; gap: var(--sp-3); }
 </style>

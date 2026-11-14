@@ -56,6 +56,7 @@ const original = ORIGIN + (origPath ?? current);
   <script>
     // Motion: reveal blocks below the fold and count up big numbers. Skipped for reduced motion and automated browsers (Figma export, tests).
     const still = matchMedia('(prefers-reduced-motion: reduce)').matches || navigator.webdriver;
+    if (navigator.webdriver) document.documentElement.classList.add('still');
     if (!still && 'IntersectionObserver' in window) {
       const SEL = '.section-head, .grid > *, .vb-cards > li, .vb-index > li, .vb-step, .vb-panels > .vb-panel, .vb-docs > li, .big-stats > div, .noa-group, .steps > li, .goals > li, .values > li, .mv-card, .vb-quote, .vb-split > *, .vb-years > li, .me-factors > li, .vb-list > li, .vb-faq, .vb-answer, .house-banner, .oly-feature > *';
       const els = [...document.querySelectorAll<HTMLElement>(SEL)].filter(el => el.getBoundingClientRect().top > innerHeight * 0.9);

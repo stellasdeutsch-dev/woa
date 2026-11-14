@@ -23,7 +23,7 @@ const CAT_ICON: Record<string, string> = { 'Development Grants': 'grant', 'Servi
 const amountFor = (t: string) => { const a = amounts.find(x => x.includes(t.replace(' Grants', ''))); return a ? (a.split(/\s[–-]\s/)[1] || '') : ''; };
 ---
 <Base title={`${p.section} | ${title}`} origPath={p.orig} image={b(p.bg)}>
-  <PageHero title={p.section} crumbs={[{ label: 'NOAs', href: '/noas/noa-guide/' }, { label: p.section }]} bg={b(p.bg)}>
+  <PageHero title={p.section} crumbs={[{ label: 'NOAs', href: '/noas/' }, { label: p.section }]} bg={b(p.bg)}>
     <div class="lead" set:html={aim} />
   </PageHero>
 
