@@ -3,7 +3,7 @@ import * as cheerio from 'cheerio';
 import Base from '../layouts/Base.astro';
 import StoryCard from '../components/StoryCard.astro';
 import { news, practices, page, noas } from '../lib/data';
-import { url, b, fmtDate } from '../lib/site';
+import { url, b, fmtDate, srcset } from '../lib/site';
 
 // All copy below is taken verbatim from olympians.org pages.
 const $ = (html: string) => cheerio.load(html);
@@ -37,7 +37,7 @@ const flags = noas.filter(n => n.flag).slice(0, 999);
 <Base title="World Olympians Association" type="Page">
   <!-- Lead story -->
   <section class="hero home-hero">
-    <div class="hero-bg"><img src={b(lead.img)} alt="" fetchpriority="high" /></div>
+    <div class="hero-bg"><img src={b(lead.img)} srcset={srcset(lead.img)} sizes="100vw" alt="" fetchpriority="high" /></div>
     <div class="container hero-inner home-hero-inner">
       <p class="hero-date"><svg class="icon icon-sm"><use href="#i-calendar" /></svg>{fmtDate(lead.date)}</p>
       <h1><a href={url(lead.path)}>{lead.title}</a></h1>
@@ -57,9 +57,15 @@ const flags = noas.filter(n => n.flag).slice(0, 999);
         <p class="lead muted">{mission}</p>
         <a class="link-arrow" href={url('/woa/about/')}>About<svg class="icon"><use href="#i-arrow" /></svg></a>
       </div>
-      <dl class="stats">
-        {stat1 && <div><dt class="stat-num">{stat1[1]}+</dt><dd class="stat-label">living Olympians throughout the world</dd></div>}
-        {stat2 && <div><dt class="stat-num">{stat2[1]}</dt><dd class="stat-label">National Olympians Associations (NOAs) spread across all five continents</dd></div>}
+    </div>
+  </section>
+
+  <!-- One screen, two numbers -->
+  <section class="section bg-grey stats-band">
+    <div class="container">
+      <dl class="big-stats">
+        {stat1 && <div><dt class="big-num" data-count={stat1[1].replace(/,/g, '')} data-suffix="+">{stat1[1]}+</dt><dd>living Olympians throughout the world</dd></div>}
+        {stat2 && <div><dt class="big-num" data-count={stat2[1]}>{stat2[1]}</dt><dd>National Olympians Associations (NOAs) spread across all five continents</dd></div>}
       </dl>
     </div>
   </section>
@@ -91,7 +97,7 @@ const flags = noas.filter(n => n.flag).slice(0, 999);
     <div class="container">
       <div class="section-head"><h2>NOAs</h2><a class="link-arrow" href={url('/noas/noa-directory/')}>NOA Directory<svg class="icon"><use href="#i-arrow" /></svg></a></div>
       <div class="noa-grid">
-        <a class="card noa-dir" href={url('/noas/noa-directory/')}>
+        <a class="card topic-card noa-dir" href={url('/noas/noa-directory/')}>
           <div class="card-body">
             <span class="topic-icon"><svg class="icon icon-lg"><use href="#i-directory" /></svg></span>
             <h3 class="card-title">NOA Directory</h3>
@@ -117,7 +123,7 @@ const flags = noas.filter(n => n.flag).slice(0, 999);
   <section class="section bg-grey">
     <div class="container">
       <div class="section-head"><h2>News</h2><a class="link-arrow" href={url('/news/')}>News<svg class="icon"><use href="#i-arrow" /></svg></a></div>
-      <div class="grid grid-3">{latest.slice(0, 6).map(n => <StoryCard item={n} />)}</div>
+      <div class="grid grid-3">{latest.slice(0, 3).map(n => <StoryCard item={n} />)}</div>
     </div>
   </section>
 
@@ -153,8 +159,14 @@ const flags = noas.filter(n => n.flag).slice(0, 999);
   .home-hero h1 a:hover { color: var(--c-gold); }
   .hero-date { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; color: #f0f0f0; }
   .hero-actions { display: flex; flex-wrap: wrap; gap: var(--sp-3); margin-top: var(--sp-3); }
-  .intro { display: grid; gap: var(--sp-8); grid-template-columns: minmax(0, 1fr); align-items: center; }
-  @media (min-width: 1024px) { .intro { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); } }
+  .intro { display: grid; }
+  .intro-text { max-width: 1000px; }
+  .intro-title { font-size: clamp(1.75rem, 1rem + 3.4vw, 4rem) !important; line-height: 1.12 !important; }
+  .big-stats { display: grid; gap: var(--sp-8); grid-template-columns: minmax(0, 1fr); margin: 0; text-align: center; }
+  @media (min-width: 834px) { .big-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } .big-stats > div + div { border-left: 1px solid var(--c-grey-300); } }
+  .big-stats > div { display: grid; gap: var(--sp-4); justify-items: center; padding-inline: var(--sp-5); }
+  .big-num { font-size: clamp(3.5rem, 1rem + 7vw, 7rem); font-weight: 700; line-height: 1; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+  .big-stats dd { margin: 0; max-width: 28ch; font-size: var(--fs-lead); line-height: 1.45; color: var(--c-grey-700); }
   .intro-text { display: grid; gap: var(--sp-5); justify-items: start; }
   .intro-title { font-size: var(--fs-h2); line-height: 1.2; }
   .stats { display: grid; gap: var(--sp-6); margin: 0; }

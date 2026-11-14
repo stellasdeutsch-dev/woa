@@ -25,34 +25,51 @@ export function titleCase(t: string): string | null {
   }).join('');
 }
 
-const ICONS: [RegExp, string][] = [
-  [/best practice/i, 'practice'],
-  [/budget|cost|fund|financ|bank|money/i, 'grant'],
-  [/grant/i, 'grant'],
-  [/strategic|operational|plan/i, 'goals'],
-  [/e-?mail/i, 'email'],
-  [/logo|brand/i, 'design'],
-  [/website/i, 'website'],
-  [/newsletter|magazine|newspaper/i, 'newsletter'],
-  [/social|facebook|twitter|instagram|whatsapp/i, 'social'],
-  [/code of conduct|governance|constitution|terms of reference|structure/i, 'integrity'],
-  [/election/i, 'values'],
-  [/meeting|agm\b/i, 'forum'],
-  [/leader|committee|succession/i, 'leadership'],
-  [/important|keep in mind|remember|don.t forget|avoid/i, 'tip'],
-  [/schedule|year|time/i, 'clock'],
-  [/stakeholder|partner|relationship|noc\b|collaborat/i, 'friendship'],
-  [/profession/i, 'excellence'],
-  [/guide/i, 'guide'],
-  [/tool/i, 'skills'],
-  [/letter|recognition/i, 'letter'],
-  [/contact/i, 'contact'],
-  [/olympian|\boly\b/i, 'oly'],
-  [/register|registration|party/i, 'house'],
-  [/eligib|submission|apply|application/i, 'doc'],
-  [/information|useful/i, 'about'],
-  [/\?$/, 'chat'],
+// heading meaning -> icon candidates (first unused one wins; each icon once per page)
+const ICONS: [RegExp, string[]][] = [
+  [/best practice|examples? of/i, ['practice', 'guide', 'tip']],
+  [/ahead|future/i, ['vision']],
+  [/service to olympians/i, ['oly', 'life']],
+  [/service to society/i, ['solidarity', 'heart']],
+  [/bank/i, ['columns']],
+  [/financial year|schedule|time your|\byear\b|\btime\b/i, ['clock']],
+  [/budgeting tool|tools?\b/i, ['skills', 'chart']],
+  [/budget|cost|fund|financ|money|grant/i, ['grant', 'chart']],
+  [/strategic|operational|plans?\b/i, ['goals', 'target', 'chart']],
+  [/e-?mail/i, ['email']],
+  [/brand/i, ['olympism', 'design']],
+  [/logo/i, ['pen', 'tip', 'design']],
+  [/website/i, ['website']],
+  [/newsletter|magazine|newspaper/i, ['newsletter']],
+  [/social|facebook|twitter|instagram|whatsapp|share/i, ['social', 'chat']],
+  [/code of conduct|constitution/i, ['integrity', 'doc']],
+  [/terms of reference/i, ['letter', 'doc']],
+  [/structure/i, ['columns', 'alliance']],
+  [/election/i, ['values']],
+  [/meeting|workshop|agm\b/i, ['forum', 'skills']],
+  [/event/i, ['torch', 'forum']],
+  [/member/i, ['solidarity', 'friendship']],
+  [/officer|leader|committee|succession/i, ['leadership', 'humanism', 'directory']],
+  [/athlete/i, ['excellence', 'humanism']],
+  [/new relationship|build a/i, ['friendship', 'target']],
+  [/existing relationship|strengthen/i, ['alliance', 'solidarity']],
+  [/stakeholder|partner|relationship|noc\b|collaborat/i, ['friendship', 'alliance']],
+  [/important|keep in mind|remember|don.t forget|avoid/i, ['tip', 'bell']],
+  [/profession|career/i, ['excellence', 'skills']],
+  [/transport|travel|flight|airport/i, ['globe']],
+  [/guide/i, ['guide']],
+  [/letter|recognition/i, ['letter']],
+  [/contact/i, ['contact']],
+  [/get ready|ready for/i, ['target', 'torch']],
+  [/olympian|\boly\b/i, ['oly', 'life', 'heart']],
+  [/register|registration|party/i, ['house']],
+  [/eligib|submission|apply|application/i, ['doc']],
+  [/information|useful/i, ['about']],
+  [/\?$/, ['chat']],
 ];
+
+// icon whose meaning matches a heading; each icon is used once per page (returns null when nothing fits)
+export const iconFor = (title: string, used: Set<string>) => { for (const [rx, ids] of ICONS) if (rx.test(title)) for (const id of ids) if (!used.has(id)) { used.add(id); return id; } return null; };
 
 const DOC_RX = /\.(pdf|docx?|xlsx?|pptx?|zip)(\?|$)/i;
 const ext = (h: string) => (h.match(/\.([a-z0-9]+)(\?|$)/i)?.[1] || '').toUpperCase();
@@ -64,7 +81,7 @@ export interface VisualOpts { legal?: boolean; faq?: boolean }
 export function visualize($: CheerioAPI, r: ReturnType<CheerioAPI>, opts: VisualOpts = {}) {
   const inForm = (el: any) => $(el).closest('form').length > 0;
   const usedIcons = new Set<string>();
-  const pickIcon = (t: string) => { for (const [rx, id] of ICONS) if (rx.test(t)) { if (usedIcons.has(id)) return null; usedIcons.add(id); return id; } return null; };
+  const pickIcon = (t: string) => iconFor(t, usedIcons);
 
   // 1. capitals in headings -> title case (letter case only)
   r.find('h1,h2,h3,h4,h5,h6').each((_, h) => {

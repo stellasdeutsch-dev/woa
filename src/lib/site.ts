@@ -110,6 +110,14 @@ export function prose(html: string, opts: { toc?: boolean; visual?: boolean; leg
     let id = slugify(text) || 'section'; let n = 2; while (used.has(id)) id = slugify(text) + '-' + n++;
     used.add(id); $(h).attr('id', id); toc.push({ id, text });
   });
+  // no h2 in the text: lift every heading one level so the outline goes h1 -> h2 (the class keeps the old look)
+  if (!r.find('h2').length && r.find('h3').length) {
+    r.find('h3,h4,h5').each((_, h) => {
+      const lvl = +(h as any).tagName.slice(1);
+      (h as any).tagName = 'h' + (lvl - 1);
+      $(h).addClass('lvl-' + lvl);
+    });
+  }
   // soft hyphens break Figma import & search; drop them
   return { html: r.html()!.replace(/­/g, ''), toc: opts.toc === false ? [] : toc };
 }
@@ -123,3 +131,16 @@ export const imgOk = (src?: string | null) => {
   if (/^https?:/.test(p)) return true;
   try { return fs.statSync('public' + decodeURI(p)).size > 0; } catch { return false; }
 };
+
+// srcset from the smaller WebP copies made by scripts/resize-images.mjs (falls back to the original only)
+let imgWidths: Record<string, number> | null = null;
+export const srcset = (src?: string | null) => {
+  if (!src) return undefined;
+  const p = decodeURI(src.replace('{{BASE}}', '').replace(BASE, ''));
+  if (/^https?:/.test(p)) return undefined;
+  if (!imgWidths) { try { imgWidths = JSON.parse(fs.readFileSync('public/_img/manifest.json', 'utf8')); } catch { imgWidths = {}; } }
+  const w = imgWidths![p]; if (!w) return undefined;
+  const parts = [480, 960].filter(x => w > x * 1.15 && fs.existsSync(`public/_img/${x}${p}.webp`)).map(x => `${BASE}/_img/${x}${encodeURI(p)}.webp ${x}w`);
+  return parts.length ? [...parts, `${b(src)} ${w}w`].join(', ') : undefined;
+};
+export const LOGO = `${BASE}/_img/logo-144.png`;

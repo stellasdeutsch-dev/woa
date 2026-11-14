@@ -1,5 +1,5 @@
 ---
-import { NAV, url } from '../lib/site';
+import { NAV, url, LOGO } from '../lib/site';
 const { current = '' } = Astro.props as { current?: string };
 const isCur = (href: string, children?: { href: string }[]) => {
   const top = href.split('/')[1];
@@ -10,7 +10,7 @@ const isCur = (href: string, children?: { href: string }[]) => {
 <header class="site-header" id="top">
   <div class="container header-row">
     <a class="logo" href={url('/')} aria-label="World Olympians Association — Home">
-      <img src={url('/images/world-olympians-association-logo-v2.png')} alt="World Olympians Association" width="622" height="724" />
+      <img src={LOGO} alt="World Olympians Association" width="124" height="144" />
     </a>
     <nav class="main-nav" aria-label="Main">
       <ul>
@@ -42,7 +42,7 @@ const isCur = (href: string, children?: { href: string }[]) => {
 
 <dialog class="mobile-menu" id="mobile-menu" aria-label="Menu">
   <div class="mm-head">
-    <a class="logo" href={url('/')} aria-label="World Olympians Association — Home"><img src={url('/images/world-olympians-association-logo-v2.png')} alt="World Olympians Association" width="622" height="724" /></a>
+    <a class="logo" href={url('/')} aria-label="World Olympians Association — Home"><img src={LOGO} alt="World Olympians Association" width="124" height="144" /></a>
     <button class="icon-btn" type="button" data-close-menu aria-label="Close"><svg class="icon"><use href="#i-close" /></svg></button>
   </div>
   <nav aria-label="Main">

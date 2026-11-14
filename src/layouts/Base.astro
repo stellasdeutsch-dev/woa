@@ -1,8 +1,7 @@
 ---
-import '@fontsource/montserrat/400.css';
-import '@fontsource/montserrat/500.css';
-import '@fontsource/montserrat/600.css';
-import '@fontsource/montserrat/700.css';
+import '@fontsource-variable/montserrat/wght.css';
+import '@fontsource-variable/montserrat/wght-italic.css';
+import fontLatin from '@fontsource-variable/montserrat/files/montserrat-latin-wght-normal.woff2?url';
 import '../styles/global.css';
 import IconSprite from '../components/IconSprite.astro';
 import Header from '../components/Header.astro';
@@ -20,6 +19,7 @@ const original = ORIGIN + (origPath ?? current);
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preload" href={fontLatin} as="font" type="font/woff2" crossorigin />
   <title>{fullTitle}</title>
   <meta name="description" content={description} />
   <meta property="og:title" content={fullTitle} />
@@ -53,6 +53,40 @@ const original = ORIGIN + (origPath ?? current);
     </div>
   </dialog>
 
+  <script>
+    // Motion: reveal blocks below the fold and count up big numbers. Skipped for reduced motion and automated browsers (Figma export, tests).
+    const still = matchMedia('(prefers-reduced-motion: reduce)').matches || navigator.webdriver;
+    if (!still && 'IntersectionObserver' in window) {
+      const SEL = '.section-head, .grid > *, .vb-cards > li, .vb-index > li, .vb-step, .vb-panels > .vb-panel, .vb-docs > li, .big-stats > div, .noa-group, .steps > li, .goals > li, .values > li, .mv-card, .vb-quote, .vb-split > *, .vb-years > li, .me-factors > li, .vb-list > li, .vb-faq, .vb-answer, .house-banner, .oly-feature > *';
+      const els = [...document.querySelectorAll<HTMLElement>(SEL)].filter(el => el.getBoundingClientRect().top > innerHeight * 0.9);
+      const io = new IntersectionObserver(entries => {
+        for (const e of entries) {
+          if (!e.isIntersecting) continue;
+          const el = e.target as HTMLElement;
+          el.classList.add('rv-in');
+          el.addEventListener('transitionend', () => { el.classList.remove('rv', 'rv-in'); el.style.transitionDelay = ''; }, { once: true });
+          io.unobserve(el);
+        }
+      }, { rootMargin: '0px 0px -8% 0px' });
+      for (const el of els) {
+        const i = el.parentElement ? [...el.parentElement.children].indexOf(el) : 0;
+        el.style.transitionDelay = `${(i % 6) * 60}ms`;
+        el.classList.add('rv'); io.observe(el);
+      }
+      // numbers grow to their final value (the final value is already in the HTML)
+      const nums = document.querySelectorAll<HTMLElement>('[data-count]');
+      const co = new IntersectionObserver(entries => {
+        for (const e of entries) {
+          if (!e.isIntersecting) continue;
+          const el = e.target as HTMLElement; co.unobserve(el);
+          const end = +el.dataset.count!; const suffix = el.dataset.suffix || ''; const t0 = performance.now(); const D = 1200;
+          const step = (t: number) => { const k = Math.min(1, (t - t0) / D); const v = Math.round(end * (1 - Math.pow(1 - k, 3))); el.textContent = v.toLocaleString('en-GB') + suffix; if (k < 1) requestAnimationFrame(step); };
+          requestAnimationFrame(step);
+        }
+      }, { threshold: 0.6 });
+      nums.forEach(n => co.observe(n));
+    }
+  </script>
   <script>
     const body = document.body;
     const BASE = body.dataset.base || '';

@@ -1,11 +1,11 @@
 ---
-import { url } from '../lib/site';
+import { url, srcset } from '../lib/site';
 interface Crumb { label: string; href?: string }
 interface Props { title: string; crumbs?: Crumb[]; bg?: string | null; lead?: string; date?: string; compact?: boolean }
 const { title, crumbs = [], bg, lead, date, compact = false } = Astro.props;
 ---
 <section class:list={['hero', 'page-hero', { compact, 'no-bg': !bg }]}>
-  {bg && <div class="hero-bg"><img src={bg} alt="" fetchpriority="high" /></div>}
+  {bg && <div class="hero-bg"><img src={bg} srcset={srcset(bg)} sizes="100vw" alt="" fetchpriority="high" /></div>}
   <div class="container hero-inner">
     {crumbs.length > 0 && (
       <nav class="crumbs" aria-label="Breadcrumb">

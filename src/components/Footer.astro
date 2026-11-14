@@ -1,5 +1,5 @@
 ---
-import { NAV, SOCIAL, EMAIL, url } from '../lib/site';
+import { NAV, SOCIAL, EMAIL, url, LOGO } from '../lib/site';
 const year = 2026;
 const groups = NAV.filter(n => n.children);
 const singles = NAV.filter(n => !n.children);
@@ -9,7 +9,7 @@ const singles = NAV.filter(n => !n.children);
     <div class="f-top">
       <div class="f-brand">
         <a class="f-logo" href={url('/')} aria-label="World Olympians Association — Home">
-          <img src={url('/images/world-olympians-association-logo-v2.png')} alt="World Olympians Association" width="622" height="724" loading="lazy" />
+          <img src={LOGO} alt="World Olympians Association" width="124" height="144" loading="lazy" />
         </a>
         <a class="f-mail" href={`mailto:${EMAIL}`}><svg class="icon"><use href="#i-mail" /></svg>{EMAIL}</a>
         <ul class="f-social">
@@ -61,4 +61,5 @@ const singles = NAV.filter(n => !n.children);
   .f-bottom { margin-top: var(--sp-8); padding-top: var(--sp-5); border-top: 1px solid #3d3d3d; display: flex; flex-wrap: wrap; gap: var(--sp-3) var(--sp-6); justify-content: space-between; font-size: var(--fs-xs); color: var(--c-grey-400); }
   .f-bottom a { transition: color var(--t); }
   .f-bottom a:hover { color: var(--c-gold); }
+  @media (max-width: 639px) { .f-nav ul { gap: 0; } .f-nav a, .f-bottom a, .f-mail { display: inline-flex; align-items: center; min-height: 44px; } }
 </style>

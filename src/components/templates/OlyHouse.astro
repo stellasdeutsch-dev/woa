@@ -1,5 +1,6 @@
 ---
 import * as cheerio from 'cheerio';
+import { iconFor } from '../../lib/visual';
 import PageHero from '../PageHero.astro';
 import { b } from '../../lib/site';
 import type { Page } from '../../lib/data';
@@ -12,7 +13,9 @@ const gamesLogo = gamesLink.find('img').attr('src');
 const gamesHref = gamesLink.attr('href');
 const pastTitle = $('h4').last().text().trim();
 const past = $('h4').last().next('ul').find('a').map((_, a) => ({ href: $(a).attr('href'), img: $(a).find('img').attr('src') })).get();
-const ICONS = ['house', 'excellence', 'life', 'forum', 'practice', 'life', 'skills'];
+// icons follow the meaning of each tile title; nothing fits -> no icon
+const usedIcons = new Set<string>(['house']);
+const tileIcon = (t: string) => iconFor(t, usedIcons);
 type Tile = { href?: string; title: string; text: string; ext: boolean; imgs: string[] };
 const tiles: Tile[] = [];
 root.children().each((_, el) => {
@@ -49,7 +52,7 @@ const recent = lastH4.length && !lastH4.next('ul').length && lastH4.find('a').le
       ) : (
         <a class="card topic-card" href={t.href ?? undefined} target={t.ext ? '_blank' : undefined} rel="noopener">
           <div class="card-body">
-            <span class="topic-icon"><svg class="icon icon-lg"><use href={`#i-${ICONS[(i + 1) % ICONS.length]}`} /></svg></span>
+            {(() => { const ic = tileIcon(t.title); return ic && <span class="topic-icon"><svg class="icon icon-lg"><use href={`#i-${ic}`} /></svg></span>; })()}
             <h3 class="card-title">{t.title}</h3>
             {t.text && <p class="card-text">{t.text}</p>}
             <span class="card-foot">{t.ext ? <svg class="icon"><use href="#i-external" /></svg> : <svg class="icon"><use href="#i-arrow" /></svg>}</span>
@@ -80,7 +83,8 @@ const recent = lastH4.length && !lastH4.next('ul').length && lastH4.find('a').le
   .oh-feature:hover { background: var(--c-ink); }
   .oh-feature h2 { font-size: var(--fs-h2); }
   .oh-feature .lead { color: var(--c-grey-400); }
-  .oh-feature .topic-icon { display: inline-grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; border: 1.5px solid var(--c-gold); color: var(--c-gold); }
+  .oh-feature .topic-icon { display: inline-grid; place-items: center; width: 56px; height: 56px; color: var(--c-white); }
+  .oh-feature .topic-icon .icon { width: 48px; height: 48px; stroke-width: 1.3; }
   .oh-feature .link-arrow { color: var(--c-gold); }
   .oh-img { display: grid; gap: var(--sp-3); padding: var(--sp-4); }
   .oh-img img { width: 100%; height: auto; }
