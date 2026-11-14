@@ -1,0 +1,10 @@
+---
+import Base from '../../layouts/Base.astro';
+import StoryList from '../../components/templates/StoryList.astro';
+import { practices as all } from '../../lib/data';
+import { b } from '../../lib/site';
+const PER = 18;
+---
+<Base title="Best Practices" type="Page" search={false}>
+  <StoryList title="Best Practices" base="/best-practices/" all={all} items={all.slice(0, PER + 1)} page={1} pages={Math.ceil((all.length - 1) / PER)} bg={b(all[0].img)} />
+</Base>

@@ -1,0 +1,26 @@
+---
+import { url } from '../lib/site';
+interface Crumb { label: string; href?: string }
+interface Props { title: string; crumbs?: Crumb[]; bg?: string | null; lead?: string; date?: string; compact?: boolean }
+const { title, crumbs = [], bg, lead, date, compact = false } = Astro.props;
+---
+<section class:list={['hero', 'page-hero', { compact, 'no-bg': !bg }]}>
+  {bg && <div class="hero-bg"><img src={bg} alt="" fetchpriority="high" /></div>}
+  <div class="container hero-inner">
+    {crumbs.length > 0 && (
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href={url('/')}>Home</a>
+        {crumbs.map(c => (<><svg class="icon"><use href="#i-chevron" /></svg>{c.href ? <a href={url(c.href)}>{c.label}</a> : <span>{c.label}</span>}</>))}
+      </nav>
+    )}
+    <h1>{title}</h1>
+    {date && <p class="hero-date"><svg class="icon icon-sm"><use href="#i-calendar" /></svg>{date}</p>}
+    {lead && <p class="lead">{lead}</p>}
+    <slot />
+  </div>
+</section>
+<style>
+  .page-hero.no-bg { background: var(--c-ink); }
+  .page-hero.compact .hero-inner { padding-block: clamp(40px, 24px + 4vw, 88px) clamp(32px, 20px + 3vw, 56px); }
+  .hero-date { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; color: #f0f0f0; }
+</style>

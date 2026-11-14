@@ -1,0 +1,113 @@
+---
+import { NAV, url } from '../lib/site';
+const { current = '' } = Astro.props as { current?: string };
+const isCur = (href: string, children?: { href: string }[]) => {
+  const top = href.split('/')[1];
+  if (children) return children.some(c => current.startsWith(c.href)) || (current.split('/')[1] === top && top !== '');
+  return current.startsWith(href);
+};
+---
+<header class="site-header" id="top">
+  <div class="container header-row">
+    <a class="logo" href={url('/')} aria-label="World Olympians Association — Home">
+      <img src={url('/images/world-olympians-association-logo-v2.png')} alt="World Olympians Association" width="622" height="724" />
+    </a>
+    <nav class="main-nav" aria-label="Main">
+      <ul>
+        {NAV.map(item => (
+          <li class={item.children ? 'has-sub' : ''}>
+            <a href={url(item.href)} aria-current={isCur(item.href, item.children) ? 'page' : undefined}>
+              {item.label}{item.children && <svg class="icon icon-sm"><use href="#i-chevron" /></svg>}
+            </a>
+            {item.children && (
+              <div class="sub">
+                <ul>
+                  {item.children.map(c => (
+                    <li><a href={url(c.href)} aria-current={current.startsWith(c.href) ? 'page' : undefined}><svg class="icon"><use href={`#i-${c.icon}`} /></svg><span>{c.label}</span></a></li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn" type="button" data-open-search aria-label="Search"><svg class="icon"><use href="#i-search" /></svg></button>
+      <a class="btn btn-sm header-cta" href={url('/olympians/oly/')}><svg class="icon"><use href="#i-oly" /></svg>Register for OLY</a>
+      <button class="icon-btn menu-btn" type="button" data-open-menu aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><svg class="icon"><use href="#i-menu" /></svg></button>
+    </div>
+  </div>
+</header>
+
+<dialog class="mobile-menu" id="mobile-menu" aria-label="Menu">
+  <div class="mm-head">
+    <a class="logo" href={url('/')} aria-label="World Olympians Association — Home"><img src={url('/images/world-olympians-association-logo-v2.png')} alt="World Olympians Association" width="622" height="724" /></a>
+    <button class="icon-btn" type="button" data-close-menu aria-label="Close"><svg class="icon"><use href="#i-close" /></svg></button>
+  </div>
+  <nav aria-label="Main">
+    <ul class="mm-list">
+      {NAV.map(item => item.children ? (
+        <li>
+          <details open={isCur(item.href, item.children)}>
+            <summary>{item.label}<svg class="icon"><use href="#i-chevron" /></svg></summary>
+            <ul>
+              {item.children.map(c => <li><a href={url(c.href)} aria-current={current.startsWith(c.href) ? 'page' : undefined}><svg class="icon"><use href={`#i-${c.icon}`} /></svg>{c.label}</a></li>)}
+            </ul>
+          </details>
+        </li>
+      ) : (
+        <li><a class="mm-top" href={url(item.href)} aria-current={isCur(item.href) ? 'page' : undefined}>{item.label}</a></li>
+      ))}
+    </ul>
+  </nav>
+  <div class="mm-foot">
+    <a class="btn" href={url('/olympians/oly/')}><svg class="icon"><use href="#i-oly" /></svg>Register for OLY</a>
+    <a class="btn btn-outline" href={url('/noas/noa-directory/')}><svg class="icon"><use href="#i-directory" /></svg>NOA Directory</a>
+  </div>
+</dialog>
+
+<style>
+  .site-header { position: sticky; top: 0; z-index: 50; background: var(--c-white); border-bottom: 1px solid var(--c-grey-200); }
+  .header-row { display: flex; align-items: center; gap: var(--sp-5); height: var(--header-h); }
+  .logo { flex: none; display: block; }
+  .logo img { height: 64px; width: auto; }
+  .main-nav { flex: 1; display: none; }
+  .main-nav > ul { display: flex; justify-content: center; gap: 2px; list-style: none; margin: 0; padding: 0; }
+  .main-nav > ul > li { position: relative; }
+  .main-nav > ul > li > a { display: inline-flex; align-items: center; gap: 4px; height: 44px; padding: 0 12px; border-radius: var(--radius); font-weight: 600; font-size: 0.9375rem; white-space: nowrap; transition: background var(--t), color var(--t); }
+  .main-nav > ul > li > a .icon { transition: transform var(--t); }
+  .main-nav > ul > li > a:hover, .main-nav li.has-sub:hover > a, .main-nav li.has-sub:focus-within > a { background: var(--c-grey-50); }
+  .main-nav > ul > li > a[aria-current="page"] { box-shadow: inset 0 -3px 0 var(--c-gold); }
+  .main-nav li.has-sub:hover > a .icon, .main-nav li.has-sub:focus-within > a .icon { transform: rotate(180deg); }
+  .sub { position: absolute; top: 100%; left: 50%; min-width: 260px; padding-top: 10px; opacity: 0; visibility: hidden; transform: translate(-50%, 6px); transition: opacity var(--t), transform var(--t), visibility var(--t); }
+  .has-sub:hover .sub, .has-sub:focus-within .sub { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+  .sub ul { list-style: none; margin: 0; padding: 8px; background: var(--c-white); border: 1px solid var(--c-grey-200); border-radius: var(--radius-lg); box-shadow: var(--shadow); }
+  .sub a { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: var(--radius); font-weight: 600; font-size: var(--fs-small); transition: background var(--t); }
+  .sub a .icon { color: var(--c-gold); }
+  .sub a:hover { background: var(--c-grey-50); }
+  .sub a[aria-current="page"] { background: var(--c-grey-50); }
+  .header-actions { margin-left: auto; display: flex; align-items: center; gap: var(--sp-2); }
+  .header-cta { display: none; }
+  @media (min-width: 640px) { .header-cta { display: inline-flex; } }
+  @media (min-width: 1200px) { .main-nav { display: block; } .menu-btn { display: none; } .header-actions { margin-left: 0; } .logo img { height: 72px; } }
+  @media (max-width: 1199px) { :global(:root) { --header-h: 76px; } }
+
+  .mobile-menu { margin: 0; width: 100%; max-width: 100%; height: 100%; max-height: 100%; padding: 0; border: 0; background: var(--c-white); color: var(--c-ink); overflow-y: auto; }
+  .mobile-menu[open] { display: flex; flex-direction: column; }
+  .mobile-menu::backdrop { background: rgba(0, 0, 0, .4); }
+  .mm-head { display: flex; align-items: center; justify-content: space-between; height: var(--header-h); padding-inline: var(--gutter); border-bottom: 1px solid var(--c-grey-200); }
+  .mm-head .logo img { height: 56px; }
+  .mm-list { list-style: none; margin: 0; padding: var(--sp-3) var(--gutter); }
+  .mm-list > li { border-bottom: 1px solid var(--c-grey-200); }
+  .mm-list summary, .mm-top { display: flex; align-items: center; justify-content: space-between; min-height: 60px; font-size: 1.25rem; font-weight: 700; cursor: pointer; list-style: none; transition: color var(--t); }
+  .mm-list summary::-webkit-details-marker { display: none; }
+  .mm-list summary:hover, .mm-top:hover { color: var(--c-grey-600); }
+  .mm-list summary .icon { transition: transform var(--t); }
+  .mm-list details[open] summary .icon { transform: rotate(180deg); }
+  .mm-list details ul { list-style: none; margin: 0 0 var(--sp-4); padding: 0; display: grid; gap: 2px; }
+  .mm-list details a { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: var(--radius); font-weight: 600; transition: background var(--t); }
+  .mm-list details a .icon { color: var(--c-gold); }
+  .mm-list details a:hover, .mm-list a[aria-current="page"] { background: var(--c-grey-50); }
+  .mm-foot { margin-top: auto; padding: var(--sp-5) var(--gutter) var(--sp-7); display: grid; gap: var(--sp-3); }
+</style>

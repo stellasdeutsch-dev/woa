@@ -1,0 +1,143 @@
+---
+import '@fontsource/montserrat/400.css';
+import '@fontsource/montserrat/500.css';
+import '@fontsource/montserrat/600.css';
+import '@fontsource/montserrat/700.css';
+import '../styles/global.css';
+import IconSprite from '../components/IconSprite.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { url, BASE, ORIGIN } from '../lib/site';
+
+interface Props { title: string; description?: string; current?: string; image?: string | null; origPath?: string; type?: string; noindex?: boolean; search?: boolean }
+const { title, description = 'The member organisation of Olympians - for Olympians. Bringing Olympic values to life.', current = Astro.url.pathname.replace(BASE, ''), image, origPath, type = 'Page', noindex = false, search = true } = Astro.props;
+const fullTitle = title === 'World Olympians Association' ? title : `${title} | World Olympians Association`;
+const ogImage = image ? new URL(image, Astro.site).href : new URL(url('/images/og-image-logo.jpg'), Astro.site).href;
+const original = ORIGIN + (origPath ?? current);
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{fullTitle}</title>
+  <meta name="description" content={description} />
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#ffffff" />
+  {noindex && <meta name="robots" content="noindex" />}
+  <link rel="icon" type="image/png" sizes="32x32" href={url('/favicon-32x32.png')} />
+  <link rel="icon" type="image/png" sizes="16x16" href={url('/favicon-16x16.png')} />
+  <link rel="apple-touch-icon" sizes="180x180" href={url('/apple-touch-icon.png')} />
+</head>
+<body data-base={BASE} data-original={original}>
+  <IconSprite />
+  <a class="skip" href="#main">Skip to content</a>
+  <Header current={current} />
+  <main id="main" data-pagefind-body={search ? '' : undefined} data-pagefind-meta={search ? `type:${type}` : undefined}>
+    <slot />
+  </main>
+  <Footer />
+
+  <dialog class="search-dialog" id="search" aria-label="Search">
+    <div class="sd-box">
+      <form class="sd-form" role="search" onsubmit="return false">
+        <svg class="icon"><use href="#i-search" /></svg>
+        <label class="sr-only" for="sd-q">Search</label>
+        <input id="sd-q" type="search" placeholder="Search" autocomplete="off" spellcheck="false" />
+        <button class="icon-btn" type="button" data-close-search aria-label="Close"><svg class="icon"><use href="#i-close" /></svg></button>
+      </form>
+      <div class="sd-results" aria-live="polite"></div>
+    </div>
+  </dialog>
+
+  <script>
+    const body = document.body;
+    const BASE = body.dataset.base || '';
+    document.documentElement.classList.add('js');
+    // tabsets
+    document.querySelectorAll('.tabset').forEach((set) => {
+      const btns = [...set.querySelectorAll<HTMLButtonElement>('.tabset-nav button')];
+      const nav = set.querySelector('.tabset-nav'); nav?.setAttribute('role', 'tablist');
+      const show = (id: string) => btns.forEach((b) => { const on = b.dataset.tab === id; b.setAttribute('aria-selected', String(on)); const p = set.querySelector<HTMLElement>('#' + CSS.escape(b.dataset.tab!)); if (p) p.hidden = !on; });
+      btns.forEach((b) => { b.setAttribute('role', 'tab'); b.addEventListener('click', () => show(b.dataset.tab!)); });
+      if (btns[0]) show(btns[0].dataset.tab!);
+    });
+    // Mobile menu
+    const menu = document.getElementById('mobile-menu') as HTMLDialogElement | null;
+    const menuBtn = document.querySelector('[data-open-menu]');
+    menuBtn?.addEventListener('click', () => { menu?.showModal(); menuBtn.setAttribute('aria-expanded', 'true'); });
+    document.querySelector('[data-close-menu]')?.addEventListener('click', () => menu?.close());
+    menu?.addEventListener('close', () => menuBtn?.setAttribute('aria-expanded', 'false'));
+    matchMedia('(min-width: 1200px)').addEventListener('change', (e) => { if (e.matches) menu?.close(); });
+
+    // Video: load youtube-nocookie only on click
+    document.addEventListener('click', (e) => {
+      const btn = (e.target as HTMLElement).closest('.video-btn') as HTMLElement | null;
+      if (!btn) return;
+      const id = btn.dataset.yt; if (!id || !/^[\w-]+$/.test(id)) return;
+      const f = document.createElement('iframe');
+      f.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`;
+      f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      f.title = 'YouTube video';
+      btn.replaceWith(f);
+    });
+
+    // Forms on this copy do not collect data: continue on the organisation's own form.
+    document.querySelectorAll('main form').forEach((form) => {
+      form.addEventListener('submit', (e) => { e.preventDefault(); window.location.href = body.dataset.original || 'https://olympians.org/'; });
+    });
+
+    // Search (Pagefind, static index)
+    const dlg = document.getElementById('search') as HTMLDialogElement;
+    const input = document.getElementById('sd-q') as HTMLInputElement;
+    const out = dlg.querySelector('.sd-results') as HTMLElement;
+    let pf: any = null; let pfLoading: Promise<any> | null = null; let seq = 0; let timer = 0;
+    const esc = (s: string) => s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]!));
+    const loadPf = () => pfLoading ??= import(/* @vite-ignore */ `${BASE}/pagefind/pagefind.js`).then(async (m) => { await m.options({ excerptLength: 22 }); m.init(); pf = m; return m; }).catch(() => { pfLoading = null; return null; });
+    const open = () => { dlg.showModal(); input.focus(); loadPf(); };
+    document.querySelectorAll('[data-open-search]').forEach((b) => b.addEventListener('click', open));
+    document.querySelector('[data-close-search]')?.addEventListener('click', () => dlg.close());
+    dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
+    document.addEventListener('keydown', (e) => { if (e.key === '/' && !dlg.open && !(e.target as HTMLElement).closest('input,textarea,select')) { e.preventDefault(); open(); } });
+    const TYPE_ORDER: Record<string, number> = { Page: 0, 'Best Practice': 2, News: 3 };
+    async function run(q: string) {
+      const my = ++seq;
+      if (q.trim().length < 2) { out.innerHTML = ''; return; }
+      const m = pf || (await loadPf()); if (my !== seq) return;
+      if (!m) { out.innerHTML = ''; return; }
+      const res = await m.search(q); if (my !== seq) return;
+      const data = await Promise.all(res.results.slice(0, 30).map((r: any) => r.data())); if (my !== seq) return;
+      const ql = q.trim().toLowerCase();
+      data.sort((a: any, b: any) => {
+        const ea = (a.meta.title || '').toLowerCase() === ql ? -10 : 0, eb = (b.meta.title || '').toLowerCase() === ql ? -10 : 0;
+        return (ea + (TYPE_ORDER[a.meta.type] ?? 1)) - (eb + (TYPE_ORDER[b.meta.type] ?? 1));
+      });
+      if (!data.length) { out.innerHTML = `<p class="sd-empty">No results</p>`; return; }
+      out.innerHTML = `<ul>${data.slice(0, 20).map((d: any) => `<li><a href="${esc(d.url)}"><span class="sd-type">${esc(d.meta.type || '')}</span><span class="sd-title">${esc(d.meta.title || '')}</span><span class="sd-ex">${d.excerpt}</span></a></li>`).join('')}</ul>`;
+    }
+    input.addEventListener('input', () => { clearTimeout(timer); timer = window.setTimeout(() => run(input.value), 160); });
+  </script>
+  <style is:global>
+    .skip { position: absolute; left: 16px; top: -60px; z-index: 100; padding: 10px 16px; background: var(--c-black); color: var(--c-white); border-radius: var(--radius); }
+    .skip:focus { top: 12px; }
+    .search-dialog { width: min(760px, calc(100% - 24px)); max-height: min(80vh, 760px); margin: 8vh auto auto; padding: 0; border: 0; border-radius: var(--radius-lg); box-shadow: 0 24px 64px rgba(0, 0, 0, .3); }
+    .search-dialog::backdrop { background: rgba(0, 0, 0, .55); }
+    .sd-box { display: flex; flex-direction: column; max-height: inherit; }
+    .sd-form { display: flex; align-items: center; gap: 12px; padding: 10px 10px 10px 20px; border-bottom: 1px solid var(--c-grey-200); }
+    .sd-form input { flex: 1; min-width: 0; border: 0; outline: none; font-size: 1.25rem; padding: 12px 0; background: transparent; }
+    .sd-form input::-webkit-search-cancel-button { display: none; }
+    .sd-results { overflow-y: auto; }
+    .sd-results ul { list-style: none; margin: 0; padding: 8px; }
+    .sd-results a { display: grid; gap: 4px; padding: 14px 16px; border-radius: var(--radius); transition: background var(--t); }
+    .sd-results a:hover, .sd-results a:focus-visible { background: var(--c-grey-50); }
+    .sd-type { font-size: var(--fs-xs); font-weight: 600; color: var(--c-grey-600); }
+    .sd-title { font-weight: 700; line-height: 1.3; }
+    .sd-ex { font-size: var(--fs-small); color: var(--c-grey-700); }
+    .sd-ex mark { background: rgba(182, 166, 127, .45); color: inherit; padding: 0 1px; }
+    .sd-empty { padding: 24px; color: var(--c-grey-600); }
+  </style>
+</body>
+</html>

@@ -1,0 +1,154 @@
+---
+import Base from '../../../layouts/Base.astro';
+import PageHero from '../../../components/PageHero.astro';
+import { page, noas } from '../../../lib/data';
+import { b } from '../../../lib/site';
+import world from '../../../data/worldmap.json';
+
+const p = page('/noas/noa-directory/');
+const list = [...noas].sort((a, z) => a.country.localeCompare(z.country));
+const letters = [...new Set(list.map(n => n.country[0].toUpperCase()))];
+const codes = new Set(list.map(n => n.code));
+const ICON: Record<string, string> = { Address: 'pin', Email: 'mail', Phone: 'phone', Website: 'globe', President: 'user', Chairperson: 'user' };
+const telHref = (v: string) => 'tel:' + v.replace(/[^\d+]/g, '');
+---
+<Base title={p.title} origPath={p.orig} image={b(p.bg)}>
+  <PageHero title={p.title} crumbs={[{ label: 'NOAs', href: '/noas/noa-guide/' }, { label: p.title }]} bg={b(p.bg)} compact>
+    <div class="dir-search">
+      <svg class="icon"><use href="#i-search" /></svg>
+      <label class="sr-only" for="noa-q">Search</label>
+      <input id="noa-q" type="search" placeholder="Search" autocomplete="off" />
+    </div>
+  </PageHero>
+
+  <section class="section-tight">
+    <div class="container">
+      <div class="dir-controls">
+        <div class="pills letters" role="group" aria-label="Letters">
+          {letters.map(l => <button class="pill" type="button" data-letter={l} aria-pressed="false">{l}</button>)}
+        </div>
+        <div class="pills view-toggle" role="group" aria-label="View">
+          <button class="pill" type="button" data-view="list" aria-pressed="true"><svg class="icon icon-sm"><use href="#i-list" /></svg>List</button>
+          <button class="pill" type="button" data-view="map" aria-pressed="false"><svg class="icon icon-sm"><use href="#i-map" /></svg>Map</button>
+        </div>
+      </div>
+
+      <div class="map-wrap" hidden>
+        <svg class="world" viewBox={`0 0 ${world.w} ${world.h}`} role="img" aria-label="Map">
+          {world.paths.map(c => codes.has(c.code)
+            ? <path d={c.d} class="has-noa" data-code={c.code} tabindex="0"><title>{c.name}</title></path>
+            : <path d={c.d} />)}
+        </svg>
+      </div>
+
+      <p class="dir-empty" hidden>No results</p>
+      <ul class="noa-list">
+        {list.map(n => (
+          <li class="noa" id={`noa-${n.code.toLowerCase()}`} data-code={n.code} data-letter={n.country[0].toUpperCase()} data-q={`${n.country} ${n.name}`.toLowerCase()}>
+            <div class="noa-head">
+              {n.flag && <img class="flag" src={b(n.flag)} alt="" width="48" height="36" loading="lazy" />}
+              <div>
+                <h2>{n.country}</h2>
+                <p class="noa-name">{n.name}</p>
+              </div>
+            </div>
+            {n.olyCount !== null && <p class="noa-oly"><span class="fact">{n.olyCount.toLocaleString('en-GB')}</span> <span>Number of Olympians registered for OLY</span></p>}
+            <details>
+              <summary>Contact Details<svg class="icon icon-sm"><use href="#i-chevron" /></svg></summary>
+              <dl>
+                {n.fields.filter((f: any) => !/registered for OLY/.test(f.label)).map((f: any) => (
+                  <div class="noa-field">
+                    <dt><svg class="icon icon-sm"><use href={`#i-${ICON[f.label] ?? 'about'}`} /></svg>{f.label}</dt>
+                    <dd>
+                      {f.links.length > 0
+                        ? f.links.map((l: any) => <a href={l.href} target={/^https?:/.test(l.href) ? '_blank' : undefined} rel="noopener">{l.text}</a>)
+                        : f.label === 'Phone' ? f.value.map((v: string) => <a href={telHref(v)}>{v}</a>)
+                        : f.value.map((v: string) => <span>{v}</span>)}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </details>
+          </li>
+        ))}
+      </ul>
+      <p class="muted dir-order">in alphabetical order</p>
+    </div>
+  </section>
+</Base>
+
+<script>
+  const q = document.getElementById('noa-q') as HTMLInputElement;
+  const items = [...document.querySelectorAll<HTMLElement>('.noa')];
+  const letterBtns = [...document.querySelectorAll<HTMLButtonElement>('[data-letter]')];
+  const empty = document.querySelector('.dir-empty') as HTMLElement;
+  let letter = ''; let code = '';
+  function apply() {
+    const s = q.value.trim().toLowerCase();
+    let shown = 0;
+    for (const el of items) {
+      const ok = (!s || el.dataset.q!.includes(s)) && (!letter || el.dataset.letter === letter) && (!code || el.dataset.code === code);
+      el.hidden = !ok; if (ok) shown++;
+    }
+    empty.hidden = shown > 0;
+    letterBtns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.letter === letter)));
+    document.querySelectorAll('.world .has-noa').forEach(p => p.classList.toggle('is-active', (p as HTMLElement).dataset.code === code));
+  }
+  q.addEventListener('input', () => { code = ''; apply(); });
+  letterBtns.forEach(b => b.addEventListener('click', () => { letter = letter === b.dataset.letter ? '' : b.dataset.letter!; code = ''; apply(); }));
+  // view toggle
+  const mapWrap = document.querySelector('.map-wrap') as HTMLElement;
+  document.querySelectorAll<HTMLButtonElement>('[data-view]').forEach(b => b.addEventListener('click', () => {
+    const map = b.dataset.view === 'map';
+    mapWrap.hidden = !map;
+    document.querySelectorAll('[data-view]').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    if (!map) { code = ''; apply(); }
+  }));
+  const pick = (c: string) => { code = code === c ? '' : c; letter = ''; q.value = ''; apply(); const el = document.querySelector(`.noa[data-code="${c}"]`); if (code && el) { (el.querySelector('details') as HTMLDetailsElement).open = true; } };
+  document.querySelectorAll<SVGPathElement>('.world .has-noa').forEach(p => {
+    p.addEventListener('click', () => pick(p.dataset.code!));
+    p.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(p.dataset.code!); } });
+  });
+  // deep link #noa-xx
+  try { const h = decodeURIComponent(location.hash); const m = h.match(/^#noa-([a-z]{2})$/); if (m) pick(m[1].toUpperCase()); } catch {}
+</script>
+
+<style>
+  .dir-search { display: flex; align-items: center; gap: 12px; max-width: 560px; margin-top: var(--sp-3); padding: 0 16px; background: var(--c-white); color: var(--c-black); border-radius: var(--radius); }
+  .dir-search input { flex: 1; min-width: 0; min-height: 56px; border: 0; outline: none; background: transparent; font-size: 1.125rem; }
+  .dir-controls { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--sp-4); margin-bottom: var(--sp-6); }
+  .letters { flex: 1 1 520px; }
+  .letters .pill { padding: 0; width: 40px; }
+  .map-wrap { margin-bottom: var(--sp-6); padding: var(--sp-5); background: var(--c-grey-50); border-radius: var(--radius-lg); }
+  .world { width: 100%; height: auto; }
+  .world path { fill: var(--c-grey-200); stroke: var(--c-white); stroke-width: .4; }
+  .world .has-noa { fill: var(--c-gold); cursor: pointer; transition: fill var(--t); outline: none; }
+  .world .has-noa:hover, .world .has-noa:focus-visible { fill: var(--c-ink); }
+  .world .has-noa.is-active { fill: var(--c-black); }
+  .noa-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-4); grid-template-columns: minmax(0, 1fr); }
+  @media (min-width: 700px) { .noa-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 1100px) { .noa-list { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .noa { display: grid; gap: var(--sp-4); align-content: start; padding: var(--sp-5); border: 1px solid var(--c-grey-200); border-radius: var(--radius-lg); background: var(--c-white); transition: border-color var(--t), box-shadow var(--t); }
+  .noa[hidden] { display: none; }
+  .noa:hover { border-color: var(--c-black); box-shadow: var(--shadow); }
+  .noa-head { display: flex; gap: var(--sp-4); align-items: center; }
+  .flag { width: 48px; height: 36px; object-fit: cover; border-radius: 3px; box-shadow: 0 0 0 1px var(--c-grey-200); flex: none; }
+  .noa h2 { font-size: var(--fs-h4); }
+  .noa-name { color: var(--c-grey-700); font-size: var(--fs-small); line-height: 1.4; }
+  .noa-oly { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; font-size: var(--fs-xs); color: var(--c-grey-700); }
+  .noa-oly .fact { font-size: 1.375rem; }
+  .noa details { border-top: 1px solid var(--c-grey-200); padding-top: var(--sp-3); }
+  .noa summary { display: flex; justify-content: space-between; align-items: center; min-height: 40px; font-weight: 600; font-size: var(--fs-small); cursor: pointer; list-style: none; border-radius: var(--radius); transition: color var(--t); }
+  .noa summary:hover { color: var(--c-grey-600); }
+  .noa summary::-webkit-details-marker { display: none; }
+  .noa summary .icon { transition: transform var(--t); }
+  .noa details[open] summary .icon { transform: rotate(180deg); }
+  .noa dl { margin: var(--sp-3) 0 0; display: grid; gap: var(--sp-3); }
+  .noa-field dt { display: flex; align-items: center; gap: 8px; font-size: var(--fs-xs); font-weight: 600; color: var(--c-grey-600); }
+  .noa-field dt .icon { color: var(--c-gold); width: 16px; height: 16px; }
+  .noa-field dd { margin: 4px 0 0 24px; display: grid; font-size: var(--fs-small); line-height: 1.5; }
+  .noa-field dd a { overflow-wrap: anywhere; text-decoration: underline; text-decoration-color: var(--c-gold); text-underline-offset: 3px; transition: color var(--t); }
+  .noa-field dd a:hover { color: var(--c-grey-600); }
+  .dir-empty { padding: var(--sp-7) 0; color: var(--c-grey-600); }
+  .dir-order { margin-top: var(--sp-6); font-size: var(--fs-small); }
+</style>

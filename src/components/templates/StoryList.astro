@@ -1,0 +1,44 @@
+---
+import PageHero from '../PageHero.astro';
+import StoryCard from '../StoryCard.astro';
+import { url } from '../../lib/site';
+import type { Story } from '../../lib/data';
+interface Props { title: string; base: string; all: Story[]; items: Story[]; page?: number; pages?: number; year?: string; bg?: string; intro?: any }
+const { title, base, all, items, page = 1, pages = 1, year, bg } = Astro.props;
+const years = [...new Set(all.map(s => s.date!.slice(0, 4)))].sort().reverse();
+const [first, ...rest] = items;
+const pageHref = (n: number) => url(n === 1 ? base : `${base}page/${n}/`);
+const crumbs = year ? [{ label: title, href: base }, { label: year }] : [];
+---
+<PageHero title={year ? `${title} ${year}` : title} crumbs={crumbs} bg={bg} compact>
+  <nav class="pills year-pills" aria-label="Year">
+    <a class="pill" href={url(base)} aria-current={!year ? 'page' : undefined}>All</a>
+    {years.map(y => <a class="pill" href={url(`${base}year/${y}/`)} aria-current={y === year ? 'page' : undefined}>{y}</a>)}
+  </nav>
+</PageHero>
+<section class="section-tight">
+  <div class="container">
+    <slot />
+    {page === 1 && first && <div class="lead-story"><StoryCard item={first} size="lg" headingLevel="h2" /></div>}
+    <div class="grid grid-3">
+      {(page === 1 ? rest : items).map(s => <StoryCard item={s} headingLevel="h2" />)}
+    </div>
+    {pages > 1 && (
+      <nav class="pager" aria-label="Pages">
+        {page > 1 && <a class="pill" href={pageHref(page - 1)} aria-label="Previous"><svg class="icon icon-sm"><use href="#i-arrow-left" /></svg></a>}
+        {Array.from({ length: pages }, (_, k) => k + 1).filter(n => n === 1 || n === pages || Math.abs(n - page) <= 2).map((n, k, arr) => (
+          <>{k > 0 && n - arr[k - 1] > 1 && <span class="pager-gap">…</span>}<a class="pill" href={pageHref(n)} aria-current={n === page ? 'page' : undefined}>{n}</a></>
+        ))}
+        {page < pages && <a class="pill" href={pageHref(page + 1)} aria-label="Next"><svg class="icon icon-sm"><use href="#i-arrow" /></svg></a>}
+      </nav>
+    )}
+  </div>
+</section>
+<style>
+  .year-pills { margin-top: var(--sp-3); }
+  .year-pills .pill { background: transparent; color: var(--c-white); border-color: rgba(255, 255, 255, .35); }
+  .year-pills .pill:hover { border-color: var(--c-white); }
+  .year-pills .pill[aria-current="page"] { background: var(--c-white); color: var(--c-black); border-color: var(--c-white); }
+  .lead-story { margin-bottom: var(--sp-5); }
+  .pager-gap { align-self: center; color: var(--c-grey-600); padding: 0 4px; }
+</style>

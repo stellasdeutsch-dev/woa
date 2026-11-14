@@ -1,0 +1,73 @@
+---
+import StoryCard from '../StoryCard.astro';
+import { prose, b, fmtDate, url, ORIGIN } from '../../lib/site';
+import { crumbsFor, type Story } from '../../lib/data';
+interface Props { story: Story; related: Story[]; kind: 'News' | 'Best Practice'; listHref: string; prev?: Story; next?: Story }
+const { story, related, kind, listHref, prev, next } = Astro.props;
+let { html } = prose(story.body, { toc: false });
+// the lead image is shown above; drop an identical trailing copy
+const img = b(story.img);
+const shareUrl = encodeURIComponent(new URL(url(story.path), Astro.site).href);
+const shareText = encodeURIComponent(story.title);
+const crumbs = crumbsFor(story);
+---
+<article class="article">
+  <header class="container art-head">
+    <nav class="crumbs crumbs-dark" aria-label="Breadcrumb">
+      <a href={url('/')}>Home</a>
+      {crumbs.slice(0, -1).map(c => (<><svg class="icon"><use href="#i-chevron" /></svg><a href={url(c.href!)}>{c.label}</a></>))}
+    </nav>
+    <h1>{story.title}</h1>
+    <div class="art-meta">
+      {story.date && <p class="card-meta art-date"><svg class="icon"><use href="#i-calendar" /></svg><time datetime={story.date}>{fmtDate(story.date)}</time></p>}
+      <div class="share" aria-label="Share">
+        <a class="icon-btn" href={`https://twitter.com/intent/tweet?url=${shareUrl}&text=${shareText}`} target="_blank" rel="noopener" aria-label="X"><svg class="icon"><use href="#i-x" /></svg></a>
+        <a class="icon-btn" href={`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`} target="_blank" rel="noopener" aria-label="Facebook"><svg class="icon"><use href="#i-facebook" /></svg></a>
+        <a class="icon-btn" href={`https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`} target="_blank" rel="noopener" aria-label="LinkedIn"><svg class="icon"><use href="#i-linkedin" /></svg></a>
+        <button class="icon-btn" type="button" data-copy-link aria-label="Copy link"><svg class="icon"><use href="#i-link" /></svg></button>
+      </div>
+    </div>
+  </header>
+  {img && <figure class="container art-figure"><img src={img} alt="" fetchpriority="high" /></figure>}
+  <div class="container art-body">
+    <div class="prose" set:html={html} />
+  </div>
+  {(prev || next) && (
+    <nav class="container art-pn" aria-label={kind}>
+      {next ? <a class="pn-link" href={url(next.path)}><svg class="icon"><use href="#i-arrow-left" /></svg><span>{next.title}</span></a> : <span />}
+      {prev ? <a class="pn-link pn-next" href={url(prev.path)}><span>{prev.title}</span><svg class="icon"><use href="#i-arrow" /></svg></a> : <span />}
+    </nav>
+  )}
+</article>
+{related.length > 0 && (
+  <section class="section bg-grey" data-pagefind-ignore>
+    <div class="container">
+      <div class="section-head"><h2>{kind === 'News' ? 'News' : 'Best Practices'}</h2><a class="link-arrow" href={url(listHref)}>{kind === 'News' ? 'News' : 'Best Practices'}<svg class="icon"><use href="#i-arrow" /></svg></a></div>
+      <div class="grid grid-3">{related.slice(0, 3).map(r => <StoryCard item={r} />)}</div>
+    </div>
+  </section>
+)}
+<script>
+  document.querySelectorAll('[data-copy-link]').forEach((btn) => btn.addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(location.href); btn.classList.add('copied'); setTimeout(() => btn.classList.remove('copied'), 1500); } catch {}
+  }));
+</script>
+<style>
+  .art-head { padding-top: var(--sp-7); display: grid; gap: var(--sp-5); max-width: calc(960px + 2 * var(--gutter)); }
+  .crumbs-dark { color: var(--c-grey-600); }
+  .crumbs-dark a:hover { color: var(--c-black); }
+  .art-head h1 { font-size: var(--fs-h1); }
+  .art-meta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--sp-3); padding-block: var(--sp-3); border-block: 1px solid var(--c-grey-200); }
+  .art-date { font-size: var(--fs-small); }
+  .share { display: flex; gap: 4px; }
+  .share .icon-btn:hover { background: var(--c-black); color: var(--c-white); }
+  .share .copied { background: var(--c-gold) !important; color: var(--c-black) !important; }
+  .art-figure { margin: var(--sp-6) auto 0; max-width: calc(960px + 2 * var(--gutter)); }
+  .art-figure img { width: 100%; max-height: 640px; object-fit: cover; border-radius: var(--radius-lg); background: var(--c-grey-100); }
+  .art-body { max-width: calc(960px + 2 * var(--gutter)); padding-block: var(--sp-7) var(--sp-8); }
+  .art-pn { max-width: calc(960px + 2 * var(--gutter)); display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sp-3); padding-bottom: var(--sp-8); }
+  @media (min-width: 834px) { .art-pn { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .pn-link { display: flex; align-items: center; gap: var(--sp-3); padding: var(--sp-4) var(--sp-5); border: 1px solid var(--c-grey-200); border-radius: var(--radius-lg); font-weight: 600; line-height: 1.35; transition: border-color var(--t), background var(--t); }
+  .pn-link:hover { border-color: var(--c-black); background: var(--c-grey-50); }
+  .pn-next { justify-content: flex-end; text-align: right; }
+</style>

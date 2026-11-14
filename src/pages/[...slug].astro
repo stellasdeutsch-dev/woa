@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro';
+import ContentPage from '../components/templates/ContentPage.astro';
+import Article from '../components/templates/Article.astro';
+import { pages, news, practices, redirects, type Story } from '../lib/data';
+import { url, b, textOf } from '../lib/site';
+
+export function getStaticPaths() {
+  const SPECIAL = new Set(['/woa/about/', '/woa/leadership/', '/woa/contact-us/', '/olympians/oly/', '/olympians/health/', '/noas/grants/', '/noas/noa-directory/', '/oly-house/', '/oly-house/2024/', '/oly-house/2022/', '/oly-house/2020/', '/news/', '/best-practices/']);
+  const strip = (p: string) => p.replace(/^\/|\/$/g, '');
+  const out: any[] = [];
+  for (const p of pages) if (!SPECIAL.has(p.path)) out.push({ params: { slug: strip(p.path) }, props: { kind: 'page', item: p } });
+  news.forEach((n, i) => out.push({ params: { slug: strip(n.path) }, props: { kind: 'news', item: n, i } }));
+  practices.forEach((n, i) => out.push({ params: { slug: strip(n.path) }, props: { kind: 'bp', item: n, i } }));
+  const taken = new Set(out.map(o => o.params.slug));
+  for (const r of redirects) if (!taken.has(strip(r.from))) out.push({ params: { slug: strip(r.from) }, props: { kind: 'redirect', to: r.to } });
+  return out;
+}
+const { kind, item, i, to } = Astro.props as any;
+let related: Story[] = [];
+if (kind === 'news') {
+  const byPath = new Map(news.map(n => [n.path, n]));
+  related = (item.related as string[]).map((h: string) => byPath.get(h.replace('{{BASE}}', ''))).filter(Boolean) as Story[];
+  if (related.length < 3) related = [...related, ...news.filter(n => n.path !== item.path && !related.includes(n)).slice(i > 3 ? i - 3 : i + 1, i > 3 ? i : i + 4)].slice(0, 3);
+}
+if (kind === 'bp') related = practices.filter(p => p.path !== item.path).slice(Math.max(0, i - 1), Math.max(0, i - 1) + 3);
+const list = kind === 'news' ? news : practices;
+---
+{kind === 'redirect' ? (
+  <html lang="en"><head><meta charset="utf-8" /><meta http-equiv="refresh" content={`0; url=${url(to)}`} /><link rel="canonical" href={url(to)} /><meta name="robots" content="noindex" /><title>World Olympians Association</title></head><body><a href={url(to)}>{url(to)}</a></body></html>
+) : kind === 'page' ? (
+  <Base title={item.title} origPath={item.orig} description={item.desc || undefined} image={b(item.bg)}>
+    <ContentPage page={item} />
+  </Base>
+) : (
+  <Base title={item.title} origPath={item.orig} type={kind === 'news' ? 'News' : 'Best Practice'} description={item.excerpt?.slice(0, 160)} image={b(item.img)}>
+    <Article story={item} related={related} kind={kind === 'news' ? 'News' : 'Best Practice'} listHref={kind === 'news' ? '/news/' : '/best-practices/'} prev={list[i - 1]} next={list[i + 1]} />
+  </Base>
+)}

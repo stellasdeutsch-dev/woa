@@ -1,0 +1,54 @@
+[
+ {
+  "from": "/woa/about/introduction/",
+  "to": "/woa/about/"
+ },
+ {
+  "from": "/noas/noa-guide/overview/",
+  "to": "/noas/noa-guide/"
+ },
+ {
+  "from": "/olympians/wof/agenda/",
+  "to": "/olympians/wof/"
+ },
+ {
+  "from": "/oly-house/be-oly/",
+  "to": "/olympians/oly/"
+ },
+ {
+  "from": "/oly-house/what-we-love-about-the-games/",
+  "to": "/oly-house/what-we-love/2022/"
+ },
+ {
+  "from": "/oly-house/olympians-for-life/",
+  "to": "/olympians/olympians-for-life/"
+ },
+ {
+  "from": "/oly-house/1964-reunion/",
+  "to": "/oly-house/1964-reunion/2020/"
+ },
+ {
+  "from": "/oly-house/international-day-of-friendship/",
+  "to": "/oly-house/international-day-of-friendship/2020/"
+ },
+ {
+  "from": "/oly-house/what-we-love/",
+  "to": "/oly-house/what-we-love/2022/"
+ },
+ {
+  "from": "/rio-2016/",
+  "to": "/pyeongchang-2018/"
+ },
+ {
+  "from": "/woa/grants/",
+  "to": "/noas/grants/"
+ },
+ {
+  "from": "/olympians/the-olympians-network/register/",
+  "to": "/olympians/olympian-org-email/"
+ },
+ {
+  "from": "/olympians/noa-directory/",
+  "to": "/noas/noa-directory/"
+ }
+]

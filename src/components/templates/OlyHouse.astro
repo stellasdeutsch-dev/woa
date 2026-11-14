@@ -1,0 +1,91 @@
+---
+import * as cheerio from 'cheerio';
+import PageHero from '../PageHero.astro';
+import { b } from '../../lib/site';
+import type { Page } from '../../lib/data';
+interface Props { page: Page; year?: string }
+const { page: p, year } = Astro.props;
+const $ = cheerio.load(b(p.body), null, false);
+const root = $.root();
+const gamesLink = root.children('a').first();
+const gamesLogo = gamesLink.find('img').attr('src');
+const gamesHref = gamesLink.attr('href');
+const pastTitle = $('h4').last().text().trim();
+const past = $('h4').last().next('ul').find('a').map((_, a) => ({ href: $(a).attr('href'), img: $(a).find('img').attr('src') })).get();
+const ICONS = ['house', 'excellence', 'life', 'forum', 'practice', 'life', 'skills'];
+type Tile = { href?: string; title: string; text: string; ext: boolean; imgs: string[] };
+const tiles: Tile[] = [];
+root.children().each((_, el) => {
+  const e = $(el);
+  if (e.is('h4') || e.is('ul') || (e.is('a') && e.is(gamesLink))) return;
+  const a = e.is('a') ? e : e.find('a').first();
+  const strong = e.find('strong').first().text().replace(/\s+/g, ' ').trim();
+  const em = e.find('em').first().text().replace(/\s+/g, ' ').trim();
+  const imgs = e.find('img').map((_, i) => $(i).attr('src')!).get();
+  if (!strong && !imgs.length && !a.text().trim()) return;
+  tiles.push({ href: a.attr('href'), title: strong || a.text().trim(), text: em, ext: /^https?:/.test(a.attr('href') || ''), imgs });
+});
+const [first, ...others] = tiles;
+const lastH4 = $('h4').last();
+const recent = lastH4.length && !lastH4.next('ul').length && lastH4.find('a').length ? { href: lastH4.find('a').attr('href'), text: lastH4.text().replace(/→/, '').trim() } : null;
+---
+<PageHero title={year ? `${p.title} ${year}` : p.title} crumbs={year ? [{ label: 'OLY House', href: '/oly-house/' }, { label: year }] : []} compact />
+<section class="section">
+  <div class="container">
+    <div class="oh-top">
+      {gamesLogo && <a class="oh-logo" href={gamesHref} target="_blank" rel="noopener"><img src={gamesLogo} alt="" /></a>}
+      {first && (
+        <a class="oh-feature" href={first.href ?? undefined} target={first.ext ? '_blank' : undefined} rel="noopener">
+          <span class="topic-icon"><svg class="icon icon-lg"><use href="#i-house" /></svg></span>
+          <h2>{first.title}</h2>
+          {first.text && <p class="lead">{first.text}</p>}
+          {first.href && <span class="link-arrow">{first.ext ? <svg class="icon"><use href="#i-external" /></svg> : <svg class="icon"><use href="#i-arrow" /></svg>}</span>}
+        </a>
+      )}
+    </div>
+    <div class="grid grid-3 oh-tiles">
+      {others.map((t, i) => t.imgs.length && !t.title.trim() || t.imgs.length ? (
+        <a class="card oh-img" href={t.href} target={t.ext ? '_blank' : undefined} rel="noopener">{t.imgs.map(s => <img src={s} alt="" loading="lazy" />)}</a>
+      ) : (
+        <a class="card topic-card" href={t.href ?? undefined} target={t.ext ? '_blank' : undefined} rel="noopener">
+          <div class="card-body">
+            <span class="topic-icon"><svg class="icon icon-lg"><use href={`#i-${ICONS[(i + 1) % ICONS.length]}`} /></svg></span>
+            <h3 class="card-title">{t.title}</h3>
+            {t.text && <p class="card-text">{t.text}</p>}
+            <span class="card-foot">{t.ext ? <svg class="icon"><use href="#i-external" /></svg> : <svg class="icon"><use href="#i-arrow" /></svg>}</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+{recent && (
+  <section class="section-tight bg-grey"><div class="container"><a class="btn" href={recent.href}><svg class="icon"><use href="#i-house" /></svg>{recent.text}<svg class="icon icon-arrow"><use href="#i-arrow" /></svg></a></div></section>
+)}
+{past.length > 0 && (
+  <section class="section bg-grey">
+    <div class="container">
+      <div class="section-head"><h2>{pastTitle}</h2></div>
+      <ul class="past">{past.map(x => <li><a href={x.href}><img src={x.img} alt="" loading="lazy" /></a></li>)}</ul>
+    </div>
+  </section>
+)}
+<style>
+  .oh-top { display: grid; gap: var(--sp-5); grid-template-columns: minmax(0, 1fr); margin-bottom: var(--sp-5); }
+  @media (min-width: 834px) { .oh-top { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); } }
+  .oh-logo { display: grid; place-items: center; padding: var(--sp-6); border: 1px solid var(--c-grey-200); border-radius: var(--radius-lg); transition: border-color var(--t); }
+  .oh-logo:hover { border-color: var(--c-black); }
+  .oh-logo img { max-height: 220px; width: auto; }
+  .oh-feature { display: grid; gap: var(--sp-4); align-content: center; justify-items: start; padding: clamp(24px, 4vw, 48px); background: var(--c-black); color: var(--c-white); border-radius: var(--radius-lg); transition: background var(--t); }
+  .oh-feature:hover { background: var(--c-ink); }
+  .oh-feature h2 { font-size: var(--fs-h2); }
+  .oh-feature .lead { color: var(--c-grey-400); }
+  .oh-feature .topic-icon { display: inline-grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; border: 1.5px solid var(--c-gold); color: var(--c-gold); }
+  .oh-feature .link-arrow { color: var(--c-gold); }
+  .oh-img { display: grid; gap: var(--sp-3); padding: var(--sp-4); }
+  .oh-img img { width: 100%; height: auto; }
+  .past { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-4); grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); }
+  .past a { display: grid; place-items: center; height: 180px; padding: var(--sp-5); background: var(--c-white); border: 1px solid var(--c-grey-200); border-radius: var(--radius-lg); transition: border-color var(--t), transform var(--t); }
+  .past a:hover { border-color: var(--c-black); transform: translateY(-2px); }
+  .past img { max-height: 130px; width: auto; }
+</style>

@@ -1,0 +1,15 @@
+---
+import { b } from '../lib/site';
+interface Props { items: { label: string; href: string }[]; title?: string }
+const { items, title } = Astro.props;
+---
+{items.length > 0 && (
+  <div class="panel">
+    {title && <h2>{title}</h2>}
+    <ul class="docs">
+      {items.map(d => (
+        <li><a class="doc-row" href={b(d.href)} target="_blank" rel="noopener"><svg class="icon icon-doc"><use href="#i-doc" /></svg><span>{d.label}</span><svg class="icon icon-download"><use href="#i-download" /></svg></a></li>
+      ))}
+    </ul>
+  </div>
+)}

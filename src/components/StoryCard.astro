@@ -1,0 +1,18 @@
+---
+import { b, fmtDate } from '../lib/site';
+interface Props { item: { path: string; title: string; date?: string | null; img?: string | null; excerpt?: string }; size?: 'lg' | 'md'; showExcerpt?: boolean; headingLevel?: 'h2' | 'h3' }
+const { item, size = 'md', showExcerpt = true, headingLevel = 'h3' } = Astro.props;
+const H = headingLevel;
+---
+<article class:list={['card', 'story', `story-${size}`]}>
+  <div class="card-media">{item.img && <img src={b(item.img)} alt="" loading="lazy" decoding="async" />}</div>
+  <div class="card-body">
+    {item.date && <p class="card-meta"><svg class="icon"><use href="#i-calendar" /></svg><time datetime={item.date}>{fmtDate(item.date)}</time></p>}
+    <H class="card-title"><a class="card-link" href={b('{{BASE}}' + item.path)}>{item.title}</a></H>
+    {showExcerpt && item.excerpt && <p class="card-text">{item.excerpt}</p>}
+  </div>
+</article>
+<style>
+  .story-lg .card-title { font-size: var(--fs-h3); }
+  @media (min-width: 834px) { .story-lg { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); } .story-lg .card-media { aspect-ratio: auto; min-height: 380px; } .story-lg .card-body { padding: var(--sp-7); justify-content: center; } }
+</style>

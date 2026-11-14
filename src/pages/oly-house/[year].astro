@@ -1,0 +1,9 @@
+---
+import Base from '../../layouts/Base.astro';
+import OlyHouse from '../../components/templates/OlyHouse.astro';
+import { page } from '../../lib/data';
+export function getStaticPaths() { return ['2024', '2022', '2020'].map(year => ({ params: { year } })); }
+const year = Astro.params.year!;
+const p = page(`/oly-house/${year}/`);
+---
+<Base title={`${p.title} ${year}`} origPath={p.orig}><OlyHouse page={p} year={year} /></Base>

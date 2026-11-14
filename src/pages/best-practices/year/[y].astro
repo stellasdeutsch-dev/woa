@@ -1,0 +1,14 @@
+---
+import Base from '../../../layouts/Base.astro';
+import StoryList from '../../../components/templates/StoryList.astro';
+import { practices } from '../../../lib/data';
+import { b } from '../../../lib/site';
+export function getStaticPaths() {
+  return [...new Set(practices.map(s => s.date!.slice(0, 4)))].map(y => ({ params: { y } }));
+}
+const y = Astro.params.y!;
+const items = practices.filter(s => s.date!.startsWith(y));
+---
+<Base title={`Best Practices ${y}`} type="Page" search={false}>
+  <StoryList title="Best Practices" base="/best-practices/" all={practices} items={items} year={y} bg={b(items[0].img)} />
+</Base>

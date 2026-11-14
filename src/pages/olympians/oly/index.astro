@@ -1,0 +1,92 @@
+---
+import * as cheerio from 'cheerio';
+import Base from '../../../layouts/Base.astro';
+import PageHero from '../../../components/PageHero.astro';
+import { page } from '../../../lib/data';
+import { b, url, prose } from '../../../lib/site';
+
+const p = page('/olympians/oly/');
+const $ = cheerio.load(b(p.body), null, false);
+const intro = $('form > p').map((_, el) => $(el).html()!.trim()).get();
+// intro: [join, recognition, post-nominal, instructions, signature img, name]
+const textPs = intro.filter(h => !/<img/.test(h));
+const join = textPs[0];
+const benefits = textPs.slice(1, 3);
+const instruction = textPs[3];
+const signer = textPs[4];
+const sig = $('form img').first().attr('src');
+const fieldset = $('fieldset').first();
+// Code of conduct -> disclosure
+const coc = fieldset.find('h4').first();
+if (coc.length) {
+  const parts = [coc.next('p'), coc.next('p').next('ol')];
+  const html = `<details class="coc"><summary>${coc.text()}<svg class="icon"><use href="#i-chevron"/></svg></summary><div>${parts.map(x => $.html(x)).join('')}</div></details>`;
+  parts.forEach(x => x.remove()); coc.replaceWith(html);
+}
+fieldset.find('a').filter((_, a) => !$(a).text().trim()).remove();
+const legend = fieldset.find('legend').first().text().trim();
+const formHtml = `<form id="register" novalidate>${$.html(fieldset)}</form>`;
+const video = (p.body.match(/data-yt="([\w-]+)"/) || [])[1];
+const { html: videoHtml } = prose(video ? `<div class="video" data-yt="${video}"></div>` : '');
+const gallery = $('ul > li > img').map((_, i) => $(i).attr('src')).get();
+const ICONS = ['oly', 'excellence'];
+---
+<Base title={p.title} origPath={p.orig} image={b(p.bg)}>
+  <PageHero title={p.title} crumbs={[{ label: 'Olympians', href: '/olympians/oly/' }, { label: 'OLY' }]} bg={b(p.bg)}>
+    <p class="lead" set:html={join} />
+    <div><a class="btn btn-gold" href="#register"><svg class="icon"><use href="#i-oly" /></svg>{legend}</a></div>
+  </PageHero>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid-2 benefits">
+        {benefits.map((h, i) => (
+          <div class="benefit"><span class="topic-icon"><svg class="icon icon-lg"><use href={`#i-${ICONS[i]}`} /></svg></span><p set:html={h} /></div>
+        ))}
+      </div>
+      <ul class="gallery">
+        {gallery.map(src => <li><img src={src} alt="" loading="lazy" /></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section bg-grey">
+    <div class="container oly-form-wrap">
+      <div class="oly-side">
+        <div class="note">
+          <p set:html={instruction} />
+          {sig && <img class="sig" src={sig} alt="" loading="lazy" />}
+          <p class="signer" set:html={signer} />
+        </div>
+        {video && <div set:html={videoHtml} />}
+      </div>
+      <div class="form-card prose" set:html={formHtml} />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .benefits { gap: var(--sp-5); }
+  .benefit { display: grid; gap: var(--sp-5); align-content: start; padding: clamp(24px, 4vw, 40px); border: 1px solid var(--c-grey-200); border-radius: var(--radius-lg); transition: border-color var(--t); }
+  .benefit:hover { border-color: var(--c-black); }
+  .benefit p { font-size: var(--fs-lead); line-height: 1.5; }
+  .benefit .topic-icon { display: inline-grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; border: 1.5px solid var(--c-gold); }
+  .gallery { list-style: none; margin: var(--sp-7) 0 0; padding: 0; display: grid; gap: var(--sp-4); grid-template-columns: minmax(0, 1fr); }
+  @media (min-width: 640px) { .gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .gallery li { border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 4 / 3; }
+  .gallery img { width: 100%; height: 100%; object-fit: cover; transition: transform 400ms ease; }
+  .gallery li:hover img { transform: scale(1.04); }
+  .oly-form-wrap { display: grid; gap: var(--sp-7); grid-template-columns: minmax(0, 1fr); align-items: start; }
+  @media (min-width: 1024px) { .oly-form-wrap { grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: var(--sp-8); } .oly-side { position: sticky; top: calc(var(--header-h) + 24px); } }
+  .oly-side { display: grid; gap: var(--sp-6); }
+  .note { display: grid; gap: var(--sp-4); padding: var(--sp-6); background: var(--c-white); border-radius: var(--radius-lg); }
+  .note .sig { width: 180px; height: auto; }
+  .signer { font-size: var(--fs-small); }
+  .form-card :global(.coc) { border: 1px solid var(--c-grey-200); border-radius: var(--radius); margin: var(--sp-2) 0 var(--sp-3); }
+  .form-card :global(.coc summary) { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); padding: 12px 16px; font-weight: 600; font-size: var(--fs-small); cursor: pointer; list-style: none; transition: background var(--t); }
+  .form-card :global(.coc summary:hover) { background: var(--c-grey-50); }
+  .form-card :global(.coc summary::-webkit-details-marker) { display: none; }
+  .form-card :global(.coc[open] summary .icon) { transform: rotate(180deg); }
+  .form-card :global(.coc summary .icon) { transition: transform var(--t); }
+  .form-card :global(.coc > div) { padding: 0 16px 16px; font-size: var(--fs-small); }
+</style>

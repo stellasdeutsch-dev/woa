@@ -1,0 +1,17 @@
+---
+import Base from '../../../layouts/Base.astro';
+import StoryList from '../../../components/templates/StoryList.astro';
+import { practices as all } from '../../../lib/data';
+import { b } from '../../../lib/site';
+const PER = 18;
+export function getStaticPaths() {
+  const n = Math.ceil((practices.length - 1) / 18);
+  return Array.from({ length: n - 1 }, (_, k) => ({ params: { n: String(k + 2) } }));
+}
+import { practices } from '../../../lib/data';
+const n = Number(Astro.params.n);
+const items = all.slice(1 + (n - 1) * PER, 1 + n * PER);
+---
+<Base title={`Best Practices – ${n}`} type="Page" search={false}>
+  <StoryList title="Best Practices" base="/best-practices/" all={all} items={items} page={n} pages={Math.ceil((all.length - 1) / PER)} bg={b(all[0].img)} />
+</Base>

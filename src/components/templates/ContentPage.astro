@@ -1,0 +1,34 @@
+---
+import PageHero from '../PageHero.astro';
+import Tabs from '../Tabs.astro';
+import Docs from '../Docs.astro';
+import { prose, b, BASE } from '../../lib/site';
+import { crumbsFor, type Page } from '../../lib/data';
+interface Props { page: Page }
+const { page } = Astro.props;
+const { html, toc } = prose(page.body);
+const docsInBody = new Set([...page.body.matchAll(/href="([^"]+)"/g)].map(m => m[1]));
+const downloads = page.downloads.filter(d => /\.(pdf|docx?|xlsx?|pptx?|zip)(\?|$)/i.test(d.href) || /library/.test(d.href)).filter(d => !docsInBody.has(d.href));
+const showToc = toc.length >= 3;
+const hasAside = downloads.length > 0 || showToc;
+const current = BASE + page.path;
+---
+<PageHero title={page.title} crumbs={crumbsFor(page)} bg={b(page.bg)} />
+{page.tabs.length > 1 && <Tabs tabs={page.tabs} current={current} />}
+<section class="section-tight">
+  <div class:list={['container', 'page-layout', { 'has-aside': hasAside }]}>
+    <div class="prose" set:html={html} />
+    {hasAside && (
+      <aside class="aside">
+        <div class="aside aside-sticky">
+          <Docs items={downloads} />
+          {showToc && (
+            <nav class="panel toc" aria-label="On this page">
+              <ol>{toc.map(t => <li><a href={`#${t.id}`}>{t.text}</a></li>)}</ol>
+            </nav>
+          )}
+        </div>
+      </aside>
+    )}
+  </div>
+</section>

@@ -1,0 +1,4522 @@
+[
+ {
+  "path": "/",
+  "status": 200,
+  "final": "https://olympians.org/"
+ },
+ {
+  "path": "/woa/about/introduction/",
+  "status": 200,
+  "final": "https://olympians.org/woa/about/introduction/"
+ },
+ {
+  "path": "/woa/about/",
+  "status": 200,
+  "final": "https://olympians.org/woa/about/introduction/"
+ },
+ {
+  "path": "/woa/olympism/",
+  "status": 200,
+  "final": "https://olympians.org/woa/olympism/"
+ },
+ {
+  "path": "/woa/leadership/",
+  "status": 200,
+  "final": "https://olympians.org/woa/leadership/"
+ },
+ {
+  "path": "/woa/contact-us/",
+  "status": 200,
+  "final": "https://olympians.org/woa/contact-us/"
+ },
+ {
+  "path": "/olympians/oly/",
+  "status": 200,
+  "final": "https://olympians.org/olympians/oly/"
+ },
+ {
+  "path": "/olympians/olympian-org-email/",
+  "status": 200,
+  "final": "https://olympians.org/olympians/olympian-org-email/"
+ },
+ {
+  "path": "/olympians/health/",
+  "status": 200,
+  "final": "https://olympians.org/olympians/health/"
+ },
+ {
+  "path": "/olympians/olympians-for-life/",
+  "status": 200,
+  "final": "https://olympians.org/olympians/olympians-for-life/"
+ },
+ {
+  "path": "/olympians/wof/",
+  "status": 200,
+  "final": "https://olympians.org/olympians/wof/"
+ },
+ {
+  "path": "/noas/noa-guide/overview/",
+  "status": 200,
+  "final": "https://olympians.org/noas/noa-guide/overview/"
+ },
+ {
+  "path": "/noas/noa-guide/",
+  "status": 200,
+  "final": "https://olympians.org/noas/noa-guide/overview/"
+ },
+ {
+  "path": "/noas/noa-directory/",
+  "status": 200,
+  "final": "https://olympians.org/noas/noa-directory/"
+ },
+ {
+  "path": "/noas/grants/",
+  "status": 200,
+  "final": "https://olympians.org/noas/grants/"
+ },
+ {
+  "path": "/news/",
+  "status": 200,
+  "final": "https://olympians.org/news/"
+ },
+ {
+  "path": "/oly-house/",
+  "status": 200,
+  "final": "https://olympians.org/oly-house/"
+ },
+ {
+  "path": "/best-practices/",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/"
+ },
+ {
+  "path": "/skillsbuild/",
+  "status": 200,
+  "final": "https://olympians.org/skillsbuild/"
+ },
+ {
+  "path": "/news/2069/cabo-verde-olympians-strengthen-communities-through-sport-and-solidarity/",
+  "status": 200,
+  "final": "https://olympians.org/news/2069/cabo-verde-olympians-strengthen-communities-through-sport-and-solidarity/"
+ },
+ {
+  "path": "/news/2066/monaco-olympians-celebrate-30th-anniversary/",
+  "status": 200,
+  "final": "https://olympians.org/news/2066/monaco-olympians-celebrate-30th-anniversary/"
+ },
+ {
+  "path": "/news/2063/olympian-for-life-simidele-adeagbo-oly-opens-latest-grants-for-female-athletes-after-reaching-100-000-milestone/",
+  "status": 200,
+  "final": "https://olympians.org/news/2063/olympian-for-life-simidele-adeagbo-oly-opens-latest-grants-for-female-athletes-after-reaching-100-000-milestone/"
+ },
+ {
+  "path": "/news/2060/jamaican-olympians-and-global-olympians-community-rebuild-steths-after-hurricane-melissa/",
+  "status": 200,
+  "final": "https://olympians.org/news/2060/jamaican-olympians-and-global-olympians-community-rebuild-steths-after-hurricane-melissa/"
+ },
+ {
+  "path": "/news/2057/olympian-community-called-on-to-support-nepal-following-devastating-floods/",
+  "status": 200,
+  "final": "https://olympians.org/news/2057/olympian-community-called-on-to-support-nepal-following-devastating-floods/"
+ },
+ {
+  "path": "/news/2054/woa-mourns-the-passing-of-three-time-olympian-king-harald-v-of-norway/",
+  "status": 200,
+  "final": "https://olympians.org/news/2054/woa-mourns-the-passing-of-three-time-olympian-king-harald-v-of-norway/"
+ },
+ {
+  "path": "/news/2051/woa-and-ioc-meet-to-discuss-transition-and-next-steps/",
+  "status": 200,
+  "final": "https://olympians.org/news/2051/woa-and-ioc-meet-to-discuss-transition-and-next-steps/"
+ },
+ {
+  "path": "/news/2050/2026-applications-open-for-full-scholarships-with-the-university-of-london/",
+  "status": 200,
+  "final": "https://olympians.org/news/2050/2026-applications-open-for-full-scholarships-with-the-university-of-london/"
+ },
+ {
+  "path": "/news/2049/new-research-backed-programme-helps-olympians-navigate-identity-wellbeing-and-social-connection-after-retirement-from-sport/",
+  "status": 200,
+  "final": "https://olympians.org/news/2049/new-research-backed-programme-helps-olympians-navigate-identity-wellbeing-and-social-connection-after-retirement-from-sport/"
+ },
+ {
+  "path": "/news/2046/ensuring-continuity-for-the-global-olympian-community/",
+  "status": 200,
+  "final": "https://olympians.org/news/2046/ensuring-continuity-for-the-global-olympian-community/"
+ },
+ {
+  "path": "/news/2040/gb-olympians-mark-50-years-since-the-montreal-and-innsbruck-games/",
+  "status": 200,
+  "final": "https://olympians.org/news/2040/gb-olympians-mark-50-years-since-the-montreal-and-innsbruck-games/"
+ },
+ {
+  "path": "/news/2037/olympians-at-the-heart-of-the-olympic-games-a-milestone-decision-was-taken-today/",
+  "status": 200,
+  "final": "https://olympians.org/news/2037/olympians-at-the-heart-of-the-olympic-games-a-milestone-decision-was-taken-today/"
+ },
+ {
+  "path": "/news/2034/slovenian-olympians-strengthen-their-connection-to-the-global-olympian-community/",
+  "status": 200,
+  "final": "https://olympians.org/news/2034/slovenian-olympians-strengthen-their-connection-to-the-global-olympian-community/"
+ },
+ {
+  "path": "/news/2031/-school-to-olympic-program-inspires-students-in-nepalgunj/",
+  "status": 200,
+  "final": "https://olympians.org/news/2031/-school-to-olympic-program-inspires-students-in-nepalgunj/"
+ },
+ {
+  "path": "/news/2028/olympians-send-messages-of-support-to-children-s-hospital-in-milan/",
+  "status": 200,
+  "final": "https://olympians.org/news/2028/olympians-send-messages-of-support-to-children-s-hospital-in-milan/"
+ },
+ {
+  "path": "/news/2022/olypan-panamanian-olympians-inspiring-new-generations/",
+  "status": 200,
+  "final": "https://olympians.org/news/2022/olypan-panamanian-olympians-inspiring-new-generations/"
+ },
+ {
+  "path": "/news/2025/european-noas-in-action/",
+  "status": 200,
+  "final": "https://olympians.org/news/2025/european-noas-in-action/"
+ },
+ {
+  "path": "/news/2019/apply-now-for-woa-grants/",
+  "status": 200,
+  "final": "https://olympians.org/news/2019/apply-now-for-woa-grants/"
+ },
+ {
+  "path": "/news/2016/a-message-from-the-woa-president/",
+  "status": 200,
+  "final": "https://olympians.org/news/2016/a-message-from-the-woa-president/"
+ },
+ {
+  "path": "/privacy-policy/",
+  "status": 200,
+  "final": "https://olympians.org/privacy-policy/"
+ },
+ {
+  "path": "/woa/about/history/",
+  "status": 200,
+  "final": "https://olympians.org/woa/about/history/"
+ },
+ {
+  "path": "/woa/about/mission/",
+  "status": 200,
+  "final": "https://olympians.org/woa/about/mission/"
+ },
+ {
+  "path": "/woa/about/vision/",
+  "status": 200,
+  "final": "https://olympians.org/woa/about/vision/"
+ },
+ {
+  "path": "/woa/about/goals/",
+  "status": 200,
+  "final": "https://olympians.org/woa/about/goals/"
+ },
+ {
+  "path": "/woa/about/values/",
+  "status": 200,
+  "final": "https://olympians.org/woa/about/values/"
+ },
+ {
+  "path": "/olympians/olympian-org-email/?register",
+  "status": 200,
+  "final": "https://olympians.org/olympians/olympian-org-email/?register"
+ },
+ {
+  "path": "/olympians/wof/?tab=agenda",
+  "status": 200,
+  "final": "https://olympians.org/olympians/wof/?tab=agenda"
+ },
+ {
+  "path": "/olympians/wof/?tab=speakers",
+  "status": 200,
+  "final": "https://olympians.org/olympians/wof/?tab=speakers"
+ },
+ {
+  "path": "/olympians/wof/?tab=attendees",
+  "status": 200,
+  "final": "https://olympians.org/olympians/wof/?tab=attendees"
+ },
+ {
+  "path": "/olympians/wof/?tab=faq",
+  "status": 200,
+  "final": "https://olympians.org/olympians/wof/?tab=faq"
+ },
+ {
+  "path": "/olympians/wof/?tab=e-wof",
+  "status": 200,
+  "final": "https://olympians.org/olympians/wof/?tab=e-wof"
+ },
+ {
+  "path": "/olympians/wof/?tab=surveys",
+  "status": 200,
+  "final": "https://olympians.org/olympians/wof/?tab=surveys"
+ },
+ {
+  "path": "/olympians/wof/?tab=gallery",
+  "status": 200,
+  "final": "https://olympians.org/olympians/wof/?tab=gallery"
+ },
+ {
+  "path": "/noas/noa-guide/member-engagement/",
+  "status": 200,
+  "final": "https://olympians.org/noas/noa-guide/member-engagement/"
+ },
+ {
+  "path": "/noas/noa-guide/branding-and-marketing/",
+  "status": 200,
+  "final": "https://olympians.org/noas/noa-guide/branding-and-marketing/"
+ },
+ {
+  "path": "/noas/noa-guide/project-delivery/",
+  "status": 200,
+  "final": "https://olympians.org/noas/noa-guide/project-delivery/"
+ },
+ {
+  "path": "/noas/noa-guide/leadership-and-governance/",
+  "status": 200,
+  "final": "https://olympians.org/noas/noa-guide/leadership-and-governance/"
+ },
+ {
+  "path": "/noas/noa-guide/finance-management/",
+  "status": 200,
+  "final": "https://olympians.org/noas/noa-guide/finance-management/"
+ },
+ {
+  "path": "/noas/noa-guide/stakeholder-engagement/",
+  "status": 200,
+  "final": "https://olympians.org/noas/noa-guide/stakeholder-engagement/"
+ },
+ {
+  "path": "/noas/noa-guide/best-practices/",
+  "status": 200,
+  "final": "https://olympians.org/noas/noa-guide/best-practices/"
+ },
+ {
+  "path": "/news/?StartRow=20",
+  "status": 200,
+  "final": "https://olympians.org/news/?StartRow=20"
+ },
+ {
+  "path": "/news/?StartRow=39",
+  "status": 200,
+  "final": "https://olympians.org/news/?StartRow=39"
+ },
+ {
+  "path": "/news/?StartRow=58",
+  "status": 200,
+  "final": "https://olympians.org/news/?StartRow=58"
+ },
+ {
+  "path": "/news/?StartRow=77",
+  "status": 200,
+  "final": "https://olympians.org/news/?StartRow=77"
+ },
+ {
+  "path": "/news/?StartRow=96",
+  "status": 200,
+  "final": "https://olympians.org/news/?StartRow=96"
+ },
+ {
+  "path": "/news/?StartRow=115",
+  "status": 200,
+  "final": "https://olympians.org/news/?StartRow=115"
+ },
+ {
+  "path": "/news/?StartRow=134",
+  "status": 200,
+  "final": "https://olympians.org/news/?StartRow=134"
+ },
+ {
+  "path": "/news/?StartRow=153",
+  "status": 200,
+  "final": "https://olympians.org/news/?StartRow=153"
+ },
+ {
+  "path": "/news/?StartRow=172",
+  "status": 200,
+  "final": "https://olympians.org/news/?StartRow=172"
+ },
+ {
+  "path": "/oly-house/?year=2024",
+  "status": 200,
+  "final": "https://olympians.org/oly-house/?year=2024"
+ },
+ {
+  "path": "/oly-house/?year=2022",
+  "status": 200,
+  "final": "https://olympians.org/oly-house/?year=2022"
+ },
+ {
+  "path": "/oly-house/?year=2020",
+  "status": 200,
+  "final": "https://olympians.org/oly-house/?year=2020"
+ },
+ {
+  "path": "/best-practices/submissions/",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/submissions/"
+ },
+ {
+  "path": "/best-practices/30-olympian-led-projects-awarded-woa-grants/?id=1840",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/30-olympian-led-projects-awarded-woa-grants/?id=1840"
+ },
+ {
+  "path": "/best-practices/taiwan-olympians-boost-spirits-at-university-devastated-by-earthquake/?id=1839",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/taiwan-olympians-boost-spirits-at-university-devastated-by-earthquake/?id=1839"
+ },
+ {
+  "path": "/best-practices/mexican-olympians-train-to-be-professional-speakers/?id=1742",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/mexican-olympians-train-to-be-professional-speakers/?id=1742"
+ },
+ {
+  "path": "/best-practices/apply-now-for-a-woa-grant/?id=1739",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/apply-now-for-a-woa-grant/?id=1739"
+ },
+ {
+  "path": "/best-practices/portuguese-olympians-meet-for-cascais-olimpico/?id=1693",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/portuguese-olympians-meet-for-cascais-olimpico/?id=1693"
+ },
+ {
+  "path": "/best-practices/fifteen-egyptian-olympians-awarded-oly-in-cairo/?id=1669",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/fifteen-egyptian-olympians-awarded-oly-in-cairo/?id=1669"
+ },
+ {
+  "path": "/best-practices/colombia-s-olympic-warriors-enjoy-sport-in-bogota/?id=1631",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/colombia-s-olympic-warriors-enjoy-sport-in-bogota/?id=1631"
+ },
+ {
+  "path": "/best-practices/hoa-protects-the-environment-with-woa-grant/?id=1498",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/hoa-protects-the-environment-with-woa-grant/?id=1498"
+ },
+ {
+  "path": "/best-practices/cyprus-noa-supports-next-gen-olympians/?id=1493",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/cyprus-noa-supports-next-gen-olympians/?id=1493"
+ },
+ {
+  "path": "/best-practices/rwandan-olympians-protect-taxi-moto-drivers/?id=1428",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/rwandan-olympians-protect-taxi-moto-drivers/?id=1428"
+ },
+ {
+  "path": "/best-practices/olympians-associations-supporting-their-communities-during-lockdown/?id=1410",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/olympians-associations-supporting-their-communities-during-lockdown/?id=1410"
+ },
+ {
+  "path": "/best-practices/ugandan-olympians-reconnect-for-the-first-time/?id=1383",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/ugandan-olympians-reconnect-for-the-first-time/?id=1383"
+ },
+ {
+  "path": "/best-practices/zambia-olympians-use-sport-to-inspire-hope/?id=1353",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/zambia-olympians-use-sport-to-inspire-hope/?id=1353"
+ },
+ {
+  "path": "/best-practices/olympians-use-taekwondo-to-empower-young-refugees-in-jordan/?id=1344",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/olympians-use-taekwondo-to-empower-young-refugees-in-jordan/?id=1344"
+ },
+ {
+  "path": "/best-practices/filipino-olympians-give-the-biggest-gift-to-disadvantaged-children/?id=1341",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/filipino-olympians-give-the-biggest-gift-to-disadvantaged-children/?id=1341"
+ },
+ {
+  "path": "/best-practices/singapore-olympians-support-plant-a-tree-programme/?id=1338",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/singapore-olympians-support-plant-a-tree-programme/?id=1338"
+ },
+ {
+  "path": "/best-practices/first-olympic-day-event-a-success-for-chinese-taipei-noa/?id=1316",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/first-olympic-day-event-a-success-for-chinese-taipei-noa/?id=1316"
+ },
+ {
+  "path": "/best-practices/olympians-driving-sports-caravan-across-japan-ahead-of-tokyo-2020/?id=1313",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/olympians-driving-sports-caravan-across-japan-ahead-of-tokyo-2020/?id=1313"
+ },
+ {
+  "path": "/best-practices/olympians-and-paralympians-unite-for-philippines-olympic-day/?id=1310",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/olympians-and-paralympians-unite-for-philippines-olympic-day/?id=1310"
+ },
+ {
+  "path": "/best-practices/?StartRow=20",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/?StartRow=20"
+ },
+ {
+  "path": "/best-practices/?StartRow=39",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/?StartRow=39"
+ },
+ {
+  "path": "/best-practices/?StartRow=58",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/?StartRow=58"
+ },
+ {
+  "path": "/best-practices/?StartRow=77",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/?StartRow=77"
+ },
+ {
+  "path": "/news/2007/woa-scholarship-changed-my-life-by-ganzi-mugula-uganda-noa-president/",
+  "status": 200,
+  "final": "https://olympians.org/news/2007/woa-scholarship-changed-my-life-by-ganzi-mugula-uganda-noa-president/"
+ },
+ {
+  "path": "/news/1945/ioc-and-woa-strengthen-their-partnership-to-better-support-olympians/",
+  "status": 200,
+  "final": "https://olympians.org/news/1945/ioc-and-woa-strengthen-their-partnership-to-better-support-olympians/"
+ },
+ {
+  "path": "/privacy-policy/?gdpr",
+  "status": 200,
+  "final": "https://olympians.org/privacy-policy/?gdpr"
+ },
+ {
+  "path": "/news/1268/set-match-oly-at-volleyfest-australia/",
+  "status": 200,
+  "final": "https://olympians.org/news/1268/set-match-oly-at-volleyfest-australia/"
+ },
+ {
+  "path": "/news/1239/tennis-stars-honoured-with-oly/",
+  "status": 200,
+  "final": "https://olympians.org/news/1239/tennis-stars-honoured-with-oly/"
+ },
+ {
+  "path": "/news/1335/road-to-tokyo-olys-shine-at-tokyo-2020-test-event/",
+  "status": 200,
+  "final": "https://olympians.org/news/1335/road-to-tokyo-olys-shine-at-tokyo-2020-test-event/"
+ },
+ {
+  "path": "/news/1313/olympians-driving-sports-caravan-across-japan-ahead-of-tokyo-2020/",
+  "status": 200,
+  "final": "https://olympians.org/news/1313/olympians-driving-sports-caravan-across-japan-ahead-of-tokyo-2020/"
+ },
+ {
+  "path": "/news/1227/chilean-olympians-inspire-youth/",
+  "status": 200,
+  "final": "https://olympians.org/news/1227/chilean-olympians-inspire-youth/"
+ },
+ {
+  "path": "/news/1158/olympians-help-prisoners-rehabilitate-in-chinese-taipei/",
+  "status": 200,
+  "final": "https://olympians.org/news/1158/olympians-help-prisoners-rehabilitate-in-chinese-taipei/"
+ },
+ {
+  "path": "/news/1207/woa-helps-grant-wish-of-a-lifetime/",
+  "status": 200,
+  "final": "https://olympians.org/news/1207/woa-helps-grant-wish-of-a-lifetime/"
+ },
+ {
+  "path": "/news/1155/zimbabwe-olympians-training-for-life-after-sport/",
+  "status": 200,
+  "final": "https://olympians.org/news/1155/zimbabwe-olympians-training-for-life-after-sport/"
+ },
+ {
+  "path": "/news/1182/woa-hails-success-of-olympians-associations-of-asia-meeting/",
+  "status": 200,
+  "final": "https://olympians.org/news/1182/woa-hails-success-of-olympians-associations-of-asia-meeting/"
+ },
+ {
+  "path": "/news/989/nordic-olympians-associations-strengthen-regional-ties/",
+  "status": 200,
+  "final": "https://olympians.org/news/989/nordic-olympians-associations-strengthen-regional-ties/"
+ },
+ {
+  "path": "/news/962/service-to-society-zimbabwe-noa-chicken-farm-has-changed-my-life-/",
+  "status": 200,
+  "final": "https://olympians.org/news/962/service-to-society-zimbabwe-noa-chicken-farm-has-changed-my-life-/"
+ },
+ {
+  "path": "/news/1254/skiing-with-olympians-inspires-love-of-snow-sports/",
+  "status": 200,
+  "final": "https://olympians.org/news/1254/skiing-with-olympians-inspires-love-of-snow-sports/"
+ },
+ {
+  "path": "/news/1134/service-to-society-olympians-help-heal-divisions-in-colombia/",
+  "status": 200,
+  "final": "https://olympians.org/news/1134/service-to-society-olympians-help-heal-divisions-in-colombia/"
+ },
+ {
+  "path": "/news/1097/zambian-olympian-brings-sport-to-refugee-camps/",
+  "status": 200,
+  "final": "https://olympians.org/news/1097/zambian-olympian-brings-sport-to-refugee-camps/"
+ },
+ {
+  "path": "/news/618/two-days-to-go-to-olympic-day-slovenia-olympians-association-contributes-to-the-country-s-olympic-day-success/",
+  "status": 200,
+  "final": "https://olympians.org/news/618/two-days-to-go-to-olympic-day-slovenia-olympians-association-contributes-to-the-country-s-olympic-day-success/"
+ },
+ {
+  "path": "/news/1143/3-days-to-go-6-000-set-to-take-part-in-olympicday-in-cape-verde/",
+  "status": 200,
+  "final": "https://olympians.org/news/1143/3-days-to-go-6-000-set-to-take-part-in-olympicday-in-cape-verde/"
+ },
+ {
+  "path": "/news/1137/5-days-to-go-australian-olympians-kick-off-olympicday-activities/",
+  "status": 200,
+  "final": "https://olympians.org/news/1137/5-days-to-go-australian-olympians-kick-off-olympicday-activities/"
+ },
+ {
+  "path": "/news/1140/4-days-to-go-olympians-unite-in-georgia-for-olympic-day/",
+  "status": 200,
+  "final": "https://olympians.org/news/1140/4-days-to-go-olympians-unite-in-georgia-for-olympic-day/"
+ },
+ {
+  "path": "/news/904/two-days-to-go-to-olympic-day-youth-sport-in-the-spotlight-in-lithuania/",
+  "status": 200,
+  "final": "https://olympians.org/news/904/two-days-to-go-to-olympic-day-youth-sport-in-the-spotlight-in-lithuania/"
+ },
+ {
+  "path": "/news/1304/japanese-olympians-say-make-everything-more-beautiful-than-it-was/",
+  "status": 200,
+  "final": "https://olympians.org/news/1304/japanese-olympians-say-make-everything-more-beautiful-than-it-was/"
+ },
+ {
+  "path": "/news/1310/olympians-and-paralympians-unite-for-philippines-olympic-day/",
+  "status": 200,
+  "final": "https://olympians.org/news/1310/olympians-and-paralympians-unite-for-philippines-olympic-day/"
+ },
+ {
+  "path": "/news/1316/first-olympic-day-event-a-success-for-chinese-taipei-noa/",
+  "status": 200,
+  "final": "https://olympians.org/news/1316/first-olympic-day-event-a-success-for-chinese-taipei-noa/"
+ },
+ {
+  "path": "/news/1301/30-000-turn-out-for-olympic-day-picnic-in-poland/",
+  "status": 200,
+  "final": "https://olympians.org/news/1301/30-000-turn-out-for-olympic-day-picnic-in-poland/"
+ },
+ {
+  "path": "/news/1338/singapore-olympians-support-plant-a-tree-programme/",
+  "status": 200,
+  "final": "https://olympians.org/news/1338/singapore-olympians-support-plant-a-tree-programme/"
+ },
+ {
+  "path": "/news/2043/mike-miller-to-step-down-as-woa-ceo-after-14-years/",
+  "status": 200,
+  "final": "https://olympians.org/news/2043/mike-miller-to-step-down-as-woa-ceo-after-14-years/"
+ },
+ {
+  "path": "/news/2010/join-the-2026-whitecard-for-them-campaign/",
+  "status": 200,
+  "final": "https://olympians.org/news/2010/join-the-2026-whitecard-for-them-campaign/"
+ },
+ {
+  "path": "/news/2004/woa-elects-two-new-vice-presidents/",
+  "status": 200,
+  "final": "https://olympians.org/news/2004/woa-elects-two-new-vice-presidents/"
+ },
+ {
+  "path": "/news/2001/arrivederci-da-oly-house-hub-milano-e-un-grande-grazie/",
+  "status": 200,
+  "final": "https://olympians.org/news/2001/arrivederci-da-oly-house-hub-milano-e-un-grande-grazie/"
+ },
+ {
+  "path": "/news/1998/olympians-in-milan-send-inspiring-words-to-children-s-hospital/",
+  "status": 200,
+  "final": "https://olympians.org/news/1998/olympians-in-milan-send-inspiring-words-to-children-s-hospital/"
+ },
+ {
+  "path": "/news/1995/watch-the-closing-ceremony-in-milan-with-the-woa-team/",
+  "status": 200,
+  "final": "https://olympians.org/news/1995/watch-the-closing-ceremony-in-milan-with-the-woa-team/"
+ },
+ {
+  "path": "/news/1992/woa-party-in-the-mountains-at-slovenia-house-cortina-a-big-hit/",
+  "status": 200,
+  "final": "https://olympians.org/news/1992/woa-party-in-the-mountains-at-slovenia-house-cortina-a-big-hit/"
+ },
+ {
+  "path": "/news/1989/catch-oly-8-before-it-s-too-late/",
+  "status": 200,
+  "final": "https://olympians.org/news/1989/catch-oly-8-before-it-s-too-late/"
+ },
+ {
+  "path": "/news/1986/join-us-in-cortina-for-the-woa-party-at-slovenia-house/",
+  "status": 200,
+  "final": "https://olympians.org/news/1986/join-us-in-cortina-for-the-woa-party-at-slovenia-house/"
+ },
+ {
+  "path": "/news/1983/have-a-selfie-with-the-olympic-torch--even-if-you-can-t-come-to-oly-house-hub-milan/",
+  "status": 200,
+  "final": "https://olympians.org/news/1983/have-a-selfie-with-the-olympic-torch--even-if-you-can-t-come-to-oly-house-hub-milan/"
+ },
+ {
+  "path": "/news/1980/olympians-come-party-in-cortina-at-slovenia-house/",
+  "status": 200,
+  "final": "https://olympians.org/news/1980/olympians-come-party-in-cortina-at-slovenia-house/"
+ },
+ {
+  "path": "/news/1977/come-sign-the-olympians-wall-at-oly-house-hub-milan/",
+  "status": 200,
+  "final": "https://olympians.org/news/1977/come-sign-the-olympians-wall-at-oly-house-hub-milan/"
+ },
+ {
+  "path": "/news/1974/oly-house-hub-milan-now-open/",
+  "status": 200,
+  "final": "https://olympians.org/news/1974/oly-house-hub-milan-now-open/"
+ },
+ {
+  "path": "/news/1971/olympians-enjoy-the-opening-ceremony-at-the-woa-watch-parties/",
+  "status": 200,
+  "final": "https://olympians.org/news/1971/olympians-enjoy-the-opening-ceremony-at-the-woa-watch-parties/"
+ },
+ {
+  "path": "/news/1968/leave-your-mark-is-back-for-milano-cortina/",
+  "status": 200,
+  "final": "https://olympians.org/news/1968/leave-your-mark-is-back-for-milano-cortina/"
+ },
+ {
+  "path": "/news/1965/take-part-in-milano-cortina-wherever-you-are-at-e-oly-house/",
+  "status": 200,
+  "final": "https://olympians.org/news/1965/take-part-in-milano-cortina-wherever-you-are-at-e-oly-house/"
+ },
+ {
+  "path": "/news/1964/watch-the-opening-ceremony-with-your-fellow-olympians/",
+  "status": 200,
+  "final": "https://olympians.org/news/1964/watch-the-opening-ceremony-with-your-fellow-olympians/"
+ },
+ {
+  "path": "/news/1961/woa-elects-first-ever-female-president/",
+  "status": 200,
+  "final": "https://olympians.org/news/1961/woa-elects-first-ever-female-president/"
+ },
+ {
+  "path": "/news/?StartRow=1",
+  "status": 200,
+  "final": "https://olympians.org/news/?StartRow=1"
+ },
+ {
+  "path": "/news/1958/ioc-and-woa-issue-joint-declaration/",
+  "status": 200,
+  "final": "https://olympians.org/news/1958/ioc-and-woa-issue-joint-declaration/"
+ },
+ {
+  "path": "/news/1955/here-s-to-a-great-2026/",
+  "status": 200,
+  "final": "https://olympians.org/news/1955/here-s-to-a-great-2026/"
+ },
+ {
+  "path": "/news/1951/help-jamaican-olympians-rebuild-after-the-hurricane/",
+  "status": 200,
+  "final": "https://olympians.org/news/1951/help-jamaican-olympians-rebuild-after-the-hurricane/"
+ },
+ {
+  "path": "/news/1948/join-the-woa-end-of-year-party-on-december-16-2025/",
+  "status": 200,
+  "final": "https://olympians.org/news/1948/join-the-woa-end-of-year-party-on-december-16-2025/"
+ },
+ {
+  "path": "/news/1942/ioc-and-woa-to-reaffirm-commitment-to-work-closely-together/",
+  "status": 200,
+  "final": "https://olympians.org/news/1942/ioc-and-woa-to-reaffirm-commitment-to-work-closely-together/"
+ },
+ {
+  "path": "/news/1939/olympians-in-action-on-olympic-day/",
+  "status": 200,
+  "final": "https://olympians.org/news/1939/olympians-in-action-on-olympic-day/"
+ },
+ {
+  "path": "/news/1936/monaco-to-host-world-olympians-forum/",
+  "status": 200,
+  "final": "https://olympians.org/news/1936/monaco-to-host-world-olympians-forum/"
+ },
+ {
+  "path": "/news/1930/apply-now-for-university-of-london-scholarships/",
+  "status": 200,
+  "final": "https://olympians.org/news/1930/apply-now-for-university-of-london-scholarships/"
+ },
+ {
+  "path": "/news/1927/read-the-letter-from-the-woa-officers-to-noas-nocs-and-ioc-members/",
+  "status": 200,
+  "final": "https://olympians.org/news/1927/read-the-letter-from-the-woa-officers-to-noas-nocs-and-ioc-members/"
+ },
+ {
+  "path": "/news/1924/another-5-years-of-clean-financial-audits-for-woa/",
+  "status": 200,
+  "final": "https://olympians.org/news/1924/another-5-years-of-clean-financial-audits-for-woa/"
+ },
+ {
+  "path": "/news/1921/shape-the-future-of-support-for-olympians/",
+  "status": 200,
+  "final": "https://olympians.org/news/1921/shape-the-future-of-support-for-olympians/"
+ },
+ {
+  "path": "/news/1905/woa-congratulates-new-ioc-president-kirsty-coventry-on-her-stunning-victory/",
+  "status": 200,
+  "final": "https://olympians.org/news/1905/woa-congratulates-new-ioc-president-kirsty-coventry-on-her-stunning-victory/"
+ },
+ {
+  "path": "/news/1902/ioc-presidential-candidates-reply-to-woa-open-letter/",
+  "status": 200,
+  "final": "https://olympians.org/news/1902/ioc-presidential-candidates-reply-to-woa-open-letter/"
+ },
+ {
+  "path": "/news/1899/woa-has-sent-an-open-letter-to-the-ioc-presidential-candidates/",
+  "status": 200,
+  "final": "https://olympians.org/news/1899/woa-has-sent-an-open-letter-to-the-ioc-presidential-candidates/"
+ },
+ {
+  "path": "/news/1898/female-olympians-apply-now-for-grants-of-up-to-5-000/",
+  "status": 200,
+  "final": "https://olympians.org/news/1898/female-olympians-apply-now-for-grants-of-up-to-5-000/"
+ },
+ {
+  "path": "/news/1893/say-no-to-gbv/",
+  "status": 200,
+  "final": "https://olympians.org/news/1893/say-no-to-gbv/"
+ },
+ {
+  "path": "/news/1896/apply-for-discounted-postgraduate-sports-diplomacy-course/",
+  "status": 200,
+  "final": "https://olympians.org/news/1896/apply-for-discounted-postgraduate-sports-diplomacy-course/"
+ },
+ {
+  "path": "/news/1890/woa-awards-four-more-olympians-full-postgraduate-scholarships/",
+  "status": 200,
+  "final": "https://olympians.org/news/1890/woa-awards-four-more-olympians-full-postgraduate-scholarships/"
+ },
+ {
+  "path": "/news/1887/six-films-chosen-for-prestigious-awards-at-oly-house-film-festival/",
+  "status": 200,
+  "final": "https://olympians.org/news/1887/six-films-chosen-for-prestigious-awards-at-oly-house-film-festival/"
+ },
+ {
+  "path": "/news/1884/we-ll-always-have-paris/",
+  "status": 200,
+  "final": "https://olympians.org/news/1884/we-ll-always-have-paris/"
+ },
+ {
+  "path": "/news/1881/edwin-moses-oly-film-has-european-premiere-at-oly-house/",
+  "status": 200,
+  "final": "https://olympians.org/news/1881/edwin-moses-oly-film-has-european-premiere-at-oly-house/"
+ },
+ {
+  "path": "/news/1875/oly-house-paris-2024-is-rocking/",
+  "status": 200,
+  "final": "https://olympians.org/news/1875/oly-house-paris-2024-is-rocking/"
+ },
+ {
+  "path": "/news/1872/olympians-are-lovin-oly-house/",
+  "status": 200,
+  "final": "https://olympians.org/news/1872/olympians-are-lovin-oly-house/"
+ },
+ {
+  "path": "/news/1869/jesse-owens-and-luz-long-among-5-awarded-olympians-for-life-by-woa-patron-prince-albert/",
+  "status": 200,
+  "final": "https://olympians.org/news/1869/jesse-owens-and-luz-long-among-5-awarded-olympians-for-life-by-woa-patron-prince-albert/"
+ },
+ {
+  "path": "/news/1866/94-year-old-olympian-stars-at-oly-house-paris-2024/",
+  "status": 200,
+  "final": "https://olympians.org/news/1866/94-year-old-olympian-stars-at-oly-house-paris-2024/"
+ },
+ {
+  "path": "/news/1863/oly-house-packed-for-the-olympic-games-opening-ceremony/",
+  "status": 200,
+  "final": "https://olympians.org/news/1863/oly-house-packed-for-the-olympic-games-opening-ceremony/"
+ },
+ {
+  "path": "/news/1860/oly-house-paris-2024-opens-today-and-leave-your-mark-is-back/",
+  "status": 200,
+  "final": "https://olympians.org/news/1860/oly-house-paris-2024-opens-today-and-leave-your-mark-is-back/"
+ },
+ {
+  "path": "/news/1857/get-a-sneak-peak-of-e-oly-house-before-it-goes-live-/",
+  "status": 200,
+  "final": "https://olympians.org/news/1857/get-a-sneak-peak-of-e-oly-house-before-it-goes-live-/"
+ },
+ {
+  "path": "/news/1854/have-your-say-at-the-oly-house-film-festival/",
+  "status": 200,
+  "final": "https://olympians.org/news/1854/have-your-say-at-the-oly-house-film-festival/"
+ },
+ {
+  "path": "/news/1851/a-week-to-go-to-oly-house-and-e-oly-house/",
+  "status": 200,
+  "final": "https://olympians.org/news/1851/a-week-to-go-to-oly-house-and-e-oly-house/"
+ },
+ {
+  "path": "/news/1850/olympians-register-now-to-visit-oly-house-paris-2024-and-e-oly-house/",
+  "status": 200,
+  "final": "https://olympians.org/news/1850/olympians-register-now-to-visit-oly-house-paris-2024-and-e-oly-house/"
+ },
+ {
+  "path": "/news/1847/woa-welcomes-new-member-associations-from-grenada-maldives-and-palestine/",
+  "status": 200,
+  "final": "https://olympians.org/news/1847/woa-welcomes-new-member-associations-from-grenada-maldives-and-palestine/"
+ },
+ {
+  "path": "/news/1846/full-university-scholarships-on-offer-again-from-woa/",
+  "status": 200,
+  "final": "https://olympians.org/news/1846/full-university-scholarships-on-offer-again-from-woa/"
+ },
+ {
+  "path": "/news/1843/oly-house-paris-to-be-at-an-historic-location/",
+  "status": 200,
+  "final": "https://olympians.org/news/1843/oly-house-paris-to-be-at-an-historic-location/"
+ },
+ {
+  "path": "/news/1840/30-olympian-led-projects-awarded-woa-grants/",
+  "status": 200,
+  "final": "https://olympians.org/news/1840/30-olympian-led-projects-awarded-woa-grants/"
+ },
+ {
+  "path": "/news/1839/taiwan-olympians-boost-spirits-at-university-devastated-by-earthquake/",
+  "status": 200,
+  "final": "https://olympians.org/news/1839/taiwan-olympians-boost-spirits-at-university-devastated-by-earthquake/"
+ },
+ {
+  "path": "/news/1836/woa-president-joins-paris-olympics-torch-relay/",
+  "status": 200,
+  "final": "https://olympians.org/news/1836/woa-president-joins-paris-olympics-torch-relay/"
+ },
+ {
+  "path": "/news/1833/nominate-an-olympian-to-join-the-olympians-for-life-honour-roll/",
+  "status": 200,
+  "final": "https://olympians.org/news/1833/nominate-an-olympian-to-join-the-olympians-for-life-honour-roll/"
+ },
+ {
+  "path": "/news/1830/last-chance-to-apply-for-woa-2024-grants/",
+  "status": 200,
+  "final": "https://olympians.org/news/1830/last-chance-to-apply-for-woa-2024-grants/"
+ },
+ {
+  "path": "/news/1829/apply-today-for-fully-funded-masters-in-sport-ethics-and-integrity/",
+  "status": 200,
+  "final": "https://olympians.org/news/1829/apply-today-for-fully-funded-masters-in-sport-ethics-and-integrity/"
+ },
+ {
+  "path": "/news/1826/japan-and-indonesia-noas-work-together-to-deliver-community-projects/",
+  "status": 200,
+  "final": "https://olympians.org/news/1826/japan-and-indonesia-noas-work-together-to-deliver-community-projects/"
+ },
+ {
+  "path": "/news/1825/apply-now-for-the-2024-25-simisleighs-athlete-grant/",
+  "status": 200,
+  "final": "https://olympians.org/news/1825/apply-now-for-the-2024-25-simisleighs-athlete-grant/"
+ },
+ {
+  "path": "/news/1820/apply-now-for-woa-2024-grants/",
+  "status": 200,
+  "final": "https://olympians.org/news/1820/apply-now-for-woa-2024-grants/"
+ },
+ {
+  "path": "/news/1804/holiday-wishes-from-woa/",
+  "status": 200,
+  "final": "https://olympians.org/news/1804/holiday-wishes-from-woa/"
+ },
+ {
+  "path": "/news/1803/university-scholarship-application-window-about-to-close/",
+  "status": 200,
+  "final": "https://olympians.org/news/1803/university-scholarship-application-window-about-to-close/"
+ },
+ {
+  "path": "/news/1802/kosovo-olympians-to-get-their-own-association/",
+  "status": 200,
+  "final": "https://olympians.org/news/1802/kosovo-olympians-to-get-their-own-association/"
+ },
+ {
+  "path": "/news/1799/98-year-old-venezuelan-olympian-awarded-his-oly/",
+  "status": 200,
+  "final": "https://olympians.org/news/1799/98-year-old-venezuelan-olympian-awarded-his-oly/"
+ },
+ {
+  "path": "/news/1796/chilean-olympians-make-history-in-santiago/",
+  "status": 200,
+  "final": "https://olympians.org/news/1796/chilean-olympians-make-history-in-santiago/"
+ },
+ {
+  "path": "/news/1790/istanbul-mayor-praises-world-olympians-forum-2023/",
+  "status": 200,
+  "final": "https://olympians.org/news/1790/istanbul-mayor-praises-world-olympians-forum-2023/"
+ },
+ {
+  "path": "/news/1787/world-olympians-forum-will-also-be-live-streamed/",
+  "status": 200,
+  "final": "https://olympians.org/news/1787/world-olympians-forum-will-also-be-live-streamed/"
+ },
+ {
+  "path": "/news/1784/four-more-olympians-awarded-full-scholarships/",
+  "status": 200,
+  "final": "https://olympians.org/news/1784/four-more-olympians-awarded-full-scholarships/"
+ },
+ {
+  "path": "/news/1783/noa-portugal-celebrates-its-female-olympians/",
+  "status": 200,
+  "final": "https://olympians.org/news/1783/noa-portugal-celebrates-its-female-olympians/"
+ },
+ {
+  "path": "/news/1782/apply-to-become-woa-development-officer-americas/",
+  "status": 200,
+  "final": "https://olympians.org/news/1782/apply-to-become-woa-development-officer-americas/"
+ },
+ {
+  "path": "/news/1779/world-olympians-forum-launched-in-istanbul/",
+  "status": 200,
+  "final": "https://olympians.org/news/1779/world-olympians-forum-launched-in-istanbul/"
+ },
+ {
+  "path": "/news/1778/last-week-to-apply-for-a-full-university-scholarship/",
+  "status": 200,
+  "final": "https://olympians.org/news/1778/last-week-to-apply-for-a-full-university-scholarship/"
+ },
+ {
+  "path": "/news/1775/woa-president-announces-funding-for-physical-activity-projects/",
+  "status": 200,
+  "final": "https://olympians.org/news/1775/woa-president-announces-funding-for-physical-activity-projects/"
+ },
+ {
+  "path": "/news/1772/free-online-workshops-to-build-your-skills-and-get-sponsorship/",
+  "status": 200,
+  "final": "https://olympians.org/news/1772/free-online-workshops-to-build-your-skills-and-get-sponsorship/"
+ },
+ {
+  "path": "/news/1771/apply-for-fully-funded-masters-degree-in-sport-ethics-and-integrity/",
+  "status": 200,
+  "final": "https://olympians.org/news/1771/apply-for-fully-funded-masters-degree-in-sport-ethics-and-integrity/"
+ },
+ {
+  "path": "/news/1770/apply-now-for-a-full-university-scholarship/",
+  "status": 200,
+  "final": "https://olympians.org/news/1770/apply-now-for-a-full-university-scholarship/"
+ },
+ {
+  "path": "/news/1767/woa-grants-to-impact-more-communities-than-ever/",
+  "status": 200,
+  "final": "https://olympians.org/news/1767/woa-grants-to-impact-more-communities-than-ever/"
+ },
+ {
+  "path": "/news/1764/woa-welcomes-new-member-associations/",
+  "status": 200,
+  "final": "https://olympians.org/news/1764/woa-welcomes-new-member-associations/"
+ },
+ {
+  "path": "/news/1761/nepalese-olympians-go-back-to-school/",
+  "status": 200,
+  "final": "https://olympians.org/news/1761/nepalese-olympians-go-back-to-school/"
+ },
+ {
+  "path": "/news/1760/apply-to-become-woa-development-officer-africa/",
+  "status": 200,
+  "final": "https://olympians.org/news/1760/apply-to-become-woa-development-officer-africa/"
+ },
+ {
+  "path": "/news/1757/noa-italy-celebrates-75-years/",
+  "status": 200,
+  "final": "https://olympians.org/news/1757/noa-italy-celebrates-75-years/"
+ },
+ {
+  "path": "/news/1754/olympians-unite-around-whitecard/",
+  "status": 200,
+  "final": "https://olympians.org/news/1754/olympians-unite-around-whitecard/"
+ },
+ {
+  "path": "/news/1751/date-set-for-woa-world-olympians-forum-this-september/",
+  "status": 200,
+  "final": "https://olympians.org/news/1751/date-set-for-woa-world-olympians-forum-this-september/"
+ },
+ {
+  "path": "/news/1748/ibm-skillsbuild-for-olympians/",
+  "status": 200,
+  "final": "https://olympians.org/news/1748/ibm-skillsbuild-for-olympians/"
+ },
+ {
+  "path": "/news/1745/woa-mourns-the-death-of-former-president/",
+  "status": 200,
+  "final": "https://olympians.org/news/1745/woa-mourns-the-death-of-former-president/"
+ },
+ {
+  "path": "/news/1742/mexican-olympians-train-to-be-professional-speakers/",
+  "status": 200,
+  "final": "https://olympians.org/news/1742/mexican-olympians-train-to-be-professional-speakers/"
+ },
+ {
+  "path": "/news/1739/apply-now-for-a-woa-grant/",
+  "status": 200,
+  "final": "https://olympians.org/news/1739/apply-now-for-a-woa-grant/"
+ },
+ {
+  "path": "/news/1736/mexican-olympians-meet-to-discuss-medical-care/",
+  "status": 200,
+  "final": "https://olympians.org/news/1736/mexican-olympians-meet-to-discuss-medical-care/"
+ },
+ {
+  "path": "/news/1733/new-financial-aid-for-female-olympians/",
+  "status": 200,
+  "final": "https://olympians.org/news/1733/new-financial-aid-for-female-olympians/"
+ },
+ {
+  "path": "/news/1730/it-s-holiday-season-once-again/",
+  "status": 200,
+  "final": "https://olympians.org/news/1730/it-s-holiday-season-once-again/"
+ },
+ {
+  "path": "/news/1727/woa-supports-olympic-summit-decision-on-athletes-right-to-compete/",
+  "status": 200,
+  "final": "https://olympians.org/news/1727/woa-supports-olympic-summit-decision-on-athletes-right-to-compete/"
+ },
+ {
+  "path": "/news/1724/a-recap-of-the-latest-activities-by-the-portuguese-olympians-association/",
+  "status": 200,
+  "final": "https://olympians.org/news/1724/a-recap-of-the-latest-activities-by-the-portuguese-olympians-association/"
+ },
+ {
+  "path": "/news/?StartRow=191",
+  "status": 200,
+  "final": "https://olympians.org/news/?StartRow=191"
+ },
+ {
+  "path": "/news/1721/istanbul-to-host-woa-world-olympians-forum-2023/",
+  "status": 200,
+  "final": "https://olympians.org/news/1721/istanbul-to-host-woa-world-olympians-forum-2023/"
+ },
+ {
+  "path": "/news/1718/join-the-olyversary-celebrations/",
+  "status": 200,
+  "final": "https://olympians.org/news/1718/join-the-olyversary-celebrations/"
+ },
+ {
+  "path": "/news/1715/woa-supports-ioc-mission-expressed-at-g20-summit/",
+  "status": 200,
+  "final": "https://olympians.org/news/1715/woa-supports-ioc-mission-expressed-at-g20-summit/"
+ },
+ {
+  "path": "/news/1712/new-learning-and-earning-opportunities-for-olympians/",
+  "status": 200,
+  "final": "https://olympians.org/news/1712/new-learning-and-earning-opportunities-for-olympians/"
+ },
+ {
+  "path": "/news/1709/full-scholarships-awarded-to-four-olympians/",
+  "status": 200,
+  "final": "https://olympians.org/news/1709/full-scholarships-awarded-to-four-olympians/"
+ },
+ {
+  "path": "/news/1708/mentoring-for-female-olympian-leaders-and-entrepreneurs/",
+  "status": 200,
+  "final": "https://olympians.org/news/1708/mentoring-for-female-olympian-leaders-and-entrepreneurs/"
+ },
+ {
+  "path": "/news/1705/record-breaking-number-of-woa-grants-awarded/",
+  "status": 200,
+  "final": "https://olympians.org/news/1705/record-breaking-number-of-woa-grants-awarded/"
+ },
+ {
+  "path": "/news/1702/woa-welcomes-new-members-brazil-liberia-and-spain/",
+  "status": 200,
+  "final": "https://olympians.org/news/1702/woa-welcomes-new-members-brazil-liberia-and-spain/"
+ },
+ {
+  "path": "/news/1699/apply-now-for-a-full-scholarship-with-the-university-of-london/",
+  "status": 200,
+  "final": "https://olympians.org/news/1699/apply-now-for-a-full-scholarship-with-the-university-of-london/"
+ },
+ {
+  "path": "/news/1696/star-sailors-get-their-oly-at-the-olympic-museum/",
+  "status": 200,
+  "final": "https://olympians.org/news/1696/star-sailors-get-their-oly-at-the-olympic-museum/"
+ },
+ {
+  "path": "/news/1688/please-donate-now-to-olympiansforukraine/",
+  "status": 200,
+  "final": "https://olympians.org/news/1688/please-donate-now-to-olympiansforukraine/"
+ },
+ {
+  "path": "/news/1693/portuguese-olympians-meet-for-cascais-olimpico/",
+  "status": 200,
+  "final": "https://olympians.org/news/1693/portuguese-olympians-meet-for-cascais-olimpico/"
+ },
+ {
+  "path": "/news/1683/apply-for-a-woa-grant-now/",
+  "status": 200,
+  "final": "https://olympians.org/news/1683/apply-for-a-woa-grant-now/"
+ },
+ {
+  "path": "/news/1678/join-olympians-around-the-world-and-raise-your-whitecard-on-april6/",
+  "status": 200,
+  "final": "https://olympians.org/news/1678/join-olympians-around-the-world-and-raise-your-whitecard-on-april6/"
+ },
+ {
+  "path": "/news/1675/woa-upholds-athletes-right-to-compete-and-launches-ukraine-appeal/",
+  "status": 200,
+  "final": "https://olympians.org/news/1675/woa-upholds-athletes-right-to-compete-and-launches-ukraine-appeal/"
+ },
+ {
+  "path": "/news/1672/support-your-community-with-a-woa-grant/",
+  "status": 200,
+  "final": "https://olympians.org/news/1672/support-your-community-with-a-woa-grant/"
+ },
+ {
+  "path": "/news/1669/fifteen-egyptian-olympians-awarded-oly-in-cairo/",
+  "status": 200,
+  "final": "https://olympians.org/news/1669/fifteen-egyptian-olympians-awarded-oly-in-cairo/"
+ },
+ {
+  "path": "/news/1666/tell-us-how-we-can-make-oly-house-even-better/",
+  "status": 200,
+  "final": "https://olympians.org/news/1666/tell-us-how-we-can-make-oly-house-even-better/"
+ },
+ {
+  "path": "/news/1665/woa-supports-ioc-call-for-russia-and-belarus-to-lose-sporting-events/",
+  "status": 200,
+  "final": "https://olympians.org/news/1665/woa-supports-ioc-call-for-russia-and-belarus-to-lose-sporting-events/"
+ },
+ {
+  "path": "/news/?StartRow=210",
+  "status": 200,
+  "final": "https://olympians.org/news/?StartRow=210"
+ },
+ {
+  "path": "/news/1662/beijing-2022-leave-your-mark-poster-revealed/",
+  "status": 200,
+  "final": "https://olympians.org/news/1662/beijing-2022-leave-your-mark-poster-revealed/"
+ },
+ {
+  "path": "/news/1659/it-s-not-too-late-to-leave-your-mark/",
+  "status": 200,
+  "final": "https://olympians.org/news/1659/it-s-not-too-late-to-leave-your-mark/"
+ },
+ {
+  "path": "/news/1656/introducing-our-latest-olympians-for-life/",
+  "status": 200,
+  "final": "https://olympians.org/news/1656/introducing-our-latest-olympians-for-life/"
+ },
+ {
+  "path": "/news/1653/show-your-support-today/",
+  "status": 200,
+  "final": "https://olympians.org/news/1653/show-your-support-today/"
+ },
+ {
+  "path": "/news/1650/meet-our-new-olympians-for-life/",
+  "status": 200,
+  "final": "https://olympians.org/news/1650/meet-our-new-olympians-for-life/"
+ },
+ {
+  "path": "/news/1647/what-we-love-about-the-games/",
+  "status": 200,
+  "final": "https://olympians.org/news/1647/what-we-love-about-the-games/"
+ },
+ {
+  "path": "/news/1644/visit-oly-house-beijing-2022-and-leave-your-mark/",
+  "status": 200,
+  "final": "https://olympians.org/news/1644/visit-oly-house-beijing-2022-and-leave-your-mark/"
+ },
+ {
+  "path": "/news/1641/host-olympian-reunions-during-beijing-2022/",
+  "status": 200,
+  "final": "https://olympians.org/news/1641/host-olympian-reunions-during-beijing-2022/"
+ },
+ {
+  "path": "/news/1640/world-olympians-association-appoint-communications-agency-mongoose/",
+  "status": 200,
+  "final": "https://olympians.org/news/1640/world-olympians-association-appoint-communications-agency-mongoose/"
+ },
+ {
+  "path": "/news/1637/boost-your-career-beyond-sport-in-2022/",
+  "status": 200,
+  "final": "https://olympians.org/news/1637/boost-your-career-beyond-sport-in-2022/"
+ },
+ {
+  "path": "/news/1634/you-left-your-mark-in-2021/",
+  "status": 200,
+  "final": "https://olympians.org/news/1634/you-left-your-mark-in-2021/"
+ },
+ {
+  "path": "/news/1631/colombia-s-olympic-warriors-enjoy-sport-in-bogota/",
+  "status": 200,
+  "final": "https://olympians.org/news/1631/colombia-s-olympic-warriors-enjoy-sport-in-bogota/"
+ },
+ {
+  "path": "/news/1628/long-term-health-of-olympians-is-prioritised-by-woa-and-fims/",
+  "status": 200,
+  "final": "https://olympians.org/news/1628/long-term-health-of-olympians-is-prioritised-by-woa-and-fims/"
+ },
+ {
+  "path": "/news/1624/woa-appoints-sandrine-billiet-oly-as-development-officer-for-africa/",
+  "status": 200,
+  "final": "https://olympians.org/news/1624/woa-appoints-sandrine-billiet-oly-as-development-officer-for-africa/"
+ },
+ {
+  "path": "/news/1621/apply-now-to-build-your-business-skills-with-ey-s-women-s-network/",
+  "status": 200,
+  "final": "https://olympians.org/news/1621/apply-now-to-build-your-business-skills-with-ey-s-women-s-network/"
+ },
+ {
+  "path": "/news/1618/two-more-olympians-awarded-university-of-london-scholarships/",
+  "status": 200,
+  "final": "https://olympians.org/news/1618/two-more-olympians-awarded-university-of-london-scholarships/"
+ },
+ {
+  "path": "/news/1612/the-passing-of-jacques-rogge-oly/",
+  "status": 200,
+  "final": "https://olympians.org/news/1612/the-passing-of-jacques-rogge-oly/"
+ },
+ {
+  "path": "/news/1609/kickstart-your-future-career/",
+  "status": 200,
+  "final": "https://olympians.org/news/1609/kickstart-your-future-career/"
+ },
+ {
+  "path": "/news/1606/tell-us-your-thoughts-on-oly-house-tokyo-2020/",
+  "status": 200,
+  "final": "https://olympians.org/news/1606/tell-us-your-thoughts-on-oly-house-tokyo-2020/"
+ },
+ {
+  "path": "/news/?StartRow=229",
+  "status": 200,
+  "final": "https://olympians.org/news/?StartRow=229"
+ },
+ {
+  "path": "/news/1603/only-3-days-left-to-leave-your-mark/",
+  "status": 200,
+  "final": "https://olympians.org/news/1603/only-3-days-left-to-leave-your-mark/"
+ },
+ {
+  "path": "/news/1600/start-planning-your-first-ever-oly-day/",
+  "status": 200,
+  "final": "https://olympians.org/news/1600/start-planning-your-first-ever-oly-day/"
+ },
+ {
+  "path": "/news/1597/tokyo-1964-olympians-reflect-on-game-changing-games/",
+  "status": 200,
+  "final": "https://olympians.org/news/1597/tokyo-1964-olympians-reflect-on-game-changing-games/"
+ },
+ {
+  "path": "/news/1594/join-our-live-chat-with-tokyo-1964-olympians/",
+  "status": 200,
+  "final": "https://olympians.org/news/1594/join-our-live-chat-with-tokyo-1964-olympians/"
+ },
+ {
+  "path": "/news/1591/a-tale-of-two-olympians-on-international-day-of-friendship/",
+  "status": 200,
+  "final": "https://olympians.org/news/1591/a-tale-of-two-olympians-on-international-day-of-friendship/"
+ },
+ {
+  "path": "/news/1588/join-over-750-olympians-and-leave-your-mark/",
+  "status": 200,
+  "final": "https://olympians.org/news/1588/join-over-750-olympians-and-leave-your-mark/"
+ },
+ {
+  "path": "/news/1585/start-promoting-be-oly-now/",
+  "status": 200,
+  "final": "https://olympians.org/news/1585/start-promoting-be-oly-now/"
+ },
+ {
+  "path": "/news/1582/introducing-our-newest-olympians-for-life/",
+  "status": 200,
+  "final": "https://olympians.org/news/1582/introducing-our-newest-olympians-for-life/"
+ },
+ {
+  "path": "/news/1579/meet-our-new-olympians-for-life/",
+  "status": 200,
+  "final": "https://olympians.org/news/1579/meet-our-new-olympians-for-life/"
+ },
+ {
+  "path": "/news/1576/a-personal-message-from-woa-president-jo-l-bouzou-oly/",
+  "status": 200,
+  "final": "https://olympians.org/news/1576/a-personal-message-from-woa-president-jo-l-bouzou-oly/"
+ },
+ {
+  "path": "/news/1573/leave-your-mark-at-tokyo-2020/",
+  "status": 200,
+  "final": "https://olympians.org/news/1573/leave-your-mark-at-tokyo-2020/"
+ },
+ {
+  "path": "/news/1570/visit-oly-house-tokyo-2020-and-leave-your-mark/",
+  "status": 200,
+  "final": "https://olympians.org/news/1570/visit-oly-house-tokyo-2020-and-leave-your-mark/"
+ },
+ {
+  "path": "/news/1567/get-ready-for-oly-day/",
+  "status": 200,
+  "final": "https://olympians.org/news/1567/get-ready-for-oly-day/"
+ },
+ {
+  "path": "/news/1564/become-woa-s-new-africa-development-officer/",
+  "status": 200,
+  "final": "https://olympians.org/news/1564/become-woa-s-new-africa-development-officer/"
+ },
+ {
+  "path": "/news/1561/be-on-the-big-screen-at-tokyo-2020/",
+  "status": 200,
+  "final": "https://olympians.org/news/1561/be-on-the-big-screen-at-tokyo-2020/"
+ },
+ {
+  "path": "/news/1558/apply-for-a-life-changing-university-scholarship/",
+  "status": 200,
+  "final": "https://olympians.org/news/1558/apply-for-a-life-changing-university-scholarship/"
+ },
+ {
+  "path": "/news/1555/life-changing-projects-awarded-woa-grants/",
+  "status": 200,
+  "final": "https://olympians.org/news/1555/life-changing-projects-awarded-woa-grants/"
+ },
+ {
+  "path": "/news/1552/watch-2021-international-athletes-forum-live/",
+  "status": 200,
+  "final": "https://olympians.org/news/1552/watch-2021-international-athletes-forum-live/"
+ },
+ {
+  "path": "/news/1549/play-your-part-on-olympic-day/",
+  "status": 200,
+  "final": "https://olympians.org/news/1549/play-your-part-on-olympic-day/"
+ },
+ {
+  "path": "/news/?StartRow=248",
+  "status": 200,
+  "final": "https://olympians.org/news/?StartRow=248"
+ },
+ {
+  "path": "/news/1546/share-your-olympian-experiences-during-tokyo-2020/",
+  "status": 200,
+  "final": "https://olympians.org/news/1546/share-your-olympian-experiences-during-tokyo-2020/"
+ },
+ {
+  "path": "/news/1543/woa-enhances-focus-on-the-environment-and-aims-to-create-oly-day/",
+  "status": 200,
+  "final": "https://olympians.org/news/1543/woa-enhances-focus-on-the-environment-and-aims-to-create-oly-day/"
+ },
+ {
+  "path": "/news/1540/register-for-career-enhancing-online-workshops/",
+  "status": 200,
+  "final": "https://olympians.org/news/1540/register-for-career-enhancing-online-workshops/"
+ },
+ {
+  "path": "/news/1537/deadline-near-for-5-000-woa-grants/",
+  "status": 200,
+  "final": "https://olympians.org/news/1537/deadline-near-for-5-000-woa-grants/"
+ },
+ {
+  "path": "/news/1531/get-to-know-exco/",
+  "status": 200,
+  "final": "https://olympians.org/news/1531/get-to-know-exco/"
+ },
+ {
+  "path": "/news/1534/woa-s-new-vps-on-the-important-role-of-women-in-sport/",
+  "status": 200,
+  "final": "https://olympians.org/news/1534/woa-s-new-vps-on-the-important-role-of-women-in-sport/"
+ },
+ {
+  "path": "/news/1528/woa-appoints-2-new-exco-members/",
+  "status": 200,
+  "final": "https://olympians.org/news/1528/woa-appoints-2-new-exco-members/"
+ },
+ {
+  "path": "/news/1525/launch-new-projects-with-a-5-000-woa-grant/",
+  "status": 200,
+  "final": "https://olympians.org/news/1525/launch-new-projects-with-a-5-000-woa-grant/"
+ },
+ {
+  "path": "/news/1522/olympians-qualify-as-afec-assessors/",
+  "status": 200,
+  "final": "https://olympians.org/news/1522/olympians-qualify-as-afec-assessors/"
+ },
+ {
+  "path": "/news/1516/apply-now-for-5-000-woa-grant/",
+  "status": 200,
+  "final": "https://olympians.org/news/1516/apply-now-for-5-000-woa-grant/"
+ },
+ {
+  "path": "/news/1519/new-woa-exco-elects-two-vps/",
+  "status": 200,
+  "final": "https://olympians.org/news/1519/new-woa-exco-elects-two-vps/"
+ },
+ {
+  "path": "/news/1513/woa-president-s-new-year-s-message/",
+  "status": 200,
+  "final": "https://olympians.org/news/1513/woa-president-s-new-year-s-message/"
+ },
+ {
+  "path": "/news/1510/seasons-greetings-from-the-woa-president/",
+  "status": 200,
+  "final": "https://olympians.org/news/1510/seasons-greetings-from-the-woa-president/"
+ },
+ {
+  "path": "/news/1507/have-your-say-on-athlete-expression-at-the-olympic-games/",
+  "status": 200,
+  "final": "https://olympians.org/news/1507/have-your-say-on-athlete-expression-at-the-olympic-games/"
+ },
+ {
+  "path": "/news/1504/noas-use-woa-grants-to-support-covid-19-recovery/",
+  "status": 200,
+  "final": "https://olympians.org/news/1504/noas-use-woa-grants-to-support-covid-19-recovery/"
+ },
+ {
+  "path": "/news/1501/james-d-wolfensohn-oly-1933--2020-/",
+  "status": 200,
+  "final": "https://olympians.org/news/1501/james-d-wolfensohn-oly-1933--2020-/"
+ },
+ {
+  "path": "/news/1498/hoa-protects-the-environment-with-woa-grant/",
+  "status": 200,
+  "final": "https://olympians.org/news/1498/hoa-protects-the-environment-with-woa-grant/"
+ },
+ {
+  "path": "/news/1493/cyprus-noa-supports-next-gen-olympians/",
+  "status": 200,
+  "final": "https://olympians.org/news/1493/cyprus-noa-supports-next-gen-olympians/"
+ },
+ {
+  "path": "/news/1492/first-global-findings-revealed-from-landmark-woa-olympians-health-study/",
+  "status": 200,
+  "final": "https://olympians.org/news/1492/first-global-findings-revealed-from-landmark-woa-olympians-health-study/"
+ },
+ {
+  "path": "/news/?StartRow=267",
+  "status": 200,
+  "final": "https://olympians.org/news/?StartRow=267"
+ },
+ {
+  "path": "/oly-house/be-oly/?year=2022",
+  "status": 200,
+  "final": "https://olympians.org/oly-house/be-oly/?year=2022"
+ },
+ {
+  "path": "/oly-house/olympian-reunions/?year=2022",
+  "status": 200,
+  "final": "https://olympians.org/oly-house/olympian-reunions/?year=2022"
+ },
+ {
+  "path": "/oly-house/what-we-love/?year=2022",
+  "status": 200,
+  "final": "https://olympians.org/oly-house/what-we-love/?year=2022"
+ },
+ {
+  "path": "/oly-house/olympians-for-life/?year=2022",
+  "status": 200,
+  "final": "https://olympians.org/oly-house/olympians-for-life/?year=2022"
+ },
+ {
+  "path": "/oly-house/welcome-to-oly-house/?year=2020",
+  "status": 200,
+  "final": "https://olympians.org/oly-house/welcome-to-oly-house/?year=2020"
+ },
+ {
+  "path": "/oly-house/a-message-from-president-joel-bouzou/?year=2020",
+  "status": 200,
+  "final": "https://olympians.org/oly-house/a-message-from-president-joel-bouzou/?year=2020"
+ },
+ {
+  "path": "/oly-house/leave-your-mark/?year=2020",
+  "status": 200,
+  "final": "https://olympians.org/oly-house/leave-your-mark/?year=2020"
+ },
+ {
+  "path": "/oly-house/be-oly/",
+  "status": 200,
+  "final": "https://olympians.org/olympians/oly/"
+ },
+ {
+  "path": "/oly-house/olympians-for-life/?year=2020",
+  "status": 200,
+  "final": "https://olympians.org/oly-house/olympians-for-life/?year=2020"
+ },
+ {
+  "path": "/oly-house/1964-reunion/?year=2020",
+  "status": 200,
+  "final": "https://olympians.org/oly-house/1964-reunion/?year=2020"
+ },
+ {
+  "path": "/oly-house/international-day-of-friendship/?year=2020",
+  "status": 200,
+  "final": "https://olympians.org/oly-house/international-day-of-friendship/?year=2020"
+ },
+ {
+  "path": "/oly-house/oly-day/?year=2020",
+  "status": 200,
+  "final": "https://olympians.org/oly-house/oly-day/?year=2020"
+ },
+ {
+  "path": "/oly-house/discover-more-olympic-activities/?year=2020",
+  "status": 200,
+  "final": "https://olympians.org/oly-house/discover-more-olympic-activities/?year=2020"
+ },
+ {
+  "path": "/best-practices/japanese-olympians-say-make-everything-more-beautiful-than-it-was/?id=1304",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/japanese-olympians-say-make-everything-more-beautiful-than-it-was/?id=1304"
+ },
+ {
+  "path": "/best-practices/30-000-turn-out-for-olympic-day-picnic-in-poland/?id=1301",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/30-000-turn-out-for-olympic-day-picnic-in-poland/?id=1301"
+ },
+ {
+  "path": "/best-practices/archery-champions-honoured-with-oly/?id=1298",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/archery-champions-honoured-with-oly/?id=1298"
+ },
+ {
+  "path": "/best-practices/us-volleyball-stars-get-behind-oly/?id=1277",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/us-volleyball-stars-get-behind-oly/?id=1277"
+ },
+ {
+  "path": "/best-practices/olympians-mobilise-for-international-day-of-sport-for-development-and-peace/?id=1274",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/olympians-mobilise-for-international-day-of-sport-for-development-and-peace/?id=1274"
+ },
+ {
+  "path": "/best-practices/set-match-oly-at-volleyfest-australia/?id=1268",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/set-match-oly-at-volleyfest-australia/?id=1268"
+ },
+ {
+  "path": "/best-practices/egyptian-olympians-honoured-at-uipm-world-cup/?id=1261",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/egyptian-olympians-honoured-at-uipm-world-cup/?id=1261"
+ },
+ {
+  "path": "/best-practices/indian-olympians-unite-in-bangalore/?id=1257",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/indian-olympians-unite-in-bangalore/?id=1257"
+ },
+ {
+  "path": "/best-practices/skiing-with-olympians-inspires-love-of-snow-sports/?id=1254",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/skiing-with-olympians-inspires-love-of-snow-sports/?id=1254"
+ },
+ {
+  "path": "/best-practices/olympians-deliver-sports-kits-to-change-lives-in-mali/?id=1242",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/olympians-deliver-sports-kits-to-change-lives-in-mali/?id=1242"
+ },
+ {
+  "path": "/best-practices/tennis-stars-honoured-with-oly/?id=1239",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/tennis-stars-honoured-with-oly/?id=1239"
+ },
+ {
+  "path": "/best-practices/chilean-olympians-inspire-youth/?id=1227",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/chilean-olympians-inspire-youth/?id=1227"
+ },
+ {
+  "path": "/best-practices/woa-helps-grant-wish-of-a-lifetime/?id=1207",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/woa-helps-grant-wish-of-a-lifetime/?id=1207"
+ },
+ {
+  "path": "/best-practices/lithuanian-olympians-help-prevent-drownings/?id=1191",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/lithuanian-olympians-help-prevent-drownings/?id=1191"
+ },
+ {
+  "path": "/best-practices/olympians-driving-sport-participation-in-palau/?id=1173",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/olympians-driving-sport-participation-in-palau/?id=1173"
+ },
+ {
+  "path": "/best-practices/olympians-help-prisoners-rehabilitate-in-chinese-taipei/?id=1158",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/olympians-help-prisoners-rehabilitate-in-chinese-taipei/?id=1158"
+ },
+ {
+  "path": "/best-practices/zimbabwe-olympians-training-for-life-after-sport/?id=1155",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/zimbabwe-olympians-training-for-life-after-sport/?id=1155"
+ },
+ {
+  "path": "/best-practices/1-day-to-go-cook-islands-olympians-association-created-for-olympicday/?id=1149",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/1-day-to-go-cook-islands-olympians-association-created-for-olympicday/?id=1149"
+ },
+ {
+  "path": "/best-practices/?StartRow=1",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/?StartRow=1"
+ },
+ {
+  "path": "/best-practices/3-days-to-go-6-000-set-to-take-part-in-olympicday-in-cape-verde/?id=1143",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/3-days-to-go-6-000-set-to-take-part-in-olympicday-in-cape-verde/?id=1143"
+ },
+ {
+  "path": "/best-practices/4-days-to-go-olympians-unite-in-georgia-for-olympic-day/?id=1140",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/4-days-to-go-olympians-unite-in-georgia-for-olympic-day/?id=1140"
+ },
+ {
+  "path": "/best-practices/5-days-to-go-australian-olympians-kick-off-olympicday-activities/?id=1137",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/5-days-to-go-australian-olympians-kick-off-olympicday-activities/?id=1137"
+ },
+ {
+  "path": "/best-practices/service-to-society-olympians-help-heal-divisions-in-colombia/?id=1134",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/service-to-society-olympians-help-heal-divisions-in-colombia/?id=1134"
+ },
+ {
+  "path": "/best-practices/service-to-society-malaysian-olympians-promote-sport-in-the-community/?id=1118",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/service-to-society-malaysian-olympians-promote-sport-in-the-community/?id=1118"
+ },
+ {
+  "path": "/best-practices/zambian-olympian-brings-sport-to-refugee-camps/?id=1097",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/zambian-olympian-brings-sport-to-refugee-camps/?id=1097"
+ },
+ {
+  "path": "/best-practices/service-to-society-indian-olympians-aiming-to-reduce-drowning-deaths/?id=1028",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/service-to-society-indian-olympians-aiming-to-reduce-drowning-deaths/?id=1028"
+ },
+ {
+  "path": "/best-practices/olympians-run-sports-clinic-for-underprivileged-children-in-manila/?id=1013",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/olympians-run-sports-clinic-for-underprivileged-children-in-manila/?id=1013"
+ },
+ {
+  "path": "/best-practices/service-to-society-zimbabwe-noa-chicken-farm-has-changed-my-life-/?id=962",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/service-to-society-zimbabwe-noa-chicken-farm-has-changed-my-life-/?id=962"
+ },
+ {
+  "path": "/best-practices/service-to-society-estonian-olympians-launch-nationwide-get-active-schools-programme/?id=940",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/service-to-society-estonian-olympians-launch-nationwide-get-active-schools-programme/?id=940"
+ },
+ {
+  "path": "/best-practices/olympic-day--australian-olympians-out-in-force-promoting-olympic-day-in-schools/?id=910",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/olympic-day--australian-olympians-out-in-force-promoting-olympic-day-in-schools/?id=910"
+ },
+ {
+  "path": "/best-practices/one-day-to-go-to-olympic-day-indian-olympians-share-their-olympic-journey-in-new-video/?id=907",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/one-day-to-go-to-olympic-day-indian-olympians-share-their-olympic-journey-in-new-video/?id=907"
+ },
+ {
+  "path": "/best-practices/two-days-to-go-to-olympic-day-youth-sport-in-the-spotlight-in-lithuania/?id=904",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/two-days-to-go-to-olympic-day-youth-sport-in-the-spotlight-in-lithuania/?id=904"
+ },
+ {
+  "path": "/best-practices/three-days-to-go-to-olympic-day-french-olympians-to-inspire-next-generation-in-mass-olympic-day-event/?id=901",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/three-days-to-go-to-olympic-day-french-olympians-to-inspire-next-generation-in-mass-olympic-day-event/?id=901"
+ },
+ {
+  "path": "/best-practices/four-days-to-go-to-olympic-day-us-and-rwandan-olympians-join-together-to-promote-gender-equality-for-olympic-day/?id=898",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/four-days-to-go-to-olympic-day-us-and-rwandan-olympians-join-together-to-promote-gender-equality-for-olympic-day/?id=898"
+ },
+ {
+  "path": "/best-practices/service-to-society-australian-olympians-inspire-high-school-students/?id=892",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/service-to-society-australian-olympians-inspire-high-school-students/?id=892"
+ },
+ {
+  "path": "/best-practices/legacy-of-target-ebola-campaign-lives-on-in-liberia/?id=883",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/legacy-of-target-ebola-campaign-lives-on-in-liberia/?id=883"
+ },
+ {
+  "path": "/best-practices/moldovan-olympians-forum-kicks-off-2017-events/?id=838",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/moldovan-olympians-forum-kicks-off-2017-events/?id=838"
+ },
+ {
+  "path": "/best-practices/india-celebrates-independence-day-at-the-olympians-reunion-centre-by-ey/?id=708",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/india-celebrates-independence-day-at-the-olympians-reunion-centre-by-ey/?id=708"
+ },
+ {
+  "path": "/best-practices/australian-angolan-and-german-olympians-bring-olympism-to-the-community-for-olympic-day/?id=624",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/australian-angolan-and-german-olympians-bring-olympism-to-the-community-for-olympic-day/?id=624"
+ },
+ {
+  "path": "/best-practices/one-day-to-go-to-olympic-day-olympic-education-week-puts-focus-on-uganda-s-youth-leaders/?id=621",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/one-day-to-go-to-olympic-day-olympic-education-week-puts-focus-on-uganda-s-youth-leaders/?id=621"
+ },
+ {
+  "path": "/best-practices/two-days-to-go-to-olympic-day-slovenia-olympians-association-contributes-to-the-country-s-olympic-day-success/?id=618",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/two-days-to-go-to-olympic-day-slovenia-olympians-association-contributes-to-the-country-s-olympic-day-success/?id=618"
+ },
+ {
+  "path": "/best-practices/three-days-to-go-to-olympic-day-great-britain-olympians-celebrate-rugby-s-olympic-return/?id=612",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/three-days-to-go-to-olympic-day-great-britain-olympians-celebrate-rugby-s-olympic-return/?id=612"
+ },
+ {
+  "path": "/best-practices/four-days-to-go-to-olympic-day-rio-2016-hopefuls-lead-olympic-day-run-in-cambodia/?id=609",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/four-days-to-go-to-olympic-day-rio-2016-hopefuls-lead-olympic-day-run-in-cambodia/?id=609"
+ },
+ {
+  "path": "/best-practices/five-days-to-go-to-olympic-day-zimbabwe-noa-promotes-sport-for-all/?id=606",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/five-days-to-go-to-olympic-day-zimbabwe-noa-promotes-sport-for-all/?id=606"
+ },
+ {
+  "path": "/best-practices/nationwide-celebrations-mark-olympic-day-in-croatia/?id=603",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/nationwide-celebrations-mark-olympic-day-in-croatia/?id=603"
+ },
+ {
+  "path": "/best-practices/angola-olympians-association-marks-8-year-anniversary/?id=509",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/angola-olympians-association-marks-8-year-anniversary/?id=509"
+ },
+ {
+  "path": "/best-practices/korean-olympians-education-programme-continues-to-inspire-20-years-on/?id=487",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/korean-olympians-education-programme-continues-to-inspire-20-years-on/?id=487"
+ },
+ {
+  "path": "/best-practices/zimbabwe-olympians-unite-to-tackle-doping-in-sport/?id=481",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/zimbabwe-olympians-unite-to-tackle-doping-in-sport/?id=481"
+ },
+ {
+  "path": "/best-practices/woa-grant-helps-establish-slovenian-olympians-tutoring-programme/?id=472",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/woa-grant-helps-establish-slovenian-olympians-tutoring-programme/?id=472"
+ },
+ {
+  "path": "/best-practices/giant-mural-honours-ecuadorian-athletes/?id=451",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/giant-mural-honours-ecuadorian-athletes/?id=451"
+ },
+ {
+  "path": "/best-practices/3-days-to-go-to-olympic-day-year-round-celebrations-keep-swedish-olympians-busy/?id=379",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/3-days-to-go-to-olympic-day-year-round-celebrations-keep-swedish-olympians-busy/?id=379"
+ },
+ {
+  "path": "/best-practices/4-days-to-go-to-olympic-day-angola-s-olympic-day-celebrations-to-focus-on-youth/?id=376",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/4-days-to-go-to-olympic-day-angola-s-olympic-day-celebrations-to-focus-on-youth/?id=376"
+ },
+ {
+  "path": "/best-practices/5-days-to-go-to-olympic-day-australia-s-olympians-return-to-school-to-promote-olympic-movement/?id=373",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/5-days-to-go-to-olympic-day-australia-s-olympians-return-to-school-to-promote-olympic-movement/?id=373"
+ },
+ {
+  "path": "/best-practices/6-days-to-go-to-olympic-day-canada-plans-country-wide-events-to-celebrate-olympic-day-2015/?id=370",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/6-days-to-go-to-olympic-day-canada-plans-country-wide-events-to-celebrate-olympic-day-2015/?id=370"
+ },
+ {
+  "path": "/best-practices/7-days-to-go-to-olympic-day-technology-aids-usa-olympic-day-awareness/?id=367",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/7-days-to-go-to-olympic-day-technology-aids-usa-olympic-day-awareness/?id=367"
+ },
+ {
+  "path": "/best-practices/9-days-to-go-to-olympic-day-peru-combines-cultural-and-sporting-events-to-mark-olympic-day/?id=360",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/9-days-to-go-to-olympic-day-peru-combines-cultural-and-sporting-events-to-mark-olympic-day/?id=360"
+ },
+ {
+  "path": "/best-practices/10-days-to-go-to-olympic-day-tajikistan-plans-week-long-olympic-day-celebration/?id=357",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/10-days-to-go-to-olympic-day-tajikistan-plans-week-long-olympic-day-celebration/?id=357"
+ },
+ {
+  "path": "/best-practices/belgian-olympians-gear-up-for-olympic-day-with-one-month-to-go/?id=338",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/belgian-olympians-gear-up-for-olympic-day-with-one-month-to-go/?id=338"
+ },
+ {
+  "path": "/best-practices/gb-olympians-to-run-westminster-mile/?id=332",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/gb-olympians-to-run-westminster-mile/?id=332"
+ },
+ {
+  "path": "/best-practices/madagascar-olympians-get-woa-help-to-aid-flood-victims/?id=298",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/madagascar-olympians-get-woa-help-to-aid-flood-victims/?id=298"
+ },
+ {
+  "path": "/best-practices/sierra-leone-olympians-give-back-to-the-community/?id=189",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/sierra-leone-olympians-give-back-to-the-community/?id=189"
+ },
+ {
+  "path": "/best-practices/namibian-olympians-association-celebrates-olympic-day-with-e-card/?id=52",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/namibian-olympians-association-celebrates-olympic-day-with-e-card/?id=52"
+ },
+ {
+  "path": "/best-practices/countdown-to-olympic-day--3-days-to-go/?id=48",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/countdown-to-olympic-day--3-days-to-go/?id=48"
+ },
+ {
+  "path": "/best-practices/olympians-ski-for-underprivileged-children/?id=27",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/olympians-ski-for-underprivileged-children/?id=27"
+ },
+ {
+  "path": "/best-practices/madagascar-olympians-help-celebrate-international-women-s-day/?id=26",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/madagascar-olympians-help-celebrate-international-women-s-day/?id=26"
+ },
+ {
+  "path": "/best-practices/swimming-towards-olympic-values-in-peru/?id=24",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/swimming-towards-olympic-values-in-peru/?id=24"
+ },
+ {
+  "path": "/best-practices/orphans-get-a-sporting-chance-in-tajikistan/?id=7",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/orphans-get-a-sporting-chance-in-tajikistan/?id=7"
+ },
+ {
+  "path": "/best-practices/tackling-childhood-obesity-in-the-usa/?id=9",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/tackling-childhood-obesity-in-the-usa/?id=9"
+ },
+ {
+  "path": "/best-practices/promoting-olympism-in-ukraine/?id=8",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/promoting-olympism-in-ukraine/?id=8"
+ },
+ {
+  "path": "/best-practices/spanish-youngsters-learn-olympic-ideals/?id=6",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/spanish-youngsters-learn-olympic-ideals/?id=6"
+ },
+ {
+  "path": "/best-practices/olympians-honoured-in-new-zealand/?id=5",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/olympians-honoured-in-new-zealand/?id=5"
+ },
+ {
+  "path": "/best-practices/olympic-values-celebrated-in-netherlands/?id=4",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/olympic-values-celebrated-in-netherlands/?id=4"
+ },
+ {
+  "path": "/best-practices/children-in-chile-benefit-from-woa-partnership/?id=2",
+  "status": 200,
+  "final": "https://olympians.org/best-practices/children-in-chile-benefit-from-woa-partnership/?id=2"
+ },
+ {
+  "path": "/milano-cortina-2026/",
+  "status": 200,
+  "final": "https://olympians.org/milano-cortina-2026/?ended"
+ },
+ {
+  "path": "/end-of-year-party/",
+  "status": 200,
+  "final": "https://olympians.org/end-of-year-party/"
+ },
+ {
+  "path": "/news/1489/apply-now-for-life-changing-50-percent-scholarships/",
+  "status": 200,
+  "final": "https://olympians.org/news/1489/apply-now-for-life-changing-50-percent-scholarships/"
+ },
+ {
+  "path": "/news/1486/more-benefits-for-olympians-discussed-at-woa-general-assembly/",
+  "status": 200,
+  "final": "https://olympians.org/news/1486/more-benefits-for-olympians-discussed-at-woa-general-assembly/"
+ },
+ {
+  "path": "/news/1483/jo-l-bouzou-oly-re-elected-president-of-woa/",
+  "status": 200,
+  "final": "https://olympians.org/news/1483/jo-l-bouzou-oly-re-elected-president-of-woa/"
+ },
+ {
+  "path": "/news/1480/woa-general-assembly-set-for-22-october/",
+  "status": 200,
+  "final": "https://olympians.org/news/1480/woa-general-assembly-set-for-22-october/"
+ },
+ {
+  "path": "/news/1473/olympians-can-now-apply-for-50-percent-postgraduate-scholarships/",
+  "status": 200,
+  "final": "https://olympians.org/news/1473/olympians-can-now-apply-for-50-percent-postgraduate-scholarships/"
+ },
+ {
+  "path": "/news/1472/woa-executive-committee-member-appointed-tokyo-2020-sports-director/",
+  "status": 200,
+  "final": "https://olympians.org/news/1472/woa-executive-committee-member-appointed-tokyo-2020-sports-director/"
+ },
+ {
+  "path": "/news/1469/unlock-your-potential-as-a-business-leader/",
+  "status": 200,
+  "final": "https://olympians.org/news/1469/unlock-your-potential-as-a-business-leader/"
+ },
+ {
+  "path": "/news/1466/olympians-awarded-life-changing-scholarships/",
+  "status": 200,
+  "final": "https://olympians.org/news/1466/olympians-awarded-life-changing-scholarships/"
+ },
+ {
+  "path": "/news/1463/woa-president-honours-mon-gasque-olympians/",
+  "status": 200,
+  "final": "https://olympians.org/news/1463/woa-president-honours-mon-gasque-olympians/"
+ },
+ {
+  "path": "/news/1460/woa-statement-on-iranian-wrestler-navid-afkari/",
+  "status": 200,
+  "final": "https://olympians.org/news/1460/woa-statement-on-iranian-wrestler-navid-afkari/"
+ },
+ {
+  "path": "/news/1457/watch-how-to-grow-your-olympian-legacy/",
+  "status": 200,
+  "final": "https://olympians.org/news/1457/watch-how-to-grow-your-olympian-legacy/"
+ },
+ {
+  "path": "/news/1454/get-paid-to-support-student-athletes/",
+  "status": 200,
+  "final": "https://olympians.org/news/1454/get-paid-to-support-student-athletes/"
+ },
+ {
+  "path": "/news/1451/hear-how-to-deliver-your-olympian-legacy/",
+  "status": 200,
+  "final": "https://olympians.org/news/1451/hear-how-to-deliver-your-olympian-legacy/"
+ },
+ {
+  "path": "/news/1441/apply-now-for-fully-paid-university-scholarships/",
+  "status": 200,
+  "final": "https://olympians.org/news/1441/apply-now-for-fully-paid-university-scholarships/"
+ },
+ {
+  "path": "/news/1435/fastest-100-olympians-will-get-free-airbnb-experiences/",
+  "status": 200,
+  "final": "https://olympians.org/news/1435/fastest-100-olympians-will-get-free-airbnb-experiences/"
+ },
+ {
+  "path": "/news/1438/new-alliance-will-increase-benefits-for-olympians/",
+  "status": 200,
+  "final": "https://olympians.org/news/1438/new-alliance-will-increase-benefits-for-olympians/"
+ },
+ {
+  "path": "/news/1431/olympians-reunite-with-oly/",
+  "status": 200,
+  "final": "https://olympians.org/news/1431/olympians-reunite-with-oly/"
+ },
+ {
+  "path": "/news/1428/rwandan-olympians-protect-taxi-moto-drivers/",
+  "status": 200,
+  "final": "https://olympians.org/news/1428/rwandan-olympians-protect-taxi-moto-drivers/"
+ },
+ {
+  "path": "/news/1425/start-earning-money-with-airbnb-olympian-experiences-now/",
+  "status": 200,
+  "final": "https://olympians.org/news/1425/start-earning-money-with-airbnb-olympian-experiences-now/"
+ },
+ {
+  "path": "/news/?StartRow=286",
+  "status": 200,
+  "final": "https://olympians.org/news/?StartRow=286"
+ },
+ {
+  "path": "/news/1422/olympians-gear-up-for-virtual-olympic-day/",
+  "status": 200,
+  "final": "https://olympians.org/news/1422/olympians-gear-up-for-virtual-olympic-day/"
+ },
+ {
+  "path": "/news/1419/woa-2020-grant-awardees-revealed/",
+  "status": 200,
+  "final": "https://olympians.org/news/1419/woa-2020-grant-awardees-revealed/"
+ },
+ {
+  "path": "/news/1416/olympians-and-noas-get-creative-to-boost-oly-sign-ups/",
+  "status": 200,
+  "final": "https://olympians.org/news/1416/olympians-and-noas-get-creative-to-boost-oly-sign-ups/"
+ },
+ {
+  "path": "/news/1413/award-winning-slovenian-olympian-celebrates-100th-birthday/",
+  "status": 200,
+  "final": "https://olympians.org/news/1413/award-winning-slovenian-olympian-celebrates-100th-birthday/"
+ },
+ {
+  "path": "/news/1410/olympians-associations-supporting-their-communities-during-lockdown/",
+  "status": 200,
+  "final": "https://olympians.org/news/1410/olympians-associations-supporting-their-communities-during-lockdown/"
+ },
+ {
+  "path": "/news/1407/lukman-niode-oly-a-bright-light-of-the-woa-family/",
+  "status": 200,
+  "final": "https://olympians.org/news/1407/lukman-niode-oly-a-bright-light-of-the-woa-family/"
+ },
+ {
+  "path": "/news/1404/play-your-part-in-the-whitecard-campaign/",
+  "status": 200,
+  "final": "https://olympians.org/news/1404/play-your-part-in-the-whitecard-campaign/"
+ },
+ {
+  "path": "/news/1401/woa-calls-on-olympians-to-use-delayed-games-time-to-focus-on-their-communities/",
+  "status": 200,
+  "final": "https://olympians.org/news/1401/woa-calls-on-olympians-to-use-delayed-games-time-to-focus-on-their-communities/"
+ },
+ {
+  "path": "/news/1398/support-your-fellow-olympians-and-your-community/",
+  "status": 200,
+  "final": "https://olympians.org/news/1398/support-your-fellow-olympians-and-your-community/"
+ },
+ {
+  "path": "/news/1395/it-s-easy-to-earn-money-by-creating-a-business-on-airbnb/",
+  "status": 200,
+  "final": "https://olympians.org/news/1395/it-s-easy-to-earn-money-by-creating-a-business-on-airbnb/"
+ },
+ {
+  "path": "/news/1392/take-a-leap-towards-your-new-career/",
+  "status": 200,
+  "final": "https://olympians.org/news/1392/take-a-leap-towards-your-new-career/"
+ },
+ {
+  "path": "/news/1389/make-your-idea-come-true-like-these-olympians/",
+  "status": 200,
+  "final": "https://olympians.org/news/1389/make-your-idea-come-true-like-these-olympians/"
+ },
+ {
+  "path": "/news/1386/100-year-old-olympian-legend-honoured/",
+  "status": 200,
+  "final": "https://olympians.org/news/1386/100-year-old-olympian-legend-honoured/"
+ },
+ {
+  "path": "/news/1383/ugandan-olympians-reconnect-for-the-first-time/",
+  "status": 200,
+  "final": "https://olympians.org/news/1383/ugandan-olympians-reconnect-for-the-first-time/"
+ },
+ {
+  "path": "/news/1380/share-your-experiences-and-watch-the-games-with-ioc-top-partners-in-tokyo-2020/",
+  "status": 200,
+  "final": "https://olympians.org/news/1380/share-your-experiences-and-watch-the-games-with-ioc-top-partners-in-tokyo-2020/"
+ },
+ {
+  "path": "/news/1377/olympians-chat-with-champions-huge-success-at-yog/",
+  "status": 200,
+  "final": "https://olympians.org/news/1377/olympians-chat-with-champions-huge-success-at-yog/"
+ },
+ {
+  "path": "/news/1374/apply-now-for-a-woa-grant/",
+  "status": 200,
+  "final": "https://olympians.org/news/1374/apply-now-for-a-woa-grant/"
+ },
+ {
+  "path": "/news/1371/olympians-oly-house-is-on-for-tokyo-2020/",
+  "status": 200,
+  "final": "https://olympians.org/news/1371/olympians-oly-house-is-on-for-tokyo-2020/"
+ },
+ {
+  "path": "/news/1368/four-20-000-grants-to-be-awarded/",
+  "status": 200,
+  "final": "https://olympians.org/news/1368/four-20-000-grants-to-be-awarded/"
+ },
+ {
+  "path": "/news/?StartRow=305",
+  "status": 200,
+  "final": "https://olympians.org/news/?StartRow=305"
+ },
+ {
+  "path": "/oly-house/what-we-love-about-the-games/",
+  "status": 200,
+  "final": "https://olympians.org/oly-house/what-we-love/"
+ },
+ {
+  "path": "/oly-house/olympians-for-life/",
+  "status": 200,
+  "final": "https://olympians.org/olympians/olympians-for-life/"
+ },
+ {
+  "path": "/oly-house/gamestime-olympian-reunions/",
+  "status": 200,
+  "final": "https://www.olyhouse.org/"
+ },
+ {
+  "path": "/oly-house/1964-reunion/",
+  "status": 200,
+  "final": "https://olympians.org/oly-house/1964-reunion/?year=2020"
+ },
+ {
+  "path": "/ism-scholarship/",
+  "status": 200,
+  "final": "https://olympians.org/ism-scholarship/"
+ },
+ {
+  "path": "/oly-house/international-day-of-friendship/",
+  "status": 200,
+  "final": "https://olympians.org/oly-house/international-day-of-friendship/?year=2020"
+ },
+ {
+  "path": "/news/1365/win-a-free-trip-to-tokyo-2020-with-oly-arts/",
+  "status": 200,
+  "final": "https://olympians.org/news/1365/win-a-free-trip-to-tokyo-2020-with-oly-arts/"
+ },
+ {
+  "path": "/news/1362/nominate-your-coach-for-an-ioc-coaches-lifetime-achievement-award/",
+  "status": 200,
+  "final": "https://olympians.org/news/1362/nominate-your-coach-for-an-ioc-coaches-lifetime-achievement-award/"
+ },
+ {
+  "path": "/news/1347/secure-your-legacy-at-the-olympic-museum/",
+  "status": 200,
+  "final": "https://olympians.org/news/1347/secure-your-legacy-at-the-olympic-museum/"
+ },
+ {
+  "path": "/news/1359/monaco-olympians-unite-with-their-noc-to-drive-olympism-forward/",
+  "status": 200,
+  "final": "https://olympians.org/news/1359/monaco-olympians-unite-with-their-noc-to-drive-olympism-forward/"
+ },
+ {
+  "path": "/news/1356/olympians-bring-your-creative-ideas-to-tokyo/",
+  "status": 200,
+  "final": "https://olympians.org/news/1356/olympians-bring-your-creative-ideas-to-tokyo/"
+ },
+ {
+  "path": "/news/1353/zambia-olympians-use-sport-to-inspire-hope/",
+  "status": 200,
+  "final": "https://olympians.org/news/1353/zambia-olympians-use-sport-to-inspire-hope/"
+ },
+ {
+  "path": "/news/1350/canadian-olympian-marie-ve-marleau-oly-joins-woa-team/",
+  "status": 200,
+  "final": "https://olympians.org/news/1350/canadian-olympian-marie-ve-marleau-oly-joins-woa-team/"
+ },
+ {
+  "path": "/news/1344/olympians-use-taekwondo-to-empower-young-refugees-in-jordan/",
+  "status": 200,
+  "final": "https://olympians.org/news/1344/olympians-use-taekwondo-to-empower-young-refugees-in-jordan/"
+ },
+ {
+  "path": "/news/1341/filipino-olympians-give-the-biggest-gift-to-disadvantaged-children/",
+  "status": 200,
+  "final": "https://olympians.org/news/1341/filipino-olympians-give-the-biggest-gift-to-disadvantaged-children/"
+ },
+ {
+  "path": "/news/1332/woa-awards-more-grants-than-ever-in-2019/",
+  "status": 200,
+  "final": "https://olympians.org/news/1332/woa-awards-more-grants-than-ever-in-2019/"
+ },
+ {
+  "path": "/news/1329/road-to-tokyo-digital-offers-for-olympians-mark-one-year-to-go/",
+  "status": 200,
+  "final": "https://olympians.org/news/1329/road-to-tokyo-digital-offers-for-olympians-mark-one-year-to-go/"
+ },
+ {
+  "path": "/news/1325/road-to-tokyo-registration-now-open-for-oly-opportunities-at-tokyo-2020/",
+  "status": 200,
+  "final": "https://olympians.org/news/1325/road-to-tokyo-registration-now-open-for-oly-opportunities-at-tokyo-2020/"
+ },
+ {
+  "path": "/news/1322/winter-olympian-wins-woa-health-study-prize/",
+  "status": 200,
+  "final": "https://olympians.org/news/1322/winter-olympian-wins-woa-health-study-prize/"
+ },
+ {
+  "path": "/news/1319/an-olympian-returns-home-/",
+  "status": 200,
+  "final": "https://olympians.org/news/1319/an-olympian-returns-home-/"
+ },
+ {
+  "path": "/news/?StartRow=324",
+  "status": 200,
+  "final": "https://olympians.org/news/?StartRow=324"
+ },
+ {
+  "path": "/news/1307/happy-olympic-day/",
+  "status": 200,
+  "final": "https://olympians.org/news/1307/happy-olympic-day/"
+ },
+ {
+  "path": "/news/1298/archery-champions-honoured-with-oly/",
+  "status": 200,
+  "final": "https://olympians.org/news/1298/archery-champions-honoured-with-oly/"
+ },
+ {
+  "path": "/news/1297/work-in-the-heart-of-the-olympic-capital/",
+  "status": 200,
+  "final": "https://olympians.org/news/1297/work-in-the-heart-of-the-olympic-capital/"
+ },
+ {
+  "path": "/news/1292/successful-world-olympians-forum-empowers-olympians-worldwide/",
+  "status": 200,
+  "final": "https://olympians.org/news/1292/successful-world-olympians-forum-empowers-olympians-worldwide/"
+ },
+ {
+  "path": "/news/1295/join-the-woa-team/",
+  "status": 200,
+  "final": "https://olympians.org/news/1295/join-the-woa-team/"
+ },
+ {
+  "path": "/news/1289/woa-2019-grants-programme-launched-at-world-olympians-forum/",
+  "status": 200,
+  "final": "https://olympians.org/news/1289/woa-2019-grants-programme-launched-at-world-olympians-forum/"
+ },
+ {
+  "path": "/news/1286/new-noa-guide-will-boost-capabilities/",
+  "status": 200,
+  "final": "https://olympians.org/news/1286/new-noa-guide-will-boost-capabilities/"
+ },
+ {
+  "path": "/news/1283/joint-session-paves-way-for-future-collaboration/",
+  "status": 200,
+  "final": "https://olympians.org/news/1283/joint-session-paves-way-for-future-collaboration/"
+ },
+ {
+  "path": "/news/1280/world-olympians-forum-celebrates-olympians-at-the-heart-of-the-games/",
+  "status": 200,
+  "final": "https://olympians.org/news/1280/world-olympians-forum-celebrates-olympians-at-the-heart-of-the-games/"
+ },
+ {
+  "path": "/news/1277/us-volleyball-stars-get-behind-oly/",
+  "status": 200,
+  "final": "https://olympians.org/news/1277/us-volleyball-stars-get-behind-oly/"
+ },
+ {
+  "path": "/news/1271/global-olympian-community-to-gather-in-lausanne/",
+  "status": 200,
+  "final": "https://olympians.org/news/1271/global-olympian-community-to-gather-in-lausanne/"
+ },
+ {
+  "path": "/news/1274/olympians-mobilise-for-international-day-of-sport-for-development-and-peace/",
+  "status": 200,
+  "final": "https://olympians.org/news/1274/olympians-mobilise-for-international-day-of-sport-for-development-and-peace/"
+ },
+ {
+  "path": "/news/1267/apply-now-for-aists-athlete-scholarship/",
+  "status": 200,
+  "final": "https://olympians.org/news/1267/apply-now-for-aists-athlete-scholarship/"
+ },
+ {
+  "path": "/news/1264/olympians-chosen-by-woa-to-attend-ioa-young-participants-session/",
+  "status": 200,
+  "final": "https://olympians.org/news/1264/olympians-chosen-by-woa-to-attend-ioa-young-participants-session/"
+ },
+ {
+  "path": "/news/1261/egyptian-olympians-honoured-at-uipm-world-cup/",
+  "status": 200,
+  "final": "https://olympians.org/news/1261/egyptian-olympians-honoured-at-uipm-world-cup/"
+ },
+ {
+  "path": "/news/1260/-10-000-in-funding-up-for-grabs-at-world-olympians-forum/",
+  "status": 200,
+  "final": "https://olympians.org/news/1260/-10-000-in-funding-up-for-grabs-at-world-olympians-forum/"
+ },
+ {
+  "path": "/news/?StartRow=343",
+  "status": 200,
+  "final": "https://olympians.org/news/?StartRow=343"
+ },
+ {
+  "path": "/news/1257/indian-olympians-unite-in-bangalore/",
+  "status": 200,
+  "final": "https://olympians.org/news/1257/indian-olympians-unite-in-bangalore/"
+ },
+ {
+  "path": "/news/1251/nominations-open-2019-young-participants-session/",
+  "status": 200,
+  "final": "https://olympians.org/news/1251/nominations-open-2019-young-participants-session/"
+ },
+ {
+  "path": "/news/1245/top-honour-for-woa-s-pernilla-wiberg/",
+  "status": 200,
+  "final": "https://olympians.org/news/1245/top-honour-for-woa-s-pernilla-wiberg/"
+ },
+ {
+  "path": "/news/1248/clean-audit-underpins-growth-of-woa/",
+  "status": 200,
+  "final": "https://olympians.org/news/1248/clean-audit-underpins-growth-of-woa/"
+ },
+ {
+  "path": "/news/1242/olympians-deliver-sports-kits-to-change-lives-in-mali/",
+  "status": 200,
+  "final": "https://olympians.org/news/1242/olympians-deliver-sports-kits-to-change-lives-in-mali/"
+ },
+ {
+  "path": "/news/1236/season-s-greetings-from-woa/",
+  "status": 200,
+  "final": "https://olympians.org/news/1236/season-s-greetings-from-woa/"
+ },
+ {
+  "path": "/news/1233/woa-launches-world-olympians-forum-ii/",
+  "status": 200,
+  "final": "https://olympians.org/news/1233/woa-launches-world-olympians-forum-ii/"
+ },
+ {
+  "path": "/news/1230/the-growing-impact-of-noas-in-asia/",
+  "status": 200,
+  "final": "https://olympians.org/news/1230/the-growing-impact-of-noas-in-asia/"
+ },
+ {
+  "path": "/news/1224/collaboration-key-at-asia-athletes-forum/",
+  "status": 200,
+  "final": "https://olympians.org/news/1224/collaboration-key-at-asia-athletes-forum/"
+ },
+ {
+  "path": "/news/1221/don-t-miss-out--win-a-trip-to-switzerland/",
+  "status": 200,
+  "final": "https://olympians.org/news/1221/don-t-miss-out--win-a-trip-to-switzerland/"
+ },
+ {
+  "path": "/news/1218/modern-pentathlon-becomes-first-international-federation-to-honour-board-with-oly/",
+  "status": 200,
+  "final": "https://olympians.org/news/1218/modern-pentathlon-becomes-first-international-federation-to-honour-board-with-oly/"
+ },
+ {
+  "path": "/news/1215/woa-urges-olympians-to-speak-up-on-integrity/",
+  "status": 200,
+  "final": "https://olympians.org/news/1215/woa-urges-olympians-to-speak-up-on-integrity/"
+ },
+ {
+  "path": "/news/1212/biggest-ever-woa-grants-programme-supports-more-olympians-than-ever/",
+  "status": 200,
+  "final": "https://olympians.org/news/1212/biggest-ever-woa-grants-programme-supports-more-olympians-than-ever/"
+ },
+ {
+  "path": "/news/1206/woa-mourns-the-passing-of-patrick-baumann/",
+  "status": 200,
+  "final": "https://olympians.org/news/1206/woa-mourns-the-passing-of-patrick-baumann/"
+ },
+ {
+  "path": "/news/1203/world-olympians-association-welcomes-athletes-declaration/",
+  "status": 200,
+  "final": "https://olympians.org/news/1203/world-olympians-association-welcomes-athletes-declaration/"
+ },
+ {
+  "path": "/news/?StartRow=362",
+  "status": 200,
+  "final": "https://olympians.org/news/?StartRow=362"
+ },
+ {
+  "path": "/oly-house/be-oly/?year=2020",
+  "status": 200,
+  "final": "https://olympians.org/oly-house/be-oly/?year=2020"
+ },
+ {
+  "path": "/grants/development-grants/",
+  "status": 200,
+  "final": "https://olympians.org/grants/development-grants/"
+ },
+ {
+  "path": "/airbnb-festival/",
+  "status": 200,
+  "final": "https://olympians.org/airbnb-festival/?full"
+ },
+ {
+  "path": "/news/1200/olympians-at-the-forefront-of-the-olympism-in-action-forum/",
+  "status": 200,
+  "final": "https://olympians.org/news/1200/olympians-at-the-forefront-of-the-olympism-in-action-forum/"
+ },
+ {
+  "path": "/news/1194/olympic-glory-on-the-horizon-as-yog-begins/",
+  "status": 200,
+  "final": "https://olympians.org/news/1194/olympic-glory-on-the-horizon-as-yog-begins/"
+ },
+ {
+  "path": "/news/1197/woa-president-praises-strong-noa-noc-collaboration-at-polish-presidential-palace/",
+  "status": 200,
+  "final": "https://olympians.org/news/1197/woa-president-praises-strong-noa-noc-collaboration-at-polish-presidential-palace/"
+ },
+ {
+  "path": "/news/1191/lithuanian-olympians-help-prevent-drownings/",
+  "status": 200,
+  "final": "https://olympians.org/news/1191/lithuanian-olympians-help-prevent-drownings/"
+ },
+ {
+  "path": "/news/1173/olympians-driving-sport-participation-in-palau/",
+  "status": 200,
+  "final": "https://olympians.org/news/1173/olympians-driving-sport-participation-in-palau/"
+ },
+ {
+  "path": "/news/1188/woa-puts-spotlight-on-the-arts-with-new-oly-arts-committee/",
+  "status": 200,
+  "final": "https://olympians.org/news/1188/woa-puts-spotlight-on-the-arts-with-new-oly-arts-committee/"
+ },
+ {
+  "path": "/news/1185/woa-encourages-olympians-to-contribute-to-the-athlete-charter/",
+  "status": 200,
+  "final": "https://olympians.org/news/1185/woa-encourages-olympians-to-contribute-to-the-athlete-charter/"
+ },
+ {
+  "path": "/news/1179/first-ever-woa-development-officer-appointed-in-asia/",
+  "status": 200,
+  "final": "https://olympians.org/news/1179/first-ever-woa-development-officer-appointed-in-asia/"
+ },
+ {
+  "path": "/news/1176/woa-secretary-general-to-open-asian-olympians-meeting/",
+  "status": 200,
+  "final": "https://olympians.org/news/1176/woa-secretary-general-to-open-asian-olympians-meeting/"
+ },
+ {
+  "path": "/news/1170/olympians-health-study-win-a-trip-to-lausanne/",
+  "status": 200,
+  "final": "https://olympians.org/news/1170/olympians-health-study-win-a-trip-to-lausanne/"
+ },
+ {
+  "path": "/news/1167/2-years-to-go-olympians-guiding-tokyo-2020-preparations/",
+  "status": 200,
+  "final": "https://olympians.org/news/1167/2-years-to-go-olympians-guiding-tokyo-2020-preparations/"
+ },
+ {
+  "path": "/news/1164/apply-now-2018-woa-grants-programme/",
+  "status": 200,
+  "final": "https://olympians.org/news/1164/apply-now-2018-woa-grants-programme/"
+ },
+ {
+  "path": "/news/1161/nominate-now-coaches-lifetime-achievement-awards/",
+  "status": 200,
+  "final": "https://olympians.org/news/1161/nominate-now-coaches-lifetime-achievement-awards/"
+ },
+ {
+  "path": "/news/1152/happy-olympic-day-message-from-woa-president/",
+  "status": 200,
+  "final": "https://olympians.org/news/1152/happy-olympic-day-message-from-woa-president/"
+ },
+ {
+  "path": "/news/1149/1-day-to-go-cook-islands-olympians-association-created-for-olympicday/",
+  "status": 200,
+  "final": "https://olympians.org/news/1149/1-day-to-go-cook-islands-olympians-association-created-for-olympicday/"
+ },
+ {
+  "path": "/news/1146/2-days-to-go-olympians-upskill-for-olympicday/",
+  "status": 200,
+  "final": "https://olympians.org/news/1146/2-days-to-go-olympians-upskill-for-olympicday/"
+ },
+ {
+  "path": "/news/?StartRow=381",
+  "status": 200,
+  "final": "https://olympians.org/news/?StartRow=381"
+ },
+ {
+  "path": "/news/1127/oly-honours-for-olympic-legends/",
+  "status": 200,
+  "final": "https://olympians.org/news/1127/oly-honours-for-olympic-legends/"
+ },
+ {
+  "path": "/news/1131/world-olympians-association-gdpr-update/",
+  "status": 200,
+  "final": "https://olympians.org/news/1131/world-olympians-association-gdpr-update/"
+ },
+ {
+  "path": "/news/1124/one-month-to-go-to-olympicday/",
+  "status": 200,
+  "final": "https://olympians.org/news/1124/one-month-to-go-to-olympicday/"
+ },
+ {
+  "path": "/news/1121/woa-patron-hsh-prince-albert-ii-of-monaco-says-save-our-seas/",
+  "status": 200,
+  "final": "https://olympians.org/news/1121/woa-patron-hsh-prince-albert-ii-of-monaco-says-save-our-seas/"
+ },
+ {
+  "path": "/news/1118/service-to-society-malaysian-olympians-promote-sport-in-the-community/",
+  "status": 200,
+  "final": "https://olympians.org/news/1118/service-to-society-malaysian-olympians-promote-sport-in-the-community/"
+ },
+ {
+  "path": "/news/1115/kiwi-olympians-and-woa-staffer-take-the-long-way-home/",
+  "status": 200,
+  "final": "https://olympians.org/news/1115/kiwi-olympians-and-woa-staffer-take-the-long-way-home/"
+ },
+ {
+  "path": "/news/1112/olympians-rush-to-complete-woa-s-landmark-health-study/",
+  "status": 200,
+  "final": "https://olympians.org/news/1112/olympians-rush-to-complete-woa-s-landmark-health-study/"
+ },
+ {
+  "path": "/news/1109/donna-de-varona-women-have-the-right-to-equality-in-sport/",
+  "status": 200,
+  "final": "https://olympians.org/news/1109/donna-de-varona-women-have-the-right-to-equality-in-sport/"
+ },
+ {
+  "path": "/news/1106/woa-launches-landmark-olympian-health-study/",
+  "status": 200,
+  "final": "https://olympians.org/news/1106/woa-launches-landmark-olympian-health-study/"
+ },
+ {
+  "path": "/news/1103/apply-now-for-aists-athlete-scholarship/",
+  "status": 200,
+  "final": "https://olympians.org/news/1103/apply-now-for-aists-athlete-scholarship/"
+ },
+ {
+  "path": "/news/1100/join-the-whitecard-campaign-by-april-6/",
+  "status": 200,
+  "final": "https://olympians.org/news/1100/join-the-whitecard-campaign-by-april-6/"
+ },
+ {
+  "path": "/news/1094/six-inspiring-projects-awarded-2018-woa-service-to-society-grants/",
+  "status": 200,
+  "final": "https://olympians.org/news/1094/six-inspiring-projects-awarded-2018-woa-service-to-society-grants/"
+ },
+ {
+  "path": "/news/1091/woa-hails-olympians-at-heart-of-spectacular-games/",
+  "status": 200,
+  "final": "https://olympians.org/news/1091/woa-hails-olympians-at-heart-of-spectacular-games/"
+ },
+ {
+  "path": "/news/1088/planning-advanced-for-orc-at-tokyo-2020/",
+  "status": 200,
+  "final": "https://olympians.org/news/1088/planning-advanced-for-orc-at-tokyo-2020/"
+ },
+ {
+  "path": "/news/?StartRow=400",
+  "status": 200,
+  "final": "https://olympians.org/news/?StartRow=400"
+ },
+ {
+  "path": "/oly-house/what-we-love/",
+  "status": 200,
+  "final": "https://olympians.org/oly-house/what-we-love/"
+ },
+ {
+  "path": "/oly-house/olympian-reunions/",
+  "status": 200,
+  "final": "https://www.olyhouse.org/"
+ },
+ {
+  "path": "/e-oly-house-milano-cortina-2026/",
+  "status": 200,
+  "final": "https://olympians.org/e-oly-house-milano-cortina-2026/"
+ },
+ {
+  "path": "/oly-house-milano-cortina-2026-hub/",
+  "status": 200,
+  "final": "https://olympians.org/oly-house-milano-cortina-2026-hub/"
+ },
+ {
+  "path": "/oly-house-milano-cortina-2026/",
+  "status": 200,
+  "final": "https://olympians.org/oly-house-milano-cortina-2026/"
+ },
+ {
+  "path": "/registration-oly-house-milano-cortina-2026/",
+  "status": 200,
+  "final": "https://olympians.org/registration-oly-house-milano-cortina-2026/"
+ },
+ {
+  "path": "/join-us-milano-cortina-2026/home-oly-house-paris-2024/",
+  "status": 200,
+  "final": "https://olympians.org/join-us-milano-cortina-2026/home-oly-house-paris-2024/"
+ },
+ {
+  "path": "/news/1085/surge-in-oly-registrations-at-pyeongchang-2018/",
+  "status": 200,
+  "final": "https://olympians.org/news/1085/surge-in-oly-registrations-at-pyeongchang-2018/"
+ },
+ {
+  "path": "/news/1082/olympians-asked-to-join-in-olympic-heritage-project/",
+  "status": 200,
+  "final": "https://olympians.org/news/1082/olympians-asked-to-join-in-olympic-heritage-project/"
+ },
+ {
+  "path": "/news/1079/korean-olympians-enjoying-olympics-thanks-to-woa/",
+  "status": 200,
+  "final": "https://olympians.org/news/1079/korean-olympians-enjoying-olympics-thanks-to-woa/"
+ },
+ {
+  "path": "/news/1076/cool-runnings-in-pyeongchang/",
+  "status": 200,
+  "final": "https://olympians.org/news/1076/cool-runnings-in-pyeongchang/"
+ },
+ {
+  "path": "/news/1073/new-woa-service-to-olympians-grant-scheme-launched/",
+  "status": 200,
+  "final": "https://olympians.org/news/1073/new-woa-service-to-olympians-grant-scheme-launched/"
+ },
+ {
+  "path": "/news/1070/mentoring-for-success-an-olympians-mission-in-pyeongchang/",
+  "status": 200,
+  "final": "https://olympians.org/news/1070/mentoring-for-success-an-olympians-mission-in-pyeongchang/"
+ },
+ {
+  "path": "/news/1067/olympians-invited-to-help-create-art-in-olympic-village/",
+  "status": 200,
+  "final": "https://olympians.org/news/1067/olympians-invited-to-help-create-art-in-olympic-village/"
+ },
+ {
+  "path": "/news/1064/woa-honours-olympians-for-life-inductees/",
+  "status": 200,
+  "final": "https://olympians.org/news/1064/woa-honours-olympians-for-life-inductees/"
+ },
+ {
+  "path": "/news/1061/olympians-share-their-unique-insights-with-olympic-partners/",
+  "status": 200,
+  "final": "https://olympians.org/news/1061/olympians-share-their-unique-insights-with-olympic-partners/"
+ },
+ {
+  "path": "/news/1058/woa-hosts-olympians-party-at-pyeongchang-2018/",
+  "status": 200,
+  "final": "https://olympians.org/news/1058/woa-hosts-olympians-party-at-pyeongchang-2018/"
+ },
+ {
+  "path": "/news/1055/love-is-in-the-air-at-pyeongchang-2018/",
+  "status": 200,
+  "final": "https://olympians.org/news/1055/love-is-in-the-air-at-pyeongchang-2018/"
+ },
+ {
+  "path": "/news/1052/woa-ticket-programme-keeps-olympians-connected/",
+  "status": 200,
+  "final": "https://olympians.org/news/1052/woa-ticket-programme-keeps-olympians-connected/"
+ },
+ {
+  "path": "/news/1049/oly-pins-prove-a-big-hit-at-pyeongchang-2018/",
+  "status": 200,
+  "final": "https://olympians.org/news/1049/oly-pins-prove-a-big-hit-at-pyeongchang-2018/"
+ },
+ {
+  "path": "/news/1046/woa-welcomes-olympians-competing-at-pyeongchang-2018/",
+  "status": 200,
+  "final": "https://olympians.org/news/1046/woa-welcomes-olympians-competing-at-pyeongchang-2018/"
+ },
+ {
+  "path": "/news/1043/woa-calls-on-olympians-to-embody-spirit-of-olympic-games/",
+  "status": 200,
+  "final": "https://olympians.org/news/1043/woa-calls-on-olympians-to-embody-spirit-of-olympic-games/"
+ },
+ {
+  "path": "/news/1040/path-to-pyeongchang-2018-from-olympic-rower-to-village-volunteer/",
+  "status": 200,
+  "final": "https://olympians.org/news/1040/path-to-pyeongchang-2018-from-olympic-rower-to-village-volunteer/"
+ },
+ {
+  "path": "/news/1037/path-to-pyeongchang-2018-from-slope-star-to-skiing-broadcaster/",
+  "status": 200,
+  "final": "https://olympians.org/news/1037/path-to-pyeongchang-2018-from-slope-star-to-skiing-broadcaster/"
+ },
+ {
+  "path": "/news/1031/woa-congratulates-pyeongchang-2018-olympian-mayors/",
+  "status": 200,
+  "final": "https://olympians.org/news/1031/woa-congratulates-pyeongchang-2018-olympian-mayors/"
+ },
+ {
+  "path": "/news/1034/us-olympians-president-calls-for-greater-protection-of-athletes/",
+  "status": 200,
+  "final": "https://olympians.org/news/1034/us-olympians-president-calls-for-greater-protection-of-athletes/"
+ },
+ {
+  "path": "/news/?StartRow=419",
+  "status": 200,
+  "final": "https://olympians.org/news/?StartRow=419"
+ },
+ {
+  "path": "/news/1028/service-to-society-indian-olympians-aiming-to-reduce-drowning-deaths/",
+  "status": 200,
+  "final": "https://olympians.org/news/1028/service-to-society-indian-olympians-aiming-to-reduce-drowning-deaths/"
+ },
+ {
+  "path": "/news/1025/path-to-pyeongchang-2018-korean-olympians-helping-run-the-games/",
+  "status": 200,
+  "final": "https://olympians.org/news/1025/path-to-pyeongchang-2018-korean-olympians-helping-run-the-games/"
+ },
+ {
+  "path": "/news/1022/woa-welcomes-chinese-taipei-membership-application/",
+  "status": 200,
+  "final": "https://olympians.org/news/1022/woa-welcomes-chinese-taipei-membership-application/"
+ },
+ {
+  "path": "/news/1019/olympians-use-pyeongchang-2018-as-a-catalyst-to-inspire-youth/",
+  "status": 200,
+  "final": "https://olympians.org/news/1019/olympians-use-pyeongchang-2018-as-a-catalyst-to-inspire-youth/"
+ },
+ {
+  "path": "/news/1013/olympians-run-sports-clinic-for-underprivileged-children-in-manila/",
+  "status": 200,
+  "final": "https://olympians.org/news/1013/olympians-run-sports-clinic-for-underprivileged-children-in-manila/"
+ },
+ {
+  "path": "/news/1016/olympian-michael-lenard-oly-recognised-for-contribution-to-the-olympic-movement/",
+  "status": 200,
+  "final": "https://olympians.org/news/1016/olympian-michael-lenard-oly-recognised-for-contribution-to-the-olympic-movement/"
+ },
+ {
+  "path": "/news/1010/join-woa-s-oly-celebration-in-pyeongchang/",
+  "status": 200,
+  "final": "https://olympians.org/news/1010/join-woa-s-oly-celebration-in-pyeongchang/"
+ },
+ {
+  "path": "/news/1007/path-to-pyeongchang-2018-olympian-pentathlete-to-olympic-volunteer/",
+  "status": 200,
+  "final": "https://olympians.org/news/1007/path-to-pyeongchang-2018-olympian-pentathlete-to-olympic-volunteer/"
+ },
+ {
+  "path": "/news/1004/woa-statement-on-the-ioc-executive-board-decision-on-russia/",
+  "status": 200,
+  "final": "https://olympians.org/news/1004/woa-statement-on-the-ioc-executive-board-decision-on-russia/"
+ },
+ {
+  "path": "/news/1001/olympians-invited-to-become-the-light/",
+  "status": 200,
+  "final": "https://olympians.org/news/1001/olympians-invited-to-become-the-light/"
+ },
+ {
+  "path": "/news/998/oly-movement-continues-to-grow-worldwide/",
+  "status": 200,
+  "final": "https://olympians.org/news/998/oly-movement-continues-to-grow-worldwide/"
+ },
+ {
+  "path": "/news/995/olympians-to-mentor-olympians-undergoing-life-transition/",
+  "status": 200,
+  "final": "https://olympians.org/news/995/olympians-to-mentor-olympians-undergoing-life-transition/"
+ },
+ {
+  "path": "/news/992/woa-patron-hsh-prince-albert-ii-of-monaco-joins-oly-ranks/",
+  "status": 200,
+  "final": "https://olympians.org/news/992/woa-patron-hsh-prince-albert-ii-of-monaco-joins-oly-ranks/"
+ },
+ {
+  "path": "/news/986/over-3000-olympians-register-for-oly-letters/",
+  "status": 200,
+  "final": "https://olympians.org/news/986/over-3000-olympians-register-for-oly-letters/"
+ },
+ {
+  "path": "/news/983/oly-post-nominal-letters-to-honour-olympians/",
+  "status": 200,
+  "final": "https://olympians.org/news/983/oly-post-nominal-letters-to-honour-olympians/"
+ },
+ {
+  "path": "/news/980/olympians-encouraged-to-drive-social-business-at-summit/",
+  "status": 200,
+  "final": "https://olympians.org/news/980/olympians-encouraged-to-drive-social-business-at-summit/"
+ },
+ {
+  "path": "/news/977/woa-supports-ioc-toolkit-on-safeguarding-athletes/",
+  "status": 200,
+  "final": "https://olympians.org/news/977/woa-supports-ioc-toolkit-on-safeguarding-athletes/"
+ },
+ {
+  "path": "/news/974/path-to-pyeongchang-2018-indian-luge-legend-hoping-to-go-full-circle/",
+  "status": 200,
+  "final": "https://olympians.org/news/974/path-to-pyeongchang-2018-indian-luge-legend-hoping-to-go-full-circle/"
+ },
+ {
+  "path": "/news/?StartRow=438",
+  "status": 200,
+  "final": "https://olympians.org/news/?StartRow=438"
+ },
+ {
+  "path": "/news/971/woa-welcomes-fully-compliant-audit/",
+  "status": 200,
+  "final": "https://olympians.org/news/971/woa-welcomes-fully-compliant-audit/"
+ },
+ {
+  "path": "/news/968/deadline-nears-for-2018-service-to-society-grants/",
+  "status": 200,
+  "final": "https://olympians.org/news/968/deadline-nears-for-2018-service-to-society-grants/"
+ },
+ {
+  "path": "/news/965/exciting-opportunity-for-olympians-at-pyeongchang-2018/",
+  "status": 200,
+  "final": "https://olympians.org/news/965/exciting-opportunity-for-olympians-at-pyeongchang-2018/"
+ },
+ {
+  "path": "/news/959/woa-salutes-olympians-at-the-heart-of-the-successful-paris-and-la-bids/",
+  "status": 200,
+  "final": "https://olympians.org/news/959/woa-salutes-olympians-at-the-heart-of-the-successful-paris-and-la-bids/"
+ },
+ {
+  "path": "/news/956/woa-has-successful-meetings-in-lima-during-ioc-session/",
+  "status": 200,
+  "final": "https://olympians.org/news/956/woa-has-successful-meetings-in-lima-during-ioc-session/"
+ },
+ {
+  "path": "/news/953/woa-supports-new-ioc-athletes-commission-strategy/",
+  "status": 200,
+  "final": "https://olympians.org/news/953/woa-supports-new-ioc-athletes-commission-strategy/"
+ },
+ {
+  "path": "/news/950/world-olympians-association-launches-2018-grant-funding-programme/",
+  "status": 200,
+  "final": "https://olympians.org/news/950/world-olympians-association-launches-2018-grant-funding-programme/"
+ },
+ {
+  "path": "/news/946/path-to-pyeongchang-2018-german-olympian-swaps-skates-for-suit/",
+  "status": 200,
+  "final": "https://olympians.org/news/946/path-to-pyeongchang-2018-german-olympian-swaps-skates-for-suit/"
+ },
+ {
+  "path": "/news/943/calling-all-olympians-nominate-the-coach-in-your-life/",
+  "status": 200,
+  "final": "https://olympians.org/news/943/calling-all-olympians-nominate-the-coach-in-your-life/"
+ },
+ {
+  "path": "/news/940/service-to-society-estonian-olympians-launch-nationwide-get-active-schools-programme/",
+  "status": 200,
+  "final": "https://olympians.org/news/940/service-to-society-estonian-olympians-launch-nationwide-get-active-schools-programme/"
+ },
+ {
+  "path": "/news/937/register-now-for-olympian-programmes-at-pyeongchang-2018/",
+  "status": 200,
+  "final": "https://olympians.org/news/937/register-now-for-olympian-programmes-at-pyeongchang-2018/"
+ },
+ {
+  "path": "/news/934/honour-the-coach-in-your-life/",
+  "status": 200,
+  "final": "https://olympians.org/news/934/honour-the-coach-in-your-life/"
+ },
+ {
+  "path": "/news/931/woa-president-jo-l-bouzou-tells-social-business-day-forum-about-the-power-of-sport/",
+  "status": 200,
+  "final": "https://olympians.org/news/931/woa-president-jo-l-bouzou-tells-social-business-day-forum-about-the-power-of-sport/"
+ },
+ {
+  "path": "/news/928/japanese-olympians-honoured-in-annual-olympic-day-awards/",
+  "status": 200,
+  "final": "https://olympians.org/news/928/japanese-olympians-honoured-in-annual-olympic-day-awards/"
+ },
+ {
+  "path": "/news/925/path-to-pyeongchang-2018-swiss-curler-benefits-from-past-olympic-experiences/",
+  "status": 200,
+  "final": "https://olympians.org/news/925/path-to-pyeongchang-2018-swiss-curler-benefits-from-past-olympic-experiences/"
+ },
+ {
+  "path": "/news/919/usa-olympian-lea-davison-s-top-5-tips-for-starting-your-own-business/",
+  "status": 200,
+  "final": "https://olympians.org/news/919/usa-olympian-lea-davison-s-top-5-tips-for-starting-your-own-business/"
+ },
+ {
+  "path": "/news/922/fiji-to-launch-national-olympians-association/",
+  "status": 200,
+  "final": "https://olympians.org/news/922/fiji-to-launch-national-olympians-association/"
+ },
+ {
+  "path": "/news/916/german-olympians-seek-to-claim-their-place-in-reunification-debate/",
+  "status": 200,
+  "final": "https://olympians.org/news/916/german-olympians-seek-to-claim-their-place-in-reunification-debate/"
+ },
+ {
+  "path": "/news/?StartRow=457",
+  "status": 200,
+  "final": "https://olympians.org/news/?StartRow=457"
+ },
+ {
+  "path": "/news/913/new-athlete-learning-gateway-course-will-help-you-be-your-own-boss/",
+  "status": 200,
+  "final": "https://olympians.org/news/913/new-athlete-learning-gateway-course-will-help-you-be-your-own-boss/"
+ },
+ {
+  "path": "/news/910/olympic-day--australian-olympians-out-in-force-promoting-olympic-day-in-schools/",
+  "status": 200,
+  "final": "https://olympians.org/news/910/olympic-day--australian-olympians-out-in-force-promoting-olympic-day-in-schools/"
+ },
+ {
+  "path": "/news/907/one-day-to-go-to-olympic-day-indian-olympians-share-their-olympic-journey-in-new-video/",
+  "status": 200,
+  "final": "https://olympians.org/news/907/one-day-to-go-to-olympic-day-indian-olympians-share-their-olympic-journey-in-new-video/"
+ },
+ {
+  "path": "/news/901/three-days-to-go-to-olympic-day-french-olympians-to-inspire-next-generation-in-mass-olympic-day-event/",
+  "status": 200,
+  "final": "https://olympians.org/news/901/three-days-to-go-to-olympic-day-french-olympians-to-inspire-next-generation-in-mass-olympic-day-event/"
+ },
+ {
+  "path": "/news/898/four-days-to-go-to-olympic-day-us-and-rwandan-olympians-join-together-to-promote-gender-equality-for-olympic-day/",
+  "status": 200,
+  "final": "https://olympians.org/news/898/four-days-to-go-to-olympic-day-us-and-rwandan-olympians-join-together-to-promote-gender-equality-for-olympic-day/"
+ },
+ {
+  "path": "/news/895/five-days-to-go-to-olympic-day-olympians-encouraged-to-get-active-for-olympic-day-in-the-u-s-/",
+  "status": 200,
+  "final": "https://olympians.org/news/895/five-days-to-go-to-olympic-day-olympians-encouraged-to-get-active-for-olympic-day-in-the-u-s-/"
+ },
+ {
+  "path": "/news/892/service-to-society-australian-olympians-inspire-high-school-students/",
+  "status": 200,
+  "final": "https://olympians.org/news/892/service-to-society-australian-olympians-inspire-high-school-students/"
+ },
+ {
+  "path": "/news/889/olympian-laura-flessel-colovic-sets-example-as-french-sports-minister/",
+  "status": 200,
+  "final": "https://olympians.org/news/889/olympian-laura-flessel-colovic-sets-example-as-french-sports-minister/"
+ },
+ {
+  "path": "/news/886/angolan-olympians-honoured-by-ioc-president/",
+  "status": 200,
+  "final": "https://olympians.org/news/886/angolan-olympians-honoured-by-ioc-president/"
+ },
+ {
+  "path": "/news/883/legacy-of-target-ebola-campaign-lives-on-in-liberia/",
+  "status": 200,
+  "final": "https://olympians.org/news/883/legacy-of-target-ebola-campaign-lives-on-in-liberia/"
+ },
+ {
+  "path": "/news/880/olympians-call-to-action-for-olympic-day-23-june-2017/",
+  "status": 200,
+  "final": "https://olympians.org/news/880/olympians-call-to-action-for-olympic-day-23-june-2017/"
+ },
+ {
+  "path": "/news/877/new-appointments-see-olympians-take-leading-roles-in-zimbabwean-sport/",
+  "status": 200,
+  "final": "https://olympians.org/news/877/new-appointments-see-olympians-take-leading-roles-in-zimbabwean-sport/"
+ },
+ {
+  "path": "/news/872/seb-coe-returns-to-racing-with-gb-olympians-at-the-olympians-mile/",
+  "status": 200,
+  "final": "https://olympians.org/news/872/seb-coe-returns-to-racing-with-gb-olympians-at-the-olympians-mile/"
+ },
+ {
+  "path": "/news/871/woa-opposes-european-athletics-recommendations-on-records/",
+  "status": 200,
+  "final": "https://olympians.org/news/871/woa-opposes-european-athletics-recommendations-on-records/"
+ },
+ {
+  "path": "/news/868/eat-to-compete-new-course-launches-on-the-ioc-athlete-learning-gateway/",
+  "status": 200,
+  "final": "https://olympians.org/news/868/eat-to-compete-new-course-launches-on-the-ioc-athlete-learning-gateway/"
+ },
+ {
+  "path": "/news/865/woa-oceania-group-calls-for-closer-ties-at-onoc-athletes-forum-/",
+  "status": 200,
+  "final": "https://olympians.org/news/865/woa-oceania-group-calls-for-closer-ties-at-onoc-athletes-forum-/"
+ },
+ {
+  "path": "/news/862/olympians-recapture-competitive-spirit-at-world-masters-games/",
+  "status": 200,
+  "final": "https://olympians.org/news/862/olympians-recapture-competitive-spirit-at-world-masters-games/"
+ },
+ {
+  "path": "/news/859/slovenian-olympians-association-forges-strong-new-partnership-with-noc/",
+  "status": 200,
+  "final": "https://olympians.org/news/859/slovenian-olympians-association-forges-strong-new-partnership-with-noc/"
+ },
+ {
+  "path": "/news/?StartRow=476",
+  "status": 200,
+  "final": "https://olympians.org/news/?StartRow=476"
+ },
+ {
+  "path": "/grants/service-to-society/",
+  "status": 200,
+  "final": "https://olympians.org/grants/service-to-society/"
+ },
+ {
+  "path": "/news/856/japanese-olympian-yuki-ota-highlights-challenges-of-balancing-education-and-elite-sport/",
+  "status": 200,
+  "final": "https://olympians.org/news/856/japanese-olympian-yuki-ota-highlights-challenges-of-balancing-education-and-elite-sport/"
+ },
+ {
+  "path": "/news/853/woa-joins-gaisf-as-associate-member/",
+  "status": 200,
+  "final": "https://olympians.org/news/853/woa-joins-gaisf-as-associate-member/"
+ },
+ {
+  "path": "/news/850/inaugural-service-to-society-grants-announced/",
+  "status": 200,
+  "final": "https://olympians.org/news/850/inaugural-service-to-society-grants-announced/"
+ },
+ {
+  "path": "/news/847/world-olympians-association-backs-whitecard-digital-campaign/",
+  "status": 200,
+  "final": "https://olympians.org/news/847/world-olympians-association-backs-whitecard-digital-campaign/"
+ },
+ {
+  "path": "/news/844/ioc-athlete-learning-gateway-adds-several-new-courses/",
+  "status": 200,
+  "final": "https://olympians.org/news/844/ioc-athlete-learning-gateway-adds-several-new-courses/"
+ },
+ {
+  "path": "/news/841/ioc-athletes-commission-statement-on-anti-doping/",
+  "status": 200,
+  "final": "https://olympians.org/news/841/ioc-athletes-commission-statement-on-anti-doping/"
+ },
+ {
+  "path": "/news/838/moldovan-olympians-forum-kicks-off-2017-events/",
+  "status": 200,
+  "final": "https://olympians.org/news/838/moldovan-olympians-forum-kicks-off-2017-events/"
+ },
+ {
+  "path": "/news/835/olympian-natalie-cook-inspires-next-generation-on-international-women-s-day/",
+  "status": 200,
+  "final": "https://olympians.org/news/835/olympian-natalie-cook-inspires-next-generation-on-international-women-s-day/"
+ },
+ {
+  "path": "/news/832/female-olympians-grasp-wabn-mentoring-opportunity/",
+  "status": 200,
+  "final": "https://olympians.org/news/832/female-olympians-grasp-wabn-mentoring-opportunity/"
+ },
+ {
+  "path": "/news/829/woa-media-partner-around-the-rings-offers-noa-members-70-percent-discount/",
+  "status": 200,
+  "final": "https://olympians.org/news/829/woa-media-partner-around-the-rings-offers-noa-members-70-percent-discount/"
+ },
+ {
+  "path": "/news/826/ioa-calls-for-applications-for-2017-2018-olympic-master-s-degree/",
+  "status": 200,
+  "final": "https://olympians.org/news/826/ioa-calls-for-applications-for-2017-2018-olympic-master-s-degree/"
+ },
+ {
+  "path": "/news/823/woa-building-on-rio-success-with-one-year-to-go-to-pyeongchang-2018/",
+  "status": 200,
+  "final": "https://olympians.org/news/823/woa-building-on-rio-success-with-one-year-to-go-to-pyeongchang-2018/"
+ },
+ {
+  "path": "/news/820/world-olympians-association-urges-permanent-solution-to-political-bans-on-athletes/",
+  "status": 200,
+  "final": "https://olympians.org/news/820/world-olympians-association-urges-permanent-solution-to-political-bans-on-athletes/"
+ },
+ {
+  "path": "/news/817/world-olympians-association-woa-calls-for-urgent-resolution-to-ensure-the-right-of-athletes-to-compete-is-protected/",
+  "status": 200,
+  "final": "https://olympians.org/news/817/world-olympians-association-woa-calls-for-urgent-resolution-to-ensure-the-right-of-athletes-to-compete-is-protected/"
+ },
+ {
+  "path": "/news/814/liechtenstein-to-launch-country-s-first-noa/",
+  "status": 200,
+  "final": "https://olympians.org/news/814/liechtenstein-to-launch-country-s-first-noa/"
+ },
+ {
+  "path": "/news/809/last-chance-to-apply-for-2017-service-to-society-grants/",
+  "status": 200,
+  "final": "https://olympians.org/news/809/last-chance-to-apply-for-2017-service-to-society-grants/"
+ },
+ {
+  "path": "/news/808/woa-imposes-sanctions-on-tatyana-lebedeva-and-calls-for-implementation-of-its-three-point-anti-doping-plan/",
+  "status": 200,
+  "final": "https://olympians.org/news/808/woa-imposes-sanctions-on-tatyana-lebedeva-and-calls-for-implementation-of-its-three-point-anti-doping-plan/"
+ },
+ {
+  "path": "/news/805/woa-statement-on-tatyana-lebedeva/",
+  "status": 200,
+  "final": "https://olympians.org/news/805/woa-statement-on-tatyana-lebedeva/"
+ },
+ {
+  "path": "/news/802/hsh-prince-albert-ii-of-monaco-becomes-first-donor-to-woa-grants-scheme/",
+  "status": 200,
+  "final": "https://olympians.org/news/802/hsh-prince-albert-ii-of-monaco-becomes-first-donor-to-woa-grants-scheme/"
+ },
+ {
+  "path": "/news/?StartRow=495",
+  "status": 200,
+  "final": "https://olympians.org/news/?StartRow=495"
+ },
+ {
+  "path": "/news/799/woa-announces-updated-strategic-plan-2017-2020/",
+  "status": 200,
+  "final": "https://olympians.org/news/799/woa-announces-updated-strategic-plan-2017-2020/"
+ },
+ {
+  "path": "/news/796/lithuania-olympians-association-strengthens-regional-links/",
+  "status": 200,
+  "final": "https://olympians.org/news/796/lithuania-olympians-association-strengthens-regional-links/"
+ },
+ {
+  "path": "/news/793/iceland-noa-engages-country-s-olympians/",
+  "status": 200,
+  "final": "https://olympians.org/news/793/iceland-noa-engages-country-s-olympians/"
+ },
+ {
+  "path": "/news/790/gb-olympians-first-to-join-athlete-friendly-education-assessment-team/",
+  "status": 200,
+  "final": "https://olympians.org/news/790/gb-olympians-first-to-join-athlete-friendly-education-assessment-team/"
+ },
+ {
+  "path": "/news/787/woa-statement-on-the-second-mclaren-report/",
+  "status": 200,
+  "final": "https://olympians.org/news/787/woa-statement-on-the-second-mclaren-report/"
+ },
+ {
+  "path": "/news/784/statement-from-ioc-athletes-commission-chair-on-upcoming-publication-of-the-independent-person-report-/",
+  "status": 200,
+  "final": "https://olympians.org/news/784/statement-from-ioc-athletes-commission-chair-on-upcoming-publication-of-the-independent-person-report-/"
+ },
+ {
+  "path": "/news/781/ghana-noa-supports-ioc-athlete-career-programme-outreach/",
+  "status": 200,
+  "final": "https://olympians.org/news/781/ghana-noa-supports-ioc-athlete-career-programme-outreach/"
+ },
+ {
+  "path": "/news/777/woa-donation-to-social-project-extends-legacy-of-olympians-reunion-centre-in-rio/",
+  "status": 200,
+  "final": "https://olympians.org/news/777/woa-donation-to-social-project-extends-legacy-of-olympians-reunion-centre-in-rio/"
+ },
+ {
+  "path": "/news/780/woa-offers-condolences-in-chapecoense-tragedy/",
+  "status": 200,
+  "final": "https://olympians.org/news/780/woa-offers-condolences-in-chapecoense-tragedy/"
+ },
+ {
+  "path": "/news/774/woa-launches-service-to-society-grant-programme/",
+  "status": 200,
+  "final": "https://olympians.org/news/774/woa-launches-service-to-society-grant-programme/"
+ },
+ {
+  "path": "/news/771/japan-olympians-association-looks-ahead-to-tokyo-2020/",
+  "status": 200,
+  "final": "https://olympians.org/news/771/japan-olympians-association-looks-ahead-to-tokyo-2020/"
+ },
+ {
+  "path": "/news/768/young-olympian-volunteer-reflects-on-orc-experience/",
+  "status": 200,
+  "final": "https://olympians.org/news/768/young-olympian-volunteer-reflects-on-orc-experience/"
+ },
+ {
+  "path": "/news/765/triple-olympic-champion-james-tomkins-joins-woa-executive-committee/",
+  "status": 200,
+  "final": "https://olympians.org/news/765/triple-olympic-champion-james-tomkins-joins-woa-executive-committee/"
+ },
+ {
+  "path": "/news/762/woa-outlines-commitment-to-the-growth-and-development-of-national-olympians-associations-at-anoc-general-assembly/",
+  "status": 200,
+  "final": "https://olympians.org/news/762/woa-outlines-commitment-to-the-growth-and-development-of-national-olympians-associations-at-anoc-general-assembly/"
+ },
+ {
+  "path": "/news/759/olympian-loroupe-sets-example-with-un-honour/",
+  "status": 200,
+  "final": "https://olympians.org/news/759/olympian-loroupe-sets-example-with-un-honour/"
+ },
+ {
+  "path": "/news/756/woa-congratulates-new-ioc-athletes-commission-appointments/",
+  "status": 200,
+  "final": "https://olympians.org/news/756/woa-congratulates-new-ioc-athletes-commission-appointments/"
+ },
+ {
+  "path": "/news/753/hong-kong-olympians-benefit-from-career-and-education-expo/",
+  "status": 200,
+  "final": "https://olympians.org/news/753/hong-kong-olympians-benefit-from-career-and-education-expo/"
+ },
+ {
+  "path": "/news/750/olympians-champion-sport-s-values-at-vatican-conference/",
+  "status": 200,
+  "final": "https://olympians.org/news/750/olympians-champion-sport-s-values-at-vatican-conference/"
+ },
+ {
+  "path": "/news/747/woa-calls-for-swift-action-on-olympic-summit-proposals/",
+  "status": 200,
+  "final": "https://olympians.org/news/747/woa-calls-for-swift-action-on-olympic-summit-proposals/"
+ },
+ {
+  "path": "/news/?StartRow=514",
+  "status": 200,
+  "final": "https://olympians.org/news/?StartRow=514"
+ },
+ {
+  "path": "/pyeongchang-2018/",
+  "status": 200,
+  "final": "https://olympians.org/"
+ },
+ {
+  "path": "/news/744/female-olympians-offered-opportunity-to-connect-with-top-women-in-business/",
+  "status": 200,
+  "final": "https://olympians.org/news/744/female-olympians-offered-opportunity-to-connect-with-top-women-in-business/"
+ },
+ {
+  "path": "/news/741/olympians-to-feature-at-9th-annual-peace-and-sport-forum/",
+  "status": 200,
+  "final": "https://olympians.org/news/741/olympians-to-feature-at-9th-annual-peace-and-sport-forum/"
+ },
+ {
+  "path": "/news/738/world-olympians-association-condemns-wada-data-leaks-and-calls-for-reform/",
+  "status": 200,
+  "final": "https://olympians.org/news/738/world-olympians-association-condemns-wada-data-leaks-and-calls-for-reform/"
+ },
+ {
+  "path": "/news/735/olympians-reunion-centre-by-ey-wins-top-rio-award/",
+  "status": 200,
+  "final": "https://olympians.org/news/735/olympians-reunion-centre-by-ey-wins-top-rio-award/"
+ },
+ {
+  "path": "/news/732/woa-celebrates-most-successful-olympians-reunion-centre-ever/",
+  "status": 200,
+  "final": "https://olympians.org/news/732/woa-celebrates-most-successful-olympians-reunion-centre-ever/"
+ },
+ {
+  "path": "/news/729/olympians-wall-captures-unique-olympic-history-in-rio/",
+  "status": 200,
+  "final": "https://olympians.org/news/729/olympians-wall-captures-unique-olympic-history-in-rio/"
+ },
+ {
+  "path": "/news/726/modern-pentathlon-celebrates-at-olympians-reunion-centre/",
+  "status": 200,
+  "final": "https://olympians.org/news/726/modern-pentathlon-celebrates-at-olympians-reunion-centre/"
+ },
+ {
+  "path": "/news/723/olympians-for-life-project-proves-popular-at-olympians-reunion-centre-by-ey/",
+  "status": 200,
+  "final": "https://olympians.org/news/723/olympians-for-life-project-proves-popular-at-olympians-reunion-centre-by-ey/"
+ },
+ {
+  "path": "/news/720/ey-offers-internships-to-female-olympians/",
+  "status": 200,
+  "final": "https://olympians.org/news/720/ey-offers-internships-to-female-olympians/"
+ },
+ {
+  "path": "/news/717/celebrated-new-york-athletic-club-comes-to-the-orc/",
+  "status": 200,
+  "final": "https://olympians.org/news/717/celebrated-new-york-athletic-club-comes-to-the-orc/"
+ },
+ {
+  "path": "/news/714/woa-congratulates-four-newest-members-of-the-ioc-athletes-commission/",
+  "status": 200,
+  "final": "https://olympians.org/news/714/woa-congratulates-four-newest-members-of-the-ioc-athletes-commission/"
+ },
+ {
+  "path": "/news/711/purpose-wins-bridges-gap-between-business-and-olympism-at-the-orc/",
+  "status": 200,
+  "final": "https://olympians.org/news/711/purpose-wins-bridges-gap-between-business-and-olympism-at-the-orc/"
+ },
+ {
+  "path": "/news/708/india-celebrates-independence-day-at-the-olympians-reunion-centre-by-ey/",
+  "status": 200,
+  "final": "https://olympians.org/news/708/india-celebrates-independence-day-at-the-olympians-reunion-centre-by-ey/"
+ },
+ {
+  "path": "/news/705/olympians-invited-to-auckland-2017-world-masters-games/",
+  "status": 200,
+  "final": "https://olympians.org/news/705/olympians-invited-to-auckland-2017-world-masters-games/"
+ },
+ {
+  "path": "/news/702/100-000-olympic-fans-watch-olympians-reunion-centre-by-ey-video/",
+  "status": 200,
+  "final": "https://olympians.org/news/702/100-000-olympic-fans-watch-olympians-reunion-centre-by-ey-video/"
+ },
+ {
+  "path": "/news/697/douglas-wakiihuri--a-kenyan-olympian-on-a-mission-at-the-orc/",
+  "status": 200,
+  "final": "https://olympians.org/news/697/douglas-wakiihuri--a-kenyan-olympian-on-a-mission-at-the-orc/"
+ },
+ {
+  "path": "/news/694/day-with-the-olympians-comes-to-the-olympians-reunion-centre-by-ey/",
+  "status": 200,
+  "final": "https://olympians.org/news/694/day-with-the-olympians-comes-to-the-olympians-reunion-centre-by-ey/"
+ },
+ {
+  "path": "/news/693/talking-clean-sport-and-play-fair-with-olympians-in-rio/",
+  "status": 200,
+  "final": "https://olympians.org/news/693/talking-clean-sport-and-play-fair-with-olympians-in-rio/"
+ },
+ {
+  "path": "/news/690/impromptu-rowing-party-sees-olympians-reunion-centre-by-ey-full-to-capacity/",
+  "status": 200,
+  "final": "https://olympians.org/news/690/impromptu-rowing-party-sees-olympians-reunion-centre-by-ey-full-to-capacity/"
+ },
+ {
+  "path": "/news/?StartRow=533",
+  "status": 200,
+  "final": "https://olympians.org/news/?StartRow=533"
+ },
+ {
+  "path": "/news/687/african-athletes-meet-at-the-rio-2016-olympians-reunion-centre-by-ey/",
+  "status": 200,
+  "final": "https://olympians.org/news/687/african-athletes-meet-at-the-rio-2016-olympians-reunion-centre-by-ey/"
+ },
+ {
+  "path": "/news/682/british-rowers-bring-a-touch-of-gold-to-the-orc/",
+  "status": 200,
+  "final": "https://olympians.org/news/682/british-rowers-bring-a-touch-of-gold-to-the-orc/"
+ },
+ {
+  "path": "/news/679/be-your-best-self--inspiring-message-from-london-1948-olympian-in-rio/",
+  "status": 200,
+  "final": "https://olympians.org/news/679/be-your-best-self--inspiring-message-from-london-1948-olympian-in-rio/"
+ },
+ {
+  "path": "/news/678/world-olympians-association-reaffirms-position-on-individual-rights-for-clean-athletes/",
+  "status": 200,
+  "final": "https://olympians.org/news/678/world-olympians-association-reaffirms-position-on-individual-rights-for-clean-athletes/"
+ },
+ {
+  "path": "/news/675/olympic-movement-comes-together-at-olympians-reunion-centre-by-ey-in-rio-to-honour-women-in-sport/",
+  "status": 200,
+  "final": "https://olympians.org/news/675/olympic-movement-comes-together-at-olympians-reunion-centre-by-ey-in-rio-to-honour-women-in-sport/"
+ },
+ {
+  "path": "/news/672/world-rugby-celebrates-rugby-s-olympic-return-at-orc-in-rio/",
+  "status": 200,
+  "final": "https://olympians.org/news/672/world-rugby-celebrates-rugby-s-olympic-return-at-orc-in-rio/"
+ },
+ {
+  "path": "/news/669/woa-executive-committee-meets-at-olympic-games/",
+  "status": 200,
+  "final": "https://olympians.org/news/669/woa-executive-committee-meets-at-olympic-games/"
+ },
+ {
+  "path": "/news/666/olympic-spirit-remains-strong-in-samir-a-t-despite-setback/",
+  "status": 200,
+  "final": "https://olympians.org/news/666/olympic-spirit-remains-strong-in-samir-a-t-despite-setback/"
+ },
+ {
+  "path": "/news/663/woa-hosts-ioc-athletes-commission-at-the-olympians-reunion-centre-by-ey-in-rio/",
+  "status": 200,
+  "final": "https://olympians.org/news/663/woa-hosts-ioc-athletes-commission-at-the-olympians-reunion-centre-by-ey-in-rio/"
+ },
+ {
+  "path": "/news/660/olympians-reunion-centre-by-ey-declared-open-at-special-gala-in-rio/",
+  "status": 200,
+  "final": "https://olympians.org/news/660/olympians-reunion-centre-by-ey-declared-open-at-special-gala-in-rio/"
+ },
+ {
+  "path": "/news/657/woa-congratulates-angela-ruggiero-and-tony-estanguet-on-their-election-as-chair-and-vice-chair-of-the-ioc-athletes-commission/",
+  "status": 200,
+  "final": "https://olympians.org/news/657/woa-congratulates-angela-ruggiero-and-tony-estanguet-on-their-election-as-chair-and-vice-chair-of-the-ioc-athletes-commission/"
+ },
+ {
+  "path": "/news/654/ioc-president-thomas-bach-to-attend-women-fast-forward-at-olympians-reunion-centre-by-ey/",
+  "status": 200,
+  "final": "https://olympians.org/news/654/ioc-president-thomas-bach-to-attend-women-fast-forward-at-olympians-reunion-centre-by-ey/"
+ },
+ {
+  "path": "/news/651/world-rugby-to-celebrate-rugby-s-olympic-return-at-orc/",
+  "status": 200,
+  "final": "https://olympians.org/news/651/world-rugby-to-celebrate-rugby-s-olympic-return-at-orc/"
+ },
+ {
+  "path": "/news/648/create-your-legacy-with-the-olympic-museum/",
+  "status": 200,
+  "final": "https://olympians.org/news/648/create-your-legacy-with-the-olympic-museum/"
+ },
+ {
+  "path": "/news/645/hsh-prince-albert-ii-and-ioc-vice-president-nawal-el-moutawakel-to-open-olympians-reunion-centre-by-ey-in-rio/",
+  "status": 200,
+  "final": "https://olympians.org/news/645/hsh-prince-albert-ii-and-ioc-vice-president-nawal-el-moutawakel-to-open-olympians-reunion-centre-by-ey-in-rio/"
+ },
+ {
+  "path": "/news/642/still-time-to-win-athlete-learning-gateway-rio-goodie-bag/",
+  "status": 200,
+  "final": "https://olympians.org/news/642/still-time-to-win-athlete-learning-gateway-rio-goodie-bag/"
+ },
+ {
+  "path": "/news/639/olympians-reunion-centre-by-ey-a-haven-for-busy-olympians/",
+  "status": 200,
+  "final": "https://olympians.org/news/639/olympians-reunion-centre-by-ey-a-haven-for-busy-olympians/"
+ },
+ {
+  "path": "/news/636/india-launches-new-national-olympians-association/",
+  "status": 200,
+  "final": "https://olympians.org/news/636/india-launches-new-national-olympians-association/"
+ },
+ {
+  "path": "/news/633/canada-s-olympian-family-to-visit-orc-in-rio/",
+  "status": 200,
+  "final": "https://olympians.org/news/633/canada-s-olympian-family-to-visit-orc-in-rio/"
+ },
+ {
+  "path": "/news/?StartRow=552",
+  "status": 200,
+  "final": "https://olympians.org/news/?StartRow=552"
+ },
+ {
+  "path": "/olympians/noa-directory/",
+  "status": 200,
+  "final": "https://olympians.org/noas/noa-directory/"
+ },
+ {
+  "path": "/news/630/olympians-urged-to-back-likeagirl-campaign/",
+  "status": 200,
+  "final": "https://olympians.org/news/630/olympians-urged-to-back-likeagirl-campaign/"
+ },
+ {
+  "path": "/news/627/anoca-athletes-commission-to-visit-orc-in-rio/",
+  "status": 200,
+  "final": "https://olympians.org/news/627/anoca-athletes-commission-to-visit-orc-in-rio/"
+ },
+ {
+  "path": "/news/624/australian-angolan-and-german-olympians-bring-olympism-to-the-community-for-olympic-day/",
+  "status": 200,
+  "final": "https://olympians.org/news/624/australian-angolan-and-german-olympians-bring-olympism-to-the-community-for-olympic-day/"
+ },
+ {
+  "path": "/news/621/one-day-to-go-to-olympic-day-olympic-education-week-puts-focus-on-uganda-s-youth-leaders/",
+  "status": 200,
+  "final": "https://olympians.org/news/621/one-day-to-go-to-olympic-day-olympic-education-week-puts-focus-on-uganda-s-youth-leaders/"
+ },
+ {
+  "path": "/news/615/woa-calls-for-three-point-anti-doping-plan-to-eliminate-cheats/",
+  "status": 200,
+  "final": "https://olympians.org/news/615/woa-calls-for-three-point-anti-doping-plan-to-eliminate-cheats/"
+ },
+ {
+  "path": "/news/612/three-days-to-go-to-olympic-day-great-britain-olympians-celebrate-rugby-s-olympic-return/",
+  "status": 200,
+  "final": "https://olympians.org/news/612/three-days-to-go-to-olympic-day-great-britain-olympians-celebrate-rugby-s-olympic-return/"
+ },
+ {
+  "path": "/news/609/four-days-to-go-to-olympic-day-rio-2016-hopefuls-lead-olympic-day-run-in-cambodia/",
+  "status": 200,
+  "final": "https://olympians.org/news/609/four-days-to-go-to-olympic-day-rio-2016-hopefuls-lead-olympic-day-run-in-cambodia/"
+ },
+ {
+  "path": "/news/606/five-days-to-go-to-olympic-day-zimbabwe-noa-promotes-sport-for-all/",
+  "status": 200,
+  "final": "https://olympians.org/news/606/five-days-to-go-to-olympic-day-zimbabwe-noa-promotes-sport-for-all/"
+ },
+ {
+  "path": "/news/603/nationwide-celebrations-mark-olympic-day-in-croatia/",
+  "status": 200,
+  "final": "https://olympians.org/news/603/nationwide-celebrations-mark-olympic-day-in-croatia/"
+ },
+ {
+  "path": "/news/600/world-olympians-mourn-the-loss-of-muhammad-ali/",
+  "status": 200,
+  "final": "https://olympians.org/news/600/world-olympians-mourn-the-loss-of-muhammad-ali/"
+ },
+ {
+  "path": "/news/597/greek-skier-one-of-many-olympians-set-to-visit-orc-by-ey-in-rio/",
+  "status": 200,
+  "final": "https://olympians.org/news/597/greek-skier-one-of-many-olympians-set-to-visit-orc-by-ey-in-rio/"
+ },
+ {
+  "path": "/news/594/olympians-needed-for-athletes-and-education-survey/",
+  "status": 200,
+  "final": "https://olympians.org/news/594/olympians-needed-for-athletes-and-education-survey/"
+ },
+ {
+  "path": "/news/591/one-month-to-go-to-olympic-day/",
+  "status": 200,
+  "final": "https://olympians.org/news/591/one-month-to-go-to-olympic-day/"
+ },
+ {
+  "path": "/news/588/olympians-sign-up-for-olympians-reunion-centre-by-ey/",
+  "status": 200,
+  "final": "https://olympians.org/news/588/olympians-sign-up-for-olympians-reunion-centre-by-ey/"
+ },
+ {
+  "path": "/news/585/woa-backs-call-for-an-international-sport-integrity-partnership/",
+  "status": 200,
+  "final": "https://olympians.org/news/585/woa-backs-call-for-an-international-sport-integrity-partnership/"
+ },
+ {
+  "path": "/news/582/female-olympians-benefit-from-elite-mentor-program/",
+  "status": 200,
+  "final": "https://olympians.org/news/582/female-olympians-benefit-from-elite-mentor-program/"
+ },
+ {
+  "path": "/news/579/woa-executive-committee-now-complete-with-appointment-of-olympian-chantal-brunner/",
+  "status": 200,
+  "final": "https://olympians.org/news/579/woa-executive-committee-now-complete-with-appointment-of-olympian-chantal-brunner/"
+ },
+ {
+  "path": "/news/576/-whitecard-for-peace-celebrates-record-breaking-campaign/",
+  "status": 200,
+  "final": "https://olympians.org/news/576/-whitecard-for-peace-celebrates-record-breaking-campaign/"
+ },
+ {
+  "path": "/news/?StartRow=571",
+  "status": 200,
+  "final": "https://olympians.org/news/?StartRow=571"
+ },
+ {
+  "path": "/news/572/olympic-torch-to-be-on-display-at-olympians-reunion-centre-by-ey/",
+  "status": 200,
+  "final": "https://olympians.org/news/572/olympic-torch-to-be-on-display-at-olympians-reunion-centre-by-ey/"
+ },
+ {
+  "path": "/news/566/ecuadorian-noa-and-noc-work-together-to-aid-olympians-affected-by-earthquake-/",
+  "status": 200,
+  "final": "https://olympians.org/news/566/ecuadorian-noa-and-noc-work-together-to-aid-olympians-affected-by-earthquake-/"
+ },
+ {
+  "path": "/news/563/first-noa-development-grants-for-2016-now-funded/",
+  "status": 200,
+  "final": "https://olympians.org/news/563/first-noa-development-grants-for-2016-now-funded/"
+ },
+ {
+  "path": "/news/560/athlete-learning-gateway-exclusive-giveaway/",
+  "status": 200,
+  "final": "https://olympians.org/news/560/athlete-learning-gateway-exclusive-giveaway/"
+ },
+ {
+  "path": "/news/557/olympians-reunion-centre-in-rio-to-host-women-in-sport-gala/",
+  "status": 200,
+  "final": "https://olympians.org/news/557/olympians-reunion-centre-in-rio-to-host-women-in-sport-gala/"
+ },
+ {
+  "path": "/news/554/olympians-help-launch-world-fit-2016-with-walk-to-rio-/",
+  "status": 200,
+  "final": "https://olympians.org/news/554/olympians-help-launch-world-fit-2016-with-walk-to-rio-/"
+ },
+ {
+  "path": "/news/551/olympians-wanted-to-help-manage-ioc-space-at-rio-2016/",
+  "status": 200,
+  "final": "https://olympians.org/news/551/olympians-wanted-to-help-manage-ioc-space-at-rio-2016/"
+ },
+ {
+  "path": "/news/548/isr-academy-offers-olympians-fantastic-post-career-scholarship-opportunity/",
+  "status": 200,
+  "final": "https://olympians.org/news/548/isr-academy-offers-olympians-fantastic-post-career-scholarship-opportunity/"
+ },
+ {
+  "path": "/news/545/woa-supports-whitecard-for-peace/",
+  "status": 200,
+  "final": "https://olympians.org/news/545/woa-supports-whitecard-for-peace/"
+ },
+ {
+  "path": "/news/542/athlete-welfare-a-top-priority-for-woa-in-2016/",
+  "status": 200,
+  "final": "https://olympians.org/news/542/athlete-welfare-a-top-priority-for-woa-in-2016/"
+ },
+ {
+  "path": "/news/539/olympian-carl-probert-joins-woa-board/",
+  "status": 200,
+  "final": "https://olympians.org/news/539/olympian-carl-probert-joins-woa-board/"
+ },
+ {
+  "path": "/news/536/woa-launches-2016-noa-development-grants/",
+  "status": 200,
+  "final": "https://olympians.org/news/536/woa-launches-2016-noa-development-grants/"
+ },
+ {
+  "path": "/news/533/applications-for-the-aists-athlete-scholarship-now-open/",
+  "status": 200,
+  "final": "https://olympians.org/news/533/applications-for-the-aists-athlete-scholarship-now-open/"
+ },
+ {
+  "path": "/news/530/woa-supports-calls-for-extended-wada-investigation/",
+  "status": 200,
+  "final": "https://olympians.org/news/530/woa-supports-calls-for-extended-wada-investigation/"
+ },
+ {
+  "path": "/news/527/the-woa-invites-olympic-family-organisations-to-host-events-at-the-olympians-reunion-centre-by-ey/",
+  "status": 200,
+  "final": "https://olympians.org/news/527/the-woa-invites-olympic-family-organisations-to-host-events-at-the-olympians-reunion-centre-by-ey/"
+ },
+ {
+  "path": "/news/524/fast-track-your-way-into-the-rio-2016-olympians-reunion-centre-by-ey/",
+  "status": 200,
+  "final": "https://olympians.org/news/524/fast-track-your-way-into-the-rio-2016-olympians-reunion-centre-by-ey/"
+ },
+ {
+  "path": "/news/521/woa-board-member-to-head-ioc-2024-evaluation-commission/",
+  "status": 200,
+  "final": "https://olympians.org/news/521/woa-board-member-to-head-ioc-2024-evaluation-commission/"
+ },
+ {
+  "path": "/news/518/slovenian-olympians-lead-record-breaking-show-of-olympic-solidarity-at-lake-bled/",
+  "status": 200,
+  "final": "https://olympians.org/news/518/slovenian-olympians-lead-record-breaking-show-of-olympic-solidarity-at-lake-bled/"
+ },
+ {
+  "path": "/news/515/registration-open-for-americas-masters-games/",
+  "status": 200,
+  "final": "https://olympians.org/news/515/registration-open-for-americas-masters-games/"
+ },
+ {
+  "path": "/news/?StartRow=590",
+  "status": 200,
+  "final": "https://olympians.org/news/?StartRow=590"
+ },
+ {
+  "path": "/news/512/olympians-to-benefit-from-newly-launched-olympic-athletes-hub/",
+  "status": 200,
+  "final": "https://olympians.org/news/512/olympians-to-benefit-from-newly-launched-olympic-athletes-hub/"
+ },
+ {
+  "path": "/news/509/angola-olympians-association-marks-8-year-anniversary/",
+  "status": 200,
+  "final": "https://olympians.org/news/509/angola-olympians-association-marks-8-year-anniversary/"
+ },
+ {
+  "path": "/news/506/beach-culture-world-champs-set-to-rock-barbados/",
+  "status": 200,
+  "final": "https://olympians.org/news/506/beach-culture-world-champs-set-to-rock-barbados/"
+ },
+ {
+  "path": "/news/503/woa-president-calls-on-olympians-to-support-ioc-refugee-campaign/",
+  "status": 200,
+  "final": "https://olympians.org/news/503/woa-president-calls-on-olympians-to-support-ioc-refugee-campaign/"
+ },
+ {
+  "path": "/news/500/woa-mourns-passing-of-olympic-legends/",
+  "status": 200,
+  "final": "https://olympians.org/news/500/woa-mourns-passing-of-olympic-legends/"
+ },
+ {
+  "path": "/news/497/ioc-and-woa-welcome-closer-working-relationship/",
+  "status": 200,
+  "final": "https://olympians.org/news/497/ioc-and-woa-welcome-closer-working-relationship/"
+ },
+ {
+  "path": "/news/494/age-no-barrier-to-olympic-dreams/",
+  "status": 200,
+  "final": "https://olympians.org/news/494/age-no-barrier-to-olympic-dreams/"
+ },
+ {
+  "path": "/news/491/olympians-receive-presidential-accolade-for-targetebola/",
+  "status": 200,
+  "final": "https://olympians.org/news/491/olympians-receive-presidential-accolade-for-targetebola/"
+ },
+ {
+  "path": "/news/490/200-days-to-go-to-rio-2016/",
+  "status": 200,
+  "final": "https://olympians.org/news/490/200-days-to-go-to-rio-2016/"
+ },
+ {
+  "path": "/news/487/korean-olympians-education-programme-continues-to-inspire-20-years-on/",
+  "status": 200,
+  "final": "https://olympians.org/news/487/korean-olympians-education-programme-continues-to-inspire-20-years-on/"
+ },
+ {
+  "path": "/news/484/world-olympians-association-speaks-up-for-clean-athletes/",
+  "status": 200,
+  "final": "https://olympians.org/news/484/world-olympians-association-speaks-up-for-clean-athletes/"
+ },
+ {
+  "path": "/news/481/zimbabwe-olympians-unite-to-tackle-doping-in-sport/",
+  "status": 200,
+  "final": "https://olympians.org/news/481/zimbabwe-olympians-unite-to-tackle-doping-in-sport/"
+ },
+ {
+  "path": "/news/478/outstanding-olympian-candidates-for-ioc-athletes-commission/",
+  "status": 200,
+  "final": "https://olympians.org/news/478/outstanding-olympian-candidates-for-ioc-athletes-commission/"
+ },
+ {
+  "path": "/news/475/woa-calls-to-protect-the-rights-of-clean-athletes/",
+  "status": 200,
+  "final": "https://olympians.org/news/475/woa-calls-to-protect-the-rights-of-clean-athletes/"
+ },
+ {
+  "path": "/news/472/woa-grant-helps-establish-slovenian-olympians-tutoring-programme/",
+  "status": 200,
+  "final": "https://olympians.org/news/472/woa-grant-helps-establish-slovenian-olympians-tutoring-programme/"
+ },
+ {
+  "path": "/news/469/olympian-elected-canadian-noc-president/",
+  "status": 200,
+  "final": "https://olympians.org/news/469/olympian-elected-canadian-noc-president/"
+ },
+ {
+  "path": "/news/466/olympians-to-play-crucial-role-in-8th-peace-and-sport-international-forum/",
+  "status": 200,
+  "final": "https://olympians.org/news/466/olympians-to-play-crucial-role-in-8th-peace-and-sport-international-forum/"
+ },
+ {
+  "path": "/news/463/the-worlds-oldest-living-olympian-passes-away/",
+  "status": 200,
+  "final": "https://olympians.org/news/463/the-worlds-oldest-living-olympian-passes-away/"
+ },
+ {
+  "path": "/news/460/woa-represented-on-the-ioc-sport-and-active-society-commission/",
+  "status": 200,
+  "final": "https://olympians.org/news/460/woa-represented-on-the-ioc-sport-and-active-society-commission/"
+ },
+ {
+  "path": "/news/?StartRow=609",
+  "status": 200,
+  "final": "https://olympians.org/news/?StartRow=609"
+ },
+ {
+  "path": "/news/457/nocs-offered-the-use-of-olympians-reunion-centre-in-rio/",
+  "status": 200,
+  "final": "https://olympians.org/news/457/nocs-offered-the-use-of-olympians-reunion-centre-in-rio/"
+ },
+ {
+  "path": "/news/454/olympians-united-in-battle-to-eliminate-cheating-in-sport/",
+  "status": 200,
+  "final": "https://olympians.org/news/454/olympians-united-in-battle-to-eliminate-cheating-in-sport/"
+ },
+ {
+  "path": "/news/451/giant-mural-honours-ecuadorian-athletes/",
+  "status": 200,
+  "final": "https://olympians.org/news/451/giant-mural-honours-ecuadorian-athletes/"
+ },
+ {
+  "path": "/news/448/uipm-backs-woa-s-declaration-of-support-for-the-olympic-charter/",
+  "status": 200,
+  "final": "https://olympians.org/news/448/uipm-backs-woa-s-declaration-of-support-for-the-olympic-charter/"
+ },
+ {
+  "path": "/news/445/jo-l-bouzou-re-elected-president-of-the-world-olympians-association/",
+  "status": 200,
+  "final": "https://olympians.org/news/445/jo-l-bouzou-re-elected-president-of-the-world-olympians-association/"
+ },
+ {
+  "path": "/news/442/inaugural-world-olympians-forum-declared-a-resounding-success/",
+  "status": 200,
+  "final": "https://olympians.org/news/442/inaugural-world-olympians-forum-declared-a-resounding-success/"
+ },
+ {
+  "path": "/news/439/vladimir-putin-to-address-inaugural-world-olympians-forum/",
+  "status": 200,
+  "final": "https://olympians.org/news/439/vladimir-putin-to-address-inaugural-world-olympians-forum/"
+ },
+ {
+  "path": "/news/436/olympic-heavyweights-to-speak-at-inaugural-world-olympians-forum/",
+  "status": 200,
+  "final": "https://olympians.org/news/436/olympic-heavyweights-to-speak-at-inaugural-world-olympians-forum/"
+ },
+ {
+  "path": "/news/433/nominations-for-woa-executive-committee-close/",
+  "status": 200,
+  "final": "https://olympians.org/news/433/nominations-for-woa-executive-committee-close/"
+ },
+ {
+  "path": "/news/430/last-chance-to-register-for-world-olympians-forum-and-general-assembly/",
+  "status": 200,
+  "final": "https://olympians.org/news/430/last-chance-to-register-for-world-olympians-forum-and-general-assembly/"
+ },
+ {
+  "path": "/news/427/105-noas-have-registered-for-the-world-olympians-forum-and-general-assembly/",
+  "status": 200,
+  "final": "https://olympians.org/news/427/105-noas-have-registered-for-the-world-olympians-forum-and-general-assembly/"
+ },
+ {
+  "path": "/news/424/hsh-prince-albert-ii-to-open-world-olympians-forum/",
+  "status": 200,
+  "final": "https://olympians.org/news/424/hsh-prince-albert-ii-to-open-world-olympians-forum/"
+ },
+ {
+  "path": "/news/421/discover-the-ioc-athlete-learning-gateway/",
+  "status": 200,
+  "final": "https://olympians.org/news/421/discover-the-ioc-athlete-learning-gateway/"
+ },
+ {
+  "path": "/news/418/96-noas-register-for-inaugural-world-olympians-forum-and-general-assembly/",
+  "status": 200,
+  "final": "https://olympians.org/news/418/96-noas-register-for-inaugural-world-olympians-forum-and-general-assembly/"
+ },
+ {
+  "path": "/news/415/ioc-president-thomas-bach-to-take-part-in-inaugural-world-olympians-forum/",
+  "status": 200,
+  "final": "https://olympians.org/news/415/ioc-president-thomas-bach-to-take-part-in-inaugural-world-olympians-forum/"
+ },
+ {
+  "path": "/news/412/registration-rush-for-forum-and-general-assembly/",
+  "status": 200,
+  "final": "https://olympians.org/news/412/registration-rush-for-forum-and-general-assembly/"
+ },
+ {
+  "path": "/news/407/register-now-for-world-olympians-forum-and-general-assembly/",
+  "status": 200,
+  "final": "https://olympians.org/news/407/register-now-for-world-olympians-forum-and-general-assembly/"
+ },
+ {
+  "path": "/news/406/woa-general-assembly-to-take-place-on-22-october-2015/",
+  "status": 200,
+  "final": "https://olympians.org/news/406/woa-general-assembly-to-take-place-on-22-october-2015/"
+ },
+ {
+  "path": "/news/403/moscow-to-host-the-inaugural-world-olympians-forum/",
+  "status": 200,
+  "final": "https://olympians.org/news/403/moscow-to-host-the-inaugural-world-olympians-forum/"
+ },
+ {
+  "path": "/news/?StartRow=628",
+  "status": 200,
+  "final": "https://olympians.org/news/?StartRow=628"
+ },
+ {
+  "path": "/rio-2016/",
+  "status": 200,
+  "final": "https://olympians.org/"
+ },
+ {
+  "path": "/news/400/woa-supports-women-in-sport-celebrations-at-the-pan-am-games/",
+  "status": 200,
+  "final": "https://olympians.org/news/400/woa-supports-women-in-sport-celebrations-at-the-pan-am-games/"
+ },
+ {
+  "path": "/news/397/story-of-olympic-solidarity-inspires-book/",
+  "status": 200,
+  "final": "https://olympians.org/news/397/story-of-olympic-solidarity-inspires-book/"
+ },
+ {
+  "path": "/news/394/female-olympians-invited-to-join-women-athletes-business-network/",
+  "status": 200,
+  "final": "https://olympians.org/news/394/female-olympians-invited-to-join-women-athletes-business-network/"
+ },
+ {
+  "path": "/news/391/olympians-receive-heartfelt-thanks-for-targetebola-campaign/",
+  "status": 200,
+  "final": "https://olympians.org/news/391/olympians-receive-heartfelt-thanks-for-targetebola-campaign/"
+ },
+ {
+  "path": "/news/385/global-olympic-day-celebrations-underway/",
+  "status": 200,
+  "final": "https://olympians.org/news/385/global-olympic-day-celebrations-underway/"
+ },
+ {
+  "path": "/news/388/1-day-to-go-to-olympic-day-ioc-president-thomas-bach-honoured-with-olympians-pin/",
+  "status": 200,
+  "final": "https://olympians.org/news/388/1-day-to-go-to-olympic-day-ioc-president-thomas-bach-honoured-with-olympians-pin/"
+ },
+ {
+  "path": "/news/382/2-days-to-go-to-olympic-day-olympic-day-run-to-celebrate-100-years-of-the-ioc-in-lausanne/",
+  "status": 200,
+  "final": "https://olympians.org/news/382/2-days-to-go-to-olympic-day-olympic-day-run-to-celebrate-100-years-of-the-ioc-in-lausanne/"
+ },
+ {
+  "path": "/news/379/3-days-to-go-to-olympic-day-year-round-celebrations-keep-swedish-olympians-busy/",
+  "status": 200,
+  "final": "https://olympians.org/news/379/3-days-to-go-to-olympic-day-year-round-celebrations-keep-swedish-olympians-busy/"
+ },
+ {
+  "path": "/news/376/4-days-to-go-to-olympic-day-angola-s-olympic-day-celebrations-to-focus-on-youth/",
+  "status": 200,
+  "final": "https://olympians.org/news/376/4-days-to-go-to-olympic-day-angola-s-olympic-day-celebrations-to-focus-on-youth/"
+ },
+ {
+  "path": "/news/373/5-days-to-go-to-olympic-day-australia-s-olympians-return-to-school-to-promote-olympic-movement/",
+  "status": 200,
+  "final": "https://olympians.org/news/373/5-days-to-go-to-olympic-day-australia-s-olympians-return-to-school-to-promote-olympic-movement/"
+ },
+ {
+  "path": "/news/370/6-days-to-go-to-olympic-day-canada-plans-country-wide-events-to-celebrate-olympic-day-2015/",
+  "status": 200,
+  "final": "https://olympians.org/news/370/6-days-to-go-to-olympic-day-canada-plans-country-wide-events-to-celebrate-olympic-day-2015/"
+ },
+ {
+  "path": "/news/367/7-days-to-go-to-olympic-day-technology-aids-usa-olympic-day-awareness/",
+  "status": 200,
+  "final": "https://olympians.org/news/367/7-days-to-go-to-olympic-day-technology-aids-usa-olympic-day-awareness/"
+ },
+ {
+  "path": "/news/363/8-days-to-go-to-olympic-day-czech-olympians-aim-for-record-breaking-olympic-day-run/",
+  "status": 200,
+  "final": "https://olympians.org/news/363/8-days-to-go-to-olympic-day-czech-olympians-aim-for-record-breaking-olympic-day-run/"
+ },
+ {
+  "path": "/news/360/9-days-to-go-to-olympic-day-peru-combines-cultural-and-sporting-events-to-mark-olympic-day/",
+  "status": 200,
+  "final": "https://olympians.org/news/360/9-days-to-go-to-olympic-day-peru-combines-cultural-and-sporting-events-to-mark-olympic-day/"
+ },
+ {
+  "path": "/news/357/10-days-to-go-to-olympic-day-tajikistan-plans-week-long-olympic-day-celebration/",
+  "status": 200,
+  "final": "https://olympians.org/news/357/10-days-to-go-to-olympic-day-tajikistan-plans-week-long-olympic-day-celebration/"
+ },
+ {
+  "path": "/news/353/aists-invites-applications-for-athlete-scholarship-programme/",
+  "status": 200,
+  "final": "https://olympians.org/news/353/aists-invites-applications-for-athlete-scholarship-programme/"
+ },
+ {
+  "path": "/news/350/woa-awarded-place-on-ioc-commission-for-sport-and-active-society/",
+  "status": 200,
+  "final": "https://olympians.org/news/350/woa-awarded-place-on-ioc-commission-for-sport-and-active-society/"
+ },
+ {
+  "path": "/news/347/masanga-hospital-thanks-woa-for-targetebola-support/",
+  "status": 200,
+  "final": "https://olympians.org/news/347/masanga-hospital-thanks-woa-for-targetebola-support/"
+ },
+ {
+  "path": "/news/344/peter-tallberg-s-olympian-legacy-lives-on/",
+  "status": 200,
+  "final": "https://olympians.org/news/344/peter-tallberg-s-olympian-legacy-lives-on/"
+ },
+ {
+  "path": "/news/?StartRow=647",
+  "status": 200,
+  "final": "https://olympians.org/news/?StartRow=647"
+ },
+ {
+  "path": "/news/341/olympians-standout-amongst-world-s-50-most-marketable-athletes/",
+  "status": 200,
+  "final": "https://olympians.org/news/341/olympians-standout-amongst-world-s-50-most-marketable-athletes/"
+ },
+ {
+  "path": "/news/338/belgian-olympians-gear-up-for-olympic-day-with-one-month-to-go/",
+  "status": 200,
+  "final": "https://olympians.org/news/338/belgian-olympians-gear-up-for-olympic-day-with-one-month-to-go/"
+ },
+ {
+  "path": "/news/335/woa-launches-olympic-day-countdown/",
+  "status": 200,
+  "final": "https://olympians.org/news/335/woa-launches-olympic-day-countdown/"
+ },
+ {
+  "path": "/news/332/gb-olympians-to-run-westminster-mile/",
+  "status": 200,
+  "final": "https://olympians.org/news/332/gb-olympians-to-run-westminster-mile/"
+ },
+ {
+  "path": "/news/329/woa-says-get-active-on-olympic-day/",
+  "status": 200,
+  "final": "https://olympians.org/news/329/woa-says-get-active-on-olympic-day/"
+ },
+ {
+  "path": "/news/328/woa-mourns-olympic-great-peter-tallberg/",
+  "status": 200,
+  "final": "https://olympians.org/news/328/woa-mourns-olympic-great-peter-tallberg/"
+ },
+ {
+  "path": "/news/325/olympians-support-peace-and-sport-watch/",
+  "status": 200,
+  "final": "https://olympians.org/news/325/olympians-support-peace-and-sport-watch/"
+ },
+ {
+  "path": "/news/322/czech-olympians-club-first-to-apply-for-2015-development-grant/",
+  "status": 200,
+  "final": "https://olympians.org/news/322/czech-olympians-club-first-to-apply-for-2015-development-grant/"
+ },
+ {
+  "path": "/news/319/idsdp-2015-gets-royal-backing-in-monaco/",
+  "status": 200,
+  "final": "https://olympians.org/news/319/idsdp-2015-gets-royal-backing-in-monaco/"
+ },
+ {
+  "path": "/news/316/isr-academy-to-provide-free-higher-education-to-olympians/",
+  "status": 200,
+  "final": "https://olympians.org/news/316/isr-academy-to-provide-free-higher-education-to-olympians/"
+ },
+ {
+  "path": "/news/313/four-time-olympian-and-ioc-member-angela-ruggiero-joins-woa-executive-board/",
+  "status": 200,
+  "final": "https://olympians.org/news/313/four-time-olympian-and-ioc-member-angela-ruggiero-joins-woa-executive-board/"
+ },
+ {
+  "path": "/news/310/us-olympic-rowers-reunite-and-promote-idsdp2015/",
+  "status": 200,
+  "final": "https://olympians.org/news/310/us-olympic-rowers-reunite-and-promote-idsdp2015/"
+ },
+ {
+  "path": "/news/307/woa-launches-noa-development-grants-for-2015/",
+  "status": 200,
+  "final": "https://olympians.org/news/307/woa-launches-noa-development-grants-for-2015/"
+ },
+ {
+  "path": "/news/304/olympic-legend-pernilla-wiberg-backs-whitecard-for-peace/",
+  "status": 200,
+  "final": "https://olympians.org/news/304/olympic-legend-pernilla-wiberg-backs-whitecard-for-peace/"
+ },
+ {
+  "path": "/news/301/woa-appeals-for-olympians-to-support-whitecard-campaign/",
+  "status": 200,
+  "final": "https://olympians.org/news/301/woa-appeals-for-olympians-to-support-whitecard-campaign/"
+ },
+ {
+  "path": "/news/298/madagascar-olympians-get-woa-help-to-aid-flood-victims/",
+  "status": 200,
+  "final": "https://olympians.org/news/298/madagascar-olympians-get-woa-help-to-aid-flood-victims/"
+ },
+ {
+  "path": "/news/296/international-sport-community-in-mourning/",
+  "status": 200,
+  "final": "https://olympians.org/news/296/international-sport-community-in-mourning/"
+ },
+ {
+  "path": "/news/293/woa-medical-committee-launched-to-support-retired-olympians/",
+  "status": 200,
+  "final": "https://olympians.org/news/293/woa-medical-committee-launched-to-support-retired-olympians/"
+ },
+ {
+  "path": "/news/290/world-olympians-association-and-around-the-rings-form-official-media-partnership/",
+  "status": 200,
+  "final": "https://olympians.org/news/290/world-olympians-association-and-around-the-rings-form-official-media-partnership/"
+ },
+ {
+  "path": "/news/?StartRow=666",
+  "status": 200,
+  "final": "https://olympians.org/news/?StartRow=666"
+ },
+ {
+  "path": "/woa/grants/",
+  "status": 200,
+  "final": "https://olympians.org/noas/grants/"
+ },
+ {
+  "path": "/news/287/woa-gives-anti-ebola-supplies-to-sierra-leone-noc-president/",
+  "status": 200,
+  "final": "https://olympians.org/news/287/woa-gives-anti-ebola-supplies-to-sierra-leone-noc-president/"
+ },
+ {
+  "path": "/news/284/woa-confirms-venue-for-rio-2016-olympians-reunion-centre/",
+  "status": 200,
+  "final": "https://olympians.org/news/284/woa-confirms-venue-for-rio-2016-olympians-reunion-centre/"
+ },
+ {
+  "path": "/news/281/third-container-of-supplies-reaches-ebola-sufferers-in-sierra-leone/",
+  "status": 200,
+  "final": "https://olympians.org/news/281/third-container-of-supplies-reaches-ebola-sufferers-in-sierra-leone/"
+ },
+ {
+  "path": "/news/278/-targetebola-supplies-reach-sierra-leone/",
+  "status": 200,
+  "final": "https://olympians.org/news/278/-targetebola-supplies-reach-sierra-leone/"
+ },
+ {
+  "path": "/news/275/czech-olympians-to-receive-free-medical-care/",
+  "status": 200,
+  "final": "https://olympians.org/news/275/czech-olympians-to-receive-free-medical-care/"
+ },
+ {
+  "path": "/news/272/international-paralympic-committee-joins-targetebola-campaign/",
+  "status": 200,
+  "final": "https://olympians.org/news/272/international-paralympic-committee-joins-targetebola-campaign/"
+ },
+ {
+  "path": "/news/269/international-golf-federation-supports-targetebola/",
+  "status": 200,
+  "final": "https://olympians.org/news/269/international-golf-federation-supports-targetebola/"
+ },
+ {
+  "path": "/news/264/prince-albert-praises-woa-at-127th-ioc-session/",
+  "status": 200,
+  "final": "https://olympians.org/news/264/prince-albert-praises-woa-at-127th-ioc-session/"
+ },
+ {
+  "path": "/news/263/woa-executive-committee-member-nancy-hogshead-makar-honoured-by-ioc/",
+  "status": 200,
+  "final": "https://olympians.org/news/263/woa-executive-committee-member-nancy-hogshead-makar-honoured-by-ioc/"
+ },
+ {
+  "path": "/news/260/italian-olympic-legend-backs-targetebola/",
+  "status": 200,
+  "final": "https://olympians.org/news/260/italian-olympic-legend-backs-targetebola/"
+ },
+ {
+  "path": "/news/257/woa-launches-targetebola-resources-kit-for-global-sports-organisations/",
+  "status": 200,
+  "final": "https://olympians.org/news/257/woa-launches-targetebola-resources-kit-for-global-sports-organisations/"
+ },
+ {
+  "path": "/news/250/uipm-backs-targetebola/",
+  "status": 200,
+  "final": "https://olympians.org/news/250/uipm-backs-targetebola/"
+ },
+ {
+  "path": "/news/249/isportconnect-joins-targetebola-campaign/",
+  "status": 200,
+  "final": "https://olympians.org/news/249/isportconnect-joins-targetebola-campaign/"
+ },
+ {
+  "path": "/news/248/british-olympians-support-targetebola/",
+  "status": 200,
+  "final": "https://olympians.org/news/248/british-olympians-support-targetebola/"
+ },
+ {
+  "path": "/news/245/woa-welcomes-agenda-2020-proposals/",
+  "status": 200,
+  "final": "https://olympians.org/news/245/woa-welcomes-agenda-2020-proposals/"
+ },
+ {
+  "path": "/news/242/champions-for-peace-promote-targetebola-campaign/",
+  "status": 200,
+  "final": "https://olympians.org/news/242/champions-for-peace-promote-targetebola-campaign/"
+ },
+ {
+  "path": "/news/237/rugby-legends-join-targetebola/",
+  "status": 200,
+  "final": "https://olympians.org/news/237/rugby-legends-join-targetebola/"
+ },
+ {
+  "path": "/news/236/world-rugby-supports-targetebola/",
+  "status": 200,
+  "final": "https://olympians.org/news/236/world-rugby-supports-targetebola/"
+ },
+ {
+  "path": "/news/233/rugby-sevens-legends-back-targetebola-campaign/",
+  "status": 200,
+  "final": "https://olympians.org/news/233/rugby-sevens-legends-back-targetebola-campaign/"
+ },
+ {
+  "path": "/news/?StartRow=685",
+  "status": 200,
+  "final": "https://olympians.org/news/?StartRow=685"
+ },
+ {
+  "path": "/news/230/francis-dove-edwin-speaks-to-bbc-world-about-woa-s-targetebola-campaign/",
+  "status": 200,
+  "final": "https://olympians.org/news/230/francis-dove-edwin-speaks-to-bbc-world-about-woa-s-targetebola-campaign/"
+ },
+ {
+  "path": "/news/225/skeleton-racer-supports-targetebola/",
+  "status": 200,
+  "final": "https://olympians.org/news/225/skeleton-racer-supports-targetebola/"
+ },
+ {
+  "path": "/news/222/ifs-show-support-for-targetebola/",
+  "status": 200,
+  "final": "https://olympians.org/news/222/ifs-show-support-for-targetebola/"
+ },
+ {
+  "path": "/news/219/more-international-sports-stars-back-targetebola/",
+  "status": 200,
+  "final": "https://olympians.org/news/219/more-international-sports-stars-back-targetebola/"
+ },
+ {
+  "path": "/news/209/join-targetebola-says-hsh-prince-albert-ii/",
+  "status": 200,
+  "final": "https://olympians.org/news/209/join-targetebola-says-hsh-prince-albert-ii/"
+ },
+ {
+  "path": "/news/212/around-the-rings-interviews-francis-dove-edwin-about-targetebola/",
+  "status": 200,
+  "final": "https://olympians.org/news/212/around-the-rings-interviews-francis-dove-edwin-about-targetebola/"
+ },
+ {
+  "path": "/news/208/us-olympians-join-targetebola/",
+  "status": 200,
+  "final": "https://olympians.org/news/208/us-olympians-join-targetebola/"
+ },
+ {
+  "path": "/news/207/hsh-prince-albert-ii-of-monaco-joins-targetebola/",
+  "status": 200,
+  "final": "https://olympians.org/news/207/hsh-prince-albert-ii-of-monaco-joins-targetebola/"
+ },
+ {
+  "path": "/news/204/join-the-targetebola-fundraising-campaign-and-help-save-lives/",
+  "status": 200,
+  "final": "https://olympians.org/news/204/join-the-targetebola-fundraising-campaign-and-help-save-lives/"
+ },
+ {
+  "path": "/news/201/asian-olympians-share-insights-in-korea/",
+  "status": 200,
+  "final": "https://olympians.org/news/201/asian-olympians-share-insights-in-korea/"
+ },
+ {
+  "path": "/news/198/woa-president-updates-ioc-president-on-woa-progress-and-global-promotion-of-olympism/",
+  "status": 200,
+  "final": "https://olympians.org/news/198/woa-president-updates-ioc-president-on-woa-progress-and-global-promotion-of-olympism/"
+ },
+ {
+  "path": "/news/195/asian-olympians-meet-to-discuss-olympism-in-action/",
+  "status": 200,
+  "final": "https://olympians.org/news/195/asian-olympians-meet-to-discuss-olympism-in-action/"
+ },
+ {
+  "path": "/news/192/olympian-s-legacy-lives-on-in-guinness-world-record-bid/",
+  "status": 200,
+  "final": "https://olympians.org/news/192/olympian-s-legacy-lives-on-in-guinness-world-record-bid/"
+ },
+ {
+  "path": "/news/189/sierra-leone-olympians-give-back-to-the-community/",
+  "status": 200,
+  "final": "https://olympians.org/news/189/sierra-leone-olympians-give-back-to-the-community/"
+ },
+ {
+  "path": "/news/184/olympians-asked-to-support-sport4climate-before-september-23/",
+  "status": 200,
+  "final": "https://olympians.org/news/184/olympians-asked-to-support-sport4climate-before-september-23/"
+ },
+ {
+  "path": "/news/183/olympians-support-for-sport4climate-campaign-gathers-pace/",
+  "status": 200,
+  "final": "https://olympians.org/news/183/olympians-support-for-sport4climate-campaign-gathers-pace/"
+ },
+ {
+  "path": "/news/180/woa-furthers-reach-with-launch-of-spanish-language-website/",
+  "status": 200,
+  "final": "https://olympians.org/news/180/woa-furthers-reach-with-launch-of-spanish-language-website/"
+ },
+ {
+  "path": "/news/119/ice-sports-initiative-to-promote-olympism-in-us/",
+  "status": 200,
+  "final": "https://olympians.org/news/119/ice-sports-initiative-to-promote-olympism-in-us/"
+ },
+ {
+  "path": "/news/117/woa-widens-reach-with-launch-of-french-language-website/",
+  "status": 200,
+  "final": "https://olympians.org/news/117/woa-widens-reach-with-launch-of-french-language-website/"
+ },
+ {
+  "path": "/candidature/",
+  "status": 200,
+  "final": "https://olympians.org/candidature/"
+ },
+ {
+  "path": "/news/98/angola-says-bem-vindo-to-youth-athletes/",
+  "status": 200,
+  "final": "https://olympians.org/news/98/angola-says-bem-vindo-to-youth-athletes/"
+ },
+ {
+  "path": "/news/88/female-olympians-to-benefit-from-business-mentoring-programme/",
+  "status": 200,
+  "final": "https://olympians.org/news/88/female-olympians-to-benefit-from-business-mentoring-programme/"
+ },
+ {
+  "path": "/news/77/olympic-stars-set-to-light-up-glasgow-commonwealth-games/",
+  "status": 200,
+  "final": "https://olympians.org/news/77/olympic-stars-set-to-light-up-glasgow-commonwealth-games/"
+ },
+ {
+  "path": "/news/55/pole-vault-champion-leaps-to-the-aid-of-aspiring-youngsters/",
+  "status": 200,
+  "final": "https://olympians.org/news/55/pole-vault-champion-leaps-to-the-aid-of-aspiring-youngsters/"
+ },
+ {
+  "path": "/news/54/olympians-from-tajikistan-to-lausanne-celebrate-olympic-day/",
+  "status": 200,
+  "final": "https://olympians.org/news/54/olympians-from-tajikistan-to-lausanne-celebrate-olympic-day/"
+ },
+ {
+  "path": "/news/53/calling-all-la-based-olympians/",
+  "status": 200,
+  "final": "https://olympians.org/news/53/calling-all-la-based-olympians/"
+ },
+ {
+  "path": "/news/52/namibian-olympians-association-celebrates-olympic-day-with-e-card/",
+  "status": 200,
+  "final": "https://olympians.org/news/52/namibian-olympians-association-celebrates-olympic-day-with-e-card/"
+ },
+ {
+  "path": "/news/51/olympians-all-over-the-world-celebrate-olympic-day/",
+  "status": 200,
+  "final": "https://olympians.org/news/51/olympians-all-over-the-world-celebrate-olympic-day/"
+ },
+ {
+  "path": "/news/50/countdown-to-olympic-day--1-day-to-go/",
+  "status": 200,
+  "final": "https://olympians.org/news/50/countdown-to-olympic-day--1-day-to-go/"
+ },
+ {
+  "path": "/news/49/countdown-to-olympic-day--2-days-to-go/",
+  "status": 200,
+  "final": "https://olympians.org/news/49/countdown-to-olympic-day--2-days-to-go/"
+ },
+ {
+  "path": "/news/48/countdown-to-olympic-day--3-days-to-go/",
+  "status": 200,
+  "final": "https://olympians.org/news/48/countdown-to-olympic-day--3-days-to-go/"
+ },
+ {
+  "path": "/news/47/countdown-to-olympic-day--4-days-to-go/",
+  "status": 200,
+  "final": "https://olympians.org/news/47/countdown-to-olympic-day--4-days-to-go/"
+ },
+ {
+  "path": "/news/46/countdown-to-olympic-day--5-days-to-go/",
+  "status": 200,
+  "final": "https://olympians.org/news/46/countdown-to-olympic-day--5-days-to-go/"
+ },
+ {
+  "path": "/news/45/countdown-to-olympic-day--10-days-to-go/",
+  "status": 200,
+  "final": "https://olympians.org/news/45/countdown-to-olympic-day--10-days-to-go/"
+ },
+ {
+  "path": "/news/44/olympian-anthony-ervin-adds-a-golden-touch-to-national-water-safety-campaign/",
+  "status": 200,
+  "final": "https://olympians.org/news/44/olympian-anthony-ervin-adds-a-golden-touch-to-national-water-safety-campaign/"
+ },
+ {
+  "path": "/news/43/olympians-to-play-key-role-at-6th-iwg-world-conference-on-women-and-sport/",
+  "status": 200,
+  "final": "https://olympians.org/news/43/olympians-to-play-key-role-at-6th-iwg-world-conference-on-women-and-sport/"
+ },
+ {
+  "path": "/news/42/canadians-celebrate-olympic-achievements/",
+  "status": 200,
+  "final": "https://olympians.org/news/42/canadians-celebrate-olympic-achievements/"
+ },
+ {
+  "path": "/news/41/check-mate-tajikistan-children-enjoy-checkers/",
+  "status": 200,
+  "final": "https://olympians.org/news/41/check-mate-tajikistan-children-enjoy-checkers/"
+ },
+ {
+  "path": "/news/40/countdown-to-olympic-day--19-days-to-go/",
+  "status": 200,
+  "final": "https://olympians.org/news/40/countdown-to-olympic-day--19-days-to-go/"
+ },
+ {
+  "path": "/news/39/countdown-to-olympic-day--26-days-to-go/",
+  "status": 200,
+  "final": "https://olympians.org/news/39/countdown-to-olympic-day--26-days-to-go/"
+ },
+ {
+  "path": "/news/38/olympians-dominate-most-marketable-top-ten/",
+  "status": 200,
+  "final": "https://olympians.org/news/38/olympians-dominate-most-marketable-top-ten/"
+ },
+ {
+  "path": "/news/37/ioc-athlete-mooc-to-benefit-olympians-worldwide/",
+  "status": 200,
+  "final": "https://olympians.org/news/37/ioc-athlete-mooc-to-benefit-olympians-worldwide/"
+ },
+ {
+  "path": "/news/36/olympians-reap-benefits-of-postgraduate-programme/",
+  "status": 200,
+  "final": "https://olympians.org/news/36/olympians-reap-benefits-of-postgraduate-programme/"
+ },
+ {
+  "path": "/news/35/woa-pays-tribute-to-olympian-tennis-player-elena-baltacha/",
+  "status": 200,
+  "final": "https://olympians.org/news/35/woa-pays-tribute-to-olympian-tennis-player-elena-baltacha/"
+ },
+ {
+  "path": "/news/32/world-olympians-forum-draws-nearer/",
+  "status": 200,
+  "final": "https://olympians.org/news/32/world-olympians-forum-draws-nearer/"
+ },
+ {
+  "path": "/news/34/olympians-can-help-make-olympic-day-2014-an-even-bigger-success/",
+  "status": 200,
+  "final": "https://olympians.org/news/34/olympians-can-help-make-olympic-day-2014-an-even-bigger-success/"
+ },
+ {
+  "path": "/news/33/get-your-members-to-sign-up-for-their-exclusive-olympian-org-email-address/",
+  "status": 200,
+  "final": "https://olympians.org/news/33/get-your-members-to-sign-up-for-their-exclusive-olympian-org-email-address/"
+ },
+ {
+  "path": "/news/31/six-million-white-cards-for-peace/",
+  "status": 200,
+  "final": "https://olympians.org/news/31/six-million-white-cards-for-peace/"
+ },
+ {
+  "path": "/news/30/olympians-champion-peace-and-development-in-monaco/",
+  "status": 200,
+  "final": "https://olympians.org/news/30/olympians-champion-peace-and-development-in-monaco/"
+ },
+ {
+  "path": "/news/28/world-fit-2014-kicks-off-in-dallas/",
+  "status": 200,
+  "final": "https://olympians.org/news/28/world-fit-2014-kicks-off-in-dallas/"
+ },
+ {
+  "path": "/news/29/german-olympians-launch-re-brand/",
+  "status": 200,
+  "final": "https://olympians.org/news/29/german-olympians-launch-re-brand/"
+ },
+ {
+  "path": "/news/27/olympians-ski-for-underprivileged-children/",
+  "status": 200,
+  "final": "https://olympians.org/news/27/olympians-ski-for-underprivileged-children/"
+ },
+ {
+  "path": "/news/26/madagascar-olympians-help-celebrate-international-women-s-day/",
+  "status": 200,
+  "final": "https://olympians.org/news/26/madagascar-olympians-help-celebrate-international-women-s-day/"
+ },
+ {
+  "path": "/news/25/dutch-athletes-benefit-from-work-experience-programme/",
+  "status": 200,
+  "final": "https://olympians.org/news/25/dutch-athletes-benefit-from-work-experience-programme/"
+ },
+ {
+  "path": "/news/24/swimming-towards-olympic-values-in-peru/",
+  "status": 200,
+  "final": "https://olympians.org/news/24/swimming-towards-olympic-values-in-peru/"
+ },
+ {
+  "path": "/news/23/the-olympians-network-launch-planned-for-may/",
+  "status": 200,
+  "final": "https://olympians.org/news/23/the-olympians-network-launch-planned-for-may/"
+ },
+ {
+  "path": "/news/22/sochi-olympians-elect-new-ioc-athletes-commission-members/",
+  "status": 200,
+  "final": "https://olympians.org/news/22/sochi-olympians-elect-new-ioc-athletes-commission-members/"
+ },
+ {
+  "path": "/news/21/ioc-ioc-ac-and-woa-working-together-for-olympians-and-society/",
+  "status": 200,
+  "final": "https://olympians.org/news/21/ioc-ioc-ac-and-woa-working-together-for-olympians-and-society/"
+ },
+ {
+  "path": "/actions/events/307/woa-launches-noa-development-grants-for-2015/",
+  "status": 200,
+  "final": "https://olympians.org/news/307/woa-launches-noa-development-grants-for-2015/"
+ },
+ {
+  "path": "/news/7/orphans-get-a-sporting-chance-in-tajikistan/",
+  "status": 200,
+  "final": "https://olympians.org/news/7/orphans-get-a-sporting-chance-in-tajikistan/"
+ },
+ {
+  "path": "/news/18/olympians-enjoy-woa-outings-to-sports-events-at-sochi-2014/",
+  "status": 200,
+  "final": "https://olympians.org/news/18/olympians-enjoy-woa-outings-to-sports-events-at-sochi-2014/"
+ },
+ {
+  "path": "/news/20/ioc-and-woa-kick-off-new-era/",
+  "status": 200,
+  "final": "https://olympians.org/news/20/ioc-and-woa-kick-off-new-era/"
+ },
+ {
+  "path": "/news/19/ioc-athletes-commission-chair-joins-woa-sochi-breakfast-panel/",
+  "status": 200,
+  "final": "https://olympians.org/news/19/ioc-athletes-commission-chair-joins-woa-sochi-breakfast-panel/"
+ },
+ {
+  "path": "/news/17/woa-showcases-events-via-flickr/",
+  "status": 200,
+  "final": "https://olympians.org/news/17/woa-showcases-events-via-flickr/"
+ },
+ {
+  "path": "/news/16/pernilla-wiberg-bjerke-and-shiva-keshavan-reveal-athletes-village-life/",
+  "status": 200,
+  "final": "https://olympians.org/news/16/pernilla-wiberg-bjerke-and-shiva-keshavan-reveal-athletes-village-life/"
+ },
+ {
+  "path": "/news/14/royal-approval-for-woa-new-look/",
+  "status": 200,
+  "final": "https://olympians.org/news/14/royal-approval-for-woa-new-look/"
+ },
+ {
+  "path": "/news/15/the-glittering-woa-cocktail-in-sochi/",
+  "status": 200,
+  "final": "https://olympians.org/news/15/the-glittering-woa-cocktail-in-sochi/"
+ },
+ {
+  "path": "/news/13/world-olympians-association-unveils-new-brand-identity-and-website-in-sochi/",
+  "status": 200,
+  "final": "https://olympians.org/news/13/world-olympians-association-unveils-new-brand-identity-and-website-in-sochi/"
+ },
+ {
+  "path": "/news/11/olympians-join-us-in-sochi/",
+  "status": 200,
+  "final": "https://olympians.org/news/11/olympians-join-us-in-sochi/"
+ },
+ {
+  "path": "/news/10/calling-olympians-in-sochi/",
+  "status": 200,
+  "final": "https://olympians.org/news/10/calling-olympians-in-sochi/"
+ },
+ {
+  "path": "/news/12/world-olympians-forum-gets-closer/",
+  "status": 200,
+  "final": "https://olympians.org/news/12/world-olympians-forum-gets-closer/"
+ },
+ {
+  "path": "/news/9/tackling-childhood-obesity-in-the-usa/",
+  "status": 200,
+  "final": "https://olympians.org/news/9/tackling-childhood-obesity-in-the-usa/"
+ },
+ {
+  "path": "/news/8/promoting-olympism-in-ukraine/",
+  "status": 200,
+  "final": "https://olympians.org/news/8/promoting-olympism-in-ukraine/"
+ },
+ {
+  "path": "/news/6/spanish-youngsters-learn-olympic-ideals/",
+  "status": 200,
+  "final": "https://olympians.org/news/6/spanish-youngsters-learn-olympic-ideals/"
+ },
+ {
+  "path": "/news/5/olympians-honoured-in-new-zealand/",
+  "status": 200,
+  "final": "https://olympians.org/news/5/olympians-honoured-in-new-zealand/"
+ },
+ {
+  "path": "/news/4/olympic-values-celebrated-in-netherlands/",
+  "status": 200,
+  "final": "https://olympians.org/news/4/olympic-values-celebrated-in-netherlands/"
+ },
+ {
+  "path": "/news/3/great-lakes-friendship-games-bring-unity/",
+  "status": 200,
+  "final": "https://olympians.org/news/3/great-lakes-friendship-games-bring-unity/"
+ },
+ {
+  "path": "/news/2/children-in-chile-benefit-from-woa-partnership/",
+  "status": 200,
+  "final": "https://olympians.org/news/2/children-in-chile-benefit-from-woa-partnership/"
+ },
+ {
+  "path": "/news/1/growing-the-woa-in-africa/",
+  "status": 200,
+  "final": "https://olympians.org/news/1/growing-the-woa-in-africa/"
+ },
+ {
+  "path": "/actions/events/208/us-olympians-join-targetebola/",
+  "status": 200,
+  "final": "https://olympians.org/news/208/us-olympians-join-targetebola/"
+ },
+ {
+  "path": "/olympians/the-olympians-network/?register",
+  "status": 200,
+  "final": "https://olympians.org/olympians/olympian-org-email/"
+ },
+ {
+  "path": "/%E2%80%9Dmailto:/",
+  "status": 200,
+  "final": "https://olympians.org/%E2%80%9Dmailto:/"
+ }
+]

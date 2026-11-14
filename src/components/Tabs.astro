@@ -1,0 +1,12 @@
+---
+import { b } from '../lib/site';
+interface Props { tabs: { label: string; href: string }[]; current: string }
+const { tabs, current } = Astro.props;
+---
+<nav class="tabs" aria-label="Section">
+  <div class="container">
+    <ul>
+      {tabs.map(t => { const h = b(t.href); return <li><a href={h} aria-current={h.replace(/\/$/, '') === current.replace(/\/$/, '') ? 'page' : undefined}>{t.label}</a></li>; })}
+    </ul>
+  </div>
+</nav>
