@@ -31,7 +31,7 @@ fieldset.find('a').filter((_, a) => !$(a).text().trim()).remove();
 const legend = fieldset.find('legend').first().text().trim();
 const formHtml = `<form id="register" novalidate>${$.html(fieldset)}</form>`;
 const video = (p.body.match(/data-yt="([\w-]+)"/) || [])[1];
-const { html: videoHtml } = prose(video ? `<div class="video" data-yt="${video}"></div>` : '');
+const { html: videoHtml } = prose(video ? `<div class="video" data-yt="${video}"></div>` : '', { lang });
 const gallery = $('ul > li > img').map((_, i) => $(i).attr('src')).get();
 const ICONS = ['oly', 'excellence'];
 // a long opening sentence (French, Spanish) would cover the "Be OLY" mark on the photo: it moves under the first screen

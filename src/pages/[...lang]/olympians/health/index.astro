@@ -29,7 +29,7 @@ const gender = findings.find(f => /Female/.test(f)) || '';
 const g = gender.match(/Female injury \((\d+(?:\.\d+)?)%\).*male \((\d+(?:\.\d+)?)%\)/);
 const kids = $.root().children().toArray(); const ulIdx = kids.findIndex(e => (e as any).tagName === 'ul');
 const rest = kids.slice(ulIdx >= 0 ? ulIdx + 1 : 3).map(e => $.html(e)).join('');
-const { html: restHtml } = prose(rest);
+const { html: restHtml } = prose(rest, { lang });
 ---
 <Base title={p.title} origPath={p.orig} image={b(p.bg)}>
   <PageHero title={p.title} crumbs={[{ label: navLabel('/olympians/', 'Olympians', lang), href: '/olympians/' }, { label: 'Health' }]} bg={b(p.bg)} />

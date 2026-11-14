@@ -24,7 +24,7 @@ const $ = cheerio.load(p.body);
 const leadText = $('h2').first().text().trim();
 const paras = $('p').map((_, el) => $(el).text().trim()).get().filter(Boolean);
 const video = (p.body.match(/data-yt="([\w-]+)"/) || [])[1];
-const { html: videoBlock } = prose(video ? `<div class="video" data-yt="${video}"></div>` : '');
+const { html: videoBlock } = prose(video ? `<div class="video" data-yt="${video}"></div>` : '', { lang });
 const mission = cheerio.load(page('/woa/about/mission/').body)('h2').first().text().trim();
 const vision = cheerio.load(page('/woa/about/vision/').body)('h2').first().text().trim();
 const goals = cheerio.load(page('/woa/about/goals/').body).text().split(/\s*\d+\.\s+/).map(s => s.trim()).filter(Boolean);

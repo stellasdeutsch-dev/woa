@@ -70,6 +70,9 @@ function build(lang: Lang) {
     es: /más de (\d[\d\s,.]*?) (Atletas Olímpicos retirados) de (\d+) (países), representando (\d+) (deportes olímpicos)/i,
   };
   const hm = health.map(p => p.match(HEALTH_RX[lang])).find(Boolean);
+  // OLY House: the first tile on its page ("Welcome to OLY House Milano Cortina 2026" + the line under it), in every language;
+  // the page's meta description is English on all three sites
+  const houseTile = (() => { const $ = load('/oly-house/'); const s = $('strong').filter((_, e) => $(e).next('em').length > 0).first(); return { head: T(s.text()), text: T(s.next('em').text()) }; })();
   const num = (s: string) => s.replace(/[^\d]/g, '');
 
   const WOA = {
@@ -88,7 +91,7 @@ function build(lang: Lang) {
     life: { title: D.page('/olympians/olympians-for-life/').title, href: loc('/olympians/olympians-for-life/'), text: life[0], img: '{{BASE}}/backgrounds/96.webp' },
     skills: { title: D.page('/skillsbuild/').title, href: loc('/skillsbuild/'), text: skills, img: '{{BASE}}/backgrounds/103.webp' },
     wof: { title: 'WOF', href: loc('/olympians/wof/'), text: D.page('/olympians/wof/').section, img: '{{BASE}}/backgrounds/104.webp' },
-    house: { title: 'OLY House', href: loc('/oly-house/'), text: D.page('/oly-house/').desc, img: '{{BASE}}/backgrounds/63.webp' },
+    house: { title: 'OLY House', href: loc('/oly-house/'), head: houseTile.head, text: houseTile.text || D.page('/oly-house/').desc, img: '{{BASE}}/backgrounds/63.webp' },
   };
   const NOAS = {
     guide: { title: nav('/noas/noa-guide/', 'NOA Guide'), href: loc('/noas/noa-guide/'), text: guideP, chapters: D.page('/noas/noa-guide/').tabs.slice(1).map((t, i) => ({ label: t.label, href: t.href.replace('{{BASE}}', ''), key: dataFor('en').page('/noas/noa-guide/').tabs[i + 1]?.label ?? '' })), img: '{{BASE}}/backgrounds/61.webp' },

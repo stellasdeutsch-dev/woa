@@ -59,7 +59,7 @@ acts.push({ href: '/airbnb-festival/', label: air.title, img: b(air.bg), icon: '
             {i === actIdx && (
               <ul class="vb-tiles pl-acts">
                 {acts.map(a => (
-                  <li><a class="card" href={url(a.href)}>
+                  <li><a class="card" href={url(Lx(a.href, lang))}>
                     <div class="card-media"><img src={a.img} alt="" loading="lazy" /></div>
                     <div class="card-body"><span class="pl-act-title"><span class="vb-ico"><svg class="icon"><use href={`#i-${a.icon}`} /></svg></span><span class="card-title">{a.label}</span></span></div>
                   </a></li>

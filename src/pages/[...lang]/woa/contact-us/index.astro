@@ -2,7 +2,7 @@
 import Base from '../../../../layouts/Base.astro';
 import PageHero from '../../../../components/PageHero.astro';
 import { dataFor } from '../../../../lib/data';
-import { LANG_PARAMS, pageLang, t as tFor, L as Lx } from '../../../../lib/i18n';
+import { LANG_PARAMS, pageLang, t as tFor, L as Lx, navLabel } from '../../../../lib/i18n';
 export function getStaticPaths() { return LANG_PARAMS; }
 const lang = pageLang(Astro.params); const tr = tFor(lang); const D = dataFor(lang);
 const page = D.page;
@@ -17,7 +17,7 @@ const p = page('/woa/contact-us/');
       <aside class="aside">
         <a class="c-card" href={`mailto:${EMAIL}`}><span class="topic-icon"><svg class="icon icon-lg"><use href="#i-mail" /></svg></span><span><span class="c-label">Email</span><span class="c-val">{EMAIL}</span></span></a>
         {SOCIAL.map(s => <a class="c-card" href={s.href} target="_blank" rel="noopener"><span class="topic-icon"><svg class="icon icon-lg"><use href={`#i-${s.icon}`} /></svg></span><span><span class="c-label">{s.label}</span><span class="c-val">{s.href.replace(/^https?:\/\/(www\.)?/, '')}</span></span></a>)}
-        <a class="c-card" href={url('/noas/noa-directory/')}><span class="topic-icon"><svg class="icon icon-lg"><use href="#i-directory" /></svg></span><span><span class="c-label">NOAs</span><span class="c-val">NOA Directory</span></span></a>
+        <a class="c-card" href={url(Lx('/noas/noa-directory/', lang))}><span class="topic-icon"><svg class="icon icon-lg"><use href="#i-directory" /></svg></span><span><span class="c-label">{navLabel('/noas/', 'NOAs', lang)}</span><span class="c-val">{navLabel('/noas/noa-directory/', 'NOA Directory', lang)}</span></span></a>
       </aside>
     </div>
   </section>

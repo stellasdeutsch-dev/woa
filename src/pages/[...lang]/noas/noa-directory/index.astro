@@ -9,8 +9,10 @@ const page = D.page; const noas = D.noas;
 import { b, realFlag } from '../../../../lib/site';
 
 const p = page('/noas/noa-directory/');
-const list = [...noas].sort((a, z) => a.country.localeCompare(z.country));
-const letters = [...new Set(list.map(n => n.country[0].toUpperCase()))];
+// French and Spanish names: alphabetical in that language, "États-Unis" under E
+const list = [...noas].sort((a, z) => a.country.localeCompare(z.country, lang));
+const letterOf = (s: string) => s.normalize('NFD')[0].toUpperCase();
+const letters = [...new Set(list.map(n => letterOf(n.country)))];
 const ICON: Record<string, string> = { Address: 'pin', Adresse: 'pin', 'Dirección': 'pin', Email: 'mail', Phone: 'phone', 'Téléphone': 'phone', 'Teléfono': 'phone', Website: 'globe', 'Sitio web': 'globe', President: 'user', Chairperson: 'user' };
 const isPhone = (l: string) => /^(Phone|Téléphone|Teléfono)$/.test(l);
 // wording on olympians.org in each language
@@ -29,7 +31,7 @@ const telHref = (v: string) => 'tel:' + v.replace(/[^\d+]/g, '');
   <section class="section-tight">
     <div class="container">
       <div class="dir-controls">
-        <div class="pills letters" role="group" aria-label="Letters">
+        <div class="pills letters" role="group" aria-label={tr.letters}>
           {letters.map(l => <button class="pill" type="button" data-letter={l} aria-pressed="false">{l}</button>)}
         </div>
       </div>
@@ -41,8 +43,8 @@ const telHref = (v: string) => 'tel:' + v.replace(/[^\d+]/g, '');
           <section class="noa-group" data-group={L} aria-labelledby={`letter-${L}`}>
             <h2 class="noa-letter" id={`letter-${L}`}>{L}</h2>
             <ul class="noa-list">
-              {list.filter(n => n.country[0].toUpperCase() === L).map(n => (
-                <li class="noa" id={`noa-${n.code.toLowerCase()}`} data-code={n.code} data-letter={L} data-q={`${n.country} ${n.name}`.toLowerCase()}>
+              {list.filter(n => letterOf(n.country) === L).map(n => (
+                <li class="noa" id={`noa-${n.code.toLowerCase()}`} data-code={n.code} data-letter={L} data-q={`${n.country} ${n.name}`.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()}>
                   <details>
                     <summary class="noa-head">
                       <span class="flag">{realFlag(n.code) && <img src={realFlag(n.code)!.src} alt="" width={realFlag(n.code)!.w} height={realFlag(n.code)!.h} loading="lazy" />}</span>
@@ -86,7 +88,7 @@ const telHref = (v: string) => 'tel:' + v.replace(/[^\d+]/g, '');
   const empty = document.querySelector('.dir-empty') as HTMLElement;
   let letter = ''; let code = '';
   function apply() {
-    const s = q.value.trim().toLowerCase();
+    const s = q.value.trim().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
     let shown = 0;
     for (const el of items) {
       const ok = (!s || el.dataset.q!.includes(s)) && (!letter || el.dataset.letter === letter) && (!code || el.dataset.code === code);

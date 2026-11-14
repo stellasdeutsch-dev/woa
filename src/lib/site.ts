@@ -1,6 +1,7 @@
 import * as cheerio from 'cheerio';
 import { visualize } from './visual';
 import fs from 'node:fs';
+import { type Lang, t as uiFor } from './i18n';
 
 export const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
 export const url = (p: string) => (/^(https?:|mailto:|tel:|#)/.test(p) ? p : BASE + (p.startsWith('/') ? p : '/' + p));
@@ -50,18 +51,18 @@ export const fmtDate = (iso?: string | null) => {
 
 export const slugify = (s: string) => s.toLowerCase().replace(/<[^>]+>/g, '').replace(/&[a-z]+;/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60);
 
-export function videoHtml(id: string) {
+export function videoHtml(id: string, lang: Lang = 'en') {
   const thumb = fs.existsSync(`public/yt/${id}.jpg`) ? `<img src="${BASE}/yt/${id}.jpg" alt="" loading="lazy" onerror="this.remove()">` : '';
-  return `<div class="video"><button type="button" class="video-btn" data-yt="${id}" aria-label="Play video">${thumb}<span class="video-play"><svg class="icon"><use href="#i-play"/></svg></span></button></div>`;
+  return `<div class="video"><button type="button" class="video-btn" data-yt="${id}" aria-label="${uiFor(lang).playVideo}">${thumb}<span class="video-play"><svg class="icon"><use href="#i-play"/></svg></span></button></div>`;
 }
 
 export type Toc = { id: string; text: string }[];
 
 // Post-process an extracted body: base paths, videos, tables, headings ids, lazy images.
-export function prose(html: string, opts: { toc?: boolean; visual?: boolean; legal?: boolean; faq?: boolean } = {}): { html: string; toc: Toc } {
+export function prose(html: string, opts: { toc?: boolean; visual?: boolean; legal?: boolean; faq?: boolean; lang?: Lang } = {}): { html: string; toc: Toc } {
   const $ = cheerio.load(`<div id="r">${b(html)}</div>`, null, false);
   const r = $('#r');
-  r.find('div.video[data-yt]').each((_, el) => { $(el).replaceWith(videoHtml($(el).attr('data-yt')!)); });
+  r.find('div.video[data-yt]').each((_, el) => { $(el).replaceWith(videoHtml($(el).attr('data-yt')!, opts.lang)); });
   r.find('div.video[data-fb]').each((_, el) => {
     const src = decodeURIComponent($(el).attr('data-fb')!);
     const href = (src.match(/href=([^&]+)/) || [])[1];

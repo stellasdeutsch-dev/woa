@@ -174,7 +174,9 @@ const noas = fs.readFileSync('data/noa/list.txt', 'utf8').trim().split('\n').map
     const links = $(h).find('a').map((_, a) => ({ text: text($, a), href: $(a).attr('href') })).get();
     return { label, value: $(h).text().split('\n').map(s => s.replace(/\s+/g, ' ').trim()).filter(Boolean), links }; }).get();
   const olyField = fields.find(f => /registered for OLY/i.test(f.label));
-  return { code, country: country.trim(), name, flag: flag ? '{{BASE}}' + flag : null, fields, olyCount: olyField ? +olyField.value.join('').replace(/\D/g, '') : null };
+  // French and Spanish pages name the country in their language: the h1 text before the association name
+  const local = LANG ? text($, h1.clone().find('strong').remove().end()) : '';
+  return { code, country: local || country.trim(), name, flag: flag ? '{{BASE}}' + flag : null, fields, olyCount: olyField ? +olyField.value.join('').replace(/\D/g, '') : null };
 });
 
 // Leadership

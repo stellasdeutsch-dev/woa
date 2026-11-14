@@ -623,7 +623,7 @@ p { margin: 0; text-wrap: pretty; }
 .ld-band .hero-bg::after { background: rgba(0, 0, 0, .58); }
 .ld-band-inner { display: grid; gap: var(--sp-5); justify-items: center; padding-block: var(--sp-9); }
 .ld-band h2 { font-size: clamp(2.75rem, 1rem + 5.4vw, 6rem); line-height: 1; letter-spacing: -0.035em; }
-.ld-band .lead { color: #f2f2f2; }
+.ld-band .lead { color: #f2f2f2; hyphens: manual; } /* short lines: no "Cortin-a" split */
 .ld-band-mail { display: inline-flex; align-items: center; gap: 12px; font-size: clamp(1.25rem, 1rem + 1.2vw, 2rem); font-weight: 700; transition: color var(--t); overflow-wrap: anywhere; }
 .ld-band-mail:hover { color: var(--c-gold); }
 

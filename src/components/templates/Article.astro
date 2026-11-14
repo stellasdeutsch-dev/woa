@@ -8,7 +8,7 @@ const { story, related, kind, prev, next } = Astro.props;
 const lang = langOf(Astro.url.pathname); const tr = t(lang);
 const listHref = L(Astro.props.listHref, lang);
 const listLabel = kind === 'News' ? navLabel('/news/', 'News', lang) : navLabel('/best-practices/', 'Best Practices', lang);
-let { html } = prose(story.body, { toc: false });
+let { html } = prose(story.body, { toc: false, lang });
 // the lead image is shown above; drop an identical trailing copy
 const img = imgOk(story.img) ? b(story.img) : '';
 const shareUrl = encodeURIComponent(new URL(url(story.path), Astro.site).href);

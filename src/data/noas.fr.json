@@ -41,7 +41,7 @@
  },
  {
   "code": "DZ",
-  "country": "Algeria",
+  "country": "Algérie",
   "name": "Association Nationale des Olympiens Algeriens",
   "flag": "{{BASE}}/flags-v2/3.svg",
   "fields": [
@@ -161,7 +161,7 @@
  },
  {
   "code": "AR",
-  "country": "Argentina",
+  "country": "Argentine",
   "name": "Asociación de Atletas Olímpicos Argentinos",
   "flag": "{{BASE}}/flags-v2/10.svg",
   "fields": [
@@ -262,7 +262,7 @@
  },
  {
   "code": "AU",
-  "country": "Australia",
+  "country": "Australie",
   "name": "Australian Olympians",
   "flag": "{{BASE}}/flags-v2/13.svg",
   "fields": [
@@ -311,7 +311,7 @@
  },
  {
   "code": "BB",
-  "country": "Barbados",
+  "country": "Barbade",
   "name": "National Olympians Association of Barbados",
   "flag": "{{BASE}}/flags-v2/19.svg",
   "fields": [
@@ -362,7 +362,7 @@
  },
  {
   "code": "BE",
-  "country": "Belgium",
+  "country": "Belgique",
   "name": "Belgian Olympians Association",
   "flag": "{{BASE}}/flags-v2/21.svg",
   "fields": [
@@ -425,7 +425,7 @@
  },
  {
   "code": "BJ",
-  "country": "Benin",
+  "country": "Bénin",
   "name": "Association des Olympiens du Benin",
   "flag": "{{BASE}}/flags-v2/23.svg",
   "fields": [
@@ -475,7 +475,7 @@
  },
  {
   "code": "BM",
-  "country": "Bermuda",
+  "country": "Bermudes",
   "name": "Bermuda Olympians Association",
   "flag": "{{BASE}}/flags-v2/24.svg",
   "fields": [
@@ -588,7 +588,7 @@
  },
  {
   "code": "BR",
-  "country": "Brazil",
+  "country": "Brésil",
   "name": "Associação de Atletas Olímpicos do Brasil",
   "flag": "{{BASE}}/flags-v2/30.svg",
   "fields": [
@@ -632,7 +632,7 @@
  },
  {
   "code": "BG",
-  "country": "Bulgaria",
+  "country": "Bulgarie",
   "name": "Bulgarian Olympians Association",
   "flag": "{{BASE}}/flags-v2/33.svg",
   "fields": [
@@ -732,7 +732,7 @@
  },
  {
   "code": "KH",
-  "country": "Cambodia",
+  "country": "Cambodge",
   "name": "Cambodia Olympians Association",
   "flag": "{{BASE}}/flags-v2/36.svg",
   "fields": [
@@ -784,7 +784,7 @@
  },
  {
   "code": "CM",
-  "country": "Cameroon",
+  "country": "Cameroun",
   "name": "Association Nationale des Olympiens du Cameroun",
   "flag": "{{BASE}}/flags-v2/37.svg",
   "fields": [
@@ -885,7 +885,7 @@
  },
  {
   "code": "CV",
-  "country": "Cape Verde",
+  "country": "Cap-Vert",
   "name": "Associação Cabo-Verdiana De Atletas Olimpicos",
   "flag": "{{BASE}}/flags-v2/39.svg",
   "fields": [
@@ -936,7 +936,7 @@
  },
  {
   "code": "CL",
-  "country": "Chile",
+  "country": "Chili",
   "name": "Asociacion de Atletas Olimpicos de Chile",
   "flag": "{{BASE}}/flags-v2/43.svg",
   "fields": [
@@ -1052,7 +1052,7 @@
  },
  {
   "code": "CO",
-  "country": "Colombia",
+  "country": "Colombie",
   "name": "Asociación Colombiana de Atletas Olímpicos",
   "flag": "{{BASE}}/flags-v2/47.svg",
   "fields": [
@@ -1104,7 +1104,7 @@
  },
  {
   "code": "CK",
-  "country": "Cook Islands",
+  "country": "Îles Cook",
   "name": "Cook Islands Olympians Association",
   "flag": "{{BASE}}/flags-v2/50.svg",
   "fields": [
@@ -1247,7 +1247,7 @@
  },
  {
   "code": "HR",
-  "country": "Croatia",
+  "country": "Croatie",
   "name": "Croatian Olympians Club",
   "flag": "{{BASE}}/flags-v2/53.svg",
   "fields": [
@@ -1309,7 +1309,7 @@
  },
  {
   "code": "CY",
-  "country": "Cyprus",
+  "country": "Chypre",
   "name": "Cyprus Olympians Association",
   "flag": "{{BASE}}/flags-v2/55.svg",
   "fields": [
@@ -1373,7 +1373,7 @@
  },
  {
   "code": "CZ",
-  "country": "Czech Republic",
+  "country": "République tchèque",
   "name": "Czech Olympians' Club",
   "flag": "{{BASE}}/flags-v2/56.svg",
   "fields": [
@@ -1405,7 +1405,7 @@
  },
  {
   "code": "CD",
-  "country": "Democratic Republic of the Congo",
+  "country": "République démocratique du Congo",
   "name": "Association Nationale des Olympies of the Democratic Republic of Congo",
   "flag": "{{BASE}}/flags-v2/265.svg",
   "fields": [
@@ -1448,7 +1448,7 @@
  },
  {
   "code": "DK",
-  "country": "Denmark",
+  "country": "Danemark",
   "name": "Olympisk Klub Danmark",
   "flag": "{{BASE}}/flags-v2/57.svg",
   "fields": [
@@ -1505,7 +1505,7 @@
  },
  {
   "code": "EG",
-  "country": "Egypt",
+  "country": "Égypte",
   "name": "Egyptian Olympians Association",
   "flag": "{{BASE}}/flags-v2/63.svg",
   "fields": [
@@ -1594,7 +1594,7 @@
  },
  {
   "code": "GQ",
-  "country": "Equatorial Guinea",
+  "country": "Guinée équatoriale",
   "name": "Asociacion de Atletas Olímpicos de Guinea Ecuatorial",
   "flag": "{{BASE}}/flags-v2/65.svg",
   "fields": [
@@ -1653,7 +1653,7 @@
  },
  {
   "code": "FJ",
-  "country": "Fiji",
+  "country": "Fidji",
   "name": "Fiji Olympians Association",
   "flag": "{{BASE}}/flags-v2/73.svg",
   "fields": [
@@ -1760,7 +1760,7 @@
  },
  {
   "code": "GE",
-  "country": "Georgia",
+  "country": "Géorgie",
   "name": "Georgian Olympians Association",
   "flag": "{{BASE}}/flags-v2/80.svg",
   "fields": [
@@ -1810,7 +1810,7 @@
  },
  {
   "code": "DE",
-  "country": "Germany",
+  "country": "Allemagne",
   "name": "German Olympians, Gemeinschaft Deutscher Olympiateilnehmer e.V.",
   "flag": "{{BASE}}/flags-v2/81.svg",
   "fields": [
@@ -1923,7 +1923,7 @@
  },
  {
   "code": "GB",
-  "country": "Great Britain",
+  "country": "Grande-Bretagne",
   "name": "The GB Olympians",
   "flag": "{{BASE}}/flags-v2/223.svg",
   "fields": [
@@ -1973,7 +1973,7 @@
  },
  {
   "code": "GR",
-  "country": "Greece",
+  "country": "Grèce",
   "name": "Hellenic Olympians Association",
   "flag": "{{BASE}}/flags-v2/84.svg",
   "fields": [
@@ -2036,7 +2036,7 @@
  },
  {
   "code": "GD",
-  "country": "Grenada",
+  "country": "Grenade",
   "name": "Grenada Olympians Association",
   "flag": "{{BASE}}/flags-v2/86.svg",
   "fields": [
@@ -2129,7 +2129,7 @@
  },
  {
   "code": "GW",
-  "country": "Guinea-Bissau",
+  "country": "Guinée-Bissau",
   "name": "Associacao dos Olimpicos da Guine Bissau",
   "flag": "{{BASE}}/flags-v2/91.svg",
   "fields": [
@@ -2254,7 +2254,7 @@
  },
  {
   "code": "HK",
-  "country": "Hong Kong, China",
+  "country": "Hong Kong, Chine",
   "name": "Hong Kong Olympians Association",
   "flag": "{{BASE}}/flags-v2/96.svg",
   "fields": [
@@ -2310,7 +2310,7 @@
  },
  {
   "code": "HU",
-  "country": "Hungary",
+  "country": "Hongrie",
   "name": "Hungarian Olympians Association",
   "flag": "{{BASE}}/flags-v2/97.svg",
   "fields": [
@@ -2372,7 +2372,7 @@
  },
  {
   "code": "IS",
-  "country": "Iceland",
+  "country": "Islande",
   "name": "Icelandic Olympians' Association",
   "flag": "{{BASE}}/flags-v2/98.svg",
   "fields": [
@@ -2415,7 +2415,7 @@
  },
  {
   "code": "IN",
-  "country": "India",
+  "country": "Inde",
   "name": "Olympians Association of India",
   "flag": "{{BASE}}/flags-v2/99.svg",
   "fields": [
@@ -2470,7 +2470,7 @@
  },
  {
   "code": "ID",
-  "country": "Indonesia",
+  "country": "Indonésie",
   "name": "Indonesia Olympians Association",
   "flag": "{{BASE}}/flags-v2/100.svg",
   "fields": [
@@ -2510,7 +2510,7 @@
  },
  {
   "code": "IE",
-  "country": "Ireland",
+  "country": "Irlande",
   "name": "Irish Olympians Association",
   "flag": "{{BASE}}/flags-v2/104.svg",
   "fields": [
@@ -2575,7 +2575,7 @@
  },
  {
   "code": "IT",
-  "country": "Italy",
+  "country": "Italie",
   "name": "Associazione Nazionale Atleti Olimpici e Azzurri D'Italia",
   "flag": "{{BASE}}/flags-v2/106.svg",
   "fields": [
@@ -2638,7 +2638,7 @@
  },
  {
   "code": "JM",
-  "country": "Jamaica",
+  "country": "Jamaïque",
   "name": "The Olympians Association of Jamaica",
   "flag": "{{BASE}}/flags-v2/107.svg",
   "fields": [
@@ -2694,7 +2694,7 @@
  },
  {
   "code": "JP",
-  "country": "Japan",
+  "country": "Japon",
   "name": "Olympians Association of Japan",
   "flag": "{{BASE}}/flags-v2/108.svg",
   "fields": [
@@ -2812,7 +2812,7 @@
  },
  {
   "code": "LV",
-  "country": "Latvia",
+  "country": "Lettonie",
   "name": "Latvian Olympian Club",
   "flag": "{{BASE}}/flags-v2/116.svg",
   "fields": [
@@ -2902,7 +2902,7 @@
  },
  {
   "code": "LR",
-  "country": "Liberia",
+  "country": "Libéria",
   "name": "Liberia Olympians Association",
   "flag": "{{BASE}}/flags-v2/119.svg",
   "fields": [
@@ -3028,7 +3028,7 @@
  },
  {
   "code": "LT",
-  "country": "Lithuania",
+  "country": "Lituanie",
   "name": "Lithuanian Olympians Association",
   "flag": "{{BASE}}/flags-v2/122.svg",
   "fields": [
@@ -3185,7 +3185,7 @@
  },
  {
   "code": "MY",
-  "country": "Malaysia",
+  "country": "Malaisie",
   "name": "Malaysia Olympians Association",
   "flag": "{{BASE}}/flags-v2/128.svg",
   "fields": [
@@ -3327,7 +3327,7 @@
  },
  {
   "code": "MT",
-  "country": "Malta",
+  "country": "Malte",
   "name": "Maltese Olympians Commission",
   "flag": "{{BASE}}/flags-v2/131.svg",
   "fields": [
@@ -3379,7 +3379,7 @@
  },
  {
   "code": "MR",
-  "country": "Mauritania",
+  "country": "Mauritanie",
   "name": "Association des Olympiens Mauritaniens",
   "flag": "{{BASE}}/flags-v2/134.svg",
   "fields": [
@@ -3407,7 +3407,7 @@
  },
  {
   "code": "MU",
-  "country": "Mauritius",
+  "country": "Maurice",
   "name": "Mauritius Olympians Association",
   "flag": "{{BASE}}/flags-v2/135.svg",
   "fields": [
@@ -3439,7 +3439,7 @@
  },
  {
   "code": "MX",
-  "country": "Mexico",
+  "country": "Mexique",
   "name": "Asociacion de Olímpicos Mexicanos",
   "flag": "{{BASE}}/flags-v2/137.svg",
   "fields": [
@@ -3547,7 +3547,7 @@
  },
  {
   "code": "MN",
-  "country": "Mongolia",
+  "country": "Mongolie",
   "name": "Mongolian Olympians Association",
   "flag": "{{BASE}}/flags-v2/140.svg",
   "fields": [
@@ -3585,7 +3585,7 @@
  },
  {
   "code": "ME",
-  "country": "Montenegro",
+  "country": "Monténégro",
   "name": "Montenegrin Olympians Club",
   "flag": "{{BASE}}/flags-v2/267.svg",
   "fields": [
@@ -3647,7 +3647,7 @@
  },
  {
   "code": "NA",
-  "country": "Namibia",
+  "country": "Namibie",
   "name": "Namibian Olympians Association",
   "flag": "{{BASE}}/flags-v2/145.svg",
   "fields": [
@@ -3700,7 +3700,7 @@
  },
  {
   "code": "NP",
-  "country": "Nepal",
+  "country": "Népal",
   "name": "Nepal Olympians Association",
   "flag": "{{BASE}}/flags-v2/148.svg",
   "fields": [
@@ -3752,7 +3752,7 @@
  },
  {
   "code": "NL",
-  "country": "Netherlands",
+  "country": "Pays-Bas",
   "name": "Netherlands Olympian Association",
   "flag": "{{BASE}}/flags-v2/149.svg",
   "fields": [
@@ -3801,7 +3801,7 @@
  },
  {
   "code": "NZ",
-  "country": "New Zealand",
+  "country": "Nouvelle-Zélande",
   "name": "Olympians Commission of New Zealand",
   "flag": "{{BASE}}/flags-v2/153.svg",
   "fields": [
@@ -3865,7 +3865,7 @@
  },
  {
   "code": "NG",
-  "country": "Nigeria",
+  "country": "Nigéria",
   "name": "Nigerian Olympians Association",
   "flag": "{{BASE}}/flags-v2/156.svg",
   "fields": [
@@ -3916,7 +3916,7 @@
  },
  {
   "code": "PW",
-  "country": "Palau",
+  "country": "Palaos",
   "name": "Palau Olympians Association",
   "flag": "{{BASE}}/flags-v2/164.svg",
   "fields": [
@@ -4068,7 +4068,7 @@
  },
  {
   "code": "PG",
-  "country": "Papua New Guinea",
+  "country": "Papouasie-Nouvelle-Guinée",
   "name": "Papua New Guinea Olympian Association",
   "flag": "{{BASE}}/flags-v2/166.svg",
   "fields": [
@@ -4163,7 +4163,7 @@
  },
  {
   "code": "PE",
-  "country": "Peru",
+  "country": "Pérou",
   "name": "Asociacion de Atletas Olimpicos de Peru",
   "flag": "{{BASE}}/flags-v2/168.svg",
   "fields": [
@@ -4270,7 +4270,7 @@
  },
  {
   "code": "PL",
-  "country": "Poland",
+  "country": "Pologne",
   "name": "POLISH OLYMPIANS ASSOCIATION",
   "flag": "{{BASE}}/flags-v2/171.svg",
   "fields": [
@@ -4384,7 +4384,7 @@
  },
  {
   "code": "PR",
-  "country": "Puerto Rico",
+  "country": "Porto Rico",
   "name": "Atletas Olimpicos de Puerto Rico",
   "flag": "{{BASE}}/flags-v2/173.svg",
   "fields": [
@@ -4448,7 +4448,7 @@
  },
  {
   "code": "KR",
-  "country": "Republic of Korea",
+  "country": "République de Corée",
   "name": "Korea Olympians Association",
   "flag": "{{BASE}}/flags-v2/192.svg",
   "fields": [
@@ -4500,7 +4500,7 @@
  },
  {
   "code": "MD",
-  "country": "Republic of Moldova",
+  "country": "République de Moldova",
   "name": "National Association of the Olympic Athletes from the Republic of Moldova",
   "flag": "{{BASE}}/flags-v2/138.svg",
   "fields": [
@@ -4601,7 +4601,7 @@
  },
  {
   "code": "ST",
-  "country": "Sao Tome and Principe",
+  "country": "Sao Tomé-et-Principe",
   "name": "Associação dos Atletas Olimpicos Santomenses",
   "flag": "{{BASE}}/flags-v2/180.svg",
   "fields": [
@@ -4643,7 +4643,7 @@
  },
  {
   "code": "SA",
-  "country": "Saudi Arabia",
+  "country": "Arabie saoudite",
   "name": "Saudi Olympians Association",
   "flag": "{{BASE}}/flags-v2/181.svg",
   "fields": [
@@ -4687,7 +4687,7 @@
  },
  {
   "code": "SN",
-  "country": "Senegal",
+  "country": "Sénégal",
   "name": "Association des Olympiens Sénégalais",
   "flag": "{{BASE}}/flags-v2/182.svg",
   "fields": [
@@ -4837,7 +4837,7 @@
  },
  {
   "code": "SG",
-  "country": "Singapore",
+  "country": "Singapour",
   "name": "Olympians Singapore",
   "flag": "{{BASE}}/flags-v2/185.svg",
   "fields": [
@@ -4881,7 +4881,7 @@
  },
  {
   "code": "SK",
-  "country": "Slovakia",
+  "country": "Slovaquie",
   "name": "Slovak Olympians Association",
   "flag": "{{BASE}}/flags-v2/186.svg",
   "fields": [
@@ -4943,7 +4943,7 @@
  },
  {
   "code": "SI",
-  "country": "Slovenia",
+  "country": "Slovénie",
   "name": "Slovenian Olympians Association",
   "flag": "{{BASE}}/flags-v2/187.svg",
   "fields": [
@@ -5007,7 +5007,7 @@
  },
  {
   "code": "ZA",
-  "country": "South Africa",
+  "country": "Afrique du Sud",
   "name": "South Africa Olympians Association",
   "flag": "{{BASE}}/flags-v2/190.svg",
   "fields": [
@@ -5058,7 +5058,7 @@
  },
  {
   "code": "ES",
-  "country": "Spain",
+  "country": "Espagne",
   "name": "Asociacion Española de Deportistas Olimpicos",
   "flag": "{{BASE}}/flags-v2/193.svg",
   "fields": [
@@ -5189,7 +5189,7 @@
  },
  {
   "code": "SE",
-  "country": "Sweden",
+  "country": "Suède",
   "name": "Swedish Olympian Association",
   "flag": "{{BASE}}/flags-v2/204.svg",
   "fields": [
@@ -5232,7 +5232,7 @@
  },
  {
   "code": "CH",
-  "country": "Switzerland",
+  "country": "Suisse",
   "name": "Swiss Olympians Association",
   "flag": "{{BASE}}/flags-v2/205.svg",
   "fields": [
@@ -5287,7 +5287,7 @@
  },
  {
   "code": "TH",
-  "country": "Thailand",
+  "country": "Thaïlande",
   "name": "Thailand Olympians Association",
   "flag": "{{BASE}}/flags-v2/210.svg",
   "fields": [
@@ -5382,7 +5382,7 @@
  },
  {
   "code": "TR",
-  "country": "Turkey",
+  "country": "Turquie",
   "name": "Turkish Olympians Association",
   "flag": "{{BASE}}/flags-v2/216.svg",
   "fields": [
@@ -5432,7 +5432,7 @@
  },
  {
   "code": "UG",
-  "country": "Uganda",
+  "country": "Ouganda",
   "name": "Uganda Olympians Association",
   "flag": "{{BASE}}/flags-v2/220.svg",
   "fields": [
@@ -5544,7 +5544,7 @@
  },
  {
   "code": "TZ",
-  "country": "United Republic of Tanzania",
+  "country": "République-Unie de Tanzanie",
   "name": "Tanzania Olympians Association",
   "flag": "{{BASE}}/flags-v2/209.svg",
   "fields": [
@@ -5597,7 +5597,7 @@
  },
  {
   "code": "US",
-  "country": "United States of America",
+  "country": "États-Unis d'Amérique",
   "name": "United States Olympians & Paralympians Association",
   "flag": "{{BASE}}/flags-v2/224.svg",
   "fields": [
@@ -5702,7 +5702,7 @@
  },
  {
   "code": "VG",
-  "country": "Virgin Islands, British",
+  "country": "Îles Vierges britanniques",
   "name": "British Virgin Islands Olympians Association",
   "flag": "{{BASE}}/flags-v2/232.svg",
   "fields": [
@@ -5752,7 +5752,7 @@
  },
  {
   "code": "ZM",
-  "country": "Zambia",
+  "country": "Zambie",
   "name": "Zambia Olympians Association",
   "flag": "{{BASE}}/flags-v2/239.svg",
   "fields": [

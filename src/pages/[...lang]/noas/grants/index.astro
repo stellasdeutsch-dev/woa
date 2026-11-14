@@ -69,7 +69,7 @@ const amountFor = (t: string) => { const a = amounts.find(x => x.includes(t.repl
       <aside class="panel apply-panel">
         <svg class="icon icon-xl"><use href="#i-directory" /></svg>
         <p>{ideasNote}</p>
-        <a class="btn" href={url('/noas/noa-directory/')}>NOA Directory<svg class="icon icon-arrow"><use href="#i-arrow" /></svg></a>
+        <a class="btn" href={url(Lx('/noas/noa-directory/', lang))}>{navLabel('/noas/noa-directory/', 'NOA Directory', lang)}<svg class="icon icon-arrow"><use href="#i-arrow" /></svg></a>
       </aside>
     </div>
   </section>

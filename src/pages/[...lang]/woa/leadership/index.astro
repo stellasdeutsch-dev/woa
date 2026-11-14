@@ -45,7 +45,7 @@ const hasOly = (n: string) => /\sOLY$/.test(n);
                 </div>
                 <button class="icon-btn pd-close" type="button" data-close aria-label={tr.close}><svg class="icon"><use href="#i-close" /></svg></button>
               </div>
-              <div class="prose pd-body" set:html={prose(x.bio, { toc: false }).html} />
+              <div class="prose pd-body" set:html={prose(x.bio, { toc: false, lang }).html} />
             </dialog>
           </li>
         ))}
