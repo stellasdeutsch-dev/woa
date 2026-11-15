@@ -9,36 +9,11 @@ export const ORIGIN = 'https://olympians.org';
 
 // Navigation: four sections; item labels as on olympians.org. Top items open the section landings.
 export type NavItem = { label: string; href: string; icon?: string; children?: NavItem[] };
-export const NAV: NavItem[] = [
-  { label: 'WOA', href: '/woa/', children: [
-    { label: 'About', href: '/woa/about/', icon: 'about' },
-    { label: 'Olympism', href: '/woa/olympism/', icon: 'olympism' },
-    { label: 'Leadership', href: '/woa/leadership/', icon: 'leadership' },
-    { label: 'Contact Us', href: '/woa/contact-us/', icon: 'contact' },
-  ] },
-  { label: 'Olympians', href: '/olympians/', children: [
-    { label: 'OLY', href: '/olympians/oly/', icon: 'oly' },
-    { label: 'Olympian.org Email', href: '/olympians/olympian-org-email/', icon: 'at' },
-    { label: 'Health', href: '/olympians/health/', icon: 'health' },
-    { label: 'Olympians for Life', href: '/olympians/olympians-for-life/', icon: 'life' },
-    { label: 'WOF', href: '/olympians/wof/', icon: 'forum' },
-    { label: 'SkillsBuild', href: '/skillsbuild/', icon: 'skills' },
-    { label: 'OLY House', href: '/oly-house/', icon: 'house' },
-  ] },
-  { label: 'NOAs', href: '/noas/', children: [
-    { label: 'NOA Guide', href: '/noas/noa-guide/', icon: 'guide' },
-    { label: 'NOA Directory', href: '/noas/noa-directory/', icon: 'directory' },
-    { label: 'Grants', href: '/noas/grants/', icon: 'grant' },
-    { label: 'Best Practices', href: '/best-practices/', icon: 'practice' },
-  ] },
-  { label: 'News', href: '/news/', icon: 'news' },
-];
-
-export const SOCIAL = [
-  { label: 'X', href: 'https://twitter.com/worldolympians', icon: 'x' },
-  { label: 'Facebook', href: 'https://www.facebook.com/WorldOlympiansAssociation', icon: 'facebook' },
-];
-export const EMAIL = 'info@thewoa.org';
+// menu, social links and contact email come from src/data/site.json (edited in the CMS)
+import SITE from '../data/site.json';
+export const NAV: NavItem[] = SITE.nav;
+export const SOCIAL: { label: string; href: string; icon: string }[] = SITE.social;
+export const EMAIL: string = SITE.email;
 
 export const b = (s: string | null | undefined) => (s ?? '').replaceAll('{{BASE}}', BASE);
 

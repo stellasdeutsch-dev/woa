@@ -250,5 +250,25 @@ const original = ORIGIN + (origPath ?? stripLang(current));
       });
     }
   </script>
+  {import.meta.env.PUBLIC_CMS_URL && <script is:inline define:vars={{ cms: import.meta.env.PUBLIC_CMS_URL.replace(/\/$/, ''), base: import.meta.env.BASE_URL.replace(/\/$/, '') }}>
+    // Visit counter for the CMS (Analytics in WOA Admin): no cookies, no personal data; off with Do Not Track / Global Privacy Control
+    (function () {
+      if (navigator.doNotTrack === '1' || navigator.globalPrivacyControl || /bot|headless/i.test(navigator.userAgent) || navigator.webdriver) return;
+      var rnd = function () { return Math.random().toString(36).slice(2, 12) + Date.now().toString(36); };
+      var keep = function (store, k) { try { var v = store.getItem(k); if (!v) { v = rnd(); store.setItem(k, v); } return v; } catch (e) { return rnd(); } };
+      var v = keep(localStorage, 'woa-v'), s = keep(sessionStorage, 'woa-s'), e = rnd(), t0 = Date.now(), hidden = 0, hid = 0;
+      var path = location.pathname.slice(base.length) || '/';
+      var ref = ''; try { var r = new URL(document.referrer); if (r.host !== location.host) ref = r.host; } catch (x) {}
+      var send = function (o) { var b = new URLSearchParams(Object.assign({ p: path, v: v, s: s, e: e }, o)); try { navigator.sendBeacon(cms + '/api/woa/track', b); } catch (x) {} };
+      send({ k: 'pageview', t: document.title.replace(/ \|.*$/, ''), l: document.documentElement.lang || 'en', r: ref });
+      document.addEventListener('visibilitychange', function () {
+        if (document.visibilityState === 'hidden') { hid = Date.now(); send({ k: 'time', d: String(Date.now() - t0 - hidden) }); } else if (hid) { hidden += Date.now() - hid; hid = 0; }
+      });
+      document.addEventListener('click', function (ev) {
+        var a = ev.target.closest && ev.target.closest('a[href]'); if (!a) return;
+        if (/\.(pdf|docx?|xlsx?|pptx?|zip)(\?|#|$)/i.test(a.getAttribute('href'))) send({ k: 'download', h: a.href.replace(location.origin, '') });
+      }, true);
+    })();
+  </script>}
 </body>
 </html>

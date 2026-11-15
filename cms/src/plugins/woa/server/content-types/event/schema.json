@@ -1,0 +1,64 @@
+{
+  "kind": "collectionType",
+  "collectionName": "woa_events",
+  "info": {
+    "singularName": "event",
+    "pluralName": "events",
+    "displayName": "Analytics event"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {
+    "content-manager": {
+      "visible": false
+    },
+    "content-type-builder": {
+      "visible": false
+    }
+  },
+  "attributes": {
+    "kind": {
+      "type": "enumeration",
+      "enum": [
+        "pageview",
+        "download"
+      ],
+      "default": "pageview"
+    },
+    "path": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "lang": {
+      "type": "string"
+    },
+    "referrer": {
+      "type": "string"
+    },
+    "visitor": {
+      "type": "string"
+    },
+    "session": {
+      "type": "string"
+    },
+    "duration": {
+      "type": "integer",
+      "default": 0
+    },
+    "device": {
+      "type": "string"
+    },
+    "target": {
+      "type": "string"
+    },
+    "day": {
+      "type": "string"
+    },
+    "eid": {
+      "type": "string"
+    }
+  }
+}

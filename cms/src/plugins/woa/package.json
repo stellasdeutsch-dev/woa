@@ -1,0 +1,8 @@
+{
+  "name": "woa",
+  "version": "1.0.0",
+  "private": true,
+  "description": "WOA admin: dashboard data, analytics, notifications, backups and site rebuilds",
+  "strapi": { "kind": "plugin", "name": "woa", "displayName": "WOA" },
+  "main": "strapi-server.js"
+}

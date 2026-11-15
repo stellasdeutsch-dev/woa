@@ -2,7 +2,11 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+    paths-ignore: ['cms/**']
   workflow_dispatch:
+  # "Rebuild site" in WOA Admin and automatic rebuilds after publishing (cms/src/plugins/woa)
+  repository_dispatch:
+    types: [cms-publish]
 permissions:
   contents: read
   pages: write
@@ -20,7 +24,17 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      # with the repository variable CMS_URL set, the published content comes from Strapi (scripts/cms-pull.mjs);
+      # without it the site builds from the JSON files in git
+      - name: Content from the CMS
+        if: ${{ vars.CMS_URL != '' }}
+        run: node scripts/cms-pull.mjs
+        env:
+          CMS_URL: ${{ vars.CMS_URL }}
+          CMS_TOKEN: ${{ secrets.CMS_TOKEN }}
       - run: npm run build
+        env:
+          PUBLIC_CMS_URL: ${{ vars.CMS_URL }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

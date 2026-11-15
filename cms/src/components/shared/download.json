@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_shared_downloads",
+  "info": {
+    "displayName": "Download",
+    "icon": "file",
+    "description": "Document link: an uploaded file wins over the path"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "href": {
+      "type": "string"
+    },
+    "file": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "files",
+        "images"
+      ]
+    }
+  }
+}

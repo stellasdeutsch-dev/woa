@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "honorary_members",
+  "info": {
+    "singularName": "honorary-member",
+    "pluralName": "honorary-members",
+    "displayName": "06 · Honorary Members",
+    "description": "Founder, honorary presidents and members"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "role": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "order": {
+      "type": "integer",
+      "default": 0,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_shared_socials",
+  "info": {
+    "displayName": "Social link",
+    "icon": "globe"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "href": {
+      "type": "string",
+      "required": true
+    },
+    "icon": {
+      "type": "string"
+    }
+  }
+}

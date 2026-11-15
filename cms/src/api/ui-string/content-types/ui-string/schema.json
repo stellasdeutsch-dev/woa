@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "ui_strings",
+  "info": {
+    "singularName": "ui-string",
+    "pluralName": "ui-strings",
+    "displayName": "09 · Interface texts",
+    "description": "Service words: Search, Close, Menu…"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "key": {
+      "type": "string",
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
+    "value": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "order": {
+      "type": "integer",
+      "default": 0,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    }
+  }
+}

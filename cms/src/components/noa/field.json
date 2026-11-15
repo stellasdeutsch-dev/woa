@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_noa_fields",
+  "info": {
+    "displayName": "Contact field",
+    "icon": "phone",
+    "description": "Address, phone, email, website, president…"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "value": {
+      "type": "text"
+    },
+    "links": {
+      "type": "json"
+    }
+  }
+}

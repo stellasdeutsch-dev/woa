@@ -1,6 +1,29 @@
 {
   "version": "0.0.1",
   "configurations": [
-    { "name": "woa-preview", "runtimeExecutable": "npx", "runtimeArgs": ["astro", "preview", "--port", "4321"], "port": 4321, "url": "http://localhost:4321" }
+    {
+      "name": "woa-preview",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "astro",
+        "preview",
+        "--port",
+        "4321"
+      ],
+      "port": 4321,
+      "url": "http://localhost:4321"
+    },
+    {
+      "name": "woa-cms",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "--prefix",
+        "cms",
+        "run",
+        "develop"
+      ],
+      "port": 1337,
+      "url": "http://localhost:1337"
+    }
   ]
 }
