@@ -175,6 +175,7 @@ const original = ORIGIN + (origPath ?? stripLang(current));
         const ea = (a.meta.title || '').toLowerCase() === ql ? -10 : 0, eb = (b.meta.title || '').toLowerCase() === ql ? -10 : 0;
         return (ea + (TYPE_ORDER[a.meta.type] ?? 1)) - (eb + (TYPE_ORDER[b.meta.type] ?? 1));
       });
+      document.dispatchEvent(new CustomEvent('woa:search', { detail: { q, n: res.results.length } }));
       if (!data.length) { out.innerHTML = `<p class="sd-empty">${document.body.dataset.noResults || 'No results'}</p>`; return; }
       out.innerHTML = `<ul>${data.slice(0, 20).map((d: any) => `<li><a href="${esc(d.url)}"><span class="sd-type">${esc(d.meta.type || '')}</span><span class="sd-title">${esc(d.meta.title || '')}</span><span class="sd-ex">${d.excerpt}</span></a></li>`).join('')}</ul>`;
     }
@@ -251,23 +252,52 @@ const original = ORIGIN + (origPath ?? stripLang(current));
     }
   </script>
   {import.meta.env.PUBLIC_CMS_URL && <script is:inline define:vars={{ cms: import.meta.env.PUBLIC_CMS_URL.replace(/\/$/, ''), base: import.meta.env.BASE_URL.replace(/\/$/, '') }}>
-    // Visit counter for the CMS (Analytics in WOA Admin): no cookies, no personal data; off with Do Not Track / Global Privacy Control
+    // Visit counter for the CMS (Analytics in WOA Admin): no cookies, no IP, no personal data; off with Do Not Track / Global Privacy Control.
+    // Sends: the page view (language, source, time zone for the country, screen width, local hour), and when the tab is hidden the time on page,
+    // scroll depth and loading speed (LCP, INP, CLS); clicks on downloads, external links and videos; site search terms; addresses that gave 404.
     (function () {
       if (navigator.doNotTrack === '1' || navigator.globalPrivacyControl || /bot|headless/i.test(navigator.userAgent) || navigator.webdriver) return;
       var rnd = function () { return Math.random().toString(36).slice(2, 12) + Date.now().toString(36); };
-      var keep = function (store, k) { try { var v = store.getItem(k); if (!v) { v = rnd(); store.setItem(k, v); } return v; } catch (e) { return rnd(); } };
-      var v = keep(localStorage, 'woa-v'), s = keep(sessionStorage, 'woa-s'), e = rnd(), t0 = Date.now(), hidden = 0, hid = 0;
+      var fresh = false;
+      var keep = function (store, k, mark) { try { var v = store.getItem(k); if (!v) { v = rnd(); store.setItem(k, v); if (mark) fresh = true; } return v; } catch (e) { return rnd(); } };
+      var v = keep(localStorage, 'woa-v', true), s = keep(sessionStorage, 'woa-s'), e = rnd(), t0 = Date.now(), hidden = 0, hid = 0;
       var path = location.pathname.slice(base.length) || '/';
-      var ref = ''; try { var r = new URL(document.referrer); if (r.host !== location.host) ref = r.host; } catch (x) {}
+      var ref = '', from = ''; try { var r = new URL(document.referrer); if (r.host !== location.host) ref = r.host; else from = r.pathname.slice(base.length) || '/'; } catch (x) {}
       var send = function (o) { var b = new URLSearchParams(Object.assign({ p: path, v: v, s: s, e: e }, o)); try { navigator.sendBeacon(cms + '/api/woa/track', b); } catch (x) {} };
-      send({ k: 'pageview', t: document.title.replace(/ \|.*$/, ''), l: document.documentElement.lang || 'en', r: ref });
+      var q = new URLSearchParams(location.search), now = new Date(), tz = '';
+      try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (x) {}
+      var notFound = !!document.querySelector('[data-notfound]');
+      send({ k: notFound ? 'notfound' : 'pageview', t: document.title.replace(/ \|.*$/, ''), l: document.documentElement.lang || 'en', r: ref, f: from, z: tz,
+        w: String(Math.round(innerWidth)), hr: String(now.getHours()), wd: String(now.getDay()), n: fresh ? '1' : '',
+        us: q.get('utm_source') || '', um: q.get('utm_medium') || '', uc: q.get('utm_campaign') || '' });
+      if (notFound) return;
+      var depth = 0, lcp = 0, cls = 0, inp = 0;
+      var measure = function () { var h = document.documentElement.scrollHeight - innerHeight; depth = Math.max(depth, h > 0 ? Math.min(100, Math.round(scrollY / h * 100)) : 100); };
+      measure(); addEventListener('scroll', measure, { passive: true });
+      var watch = function (type, fn, opt) { try { new PerformanceObserver(function (l) { l.getEntries().forEach(fn); }).observe(Object.assign({ type: type, buffered: true }, opt || {})); } catch (x) {} };
+      watch('largest-contentful-paint', function (x) { lcp = Math.round(x.startTime); });
+      watch('layout-shift', function (x) { if (!x.hadRecentInput) cls += x.value; });
+      watch('event', function (x) { if (x.interactionId) inp = Math.max(inp, Math.round(x.duration)); }, { durationThreshold: 40 });
+      var report = function () { send({ k: 'time', d: String(Date.now() - t0 - hidden - (hid ? Date.now() - hid : 0)), sd: String(depth), lcp: String(lcp), cls: String(Math.round(cls * 1000)), inp: String(inp) }); };
       document.addEventListener('visibilitychange', function () {
-        if (document.visibilityState === 'hidden') { hid = Date.now(); send({ k: 'time', d: String(Date.now() - t0 - hidden) }); } else if (hid) { hidden += Date.now() - hid; hid = 0; }
+        if (document.visibilityState === 'hidden') { hid = Date.now(); report(); }
+        else if (hid) { hidden += Date.now() - hid; hid = 0; }
       });
+      addEventListener('pagehide', report);
       document.addEventListener('click', function (ev) {
-        var a = ev.target.closest && ev.target.closest('a[href]'); if (!a) return;
-        if (/\.(pdf|docx?|xlsx?|pptx?|zip)(\?|#|$)/i.test(a.getAttribute('href'))) send({ k: 'download', h: a.href.replace(location.origin, '') });
+        var el = ev.target.closest ? ev.target : null; if (!el) return;
+        var vid = el.closest('.video-btn'); if (vid) { send({ k: 'video', h: vid.getAttribute('data-yt') || '' }); return; }
+        var a = el.closest('a[href]'); if (!a) return;
+        var href = a.getAttribute('href') || '';
+        if (/\.(pdf|docx?|xlsx?|pptx?|zip)(\?|#|$)/i.test(href)) send({ k: 'download', h: a.href.replace(location.origin, '') });
+        else if (/^(mailto|tel):/i.test(href) || (a.host && a.host !== location.host)) send({ k: 'outbound', h: a.href.slice(0, 300) });
+        else if (href.charAt(0) !== '#') report();
       }, true);
+      var st = 0;
+      document.addEventListener('woa:search', function (ev) {
+        clearTimeout(st); var d = ev.detail || {};
+        st = setTimeout(function () { if (d.q && d.q.trim().length > 1) send({ k: 'search', h: d.q.trim().toLowerCase().slice(0, 100), c: String(d.n) }); }, 1500);
+      });
     })();
   </script>}
 </body>

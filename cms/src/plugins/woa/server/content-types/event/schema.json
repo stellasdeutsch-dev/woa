@@ -22,7 +22,11 @@
       "type": "enumeration",
       "enum": [
         "pageview",
-        "download"
+        "download",
+        "outbound",
+        "video",
+        "search",
+        "notfound"
       ],
       "default": "pageview"
     },
@@ -59,6 +63,55 @@
     },
     "eid": {
       "type": "string"
+    },
+    "from_path": {
+      "type": "string"
+    },
+    "country": {
+      "type": "string"
+    },
+    "browser": {
+      "type": "string"
+    },
+    "os": {
+      "type": "string"
+    },
+    "screen": {
+      "type": "string"
+    },
+    "utm_source": {
+      "type": "string"
+    },
+    "utm_medium": {
+      "type": "string"
+    },
+    "utm_campaign": {
+      "type": "string"
+    },
+    "first_visit": {
+      "type": "boolean",
+      "default": false
+    },
+    "scroll": {
+      "type": "integer"
+    },
+    "lcp": {
+      "type": "integer"
+    },
+    "cls": {
+      "type": "integer"
+    },
+    "inp": {
+      "type": "integer"
+    },
+    "results": {
+      "type": "integer"
+    },
+    "hour": {
+      "type": "integer"
+    },
+    "weekday": {
+      "type": "integer"
     }
   }
 }

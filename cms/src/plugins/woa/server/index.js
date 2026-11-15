@@ -1,10 +1,11 @@
 'use strict';
 // WOA plugin (server only). The admin screens live in src/admin/app.tsx and call the admin routes below.
 //   - dashboard data: content counts per language, items that need attention, review queue
-//   - analytics: the public site sends page views and downloads to /api/woa/track (no cookies, no IP stored)
+//   - analytics (./analytics.js): the public site sends visits, clicks, searches and 404s to /api/woa/track (no cookies, no IP stored)
 //   - notifications, nightly database backup, site rebuild through GitHub Actions
 const fs = require('node:fs');
 const path = require('node:path');
+const A = require('./analytics');
 
 const LOCALES = ['en', 'fr', 'es'];
 const TYPES = [
@@ -23,7 +24,7 @@ const EVENT = 'plugin::woa.event';
 const NOTE = 'plugin::woa.notification';
 const editUrl = (uid, documentId, locale) => `/content-manager/collection-types/${uid}/${documentId}?plugins[i18n][locale]=${locale}`;
 const listUrl = (uid, locale, extra = '') => `/content-manager/collection-types/${uid}?page=1&pageSize=20&plugins[i18n][locale]=${locale}${extra}`;
-const dayOf = (d) => new Date(d).toISOString().slice(0, 10);
+const dayOf = A.dayOf;
 const env = (k, d) => (process.env[k] === undefined || process.env[k] === '' ? d : process.env[k]);
 
 // ---------- helpers ----------
@@ -39,7 +40,7 @@ async function notify(strapi, title, kind = 'info', link = null) {
   try { await strapi.documents(NOTE).create({ data: { title, kind, link, read: false } }); } catch (e) { strapi.log.warn(`[woa] notification failed: ${e.message}`); }
 }
 const store = (strapi) => strapi.store({ type: 'plugin', name: 'woa' });
-const DEFAULT_SETTINGS = { enabled: true, retentionDays: 395, excludePaths: [] };
+const DEFAULT_SETTINGS = { enabled: true, retentionDays: 395, excludePaths: [], weeklyDigest: true };
 async function getSettings(strapi) { return { ...DEFAULT_SETTINGS, ...((await store(strapi).get({ key: 'analytics' })) || {}) }; }
 
 // ---------- backups ----------
@@ -96,46 +97,6 @@ function scheduleDeploy(strapi, what) {
     pending.clear();
     dispatch(strapi, reason).catch(e => notify(strapi, `Site rebuild failed to start: ${e.message}`, 'error'));
   }, Number(env('DEPLOY_DEBOUNCE_SECONDS', 120)) * 1000);
-}
-
-// ---------- analytics ----------
-const BOT = /bot|crawl|spider|slurp|preview|headless|lighthouse|pingdom|monitor|curl|wget|python|axios|node-fetch/i;
-const deviceOf = (ua = '') => (/ipad|tablet/i.test(ua) ? 'tablet' : /mobi|android|iphone/i.test(ua) ? 'mobile' : 'desktop');
-const hits = new Map();
-function limited(ip) {
-  const now = Date.now(); const h = hits.get(ip) || { n: 0, t: now };
-  if (now - h.t > 60000) { h.n = 0; h.t = now; }
-  h.n++; hits.set(ip, h);
-  if (hits.size > 5000) hits.clear();
-  return h.n > 120;
-}
-const clip = (s, n) => (typeof s === 'string' ? s.slice(0, n) : '');
-async function analytics(strapi, days) {
-  const now = new Date(); const from = new Date(now.getTime() - (days - 1) * 86400000); const prevFrom = new Date(from.getTime() - days * 86400000);
-  const all = await strapi.db.query(EVENT).findMany({ where: { day: { $gte: dayOf(prevFrom) } }, limit: 500000, select: ['kind', 'path', 'title', 'lang', 'referrer', 'visitor', 'session', 'duration', 'device', 'target', 'day'] });
-  const cur = all.filter(e => e.day >= dayOf(from)); const prev = all.filter(e => e.day < dayOf(from));
-  const kpi = (list) => {
-    const pv = list.filter(e => e.kind === 'pageview');
-    const sessions = new Map();
-    for (const e of pv) { const s = sessions.get(e.session) || { n: 0, t: 0 }; s.n++; s.t += e.duration || 0; sessions.set(e.session, s); }
-    const ns = sessions.size || 0; const total = [...sessions.values()].reduce((a, s) => a + s.t, 0);
-    return { visitors: new Set(pv.map(e => e.visitor)).size, pageviews: pv.length, sessions: ns, avgTime: ns ? Math.round(total / ns / 1000) : 0,
-      pagesPerSession: ns ? +(pv.length / ns).toFixed(2) : 0, bounce: ns ? Math.round(([...sessions.values()].filter(s => s.n === 1).length / ns) * 100) : 0,
-      downloads: list.filter(e => e.kind === 'download').length };
-  };
-  const perDay = [];
-  for (let i = 0; i < days; i++) {
-    const d = dayOf(new Date(from.getTime() + i * 86400000)); const list = cur.filter(e => e.day === d && e.kind === 'pageview');
-    perDay.push({ day: d, pageviews: list.length, visitors: new Set(list.map(e => e.visitor)).size });
-  }
-  const group = (list, key) => { const m = new Map(); for (const e of list) { const k = key(e) || '—'; m.set(k, (m.get(k) || 0) + 1); } return [...m].sort((a, b) => b[1] - a[1]).map(([name, count]) => ({ name, count })); };
-  const pv = cur.filter(e => e.kind === 'pageview');
-  const pages = new Map();
-  for (const e of pv) { const p = pages.get(e.path) || { path: e.path, title: e.title, views: 0, visitors: new Set(), time: 0 }; p.views++; p.visitors.add(e.visitor); p.time += e.duration || 0; if (e.title) p.title = e.title; pages.set(e.path, p); }
-  const topPages = [...pages.values()].sort((a, b) => b.views - a.views).slice(0, 50).map(p => ({ path: p.path, title: p.title, views: p.views, visitors: p.visitors.size, avgTime: Math.round(p.time / p.views / 1000) }));
-  return { days, from: dayOf(from), to: dayOf(now), kpi: kpi(cur), prev: kpi(prev), perDay, topPages,
-    referrers: group(pv, e => e.referrer).slice(0, 20), languages: group(pv, e => e.lang), devices: group(pv, e => e.device),
-    downloads: group(cur.filter(e => e.kind === 'download'), e => e.target).slice(0, 30) };
 }
 
 // ---------- controllers ----------
@@ -213,38 +174,20 @@ const controllers = {
     },
   }),
   stats: ({ strapi }) => ({
-    async report(ctx) { const days = Math.min(400, Math.max(1, Number(ctx.query.days) || 30)); ctx.body = await analytics(strapi, days); },
+    async report(ctx) { ctx.body = await A.report(strapi, ctx.query); },
+    async live(ctx) { ctx.body = await A.live(strapi); },
     async csv(ctx) {
-      const days = Math.min(400, Math.max(1, Number(ctx.query.days) || 30)); const r = await analytics(strapi, days);
-      const q = (s) => `"${String(s ?? '').replace(/"/g, '""')}"`;
-      const lines = [['day', 'pageviews', 'visitors'].join(','), ...r.perDay.map(d => [d.day, d.pageviews, d.visitors].join(',')), '', ['path', 'title', 'views', 'visitors', 'avg_time_s'].join(','), ...r.topPages.map(p => [q(p.path), q(p.title), p.views, p.visitors, p.avgTime].join(','))];
+      const r = await A.report(strapi, ctx.query);
       ctx.set('Content-Type', 'text/csv; charset=utf-8'); ctx.set('Content-Disposition', `attachment; filename="woa-analytics-${r.from}-${r.to}.csv"`);
-      ctx.body = lines.join('\n');
+      ctx.body = '\ufeff' + A.csv(r);
     },
     async getSettings(ctx) { ctx.body = await getSettings(strapi); },
     async setSettings(ctx) {
       const b = ctx.request.body || {};
-      const v = { enabled: b.enabled !== false, retentionDays: Math.min(1000, Math.max(30, Number(b.retentionDays) || 395)), excludePaths: Array.isArray(b.excludePaths) ? b.excludePaths.map(String).filter(Boolean).slice(0, 50) : [] };
+      const v = { enabled: b.enabled !== false, weeklyDigest: b.weeklyDigest !== false, retentionDays: Math.min(1000, Math.max(30, Number(b.retentionDays) || 395)), excludePaths: Array.isArray(b.excludePaths) ? b.excludePaths.map(String).filter(Boolean).slice(0, 50) : [] };
       await store(strapi).set({ key: 'analytics', value: v }); ctx.body = v;
     },
-    async track(ctx) {
-      // the public site sends a form-encoded beacon: k=kind, p=path, t=title, l=lang, r=referrer host, v=visitor, s=session, e=event id, d=duration ms, h=download target
-      ctx.status = 204;
-      const ua = ctx.get('user-agent');
-      if (BOT.test(ua) || limited(ctx.ip)) return;
-      const b = ctx.request.body || {};
-      const st = await getSettings(strapi);
-      if (!st.enabled) return;
-      const p = clip(b.p, 300);
-      if (!p.startsWith('/') || st.excludePaths.some(x => p.startsWith(x))) return;
-      if (b.k === 'time') {
-        const d = Math.min(3600000, Math.max(0, Number(b.d) || 0)); const eid = clip(b.e, 40);
-        if (eid) await strapi.db.query(EVENT).updateMany({ where: { eid, session: clip(b.s, 40) }, data: { duration: d } });
-        return;
-      }
-      const kind = b.k === 'download' ? 'download' : 'pageview';
-      await strapi.db.query(EVENT).create({ data: { kind, path: p, title: clip(b.t, 200), lang: clip(b.l, 5), referrer: clip(b.r, 120), visitor: clip(b.v, 40), session: clip(b.s, 40), eid: clip(b.e, 40), duration: 0, device: deviceOf(ua), target: clip(b.h, 300), day: dayOf(Date.now()) } });
-    },
+    async track(ctx) { await A.track(strapi, ctx, () => getSettings(strapi)); },
   }),
 };
 
@@ -255,7 +198,7 @@ const routes = {
     admin('GET', '/notifications', 'dash.notifications'), admin('POST', '/notifications/read', 'dash.readNotifications'), admin('DELETE', '/notifications', 'dash.clearNotifications'),
     admin('GET', '/deploy', 'dash.deployStatus'), admin('POST', '/deploy', 'dash.deploy'),
     admin('GET', '/backups', 'dash.backups'), admin('POST', '/backups', 'dash.backupNow'),
-    admin('GET', '/analytics', 'stats.report'), admin('GET', '/analytics/export', 'stats.csv'),
+    admin('GET', '/analytics', 'stats.report'), admin('GET', '/analytics/live', 'stats.live'), admin('GET', '/analytics/export', 'stats.csv'),
     admin('GET', '/analytics/settings', 'stats.getSettings'), admin('PUT', '/analytics/settings', 'stats.setSettings'),
   ] },
   'content-api': { type: 'content-api', routes: [
@@ -286,9 +229,12 @@ module.exports = {
       } catch (e) { strapi.log.warn(`[woa] document hook: ${e.message}`); }
       return result;
     });
+    // the reports filter events by day
+    try { await strapi.db.connection.raw('CREATE INDEX IF NOT EXISTS woa_events_day_idx ON woa_events (day)'); } catch (e) { strapi.log.warn(`[woa] index: ${e.message}`); }
     strapi.cron.add({
       woaBackup: { task: () => backup(strapi).catch(e => notify(strapi, `Backup failed: ${e.message}`, 'error')), options: { rule: env('BACKUP_CRON', '0 3 * * *') } },
       woaRetention: { task: async () => { const st = await getSettings(strapi); await strapi.db.query(EVENT).deleteMany({ where: { day: { $lt: dayOf(Date.now() - st.retentionDays * 86400000) } } }); }, options: { rule: '30 3 * * *' } },
+      woaDigest: { task: async () => { if ((await getSettings(strapi)).weeklyDigest) await A.digest(strapi, notify).catch(e => strapi.log.warn(`[woa] digest: ${e.message}`)); }, options: { rule: env('DIGEST_CRON', '0 7 * * 1') } },
     });
   },
 };

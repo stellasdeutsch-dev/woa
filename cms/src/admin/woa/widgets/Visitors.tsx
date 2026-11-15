@@ -6,13 +6,14 @@ import { Muted } from '../ui';
 type R = { kpi: { visitors: number; pageviews: number; avgTime: number }; perDay: { day: string; pageviews: number }[] };
 export default function Visitors() {
   const { loading, error, data } = useWoa<R>('/analytics?days=14');
+  const live = useWoa<{ active: number }>('/analytics/live');
   if (loading) return <Widget.Loading />;
   if (error || !data) return <Widget.Error />;
   const max = Math.max(1, ...data.perDay.map(d => d.pageviews));
   return (
     <Box>
       <Flex gap={6} paddingBottom={3}>
-        {[['Visitors', data.kpi.visitors], ['Page views', data.kpi.pageviews], ['Avg. time', `${Math.floor(data.kpi.avgTime / 60)} min ${data.kpi.avgTime % 60} s`]].map(([k, v]) => (
+        {[['On the site now', live.data?.active ?? '—'], ['Visitors', data.kpi.visitors], ['Page views', data.kpi.pageviews], ['Avg. time', `${Math.floor(data.kpi.avgTime / 60)} min ${data.kpi.avgTime % 60} s`]].map(([k, v]) => (
           <Box key={k as string}><Muted>{k}</Muted><Typography variant="beta" tag="p">{v}</Typography></Box>
         ))}
       </Flex>

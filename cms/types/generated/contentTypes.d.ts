@@ -1895,6 +1895,9 @@ export interface PluginWoaEvent extends Struct.CollectionTypeSchema {
     };
   };
   attributes: {
+    browser: Schema.Attribute.String;
+    cls: Schema.Attribute.Integer;
+    country: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1902,22 +1905,37 @@ export interface PluginWoaEvent extends Struct.CollectionTypeSchema {
     device: Schema.Attribute.String;
     duration: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
     eid: Schema.Attribute.String;
-    kind: Schema.Attribute.Enumeration<['pageview', 'download']> &
+    first_visit: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    from_path: Schema.Attribute.String;
+    hour: Schema.Attribute.Integer;
+    inp: Schema.Attribute.Integer;
+    kind: Schema.Attribute.Enumeration<
+      ['pageview', 'download', 'outbound', 'video', 'search', 'notfound']
+    > &
       Schema.Attribute.DefaultTo<'pageview'>;
     lang: Schema.Attribute.String;
+    lcp: Schema.Attribute.Integer;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'plugin::woa.event'> &
       Schema.Attribute.Private;
+    os: Schema.Attribute.String;
     path: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     referrer: Schema.Attribute.String;
+    results: Schema.Attribute.Integer;
+    screen: Schema.Attribute.String;
+    scroll: Schema.Attribute.Integer;
     session: Schema.Attribute.String;
     target: Schema.Attribute.String;
     title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    utm_campaign: Schema.Attribute.String;
+    utm_medium: Schema.Attribute.String;
+    utm_source: Schema.Attribute.String;
     visitor: Schema.Attribute.String;
+    weekday: Schema.Attribute.Integer;
   };
 }
 
