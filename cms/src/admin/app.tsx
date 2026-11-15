@@ -4,6 +4,10 @@ import Logo from './extensions/logo.png';
 
 const T = (id: string, defaultMessage: string) => ({ id: `woa.${id}`, defaultMessage });
 
+// Light theme by default. Strapi reads STRAPI_THEME when the admin store is created (after this module loads)
+// and falls back to the system setting; a theme picked in Profile is saved there and still wins.
+try { if (!localStorage.getItem('STRAPI_THEME')) localStorage.setItem('STRAPI_THEME', 'light'); } catch {}
+
 export default {
   config: {
     // interface languages an editor can pick in Profile settings
