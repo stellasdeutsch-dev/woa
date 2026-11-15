@@ -108,3 +108,6 @@
 ## 15.11.2026: доперевод FR и ES
 - Home FR и Home ES (1440, 834, 390): в блоке OLY House английские строки заменены текстом оригинала на языке кадра («Bienvenue à OLY House Milano Cortina 2026» / «la destination pour tous les Olympiens et de leurs invités pendant les Jeux»; «Bienvenido a la OLY House Milano Cortina 2026» / «el lugar para todos los Atletas Olímpicos y sus invitados durante los Juegos»). На 1440 и 834 заголовок в одну строку и по центру, на 390 в две строки, как на сайте.
 - Кадров каталога NOA на FR/ES в файле нет; названия стран там меняются только на сайте.
+
+## 15.11.2026, ночь: CMS на Strapi
+- Кадры сайта не менялись: CMS меняет, откуда сайт берёт тексты, а не как он выглядит. Панель управления описана в `cms/README.md`.
