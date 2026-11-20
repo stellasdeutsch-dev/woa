@@ -1,5 +1,5 @@
 import * as cheerio from 'cheerio';
-import { visualize } from './visual';
+import { visualize, foldLongRuns } from './visual';
 import fs from 'node:fs';
 import { type Lang, t as uiFor } from './i18n';
 
@@ -34,7 +34,7 @@ export function videoHtml(id: string, lang: Lang = 'en') {
 export type Toc = { id: string; text: string }[];
 
 // Post-process an extracted body: base paths, videos, tables, headings ids, lazy images.
-export function prose(html: string, opts: { toc?: boolean; visual?: boolean; legal?: boolean; faq?: boolean; lang?: Lang } = {}): { html: string; toc: Toc } {
+export function prose(html: string, opts: { toc?: boolean; visual?: boolean; legal?: boolean; faq?: boolean; lang?: Lang; fold?: boolean } = {}): { html: string; toc: Toc } {
   const $ = cheerio.load(`<div id="r">${b(html)}</div>`, null, false);
   const r = $('#r');
   r.find('div.video[data-yt]').each((_, el) => { $(el).replaceWith(videoHtml($(el).attr('data-yt')!, opts.lang)); });
@@ -79,6 +79,7 @@ export function prose(html: string, opts: { toc?: boolean; visual?: boolean; leg
     T.wrap('<div class="table"></div>');
   });
   if (opts.visual) visualize($, r, { legal: opts.legal, faq: opts.faq });
+  if (opts.visual || opts.fold) { const ui = uiFor(opts.lang || 'en'); foldLongRuns($, r, { more: ui.readMore, less: ui.showLess }); }
   const toc: Toc = [];
   const used = new Set<string>();
   r.find('h2').not('.tab-title').each((_, h) => {

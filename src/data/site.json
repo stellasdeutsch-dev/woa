@@ -170,7 +170,8 @@
    "pages": "Pages",
    "onPage": "On this page",
    "section": "Section",
-   "playVideo": "Play video"
+   "playVideo": "Play video",
+   "showLess": "Show less"
   },
   "fr": {
    "search": "Rechercher",
@@ -201,7 +202,8 @@
    "pages": "Pages",
    "onPage": "Sur cette page",
    "section": "Rubrique",
-   "playVideo": "Lire la vidéo"
+   "playVideo": "Lire la vidéo",
+   "showLess": "Afficher moins"
   },
   "es": {
    "search": "Buscar",
@@ -232,7 +234,8 @@
    "pages": "Páginas",
    "onPage": "En esta página",
    "section": "Sección",
-   "playVideo": "Reproducir el vídeo"
+   "playVideo": "Reproducir el vídeo",
+   "showLess": "Mostrar menos"
   }
  }
 }

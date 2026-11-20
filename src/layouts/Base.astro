@@ -115,6 +115,26 @@ const original = ORIGIN + (origPath ?? stripLang(current));
     const body = document.body;
     const BASE = body.dataset.base || '';
     document.documentElement.classList.add('js');
+    // long text: "Read More" opens the rest of the paragraphs (hidden="until-found" keeps it findable with Ctrl+F)
+    const calm = matchMedia('(prefers-reduced-motion: reduce)');
+    const setMore = (btn: HTMLElement, open: boolean, animate = true) => {
+      const box = document.getElementById(btn.getAttribute('aria-controls') || '');
+      if (!box) return;
+      btn.setAttribute('aria-expanded', String(open));
+      (btn.querySelector('span') as HTMLElement).textContent = open ? btn.dataset.less! : btn.dataset.more!;
+      const run = (from: string, to: string, done?: () => void) => {
+        if (!animate || calm.matches) { done?.(); return; }
+        box.animate([{ height: from, opacity: from === '0px' ? 0 : 1 }, { height: to, opacity: to === '0px' ? 0 : 1 }], { duration: 320, easing: 'cubic-bezier(.2,.7,.2,1)' }).finished.then(() => done?.(), () => done?.());
+      };
+      if (open) { box.hidden = false; run('0px', `${box.scrollHeight}px`); }
+      else {
+        run(`${box.scrollHeight}px`, '0px', () => box.setAttribute('hidden', 'until-found'));
+        const top = btn.closest('.vb-more')!.getBoundingClientRect().top;
+        if (top < 0) btn.closest('.vb-more')!.previousElementSibling?.scrollIntoView({ block: 'start', behavior: calm.matches ? 'auto' : 'smooth' });
+      }
+    };
+    document.addEventListener('click', (e) => { const btn = (e.target as HTMLElement).closest('.vb-more-btn') as HTMLElement | null; if (btn) setMore(btn, btn.getAttribute('aria-expanded') !== 'true'); });
+    document.addEventListener('beforematch', (e) => { const box = e.target as HTMLElement; if (!box.classList?.contains('vb-more-body')) return; const btn = document.querySelector(`[aria-controls="${box.id}"]`) as HTMLElement | null; if (btn) setMore(btn, true, false); }, true);
     // tabsets
     document.querySelectorAll('.tabset').forEach((set) => {
       const btns = [...set.querySelectorAll<HTMLButtonElement>('.tabset-nav button')];

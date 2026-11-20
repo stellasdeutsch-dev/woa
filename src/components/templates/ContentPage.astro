@@ -17,7 +17,7 @@ const downloads = page.downloads.filter(d => isDoc(d.href));
 const sideText = page.side.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
 const docText = downloads.map(d => d.label).join(' ').replace(/\s+/g, ' ').trim();
 const sideRich = sideText.length > 0 && (page.downloads.some(d => !isDoc(d.href)) || sideText.length > docText.length + 2);
-const side = sideRich ? prose(page.side, { toc: false, lang }).html : '';
+const side = sideRich ? prose(page.side, { toc: false, lang, fold: true }).html : '';
 // long help text from the side column reads better as its own block under the content
 const sideBelow = sideRich && sideText.length > 600;
 // three or more sections: a visual index on top instead of a side list (legal texts keep the side list)

@@ -240,3 +240,28 @@ export function visualize($: CheerioAPI, r: ReturnType<CheerioAPI>, opts: Visual
     });
   });
 }
+
+// 11. long runs of paragraphs -> the first ~100 words stay, the rest opens with "Read More" (text unchanged, found by Ctrl+F and search)
+let moreId = 0;
+const words = (s: string) => s.replace(/\s+/g, ' ').trim().split(' ').filter(Boolean).length;
+export function foldLongRuns($: CheerioAPI, r: ReturnType<CheerioAPI>, labels: { more: string; less: string }, opts: { max?: number; keep?: number; minRest?: number } = {}) {
+  const { max = 180, keep = 90, minRest = 50 } = opts;
+  r.find('p').each((_, p) => {
+    const $p = $(p);
+    if ($p.prev().is('p') || $p.closest('form, table, details, .vb-faq, .vb-more, .timeline, .tab-panel, nav').length) return;
+    const run: any[] = []; let el = $p;
+    while (el.length && el.is('p')) { run.push(el[0]); el = el.next(); }
+    if (run.length < 2) return;
+    const n = run.map(x => words($(x).text()));
+    if (n.reduce((a, b) => a + b, 0) <= max) return;
+    let shown = 0, k = 0;
+    while (k < run.length && (k === 0 || shown < keep)) shown += n[k++];
+    const rest = n.slice(k).reduce((a, b) => a + b, 0);
+    if (k >= run.length || rest < minRest) return;
+    const id = `more-${++moreId}`;
+    const box = $(`<div class="vb-more"><div class="vb-more-body" id="${id}" hidden="until-found"></div><button type="button" class="btn btn-outline vb-more-btn" aria-expanded="false" aria-controls="${id}" data-more="" data-less=""><span></span>${icon('chevron')}</button></div>`);
+    box.find('button').attr('data-more', labels.more).attr('data-less', labels.less).find('span').text(labels.more);
+    $(run[k - 1]).after(box);
+    box.find('.vb-more-body').append(run.slice(k));
+  });
+}

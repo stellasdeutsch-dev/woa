@@ -807,3 +807,13 @@ html.still main > section, html.still .site-footer { content-visibility: visible
 @property --swipe-bd { syntax: '<number>'; inherits: true; initial-value: 1; }
 dialog::backdrop { opacity: var(--swipe-bd, 1); }
 .mobile-menu { touch-action: pan-y; }
+
+/* long text: the rest of the paragraphs behind "Read More" (lib/visual.ts foldLongRuns) */
+.vb-more { margin: var(--sp-4) 0 var(--sp-5); }
+.vb-more-body { overflow: hidden; }
+.vb-more-body > p:first-child { margin-top: 0; }
+.vb-more-body:not([hidden]) { margin-bottom: var(--sp-4); }
+.vb-more-btn .icon { transition: transform var(--t); }
+.vb-more-btn[aria-expanded="true"] .icon { transform: rotate(180deg); }
+.vb-more-btn:focus-visible { outline: 2px solid var(--c-gold); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { .vb-more-btn .icon { transition: none; } }
