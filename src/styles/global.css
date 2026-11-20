@@ -817,3 +817,9 @@ dialog::backdrop { opacity: var(--swipe-bd, 1); }
 .vb-more-btn[aria-expanded="true"] .icon { transform: rotate(180deg); }
 .vb-more-btn:focus-visible { outline: 2px solid var(--c-gold); outline-offset: 3px; }
 @media (prefers-reduced-motion: reduce) { .vb-more-btn .icon { transition: none; } }
+
+/* site forms: thank-you block after sending to the CMS; hidden field that only bots fill */
+.form-done { display: flex; align-items: center; gap: var(--sp-3); padding: var(--sp-4) 0; }
+.form-done .icon { flex: none; width: 28px; height: 28px; }
+.form-done p { margin: 0; font-weight: 600; }
+.hp-field { position: absolute !important; left: -9999px; width: 1px; height: 1px; opacity: 0; }

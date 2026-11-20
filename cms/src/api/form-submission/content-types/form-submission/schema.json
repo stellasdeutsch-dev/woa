@@ -1,0 +1,52 @@
+{
+  "kind": "collectionType",
+  "collectionName": "form_submissions",
+  "info": {
+    "singularName": "form-submission",
+    "pluralName": "form-submissions",
+    "displayName": "92 · Form submissions",
+    "description": "What visitors sent through the site forms"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "form": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::form.form"
+    },
+    "form_key": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "page": {
+      "type": "string"
+    },
+    "lang": {
+      "type": "string"
+    },
+    "data": {
+      "type": "json"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "new",
+        "in_progress",
+        "answered",
+        "spam"
+      ],
+      "default": "new"
+    },
+    "note": {
+      "type": "text"
+    }
+  }
+}

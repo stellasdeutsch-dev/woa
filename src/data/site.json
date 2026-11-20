@@ -171,7 +171,8 @@
    "onPage": "On this page",
    "section": "Section",
    "playVideo": "Play video",
-   "showLess": "Show Less"
+   "showLess": "Show Less",
+   "formSent": "Thank you, your message has been sent."
   },
   "fr": {
    "search": "Rechercher",
@@ -203,7 +204,8 @@
    "onPage": "Sur cette page",
    "section": "Rubrique",
    "playVideo": "Lire la vidéo",
-   "showLess": "Afficher moins"
+   "showLess": "Afficher moins",
+   "formSent": "Merci, votre message a bien été envoyé."
   },
   "es": {
    "search": "Buscar",
@@ -235,7 +237,8 @@
    "onPage": "En esta página",
    "section": "Sección",
    "playVideo": "Reproducir el vídeo",
-   "showLess": "Mostrar menos"
+   "showLess": "Mostrar menos",
+   "formSent": "Gracias, su mensaje ha sido enviado."
   }
  }
 }

@@ -6,6 +6,8 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const A = require('./analytics');
+const H = require('./history');
+const F = require('./forms');
 
 const LOCALES = ['en', 'fr', 'es'];
 const TYPES = [
@@ -18,6 +20,10 @@ const TYPES = [
   { uid: 'api::redirect.redirect', key: 'redirects', label: 'Redirects', title: 'from' },
   { uid: 'api::nav-item.nav-item', key: 'nav', label: 'Menu', title: 'label' },
   { uid: 'api::ui-string.ui-string', key: 'ui', label: 'Interface texts', title: 'key' },
+  { uid: 'api::faq.faq', key: 'faq', label: 'FAQ', title: 'question' },
+  { uid: 'api::event.event', key: 'events', label: 'Events', title: 'title' },
+  { uid: 'api::grant.grant', key: 'grants', label: 'Grants', title: 'name' },
+  { uid: 'api::partner.partner', key: 'partners', label: 'Partners', title: 'name' },
 ];
 const REVIEWABLE = TYPES.filter(t => ['pages', 'news', 'practices', 'noas', 'leaders'].includes(t.key));
 const EVENT = 'plugin::woa.event';
@@ -101,6 +107,8 @@ function scheduleDeploy(strapi, what) {
 
 // ---------- controllers ----------
 const controllers = {
+  history: H.controllers,
+  forms: (deps) => F.controllers(deps, notify),
   dash: ({ strapi }) => ({
     async overview(ctx) {
       const out = [];
@@ -133,6 +141,8 @@ const controllers = {
       }
       const noas = await strapi.db.query('api::noa.noa').findMany({ where: { publishedAt: null, locale: 'en' }, populate: { fields: true }, limit: 1000 });
       items.push({ id: 'noa-email', label: 'NOAs without an email address', count: noas.filter(n => !(n.fields || []).some(f => /mail/i.test(f.label) && (f.value || '').trim())).length, href: listUrl('api::noa.noa', 'en') });
+      const fresh = await strapi.db.query('api::form-submission.form-submission').count({ where: { status: 'new' } });
+      items.push({ id: 'forms-new', label: 'new form submissions', count: fresh, href: "/content-manager/collection-types/api::form-submission.form-submission?page=1&pageSize=20&filters[$and][0][status][$eq]=new" });
       ctx.body = { items };
     },
     async review(ctx) {
@@ -199,10 +209,12 @@ const routes = {
     admin('GET', '/deploy', 'dash.deployStatus'), admin('POST', '/deploy', 'dash.deploy'),
     admin('GET', '/backups', 'dash.backups'), admin('POST', '/backups', 'dash.backupNow'),
     admin('GET', '/analytics', 'stats.report'), admin('GET', '/analytics/live', 'stats.live'), admin('GET', '/analytics/export', 'stats.csv'),
+    admin('GET', '/versions', 'history.list'), admin('POST', '/versions/:id/restore', 'history.restore'),
     admin('GET', '/analytics/settings', 'stats.getSettings'), admin('PUT', '/analytics/settings', 'stats.setSettings'),
   ] },
   'content-api': { type: 'content-api', routes: [
     { method: 'POST', path: '/track', handler: 'stats.track', config: { auth: false, policies: [] } },
+    { method: 'POST', path: '/forms/:key', handler: 'forms.submit', config: { auth: false, policies: [] } },
   ] },
 };
 
@@ -210,11 +222,15 @@ module.exports = {
   contentTypes: {
     event: { schema: require('./content-types/event/schema.json') },
     notification: { schema: require('./content-types/notification/schema.json') },
+    audit: { schema: require('./content-types/audit/schema.json') },
+    'review-log': { schema: require('./content-types/review-log/schema.json') },
+    version: { schema: require('./content-types/version/schema.json') },
   },
   controllers,
   routes,
   register() {},
   async bootstrap({ strapi }) {
+    H.register(strapi);
     // publishing content rebuilds the site (debounced); a request for review creates a notification
     strapi.documents.use(async (ctx, next) => {
       const result = await next();

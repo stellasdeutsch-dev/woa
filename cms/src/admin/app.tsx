@@ -1,6 +1,7 @@
 import type { StrapiApp } from '@strapi/strapi/admin';
 import { ChartBubble, Bell, WarningCircle, CheckCircle, Rocket, Eye, Earth, Layout } from '@strapi/icons';
 import Logo from './extensions/logo.png';
+import HistoryPanel from './woa/panels/History';
 
 const T = (id: string, defaultMessage: string) => ({ id: `woa.${id}`, defaultMessage });
 
@@ -71,5 +72,8 @@ export default {
       { id: 'woa-translations', icon: Earth, title: T('translations', 'Translations'), component: async () => (await import('./woa/widgets/Translations')).default },
     ]);
   },
-  bootstrap() {},
+  bootstrap(app: StrapiApp) {
+    // "History" panel next to every entry: earlier versions with a restore button
+    (app.getPlugin('content-manager') as any).apis.addEditViewSidePanel([HistoryPanel]);
+  },
 };

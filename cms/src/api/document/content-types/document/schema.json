@@ -1,0 +1,50 @@
+{
+  "kind": "collectionType",
+  "collectionName": "documents",
+  "info": {
+    "singularName": "document",
+    "pluralName": "documents",
+    "displayName": "12 · Documents",
+    "description": "Library of PDF and Office files linked from the site. A new file here replaces it on every page"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "file": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "files",
+        "images"
+      ]
+    },
+    "site_path": {
+      "type": "string"
+    },
+    "language": {
+      "type": "enumeration",
+      "enum": [
+        "en",
+        "fr",
+        "es",
+        "other"
+      ],
+      "default": "en"
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::document-category.document-category",
+      "inversedBy": "documents"
+    },
+    "used_on": {
+      "type": "json"
+    }
+  }
+}

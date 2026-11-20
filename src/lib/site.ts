@@ -11,6 +11,7 @@ export const ORIGIN = 'https://olympians.org';
 export type NavItem = { label: string; href: string; icon?: string; children?: NavItem[] };
 // menu, social links and contact email come from src/data/site.json (edited in the CMS)
 import SITE from '../data/site.json';
+import VIDEO_DATA from '../data/videos.json';
 export const NAV: NavItem[] = SITE.nav;
 export const SOCIAL: { label: string; href: string; icon: string }[] = SITE.social;
 export const EMAIL: string = SITE.email;
@@ -26,9 +27,15 @@ export const fmtDate = (iso?: string | null) => {
 
 export const slugify = (s: string) => s.toLowerCase().replace(/<[^>]+>/g, '').replace(/&[a-z]+;/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60);
 
+// titles and covers of the videos come from 11 · Videos in the CMS (src/data/videos.json)
+const VIDEOS = VIDEO_DATA as Record<string, { title: string | null; cover: string | null }>;
+const attr = (t: string) => t.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 export function videoHtml(id: string, lang: Lang = 'en') {
-  const thumb = fs.existsSync(`public/yt/${id}.jpg`) ? `<img src="${BASE}/yt/${id}.jpg" alt="" loading="lazy" onerror="this.remove()">` : '';
-  return `<div class="video"><button type="button" class="video-btn" data-yt="${id}" aria-label="${uiFor(lang).playVideo}">${thumb}<span class="video-play"><svg class="icon"><use href="#i-play"/></svg></span></button></div>`;
+  const v = VIDEOS[id];
+  const cover = v?.cover ? b(v.cover) : fs.existsSync(`public/yt/${id}.jpg`) ? `${BASE}/yt/${id}.jpg` : '';
+  const thumb = cover ? `<img src="${cover}" alt="" loading="lazy" onerror="this.remove()">` : '';
+  const label = uiFor(lang).playVideo + (v?.title ? `: ${v.title}` : '');
+  return `<div class="video"><button type="button" class="video-btn" data-yt="${id}" aria-label="${attr(label)}">${thumb}<span class="video-play"><svg class="icon"><use href="#i-play"/></svg></span></button></div>`;
 }
 
 export type Toc = { id: string; text: string }[];

@@ -121,6 +121,40 @@ for (const l of LANGS) {
   files['site.json'] = { nav, navLabel, social: (settings.social || []).map(s => ({ label: s.label, href: s.href, icon: s.icon })), email: settings.email, ui };
 }
 
+// 13 · FAQ: the FAQ page text is built from its questions (one <h3> question, then the answer)
+{
+  const byPage = new Map();
+  for (const l of LANGS) for (const q of await all('faqs', l)) { if (!q.page) continue; (byPage.get(q.page) || byPage.set(q.page, []).get(q.page)).push(q); }
+  for (const [pagePath, list] of byPage) {
+    const file = `pages${SUF[(pagePath.match(/^\/(fr|es)\//) || [])[1] || 'en']}.json`;
+    const page = files[file]?.find(p => p.path === pagePath);
+    if (page) page.body = list.sort((a, b) => (a.order ?? 0) - (b.order ?? 0)).map(q => `${q.question ? `<h3>${q.question}</h3>` : ''}${html(q.answer) || ''}`).join('');
+  }
+}
+
+// 11 · Videos: titles and covers (a cover uploaded in the CMS replaces the YouTube picture)
+{
+  const videos = {};
+  for (const v of (await all('videos', 'en', '&populate[thumbnail]=true')).sort((a, b) => a.youtube_id.localeCompare(b.youtube_id))) {
+    videos[v.youtube_id] = { title: v.title || null, cover: v.thumbnail ? await fileRef(v.thumbnail) : null };
+  }
+  files['videos.json'] = videos;
+}
+
+// 12 · Documents: a file uploaded in the library replaces the original file on every page that links to it
+{
+  const swap = [];
+  for (const d of await all('documents', 'en', '&populate[file]=true')) {
+    if (!d.site_path || !d.file || (d.file.caption && d.file.caption.startsWith('{{BASE}}/'))) continue;
+    swap.push([d.site_path, await fileRef(d.file)]);
+  }
+  if (swap.length) for (const name of Object.keys(files).filter(n => /^(pages|news|practices)(\.(fr|es))?\.json$/.test(n))) {
+    let text = JSON.stringify(files[name]);
+    for (const [from, to] of swap) text = text.split(JSON.stringify(from).slice(1, -1)).join(JSON.stringify(to).slice(1, -1));
+    files[name] = JSON.parse(text);
+  }
+}
+
 // compare (objects ignore key order, arrays keep it) and write
 const canon = (v) => Array.isArray(v) ? v.map(canon) : v && typeof v === 'object' ? Object.fromEntries(Object.keys(v).sort().map(k => [k, canon(v[k])])) : v;
 let changed = 0;

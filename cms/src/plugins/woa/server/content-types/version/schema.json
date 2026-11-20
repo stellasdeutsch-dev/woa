@@ -1,0 +1,47 @@
+{
+  "kind": "collectionType",
+  "collectionName": "woa_versions",
+  "info": {
+    "singularName": "version",
+    "pluralName": "versions",
+    "displayName": "99 · Content versions",
+    "description": "Copies of entries before each change; restore from the History panel of the entry (written automatically)"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {
+    "content-manager": {
+      "visible": true
+    },
+    "content-type-builder": {
+      "visible": false
+    }
+  },
+  "attributes": {
+    "uid": {
+      "type": "string"
+    },
+    "type_label": {
+      "type": "string"
+    },
+    "entry_id": {
+      "type": "string"
+    },
+    "lang": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "action": {
+      "type": "string"
+    },
+    "user_name": {
+      "type": "string"
+    },
+    "data": {
+      "type": "json"
+    }
+  }
+}

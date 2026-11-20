@@ -98,6 +98,16 @@
           "localized": true
         }
       }
+    },
+    "country_ref": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::country.country",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     }
   }
 }

@@ -1,7 +1,7 @@
 import type { Core } from '@strapi/strapi';
 
 // Content types whose published entries the site build reads through the public REST API
-const PUBLIC_READ = ['page', 'news-item', 'practice', 'noa', 'leader', 'honorary-member', 'redirect', 'nav-item', 'ui-string', 'site-setting'];
+const PUBLIC_READ = ['page', 'news-item', 'practice', 'noa', 'leader', 'honorary-member', 'redirect', 'nav-item', 'ui-string', 'site-setting', 'video', 'document', 'faq'];
 
 // Columns of the Content Manager lists (like ISTC: title, address, review status, last change)
 const LIST_COLUMNS: Record<string, string[]> = {
@@ -14,13 +14,37 @@ const LIST_COLUMNS: Record<string, string[]> = {
   'api::redirect.redirect': ['from', 'to', 'order'],
   'api::nav-item.nav-item': ['label', 'href', 'icon', 'parent', 'order'],
   'api::ui-string.ui-string': ['key', 'value', 'order'],
+  'api::video.video': ['title', 'youtube_id', 'thumbnail', 'updatedAt'],
+  'api::document.document': ['title', 'category', 'language', 'file', 'updatedAt'],
+  'api::faq.faq': ['question', 'page', 'order', 'updatedAt'],
+  'api::event.event': ['title', 'edition', 'event_type', 'year', 'updatedAt'],
+  'api::grant.grant': ['name', 'grant_status', 'deadline', 'page', 'updatedAt'],
+  'api::partner.partner': ['name', 'website', 'logo', 'order'],
+  'api::news-category.news-category': ['name', 'order'],
+  'api::document-category.document-category': ['name', 'order'],
+  'api::country.country': ['name', 'code'],
+  'api::event-type.event-type': ['name', 'order'],
+  'api::form.form': ['title', 'key', 'page', 'active', 'newsletter_optin'],
+  'api::form-submission.form-submission': ['form', 'name', 'email', 'status', 'createdAt'],
+  'api::subscriber.subscriber': ['email', 'name', 'lang', 'status', 'consent_at'],
+  'plugin::woa.audit': ['createdAt', 'user_name', 'action', 'type_label', 'title', 'lang'],
+  'plugin::woa.review-log': ['createdAt', 'user_name', 'type_label', 'title', 'from_status', 'to_status'],
+  'plugin::woa.version': ['createdAt', 'user_name', 'action', 'type_label', 'title', 'lang'],
 };
 const MAIN_FIELD: Record<string, string> = {
   'api::site-setting.site-setting': 'email',
   'api::page.page': 'title', 'api::news-item.news-item': 'title', 'api::practice.practice': 'title', 'api::noa.noa': 'country',
   'api::leader.leader': 'name', 'api::honorary-member.honorary-member': 'name', 'api::redirect.redirect': 'from', 'api::nav-item.nav-item': 'label', 'api::ui-string.ui-string': 'key',
+  'api::video.video': 'title', 'api::document.document': 'title', 'api::faq.faq': 'question', 'api::event.event': 'title', 'api::grant.grant': 'name', 'api::partner.partner': 'name',
+  'api::news-category.news-category': 'name', 'api::document-category.document-category': 'name', 'api::country.country': 'name', 'api::event-type.event-type': 'name',
+  'api::form.form': 'title', 'api::form-submission.form-submission': 'email', 'api::subscriber.subscriber': 'email',
+  'plugin::woa.audit': 'title', 'plugin::woa.review-log': 'title', 'plugin::woa.version': 'title',
 };
-const SORT: Record<string, string> = { 'api::news-item.news-item': 'date', 'api::practice.practice': 'date', 'api::page.page': 'path', 'api::noa.noa': 'country', 'api::leader.leader': 'order', 'api::honorary-member.honorary-member': 'order', 'api::nav-item.nav-item': 'order', 'api::ui-string.ui-string': 'order', 'api::redirect.redirect': 'order' };
+const SORT: Record<string, string> = { 'api::news-item.news-item': 'date', 'api::practice.practice': 'date', 'api::page.page': 'path', 'api::noa.noa': 'country', 'api::leader.leader': 'order', 'api::honorary-member.honorary-member': 'order', 'api::nav-item.nav-item': 'order', 'api::ui-string.ui-string': 'order', 'api::redirect.redirect': 'order',
+  'api::video.video': 'title', 'api::document.document': 'title', 'api::faq.faq': 'order', 'api::event.event': 'year', 'api::grant.grant': 'order', 'api::partner.partner': 'order',
+  'api::news-category.news-category': 'order', 'api::document-category.document-category': 'order', 'api::country.country': 'name', 'api::event-type.event-type': 'order',
+  'api::form.form': 'title', 'api::form-submission.form-submission': 'createdAt', 'api::subscriber.subscriber': 'createdAt',
+  'plugin::woa.audit': 'createdAt', 'plugin::woa.review-log': 'createdAt', 'plugin::woa.version': 'createdAt' };
 
 async function ensureLocales(strapi: Core.Strapi) {
   const svc = strapi.plugin('i18n').service('locales');
@@ -71,6 +95,17 @@ const LABELS: Record<string, [string, string?]> = {
   excerpt: ['Teaser', 'Short text on news cards'], featured: ['Featured'], news_id: ['Article number', 'The number in the address: /news/<number>/…'], slug: ['Address part'],
   country: ['Country'], name: ['Name'], olyCount: ['Olympians registered for OLY'], code: ['Country code'], fields: ['Contacts'], flag: ['Original flag file'],
   role: ['Role'], meta: ['Sport | Country'], photo: ['Photo'], bio: ['Biography'], order: ['Order'],
+  youtube_id: ['YouTube id', 'The part after watch?v= in the YouTube address'], thumbnail: ['Cover image', 'Shown before the video plays; empty = the YouTube picture'],
+  used_on: ['Used on pages', 'Filled in automatically'], note: ['Note'], file: ['File', 'Upload a new file to replace it on every page'],
+  site_path: ['Original file', 'Site path of the imported file'], language: ['Language'], category: ['Category'],
+  question: ['Question'], answer: ['Answer'], page: ['Site page', 'Address of the page this belongs to'],
+  edition: ['Games edition'], year: ['Year'], event_type: ['Type'], start_date: ['Starts'], end_date: ['Ends'], location: ['Place'], description: ['Description'],
+  status: ['Status'], deadline: ['Deadline'], amount: ['Amount'], apply_url: ['Application link'], website: ['Website'], logo: ['Logo'],
+  key: ['Key'], recipients: ['Recipients', 'Emails for alerts once an email service is connected'], success_message: ['Thank-you text', 'Shown after sending; empty = the standard text'],
+  active: ['Accepting answers'], newsletter_optin: ['Has a newsletter consent box'], form: ['Form'], form_key: ['Form key'], email: ['Email'], lang: ['Language'], data: ['Answers'],
+  consent_at: ['Consent given'], source: ['Signed up on'], categories: ['Categories'], country_ref: ['Country in the list'],
+  action: ['Action'], type_label: ['Section'], uid: ['Content type'], entry_id: ['Entry id'], grant_status: ['Status'], user_name: ['Editor'], user_email: ['Editor email'],
+  changed_fields: ['Changed fields'], from_status: ['From'], to_status: ['To'],
 };
 
 async function configureLists(strapi: Core.Strapi) {
@@ -81,7 +116,7 @@ async function configureLists(strapi: Core.Strapi) {
       if (!ct) continue;
       const conf = await cm.findConfiguration(ct);
       const next = {
-        settings: { ...conf.settings, mainField: MAIN_FIELD[uid] ?? conf.settings.mainField, defaultSortBy: SORT[uid] ?? conf.settings.defaultSortBy, defaultSortOrder: SORT[uid] && /date/.test(SORT[uid]) ? 'DESC' : 'ASC', pageSize: 20 },
+        settings: { ...conf.settings, mainField: MAIN_FIELD[uid] ?? conf.settings.mainField, defaultSortBy: SORT[uid] ?? conf.settings.defaultSortBy, defaultSortOrder: SORT[uid] && /date|createdAt|year/.test(SORT[uid]) ? 'DESC' : 'ASC', pageSize: 20 },
         layouts: { ...conf.layouts, ...(cols ? { list: cols } : {}), ...(EDIT[uid] ? { edit: EDIT[uid].map(row => row.filter(([n]) => conf.metadatas[n]).map(([name, size]) => ({ name, size }))).filter(r => r.length) } : {}) },
         metadatas: Object.fromEntries(Object.entries(conf.metadatas).map(([k, m]: [string, any]) => [k, LABELS[k] ? { ...m, edit: { ...m.edit, label: LABELS[k][0], description: LABELS[k][1] ?? m.edit?.description ?? '' }, list: { ...m.list, label: LABELS[k][0] } } : m])),
       };

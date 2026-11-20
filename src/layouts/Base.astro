@@ -42,7 +42,7 @@ const original = ORIGIN + (origPath ?? stripLang(current));
   <link rel="icon" type="image/png" sizes="16x16" href={url('/favicon-16x16.png')} />
   <link rel="apple-touch-icon" sizes="180x180" href={url('/apple-touch-icon.png')} />
 </head>
-<body data-base={BASE} data-original={original} data-no-results={tr.noResults}>
+<body data-base={BASE} data-original={original} data-no-results={tr.noResults} data-form-sent={tr.formSent}>
   <IconSprite />
   <a class="skip" href="#main">{tr.skip}</a>
   <Header current={current} />
@@ -164,9 +164,30 @@ const original = ORIGIN + (origPath ?? stripLang(current));
       btn.replaceWith(f);
     });
 
-    // Forms on this copy do not collect data: continue on the organisation's own form.
-    document.querySelectorAll('main form').forEach((form) => {
-      form.addEventListener('submit', (e) => { e.preventDefault(); window.location.href = body.dataset.original || 'https://olympians.org/'; });
+    // Forms: with the CMS connected (PUBLIC_CMS_URL) the answers go to 92 · Form submissions in WOA Admin;
+    // without it, or if sending fails, the visitor continues on the organisation's own form.
+    const CMS = (import.meta.env.PUBLIC_CMS_URL || '').replace(/\/$/, '');
+    const toOriginal = () => { window.location.href = body.dataset.original || 'https://olympians.org/'; };
+    document.querySelectorAll<HTMLFormElement>('main form').forEach((form, i) => {
+      if (CMS) form.insertAdjacentHTML('beforeend', '<input type="text" name="_hp" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp-field">');
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!CMS) return toOriginal();
+        const path = location.pathname.slice(BASE.length) || '/';
+        const lang = (path.match(/^\/(fr|es)\//) || [])[1] || 'en';
+        const key = (path.replace(/^\/(fr|es)(?=\/)/, '').replace(/^\/|\/$/g, '').replace(/[^a-z0-9]+/gi, '-').toLowerCase() || 'home') + (i ? `-${i + 1}` : '');
+        const fd = new FormData(form); fd.set('_lang', lang); fd.set('_page', path);
+        const btn = form.querySelector<HTMLButtonElement>('[type=submit], button:not([type])'); if (btn) btn.disabled = true;
+        try {
+          const res = await fetch(`${CMS}/api/woa/forms/${key}`, { method: 'POST', body: new URLSearchParams(fd as any) });
+          const j = await res.json();
+          if (!res.ok || !j.ok) throw new Error(j.error || String(res.status));
+          const done = document.createElement('div'); done.className = 'form-done'; done.setAttribute('role', 'status');
+          done.innerHTML = '<svg class="icon"><use href="#i-check"/></svg><p></p>';
+          done.querySelector('p')!.textContent = j.message || body.dataset.formSent || 'Thank you, your message has been sent.';
+          form.replaceWith(done);
+        } catch { toOriginal(); }
+      });
     });
 
     // Search (Pagefind, static index)

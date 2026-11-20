@@ -1,0 +1,50 @@
+{
+  "kind": "collectionType",
+  "collectionName": "woa_review_log",
+  "info": {
+    "singularName": "review-log",
+    "pluralName": "review-logs",
+    "displayName": "98 · Review log",
+    "description": "Every change of a review status (written automatically)"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {
+    "content-manager": {
+      "visible": true
+    },
+    "content-type-builder": {
+      "visible": false
+    }
+  },
+  "attributes": {
+    "type_label": {
+      "type": "string"
+    },
+    "uid": {
+      "type": "string"
+    },
+    "entry_id": {
+      "type": "string"
+    },
+    "lang": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "from_status": {
+      "type": "string"
+    },
+    "to_status": {
+      "type": "string"
+    },
+    "note": {
+      "type": "text"
+    },
+    "user_name": {
+      "type": "string"
+    }
+  }
+}

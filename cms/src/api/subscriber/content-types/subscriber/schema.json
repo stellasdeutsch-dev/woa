@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "subscribers",
+  "info": {
+    "singularName": "subscriber",
+    "pluralName": "subscribers",
+    "displayName": "93 · Newsletter subscribers",
+    "description": "People who agreed to receive the newsletter"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "email": {
+      "type": "email",
+      "required": true,
+      "unique": true
+    },
+    "name": {
+      "type": "string"
+    },
+    "lang": {
+      "type": "string"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "subscribed",
+        "unsubscribed"
+      ],
+      "default": "subscribed"
+    },
+    "source": {
+      "type": "string"
+    },
+    "consent_at": {
+      "type": "datetime"
+    }
+  }
+}
