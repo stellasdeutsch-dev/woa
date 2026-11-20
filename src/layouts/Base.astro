@@ -81,8 +81,7 @@ const original = ORIGIN + (origPath ?? stripLang(current));
     if (navigator.webdriver) document.documentElement.classList.add('still');
     if (!still && 'IntersectionObserver' in window) {
       const SEL = '.section-head, .grid > *, .vb-cards > li, .vb-index > li, .vb-step, .vb-panels > .vb-panel, .vb-docs > li, .big-stats > div, .noa-group, .steps > li, .goals > li, .values > li, .mv-card, .vb-quote, .vb-split > *, .vb-years > li, .me-factors > li, .vb-list > li, .vb-faq, .vb-answer, .house-banner, .oly-feature > *';
-      // blocks inside a scroll story move with the story itself (src/lib/story.ts)
-      const els = [...document.querySelectorAll<HTMLElement>(SEL)].filter(el => el.getBoundingClientRect().top > innerHeight * 0.9 && !el.closest('[data-story]'));
+      const els = [...document.querySelectorAll<HTMLElement>(SEL)].filter(el => el.getBoundingClientRect().top > innerHeight * 0.9);
       const io = new IntersectionObserver(entries => {
         for (const e of entries) {
           if (!e.isIntersecting) continue;
@@ -98,7 +97,7 @@ const original = ORIGIN + (origPath ?? stripLang(current));
         el.classList.add('rv'); io.observe(el);
       }
       // numbers grow to their final value (the final value is already in the HTML)
-      const nums = [...document.querySelectorAll<HTMLElement>('[data-count]')].filter(n => !n.closest('[data-story]'));
+      const nums = document.querySelectorAll<HTMLElement>('[data-count]');
       const co = new IntersectionObserver(entries => {
         for (const e of entries) {
           if (!e.isIntersecting) continue;
@@ -113,8 +112,6 @@ const original = ORIGIN + (origPath ?? stripLang(current));
   </script>
   <script>
     import { swipeToClose } from '../lib/swipe';
-    import { initStories } from '../lib/story';
-    initStories();
     const body = document.body;
     const BASE = body.dataset.base || '';
     document.documentElement.classList.add('js');

@@ -99,13 +99,12 @@ export function prose(html: string, opts: { toc?: boolean; visual?: boolean; leg
   // year-by-year text (History) -> timeline
   const yearPs = r.children('p').filter((_, p) => /^\d{4}$/.test($(p).text().trim()) && $(p).find('strong,b').length > 0);
   if (yearPs.length >= 4) {
-    // the line fills as the reader goes down the years (scroll story "timeline", src/lib/story.ts)
-    const ol = $('<ol class="timeline story story-timeline" data-story="timeline" data-story-pin="false"></ol>');
+    const ol = $('<ol class="timeline"></ol>');
     yearPs.first().before(ol);
     let li: any = null;
     ol.nextAll().each((_, el) => {
       const isYear = yearPs.toArray().includes(el as any);
-      if (isYear) { li = $('<li data-step><div class="tl-body"></div></li>'); ol.append(li); $(el).addClass('tl-year'); li.prepend(el); return; }
+      if (isYear) { li = $('<li><div class="tl-body"></div></li>'); ol.append(li); $(el).addClass('tl-year'); li.prepend(el); return; }
       if (li) li.children('.tl-body').append(el);
     });
   }

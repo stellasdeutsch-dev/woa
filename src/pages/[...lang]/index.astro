@@ -55,23 +55,19 @@ const ACTIONS = [
   </section>
 
   <!-- 2. Numbers -->
-  <section class="bg-dark stats-band story story-count" id="numbers" data-story="count">
-    <div class="story-stage section">
-      <div class="container">
-        <dl class="big-stats">
-          {SX.STATS.map((st, i) => <div data-step><dt class="big-num" data-count={st.n} data-suffix={i === 0 ? '+' : ''} data-locale={lang}>{fmtNum(+st.n, lang)}{i === 0 ? '+' : ''}</dt><dd>{st.text}</dd></div>)}
-        </dl>
-      </div>
+  <section class="section bg-dark stats-band" id="numbers">
+    <div class="container">
+      <dl class="big-stats">
+        {SX.STATS.map((st, i) => <div><dt class="big-num" data-count={st.n} data-suffix={i === 0 ? '+' : ''} data-locale={lang}>{fmtNum(+st.n, lang)}{i === 0 ? '+' : ''}</dt><dd>{st.text}</dd></div>)}
+      </dl>
     </div>
   </section>
 
   <!-- 3. Mission, lighting up word by word while scrolling -->
-  <section class="home-mission story story-words" data-story="words">
-    <div class="story-stage section">
-      <div class="container">
-        <p class="ld-statement" set:html={words(SX.MISSION)} />
-        <a class="link-arrow" href={url(SX.WOA.mission.href)}>{SX.WOA.mission.title}<svg class="icon"><use href="#i-arrow" /></svg></a>
-      </div>
+  <section class="section home-mission">
+    <div class="container">
+      <p class="ld-statement scrub" set:html={words(SX.MISSION)} />
+      <a class="link-arrow" href={url(SX.WOA.mission.href)}>{SX.WOA.mission.title}<svg class="icon"><use href="#i-arrow" /></svg></a>
     </div>
   </section>
 
@@ -116,8 +112,7 @@ const ACTIONS = [
   </section>
 
   <!-- 7. OLY House -->
-  <section class="home-house-wrap story story-window" data-story="window">
-  <div class="story-stage hero ld-band home-house">
+  <section class="hero ld-band home-house">
     <div class="hero-bg"><img src={b('{{BASE}}/backgrounds/63.webp')} srcset={srcset('{{BASE}}/backgrounds/63.webp')} style={phColor('{{BASE}}/backgrounds/63.webp')} sizes="100vw" alt="" loading="lazy" /></div>
     <div class="container ld-band-inner">
       <span class="house-mark"><img src={url('/images/logo-milano-cortina-2026.svg')} alt="Milano Cortina 2026" loading="lazy" /></span>
@@ -126,7 +121,6 @@ const ACTIONS = [
       <p>{SX.OLYMPIANS.house.text}</p>
       <a class="btn btn-gold" href={loc('/oly-house/')}><svg class="icon"><use href="#i-house" /></svg>OLY House</a>
     </div>
-  </div>
   </section>
 </Base>
 
@@ -179,8 +173,7 @@ const ACTIONS = [
   @media (prefers-reduced-motion: reduce) { .act:hover, .act:hover .act-arrow, .ticker-head:hover .icon-arrow { transform: none; } }
   .home-scroll { position: absolute; left: 50%; bottom: 20px; translate: -50% 0; display: grid; place-items: center; width: 48px; height: 48px; border: 1px solid rgba(255, 255, 255, .5); border-radius: 50%; color: var(--c-white); transition: background var(--t), color var(--t); }
   .home-scroll:hover { background: var(--c-white); color: var(--c-black); }
-  .stats-band .story-stage { padding-block: clamp(96px, 60px + 8vw, 200px); }
-  .stats-band.story-on .story-stage { padding-block: 0; }
+  .stats-band { padding-block: clamp(96px, 60px + 8vw, 200px); }
   .big-stats { display: grid; gap: var(--sp-8); grid-template-columns: minmax(0, 1fr); margin: 0; text-align: center; }
   @media (min-width: 834px) { .big-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } .big-stats > div + div { border-left: 1px solid #3a3a3a; } }
   .big-stats > div { display: grid; gap: var(--sp-4); justify-items: center; padding-inline: var(--sp-5); }

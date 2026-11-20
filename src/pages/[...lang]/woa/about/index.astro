@@ -41,19 +41,13 @@ const facts = (s: string) => s.replace(/(over [\d,]+ living Olympians|\d+ Nation
   <PageHero title={aboutTitle} crumbs={[{ label: 'WOA', href: '/woa/' }, { label: aboutTitle }]} bg={b(p.bg)} lead={leadText} />
   <Tabs tabs={p.tabs} current={BASE + Lx('/woa/about/', lang)} />
 
-  <section class="story story-steps" data-story="steps">
-    <div class="story-stage">
-      <figure class="ss-media" aria-hidden="true"><img src={b(p.bg)} alt="" loading="lazy" /></figure>
-      <div class="container ss-copy prose">
-        <h2 class="sr-only">Introduction</h2>
-        {paras.map(t => <p class="ss-step" data-step set:html={facts(t)} />)}
-      </div>
-    </div>
-  </section>
-
   <section class="section">
     <div class="container about-intro">
-      <aside class="about-side">
+      <div class="prose">
+        <h2 class="sr-only">Introduction</h2>
+        {paras.map(t => <p set:html={facts(t)} />)}
+      </div>
+      <aside class="aside">
         <dl class="about-stats">
           {STATS.map((st, i) => <div><dt class="stat-num">{fmtNum(+st.n, lang)}{i === 0 ? '+' : ''}</dt><dd class="stat-label">{st.text}</dd></div>)}
         </dl>
@@ -76,21 +70,20 @@ const facts = (s: string) => s.replace(/(over [\d,]+ living Olympians|\d+ Nation
     </div>
   </section>
 
-  <section class="story story-stack" data-story="stack">
-    <div class="container story-stage section">
+  <section class="section">
+    <div class="container">
       <div class="section-head"><h2>{tab('/woa/about/goals/', 'Goals')}</h2><a class="link-arrow" href={loc('/woa/about/goals/')}>{tab('/woa/about/goals/', 'Goals')}<svg class="icon"><use href="#i-arrow" /></svg></a></div>
       <ol class="goals">
-        {goals.map((g, i) => <li data-step><span class="goal-num">{i + 1}</span><p>{g}</p></li>)}
+        {goals.map((g, i) => <li><span class="goal-num">{i + 1}</span><p>{g}</p></li>)}
       </ol>
     </div>
   </section>
 
-  <section class="bg-grey story story-spot" data-story="spotlight">
-    <div class="container story-stage section">
-      <span class="sp-shape" aria-hidden="true"></span>
+  <section class="section bg-grey">
+    <div class="container">
       <div class="section-head"><h2>{tab('/woa/about/values/', 'Values')}</h2><a class="link-arrow" href={loc('/woa/about/values/')}>{tab('/woa/about/values/', 'Values')}<svg class="icon"><use href="#i-arrow" /></svg></a></div>
       <ul class="values">
-        {values.map((v, i) => <li data-step><svg class="icon icon-xl"><use href={`#i-${VALUE_ICONS[enValues[i]] ?? 'values'}`} /></svg><h3>{v}</h3></li>)}
+        {values.map((v, i) => <li><svg class="icon icon-xl"><use href={`#i-${VALUE_ICONS[enValues[i]] ?? 'values'}`} /></svg><h3>{v}</h3></li>)}
       </ul>
     </div>
   </section>
@@ -108,10 +101,10 @@ const facts = (s: string) => s.replace(/(over [\d,]+ living Olympians|\d+ Nation
 
 <style>
   .about-intro { display: grid; gap: var(--sp-7); grid-template-columns: minmax(0, 1fr); }
-  .about-side { display: grid; gap: var(--sp-6); grid-template-columns: minmax(0, 1fr); }
-  @media (min-width: 1024px) { .about-side { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); align-items: start; } }
+  @media (min-width: 1024px) { .about-intro { grid-template-columns: minmax(0, 1fr) 340px; gap: var(--sp-8); } }
+  .about-intro .prose p:first-of-type { font-size: var(--fs-lead); line-height: 1.55; }
   .about-stats { display: grid; gap: var(--sp-4); margin: 0; }
-  @media (min-width: 640px) { .about-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 640px) and (max-width: 1023px) { .about-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   .about-stats > div { padding: var(--sp-6); background: var(--c-grey-50); border-radius: var(--radius-lg); }
   .about-stats dd { margin: var(--sp-3) 0 0; }
   .about-video { margin-top: var(--sp-8); }
@@ -122,20 +115,20 @@ const facts = (s: string) => s.replace(/(over [\d,]+ living Olympians|\d+ Nation
   .mv-head { display: flex; align-items: center; gap: var(--sp-4); color: var(--c-gold); }
   .mv-head h2 { color: var(--c-white); font-size: var(--fs-h3); }
   .mv-card p { font-size: var(--fs-h3); font-weight: 600; line-height: 1.35; }
-  .story:not(.story-on) .goals { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-4); grid-template-columns: minmax(0, 1fr); counter-reset: g; }
-  @media (min-width: 640px) { .story:not(.story-on) .goals { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  @media (min-width: 1024px) { .story:not(.story-on) .goals { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
-  .story:not(.story-on) .goals li { display: grid; gap: var(--sp-4); align-content: start; padding: var(--sp-5); border: 1px solid var(--c-grey-200); border-radius: var(--radius-lg); transition: border-color var(--t), transform var(--t); }
-  .story:not(.story-on) .goals li:hover { border-color: var(--c-black); transform: translateY(-2px); }
-  .story:not(.story-on) .goal-num { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: var(--c-gold); color: var(--c-black); font-weight: 700; font-size: 1.25rem; line-height: 1; }
-  .story:not(.story-on) .goals p { font-weight: 600; line-height: 1.4; hyphens: manual; }
-  .story:not(.story-on) .values { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-4); grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  @media (min-width: 834px) { .story:not(.story-on) .values { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-  @media (min-width: 1200px) { .story:not(.story-on) .values { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
-  .story:not(.story-on) .values li { display: grid; justify-items: center; gap: var(--sp-4); padding: var(--sp-6) var(--sp-4); background: var(--c-white); border: 1px solid var(--c-grey-200); border-radius: var(--radius-lg); text-align: center; transition: border-color var(--t), transform var(--t); }
-  .story:not(.story-on) .values li:hover { border-color: var(--c-black); transform: translateY(-2px); }
-  .story:not(.story-on) .values .icon { color: var(--c-gold); }
-  .story:not(.story-on) .values h3 { font-size: var(--fs-h4); }
+  .goals { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-4); grid-template-columns: minmax(0, 1fr); counter-reset: g; }
+  @media (min-width: 640px) { .goals { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 1024px) { .goals { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+  .goals li { display: grid; gap: var(--sp-4); align-content: start; padding: var(--sp-5); border: 1px solid var(--c-grey-200); border-radius: var(--radius-lg); transition: border-color var(--t), transform var(--t); }
+  .goals li:hover { border-color: var(--c-black); transform: translateY(-2px); }
+  .goal-num { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: var(--c-gold); color: var(--c-black); font-weight: 700; font-size: 1.25rem; line-height: 1; }
+  .goals p { font-weight: 600; line-height: 1.4; hyphens: manual; }
+  .values { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-4); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @media (min-width: 834px) { .values { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (min-width: 1200px) { .values { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+  .values li { display: grid; justify-items: center; gap: var(--sp-4); padding: var(--sp-6) var(--sp-4); background: var(--c-white); border: 1px solid var(--c-grey-200); border-radius: var(--radius-lg); text-align: center; transition: border-color var(--t), transform var(--t); }
+  .values li:hover { border-color: var(--c-black); transform: translateY(-2px); }
+  .values .icon { color: var(--c-gold); }
+  .values h3 { font-size: var(--fs-h4); }
   .history-banner { display: grid; gap: var(--sp-5); align-items: center; grid-template-columns: minmax(0, 1fr); padding: clamp(24px, 4vw, 48px); border: 1px solid var(--c-grey-200); border-radius: var(--radius-lg); transition: border-color var(--t), box-shadow var(--t); }
   @media (min-width: 834px) { .history-banner { grid-template-columns: auto minmax(0, 1fr) auto; gap: var(--sp-7); } }
   .history-banner:hover { border-color: var(--c-black); box-shadow: var(--shadow); }
