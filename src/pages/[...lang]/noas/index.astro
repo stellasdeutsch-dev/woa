@@ -20,8 +20,9 @@ const GUIDE_ICON: Record<string, string> = { 'Member Engagement': 'friendship', 
     <div class="container">
       <div class="section-head"><h2>{L.directory.title}</h2><a class="link-arrow" href={url(L.directory.href)}>{L.directory.title}<svg class="icon"><use href="#i-arrow" /></svg></a></div>
       <ul class="ld-flags">
-        {L.directory.flags.map(f => <li><a href={url(`${L.directory.href}#noa-${f.code}`)} title={f.country}>{realFlag(f.code) && <img src={realFlag(f.code)!.src} alt={f.country} loading="lazy" width={realFlag(f.code)!.w} height={realFlag(f.code)!.h} />}</a></li>)}
+        {L.directory.flags.map(f => <li><a href={url(`${L.directory.href}#noa-${f.code}`)}><span class="ld-flag-img">{realFlag(f.code) && <img src={realFlag(f.code)!.src} alt="" loading="lazy" width={realFlag(f.code)!.w} height={realFlag(f.code)!.h} />}</span><span class="ld-flag-name">{f.country}</span></a></li>)}
       </ul>
+      <a class="btn btn-outline ld-flags-all" href={url(L.directory.href)}>{L.directory.title}<svg class="icon icon-arrow"><use href="#i-arrow" /></svg></a>
     </div>
   </section>
 
