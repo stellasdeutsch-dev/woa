@@ -140,8 +140,8 @@ const telHref = (v: string) => 'tel:' + v.replace(/[^\d+]/g, '');
   .noa-field dt { display: flex; align-items: center; gap: 8px; font-size: var(--fs-xs); font-weight: 600; color: var(--c-grey-600); }
   .noa-field dt .icon { width: 16px; height: 16px; }
   .noa-field dd { margin: 4px 0 0 24px; display: grid; font-size: var(--fs-small); line-height: 1.5; }
-  .noa-field dd a { overflow-wrap: anywhere; text-decoration: underline; text-decoration-color: var(--c-gold); text-underline-offset: 3px; transition: color var(--t); }
-  .noa-field dd a:hover { color: var(--c-grey-600); }
+  .noa-field dd a { overflow-wrap: anywhere; text-decoration: underline; text-decoration-color: var(--c-gold); text-underline-offset: 3px; transition: color var(--t), text-decoration-color var(--t); }
+  .noa-field dd a:hover { color: var(--c-grey-600); text-decoration-color: currentColor; }
   .dir-empty { padding: var(--sp-7) 0; color: var(--c-grey-600); }
   .dir-order { margin-top: var(--sp-6); font-size: var(--fs-small); }
 </style>

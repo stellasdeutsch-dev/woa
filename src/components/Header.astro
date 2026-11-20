@@ -96,7 +96,8 @@ const isCur = (href: string, children?: { href: string }[]) => {
 <style>
   .site-header { position: sticky; top: 0; z-index: 50; background: var(--c-white); border-bottom: 1px solid var(--c-grey-200); }
   .header-row { display: flex; align-items: center; gap: var(--sp-5); height: var(--header-h); }
-  .logo { flex: none; display: block; }
+  .logo { flex: none; display: block; transition: opacity var(--t); }
+  .logo:hover { opacity: .75; }
   .logo img { height: 64px; width: auto; }
   .main-nav { flex: 1; display: none; }
   .main-nav > ul { display: flex; justify-content: center; gap: 2px; list-style: none; margin: 0; padding: 0; }
