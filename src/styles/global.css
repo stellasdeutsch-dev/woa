@@ -213,9 +213,10 @@ p { margin: 0; text-wrap: pretty; }
 .prose form, .form { display: grid; gap: var(--sp-4); }
 .prose fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: var(--sp-4); min-width: 0; }
 .prose fieldset + fieldset { margin-top: var(--sp-4); }
-.prose legend { font-size: var(--fs-h4); font-weight: 700; margin-bottom: var(--sp-3); }
+.prose legend { padding: 0; font-size: var(--fs-h4); font-weight: 700; margin-bottom: var(--sp-3); }
 .prose form br { display: none; }
 .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-4); width: 100%; max-width: 640px; }
+.form-card .form-grid { max-width: none; } /* a form in its own card already has a comfortable width */
 .form-grid > * { grid-column: 1 / -1; margin: 0; }
 .form-grid > .field-half { grid-column: span 1; }
 .field { display: grid; gap: 6px; align-content: start; min-width: 0; }

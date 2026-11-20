@@ -40,6 +40,50 @@ export function videoHtml(id: string, lang: Lang = 'en') {
 
 export type Toc = { id: string; text: string }[];
 
+// Forms from the original markup (label, control, <br>) -> fields in a compact grid: each label with its control,
+// short personal fields (names, email, phone, dates) two in a row, checkboxes as one group. Text inside the form stays full width.
+const HALF = /name|first|last|e-?mail|phone|tel|date/i;
+const NOT_HALF = /position|organi[sz]|venue|title|project|company|user/i;
+export function tidyFormHtml(html: string) { const $ = cheerio.load(`<div id="r">${html}</div>`, null, false); tidyForms($, $('#r')); return $('#r').html()!; }
+function tidyForms($: cheerio.CheerioAPI, r: cheerio.Cheerio<any>) {
+  r.find('form').each((_, f) => {
+    const $f = $(f);
+    $f.find('label').each((_, l) => {
+      const $l = $(l);
+      if ($l.find('input,select,textarea').length) { $l.addClass('field-check'); return; }
+      let next = $l.next();
+      while (next.is('br')) { const n = next.next(); next.remove(); next = n; }
+      if (!next.is('input,select,textarea') && !(next.is('ul') && next.find('select').length && !next.find('label').length)) return;
+      const key = `${next.attr('name') || ''} ${next.attr('autocomplete') || ''} ${$l.text()}`;
+      const half = next.is('input') && /^(text|email|tel|date|)$/.test(next.attr('type') || '') && HALF.test(key) && !NOT_HALF.test(key);
+      const field = $(`<div class="field${half ? ' field-half' : ''}"></div>`);
+      $l.before(field); field.append($l, next);
+    });
+    $f.find('br').remove();
+    // runs of fields, checkboxes and the button (directly in the form or in a fieldset) -> one grid
+    $f.find('fieldset').add($f).each((_, box) => {
+      const kids = $(box).children().toArray();
+      let grid: any = null;
+      for (const k of kids) {
+        const $k = $(k);
+        const inGrid = $k.is('.field, .field-check, button, input[type=submit]') || ($k.is('ul') && $k.find('.field').length > 0);
+        if (!inGrid) { grid = null; continue; }
+        if (!grid) { grid = $('<div class="form-grid"></div>'); $k.before(grid); }
+        grid.append($k);
+      }
+    });
+    // a short field without a short neighbour takes the whole row
+    $f.find('.form-grid').each((_, g) => {
+      const items = $(g).children().toArray();
+      for (let i = 0; i < items.length; i++) {
+        if (!$(items[i]).hasClass('field-half')) continue;
+        if ($(items[i + 1]).hasClass('field-half')) { i++; continue; }
+        $(items[i]).removeClass('field-half');
+      }
+    });
+  });
+}
+
 // Post-process an extracted body: base paths, videos, tables, headings ids, lazy images.
 export function prose(html: string, opts: { toc?: boolean; visual?: boolean; legal?: boolean; faq?: boolean; lang?: Lang; fold?: boolean } = {}): { html: string; toc: Toc } {
   const $ = cheerio.load(`<div id="r">${b(html)}</div>`, null, false);
@@ -85,6 +129,7 @@ export function prose(html: string, opts: { toc?: boolean; visual?: boolean; leg
     }
     T.wrap('<div class="table"></div>');
   });
+  tidyForms($, r);
   if (opts.visual) visualize($, r, { legal: opts.legal, faq: opts.faq });
   if (opts.visual || opts.fold) { const ui = uiFor(opts.lang || 'en'); foldLongRuns($, r, { more: ui.readMore, less: ui.showLess }); }
   const toc: Toc = [];

@@ -7,7 +7,7 @@ import { LANG_PARAMS, pageLang, t as tFor, L as Lx } from '../../../../lib/i18n'
 export function getStaticPaths() { return LANG_PARAMS; }
 const lang = pageLang(Astro.params); const tr = tFor(lang); const D = dataFor(lang);
 const page = D.page;
-import { b, url, prose } from '../../../../lib/site';
+import { b, url, prose, tidyFormHtml } from '../../../../lib/site';
 
 const p = page('/olympians/oly/');
 const $ = cheerio.load(b(p.body), null, false);
@@ -29,7 +29,7 @@ if (coc.length) {
 }
 fieldset.find('a').filter((_, a) => !$(a).text().trim()).remove();
 const legend = fieldset.find('legend').first().text().trim();
-const formHtml = `<form id="register" novalidate>${$.html(fieldset)}</form>`;
+const formHtml = tidyFormHtml(`<form id="register" novalidate>${$.html(fieldset)}</form>`);
 const video = (p.body.match(/data-yt="([\w-]+)"/) || [])[1];
 const { html: videoHtml } = prose(video ? `<div class="video" data-yt="${video}"></div>` : '', { lang });
 const gallery = $('ul > li > img').map((_, i) => $(i).attr('src')).get();

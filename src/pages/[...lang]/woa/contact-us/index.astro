@@ -6,14 +6,14 @@ import { LANG_PARAMS, pageLang, t as tFor, L as Lx, navLabel } from '../../../..
 export function getStaticPaths() { return LANG_PARAMS; }
 const lang = pageLang(Astro.params); const tr = tFor(lang); const D = dataFor(lang);
 const page = D.page;
-import { b, url, EMAIL, SOCIAL } from '../../../../lib/site';
+import { b, url, EMAIL, SOCIAL, tidyFormHtml } from '../../../../lib/site';
 const p = page('/woa/contact-us/');
 ---
 <Base title={p.title} origPath={p.orig} image={b(p.bg)}>
   <PageHero title={p.title} crumbs={[{ label: 'WOA', href: '/woa/' }, { label: p.title }]} bg={b(p.bg)} compact />
   <section class="section">
     <div class="container contact">
-      <div class="form-card prose" set:html={b(p.body)} />
+      <div class="form-card prose" set:html={tidyFormHtml(b(p.body))} />
       <aside class="aside">
         <a class="c-card" href={`mailto:${EMAIL}`}><span class="topic-icon"><svg class="icon icon-lg"><use href="#i-mail" /></svg></span><span><span class="c-label">Email</span><span class="c-val">{EMAIL}</span></span></a>
         {SOCIAL.map(s => <a class="c-card" href={s.href} target="_blank" rel="noopener"><span class="topic-icon"><svg class="icon icon-lg"><use href={`#i-${s.icon}`} /></svg></span><span><span class="c-label">{s.label}</span><span class="c-val">{s.href.replace(/^https?:\/\/(www\.)?/, '')}</span></span></a>)}
