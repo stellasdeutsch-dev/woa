@@ -756,19 +756,19 @@ html { scrollbar-color: var(--c-gold) transparent; }
 html.has-sb { scrollbar-width: none; }
 html.has-sb::-webkit-scrollbar { display: none; }
 .scrollbar { display: none; }
-html.has-sb .scrollbar { --k: 0; --st: 0px; --sbt: 44px; display: block; position: fixed; z-index: 60; right: 4px; top: calc(var(--header-h) + 14px); bottom: 14px; width: 56px; cursor: pointer; touch-action: none; }
+html.has-sb .scrollbar { --k: 0; --st: 0px; --sbt: 34px; display: block; position: fixed; z-index: 60; right: 4px; top: calc(var(--header-h) + 14px); bottom: 14px; width: 56px; cursor: pointer; touch-action: none; }
 html.has-sb .scrollbar[hidden] { display: none; }
 .scrollbar::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; translate: -50% 0; background: rgba(128, 128, 128, .35); border-radius: 2px; transform-origin: top; transition: width var(--t), background var(--t); }
 .sb-fill { position: absolute; left: 50%; top: 0; width: 2px; translate: -50% 0; height: calc(var(--k) * (100% - var(--sbt)) + var(--sbt) / 2); background: var(--c-gold); border-radius: 2px; transform-origin: top; }
 .sb-dots i { position: absolute; left: 50%; top: calc(var(--p) * (100% - var(--sbt)) + var(--sbt) / 2); width: 8px; height: 8px; translate: -50% -50%; border-radius: 50%; background: var(--c-white); box-shadow: 0 0 0 1.5px rgba(128, 128, 128, .55); transition: background 300ms var(--ease-out), box-shadow 300ms var(--ease-out), scale 300ms cubic-bezier(.34, 1.56, .64, 1); }
 .sb-dots i.on { background: var(--c-gold); box-shadow: 0 0 0 1.5px var(--c-gold); scale: 1.25; }
-.sb-thumb { position: absolute; left: 50%; top: calc(var(--k) * (100% - var(--sbt)) - var(--st) / 2); width: var(--sbt); height: calc(var(--sbt) + var(--st)); translate: -50% 0; display: grid; place-items: center; border-radius: 999px; background: var(--c-gold); color: var(--c-black); box-shadow: 0 0 0 3px var(--c-white), 0 6px 18px rgba(0, 0, 0, .2); font-weight: 800; font-size: 11px; letter-spacing: .04em; transition: height 520ms cubic-bezier(.34, 1.56, .64, 1), top 520ms cubic-bezier(.34, 1.56, .64, 1), scale var(--t), background var(--t), color var(--t); }
+.sb-thumb { position: absolute; left: 50%; top: calc(var(--k) * (100% - var(--sbt)) - var(--st) / 2); width: var(--sbt); height: calc(var(--sbt) + var(--st)); translate: -50% 0; display: grid; place-items: center; border-radius: 999px; background: var(--c-gold); color: var(--c-black); box-shadow: 0 0 0 3px var(--c-white), 0 6px 18px rgba(0, 0, 0, .2); font-weight: 800; font-size: 9px; letter-spacing: .04em; transition: height 520ms cubic-bezier(.34, 1.56, .64, 1), top 520ms cubic-bezier(.34, 1.56, .64, 1), scale var(--t), background var(--t), color var(--t); }
 .scrollbar.moving .sb-thumb, .scrollbar.dragging .sb-thumb { transition: height 90ms linear, top 0ms, scale var(--t), background var(--t), color var(--t); }
-.sb-ring { position: absolute; left: 50%; top: 50%; width: 56px; height: 56px; translate: -50% -50%; rotate: -90deg; overflow: visible; pointer-events: none; opacity: 0; transition: opacity 300ms var(--ease-out); }
+.sb-ring { position: absolute; left: 50%; top: 50%; width: 44px; height: 44px; translate: -50% -50%; rotate: -90deg; overflow: visible; pointer-events: none; opacity: 0; transition: opacity 300ms var(--ease-out); }
 .sb-ring circle { fill: none; stroke: var(--c-gold); stroke-width: 2.5; stroke-linecap: round; stroke-dasharray: 163.4; stroke-dashoffset: calc(163.4 * (1 - var(--k))); }
 .scrollbar.moving .sb-ring, .scrollbar:hover .sb-ring, .scrollbar.dragging .sb-ring { opacity: 1; }
 .sb-oly, .sb-pct { grid-area: 1 / 1; transition: opacity 200ms var(--ease-out), translate 200ms var(--ease-out); }
-.sb-pct { opacity: 0; translate: 0 4px; font-variant-numeric: tabular-nums; font-size: 10px; }
+.sb-pct { opacity: 0; translate: 0 4px; font-variant-numeric: tabular-nums; font-size: 9px; }
 .scrollbar:hover .sb-oly, .scrollbar.dragging .sb-oly { opacity: 0; translate: 0 -4px; }
 .scrollbar:hover .sb-pct, .scrollbar.dragging .sb-pct { opacity: 1; translate: 0 0; }
 .scrollbar:hover::before { width: 4px; background: rgba(128, 128, 128, .55); }
