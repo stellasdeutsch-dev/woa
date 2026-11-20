@@ -35,10 +35,14 @@ const GUIDE_ICON: Record<string, string> = { 'Member Engagement': 'friendship', 
         <a class="btn" href={url(L.guide.href)}>{L.guide.title}<svg class="icon icon-arrow"><use href="#i-arrow" /></svg></a>
       </div>
     </div>
-    <div class="container">
-      <ol class="ld-chapters">
-        {L.guide.chapters.map((c, i) => <li><a href={url(c.href)}><span class="ld-ch-mark"><svg class="icon"><use href={`#i-${GUIDE_ICON[c.key] ?? 'guide'}`} /></svg><span class="ld-ch-num">{i + 1}</span></span><span>{c.label}</span></a></li>)}
+    <div class="story story-track" data-story="track">
+      <div class="story-stage">
+      <div class="container">
+      <ol class="ld-chapters story-row">
+        {L.guide.chapters.map((c, i) => <li data-step><a href={url(c.href)}><span class="ld-ch-mark"><svg class="icon"><use href={`#i-${GUIDE_ICON[c.key] ?? 'guide'}`} /></svg><span class="ld-ch-num">{i + 1}</span></span><span>{c.label}</span></a></li>)}
       </ol>
+      </div>
+      </div>
     </div>
   </section>
 

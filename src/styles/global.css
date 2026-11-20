@@ -859,3 +859,119 @@ dialog::backdrop { opacity: var(--swipe-bd, 1); }
 .form-done .icon { flex: none; width: 28px; height: 28px; }
 .form-done p { margin: 0; font-weight: 600; }
 .hp-field { position: absolute !important; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+
+/* ===== Scroll stories (src/lib/story.ts) =====
+   One mechanism, several techniques. Every story shares: the pinned stage under the header, the gold progress line at the
+   bottom, the step dots on the right, one easing and one duration for step changes. Without .story-on (reduced motion,
+   Figma export, no JS) each block keeps its plain layout. */
+:root { --story-ease: cubic-bezier(.22, .7, .2, 1); --story-t: 700ms; }
+.story-on { position: relative; height: calc(var(--screens, 3) * 100svh); }
+.story-on[data-story-pin="false"] { height: auto; }
+.story-on:not([data-story-pin="false"]) > .story-stage, .story-on > .container > .story-stage { position: sticky; top: var(--header-h); height: calc(100svh - var(--header-h)); overflow: hidden; }
+.story-on.story-stack > .story-stage, .story-on.story-spot > .story-stage { max-width: none; }
+.story-bar { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--c-gold); transform: scaleX(var(--p, 0)); transform-origin: left; z-index: 6; pointer-events: none; }
+.story-rail { position: absolute; right: max(12px, 2vw); top: 50%; translate: 0 -50%; display: grid; gap: 12px; z-index: 6; pointer-events: none; }
+.story-rail i { width: 9px; height: 9px; border-radius: 50%; background: currentColor; opacity: .28; transition: opacity var(--story-t) var(--story-ease), background var(--story-t) var(--story-ease), transform var(--story-t) var(--story-ease); }
+.story-rail i.on { opacity: 1; background: var(--c-gold); transform: scale(1.35); }
+
+/* steps: the photo stays, texts change on top of it (About, introduction) */
+.ss-media { margin: 0; height: clamp(220px, 30vw, 420px); overflow: hidden; }
+.ss-media img { width: 100%; height: 100%; object-fit: cover; }
+.ss-copy { padding-block: var(--sp-8); }
+.ss-copy .ss-step:first-of-type { font-size: var(--fs-lead); line-height: 1.55; }
+.story-steps.story-on { --screens: calc(var(--n) * .85 + 1); }
+.story-steps.story-on .story-stage { background: var(--c-black); color: var(--c-white); }
+.story-steps.story-on .ss-media { position: absolute; inset: 0; height: auto; }
+.story-steps.story-on .ss-media img { transform: scale(calc(1.14 - var(--p, 0) * .14)); }
+.story-steps.story-on .ss-media::after { content: ''; position: absolute; inset: 0; background: rgba(0, 0, 0, .6); }
+.story-steps.story-on .ss-copy { position: absolute; left: 0; right: 0; bottom: 12vh; padding-block: 0; display: grid; }
+.story-steps.story-on .ss-copy .ss-step { grid-area: 1 / 1; align-self: end; margin: 0; max-width: 34ch; color: var(--c-white); font-size: var(--fs-h3); font-weight: 600; line-height: 1.35; opacity: 0; transform: translateY(40px); transition: opacity var(--story-t) var(--story-ease), transform var(--story-t) var(--story-ease); }
+.story-steps.story-on .ss-step.is-on { opacity: 1; transform: none; }
+.story-steps.story-on .ss-step.is-past { transform: translateY(-40px); }
+.story-steps.story-on .ss-step .fact { color: var(--c-gold); }
+
+/* spotlight: one value per screen, the background and the shape change with it (About, values) */
+.sp-shape { display: none; }
+.story-spot.story-on { --screens: calc(var(--n) * .7 + 1); }
+.story-spot.story-on .story-stage { display: grid; grid-template-rows: auto minmax(0, 1fr); align-content: start; background: var(--c-grey-50); transition: background var(--story-t) var(--story-ease), color var(--story-t) var(--story-ease); }
+.story-spot.story-on .section-head { position: relative; z-index: 2; margin-bottom: 0; }
+.story-spot.story-on .values { position: relative; display: block; z-index: 2; }
+.story-spot.story-on .values li { position: absolute; inset: 0; display: flex; align-items: center; justify-content: flex-start; gap: clamp(16px, 3vw, 40px); padding: 0; background: none; border: 0; text-align: left; opacity: 0; transform: translateY(60px); transition: opacity var(--story-t) var(--story-ease), transform var(--story-t) var(--story-ease); }
+.story-spot.story-on .values li:hover { transform: translateY(60px); }
+.story-spot.story-on .values li.is-on, .story-spot.story-on .values li.is-on:hover { opacity: 1; transform: none; }
+.story-spot.story-on .values li.is-past { transform: translateY(-60px); }
+.story-spot.story-on .values h3 { font-size: clamp(2.75rem, 1rem + 7vw, 8.5rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1; }
+.story-spot.story-on .values .icon { width: clamp(56px, 7vw, 112px); height: clamp(56px, 7vw, 112px); flex: none; }
+.story-spot.story-on .sp-shape { display: block; position: absolute; right: 7vw; top: 55%; width: min(34vw, 420px); aspect-ratio: 1; translate: 0 -50%; background: var(--c-gold); border-radius: 50%; opacity: .9; z-index: 1; transition: border-radius var(--story-t) var(--story-ease), rotate var(--story-t) var(--story-ease), background var(--story-t) var(--story-ease), scale var(--story-t) var(--story-ease); }
+.story-spot[data-step="1"] .story-stage { background: var(--c-white); }
+.story-spot[data-step="1"] .sp-shape { border-radius: 14%; rotate: 45deg; scale: .8; background: var(--c-black); }
+.story-spot[data-step="2"] .story-stage { background: var(--c-gold); }
+.story-spot[data-step="2"] .sp-shape { background: var(--c-white); border-radius: 50%; scale: 1.05; }
+.story-spot.story-on[data-step="2"] .values .icon { color: var(--c-black); }
+.story-spot[data-step="3"] .story-stage { background: var(--c-ink); color: var(--c-white); }
+.story-spot[data-step="3"] .sp-shape { border-radius: 50% 50% 0 50%; rotate: 90deg; }
+.story-spot[data-step="3"] .section-head .link-arrow { color: var(--c-white); }
+.story-spot[data-step="4"] .story-stage { background: var(--c-white); }
+.story-spot[data-step="4"] .sp-shape { border-radius: 0; rotate: 180deg; scale: .75; background: var(--c-ink); }
+.story-spot[data-step="5"] .story-stage { background: var(--c-black); color: var(--c-white); }
+.story-spot[data-step="5"] .sp-shape { border-radius: 50%; scale: 1.15; }
+.story-spot[data-step="5"] .section-head .link-arrow { color: var(--c-white); }
+
+/* stack: each goal is a card that lands on the previous one (About, goals) */
+.story-stack.story-on { --screens: calc(var(--n) * .6 + 1); }
+.story-stack.story-on .story-stage { display: grid; grid-template-rows: auto minmax(0, 1fr); }
+.story-stack.story-on .goals { position: relative; display: block; margin-top: var(--sp-6); }
+.story-stack.story-on .goals li { position: absolute; left: 0; right: 0; top: 0; max-width: 920px; margin: 0 auto; min-height: min(48vh, 420px); align-content: center; gap: var(--sp-5); padding: clamp(24px, 4vw, 56px); background: var(--c-white); border: 1px solid var(--c-grey-200); border-radius: 24px; box-shadow: var(--shadow); transform: translateY(110vh); transition: transform var(--story-t) var(--story-ease), opacity var(--story-t) var(--story-ease); }
+.story-stack.story-on .goals li:hover { transform: translateY(110vh); border-color: var(--c-grey-200); }
+.story-stack.story-on .goals li.is-on, .story-stack.story-on .goals li.is-past, .story-stack.story-on .goals li.is-on:hover, .story-stack.story-on .goals li.is-past:hover { transform: translateY(calc(var(--d, 0) * -16px)) scale(calc(1 - var(--d, 0) * .05)); }
+.story-stack.story-on .goals li.is-past { opacity: calc(1 - var(--d, 0) * .22); }
+.story-stack.story-on .goals p { font-size: var(--fs-h2); font-weight: 700; line-height: 1.2; }
+.story-stack.story-on .goal-num { width: 72px; height: 72px; font-size: 1.75rem; }
+
+.story-stack.story-on .goals { list-style: none; padding: 0; margin-bottom: 0; }
+.story-stack.story-on .goals li { display: grid; }
+.story-stack.story-on .goal-num { display: grid; place-items: center; border-radius: 50%; background: var(--c-gold); color: var(--c-black); font-weight: 700; line-height: 1; }
+.story-spot.story-on .values { list-style: none; margin: 0; padding: 0; }
+.story-spot.story-on .values .icon { color: var(--c-gold); }
+
+/* words: the mission lights up word by word (home) */
+.story-words.story-on { --screens: 2.2; }
+.story-words.story-on .story-stage { display: grid; align-content: center; }
+.story-words.story-on .w { opacity: clamp(.14, calc(var(--lit, 0) - var(--i, 0)), 1); }
+
+/* count: the numbers count while you scroll (home) */
+.story-count.story-on { --screens: 1.8; }
+.story-count.story-on .story-stage { display: grid; align-content: center; padding-block: 0; }
+.story-count.story-on .big-stats > div { transition: opacity var(--story-t) var(--story-ease); }
+.story-count.story-on .big-stats > div.is-next { opacity: .35; }
+.story-count.story-on .big-num { transform: scale(calc(.88 + var(--p, 0) * .12)); }
+
+/* window: the photo opens from a small window to the whole screen, then the text comes in (home, OLY House) */
+.story-window.story-on { --screens: 2.2; --open: min(1, calc(var(--p, 0) * 1.7)); --show: clamp(0, calc((var(--p, 0) - .55) * 4), 1); }
+.story-window.story-on .story-stage { min-height: 0; background: var(--c-white); }
+.story-window.story-on .hero-bg { clip-path: inset(calc((1 - var(--open)) * 26%) calc((1 - var(--open)) * 30%) round calc((1 - var(--open)) * 24px)); }
+.story-window.story-on .hero-bg img { transform: scale(calc(1.25 - var(--open) * .25)); animation: none !important; }
+.story-window.story-on .ld-band-inner { opacity: var(--show); transform: translateY(calc((1 - var(--show)) * 40px)); }
+
+/* track: a ribbon that moves sideways while you scroll down (NOAs, NOA Guide chapters) */
+.story-track.story-on { height: calc(100svh - var(--header-h) + var(--dist, 0px)); margin-top: var(--sp-6); }
+.story-track.story-on .story-stage { display: flex; align-items: center; }
+.story-track.story-on .story-stage > .container { max-width: none; margin: 0; }
+.story-track.story-on .story-row { display: flex; flex-wrap: nowrap; gap: var(--sp-5); width: max-content; transform: translateX(calc(var(--p, 0) * -1 * var(--dist, 0px))); will-change: transform; }
+.story-track.story-on .story-row li { width: clamp(240px, 24vw, 330px); }
+.story-track.story-on .story-row a { grid-template-columns: minmax(0, 1fr); align-content: space-between; min-height: clamp(240px, 38vh, 360px); padding: var(--sp-6); font-size: var(--fs-h4); font-weight: 600; }
+.story-track.story-on .ld-ch-mark { transform: scale(1.4); transform-origin: left top; }
+
+/* timeline: the line fills and the current year lights up as you read (History) */
+.story-timeline.story-on { position: relative; }
+.story-timeline.story-on::before { content: ''; position: absolute; left: 0; top: 0; width: 2px; height: calc(var(--p, 0) * 100%); background: var(--c-gold); z-index: 1; }
+.prose .story-timeline.story-on > li::before { z-index: 2; transition: background var(--story-t) var(--story-ease), transform var(--story-t) var(--story-ease); }
+.prose .story-timeline.story-on > li.is-past::before, .prose .story-timeline.story-on > li.is-on::before { background: var(--c-gold); }
+.prose .story-timeline.story-on > li.is-on::before { transform: scale(1.5); }
+.prose .story-timeline.story-on > li.is-on .tl-year { color: var(--c-gold-deep, #8c7c55); }
+
+@media (max-width: 720px) {
+  .story-spot.story-on .sp-shape { width: 58vw; right: -12vw; top: 62%; opacity: .5; }
+  .story-stack.story-on .goals p { font-size: var(--fs-h3); }
+  .story-steps.story-on .ss-copy .ss-step { font-size: 1.2rem; }
+}
