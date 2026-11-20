@@ -259,7 +259,7 @@ export function foldLongRuns($: CheerioAPI, r: ReturnType<CheerioAPI>, labels: {
     const rest = n.slice(k).reduce((a, b) => a + b, 0);
     if (k >= run.length || rest < minRest) return;
     const id = `more-${++moreId}`;
-    const box = $(`<div class="vb-more"><div class="vb-more-body" id="${id}" hidden="until-found"></div><button type="button" class="btn btn-outline vb-more-btn" aria-expanded="false" aria-controls="${id}" data-more="" data-less=""><span></span>${icon('chevron')}</button></div>`);
+    const box = $(`<div class="vb-more"><div class="vb-more-body" id="${id}" hidden="until-found"></div><button type="button" class="btn btn-outline vb-more-btn" aria-expanded="false" aria-controls="${id}" data-more="" data-less=""><span></span><svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></button></div>`);
     box.find('button').attr('data-more', labels.more).attr('data-less', labels.less).find('span').text(labels.more);
     $(run[k - 1]).after(box);
     box.find('.vb-more-body').append(run.slice(k));
