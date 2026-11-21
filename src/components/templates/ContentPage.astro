@@ -1,4 +1,5 @@
 ---
+import * as cheerio from 'cheerio';
 import PageHero from '../PageHero.astro';
 import Tabs from '../Tabs.astro';
 import Docs from '../Docs.astro';
@@ -9,7 +10,26 @@ interface Props { page: Page }
 const { page } = Astro.props;
 const lang = langOf(Astro.url.pathname);
 const legal = /privacy-policy/.test(page.path);
-const { html, toc } = prose(page.body, { visual: true, legal, faq: /\/faq\//.test(page.path), lang });
+const parsed = prose(page.body, { visual: true, legal, faq: /\/faq\//.test(page.path), lang });
+const { toc } = parsed; let html = parsed.html;
+// Olympian.org Email: the opening paragraph lists three things the address gives; shown as three cards with icons, words unchanged
+if (/\/olympian-org-email\//.test(page.path)) {
+  const $ = cheerio.load(html, null, false);
+  const p0 = $('h2').first().nextAll('p').first();
+  const parts = p0.text().replace(/\s+/g, ' ').trim().split(/(?<=[.!?])\s+/);
+  if (parts.length >= 3) {
+    const ICON = ['email', 'at', 'oly'];
+    const cards = parts.slice(0, 3).map((t, i) => `<li class="vb-card"><span class="vb-ico"><svg class="icon"><use href="#i-${ICON[i]}"/></svg></span><p></p></li>`).join('');
+    const ul = $(`<ul class="vb-cards cols-3 email-perks">${cards}</ul>`);
+    ul.find('p').each((i, el) => { $(el).text(parts[i]); });
+    const rest = parts.slice(3).join(' ');
+    const keepLinks = p0.find('a').length > 0;
+    p0.before(ul);
+    if (!rest) p0.remove(); else if (!keepLinks) p0.text(rest);
+    else { const html0 = p0.html() || ''; const cut = parts.slice(0, 3).join(' '); p0.html(html0.replace(/\s+/g, ' ').startsWith(cut) ? html0.replace(/\s+/g, ' ').slice(cut.length).trim() : html0); }
+    html = $.html();
+  }
+}
 const current = BASE + page.path;
 const isDoc = (h: string) => /\.(pdf|docx?|xlsx?|pptx?|zip)(\?|$)/i.test(h) || /\/library\//.test(h);
 const downloads = page.downloads.filter(d => isDoc(d.href));

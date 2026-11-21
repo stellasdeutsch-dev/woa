@@ -10,6 +10,7 @@ const lang = pageLang(Astro.params);
 const SX = sections(lang);
 const L = SX.NOAS;
 import { url, b, srcset, phColor, words, realFlag } from '../../../lib/site';
+import OlyChart from '../../../components/OlyChart.astro';
 const s = SX.SECTIONS.find(x => x.key === 'noas')!;
 const GUIDE_ICON: Record<string, string> = { 'Member Engagement': 'friendship', 'Branding & Marketing': 'design', 'Project Delivery': 'target', 'Leadership & Governance': 'leadership', 'Finance Management': 'grant', 'Stakeholder Engagement': 'alliance', 'Best Practices': 'practice' };
 ---
@@ -25,6 +26,8 @@ const GUIDE_ICON: Record<string, string> = { 'Member Engagement': 'friendship', 
       <a class="btn btn-outline ld-flags-all" href={url(L.directory.href)}>{L.directory.title}<svg class="icon icon-arrow"><use href="#i-arrow" /></svg></a>
     </div>
   </section>
+
+  <OlyChart />
 
   <section class="section bg-grey">
     <div class="container ld-row">

@@ -37,6 +37,7 @@ const ICONS = ['oly', 'excellence'];
 // a long opening sentence (French, Spanish) would cover the "Be OLY" mark on the photo: it moves under the first screen
 const longJoin = join.replace(/<[^>]+>/g, '').length > 160;
 import { navLabel } from '../../../../lib/i18n';
+import OlyChart from '../../../../components/OlyChart.astro';
 ---
 <Base title={p.title} origPath={p.orig} image={b(p.bg)}>
   <PageHero title={p.title} crumbs={[{ label: navLabel('/olympians/', 'Olympians', lang), href: '/olympians/' }, { label: 'OLY' }]} bg={b(p.bg)}>
@@ -57,6 +58,8 @@ import { navLabel } from '../../../../lib/i18n';
       </ul>
     </div>
   </section>
+
+  <OlyChart />
 
   <section class="section bg-grey">
     <div class="container oly-form-wrap">

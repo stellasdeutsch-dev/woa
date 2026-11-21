@@ -1,0 +1,77 @@
+---
+// Olympians registered for OLY, from the NOA Directory: the total over all NOAs and the ten largest as bars that grow into place.
+// Numbers come straight from each NOA's "Number of Olympians registered for OLY" field; nothing is estimated.
+import { dataFor } from '../lib/data';
+import { url, realFlag } from '../lib/site';
+import { langOf, L, fmtNum, navLabel } from '../lib/i18n';
+const lang = langOf(Astro.url.pathname);
+const FIELD = 'Number of Olympians registered for OLY';
+const rows = (dataFor(lang).noas as any[]).map(n => {
+  const f = n.fields.find((x: any) => x.label === FIELD);
+  const v = f && f.value[0] ? parseInt(String(f.value[0]).replace(/[^\d]/g, ''), 10) : NaN;
+  return { code: n.code as string, country: n.country as string, v };
+}).filter(r => Number.isFinite(r.v));
+const total = rows.reduce((s, r) => s + r.v, 0);
+const top = [...rows].sort((a, b) => b.v - a.v).slice(0, 10);
+const max = top[0]?.v || 1;
+const dir = L('/noas/noa-directory/', lang);
+---
+<section class="section bg-dark oly-chart" aria-labelledby="oly-chart-h">
+  <div class="container oc-in">
+    <div class="oc-total">
+      <h2 id="oly-chart-h" class="oc-title">{FIELD}</h2>
+      <p class="big-num oc-num" data-count={total} data-locale={lang}>{fmtNum(total, lang)}</p>
+      <p class="oc-sub"><span class="fact">{rows.length}</span> NOAs</p>
+      <a class="btn btn-gold" href={url(dir)}><svg class="icon"><use href="#i-directory" /></svg>{navLabel('/noas/noa-directory/', 'NOA Directory', lang)}</a>
+    </div>
+    <ol class="oc-bars">
+      {top.map((r, i) => {
+        const flag = realFlag(r.code, 24);
+        return (
+          <li style={`--w:${(r.v / max).toFixed(4)};--i:${i}`}>
+            <a href={url(`${dir}#noa-${r.code}`)}>
+              <span class="oc-name">{flag && <img src={flag.src} alt="" loading="lazy" width={flag.w} height={flag.h} />}<span>{r.country}</span></span>
+              <span class="oc-track"><span class="oc-bar" /></span>
+              <span class="oc-val">{fmtNum(r.v, lang)}</span>
+            </a>
+          </li>
+        );
+      })}
+    </ol>
+  </div>
+</section>
+<style>
+  .oc-in { display: grid; gap: var(--sp-8); grid-template-columns: minmax(0, 1fr); align-items: center; }
+  @media (min-width: 1024px) { .oc-in { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--sp-9); } }
+  .oc-total { display: grid; gap: var(--sp-4); justify-items: start; }
+  .oc-title { font-size: var(--fs-h4) !important; color: var(--c-grey-400); letter-spacing: 0 !important; max-width: 24ch; }
+  .oc-num { font-size: clamp(3.5rem, 1.5rem + 6vw, 7rem); color: var(--c-gold); }
+  .oc-sub { font-size: var(--fs-lead); color: var(--c-white); }
+  .oc-sub .fact { color: var(--c-white); }
+  .oc-bars { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+  .oc-bars a { display: grid; grid-template-columns: minmax(0, 13rem) minmax(0, 1fr) 4.5rem; gap: var(--sp-4); align-items: center; min-height: 44px; padding: 4px 10px; border-radius: var(--radius); color: var(--c-white); transition: background-color var(--t); }
+  .oc-bars a:hover { background: #1c1c1c; }
+  .oc-name { display: flex; align-items: center; gap: 10px; font-size: var(--fs-small); font-weight: 600; min-width: 0; }
+  .oc-name span { line-height: 1.25; hyphens: manual; }
+  .oc-name img { flex: none; width: auto; height: 18px; border-radius: 2px; box-shadow: 0 0 0 1px rgba(255, 255, 255, .25); }
+  .oc-track { display: block; height: 12px; }
+  .oc-bar { display: block; height: 100%; width: calc(var(--w) * 100%); background: var(--c-gold); border-radius: 0 4px 4px 0; transform-origin: left; transition: background-color var(--t); }
+  .oc-bars a:hover .oc-bar { background: #d4c6a2; }
+  .oc-val { text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; }
+  @media (max-width: 639px) {
+    .oc-bars a { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: 'name val' 'bar bar'; gap: 6px var(--sp-3); padding-block: 8px; }
+    .oc-name { grid-area: name; } .oc-val { grid-area: val; } .oc-track { grid-area: bar; height: 10px; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    :global(html.js:not(.still):not(.lite)) .oc-bars:not(.oc-in-view) .oc-bar { transform: scaleX(0); }
+    .oc-bars.oc-in-view .oc-bar { transition: transform 1100ms cubic-bezier(.2, .7, .1, 1) calc(var(--i) * 70ms), background-color var(--t); }
+  }
+</style>
+<script>
+  // bars grow when the chart comes into view (no script, reduced motion or an automated browser: they are simply there)
+  for (const ol of document.querySelectorAll<HTMLElement>('.oc-bars')) {
+    if (!('IntersectionObserver' in window)) { ol.classList.add('oc-in-view'); continue; }
+    const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { ol.classList.add('oc-in-view'); io.disconnect(); } }, { threshold: 0.25 });
+    io.observe(ol);
+  }
+</script>
