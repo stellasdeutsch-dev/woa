@@ -2,11 +2,11 @@
 // Applies text styles encoded in layer names (T§w=600§s=17§lh=28§ls=0§al=l§...§n=Name),
 // merges per-line text nodes into one paragraph, renames layers by content.
 const FRAMES = __FRAMES__;
-const W2S = { 100: 'Thin', 200: 'ExtraLight', 300: 'Light', 400: 'Regular', 500: 'Medium', 600: 'SemiBold', 700: 'Bold', 800: 'ExtraBold', 900: 'Black' };
+const W2S = { 100: 'Thin', 200: 'Extra Light', 300: 'Light', 400: 'Regular', 500: 'Medium', 600: 'Semi Bold', 700: 'Bold', 800: 'Extra Bold', 900: 'Black' };
 const styleFor = (w, it) => { const b = W2S[Math.round(w / 100) * 100] || 'Regular'; return it ? (b === 'Regular' ? 'Italic' : b + ' Italic') : b; };
 const need = new Set();
 for (const w of [400, 500, 600, 700]) for (const it of [0, 1]) need.add(styleFor(w, it));
-await Promise.all([...need].map(s => figma.loadFontAsync({ family: 'Montserrat', style: s })));
+await Promise.all([...need].map(s => figma.loadFontAsync({ family: 'Inter', style: s })));
 const report = [];
 for (const fid of FRAMES) {
   const frame = await figma.getNodeByIdAsync(fid);
@@ -24,7 +24,7 @@ for (const fid of FRAMES) {
       const lead = texts[0]; const lfs = +meta.s || lead.fontSize; const llh = +meta.lh || Math.round(lfs * 1.22);
       const ltop = lead.y - (llh - lead.height) / 2;
       const p0 = n.parent; const solo = figma.createText(); p0.insertChild(p0.children.indexOf(n), solo);
-      solo.fontName = { family: 'Montserrat', style: styleFor(+meta.w || 400, meta.it === '1') }; solo.characters = lead.characters;
+      solo.fontName = { family: 'Inter', style: styleFor(+meta.w || 400, meta.it === '1') }; solo.characters = lead.characters;
       solo.fontSize = lfs; solo.lineHeight = { unit: 'PIXELS', value: llh }; solo.letterSpacing = { unit: 'PIXELS', value: +meta.ls || 0 }; solo.fills = lead.fills;
       solo.textAutoResize = 'WIDTH_AND_HEIGHT'; solo.x = lead.x; solo.y = ltop; solo.name = lead.characters.slice(0, 40);
       texts = texts.slice(1);
@@ -46,8 +46,8 @@ for (const fid of FRAMES) {
       parent.insertChild(parent.children.indexOf(n), t);
       merged++;
     }
-    for (const f of ['Regular', style]) await figma.loadFontAsync({ family: 'Montserrat', style: f });
-    t.fontName = { family: 'Montserrat', style };
+    for (const f of ['Regular', style]) await figma.loadFontAsync({ family: 'Inter', style: f });
+    t.fontName = { family: 'Inter', style };
     t.characters = chars;
     t.fontSize = fs;
     t.lineHeight = { unit: 'PIXELS', value: lh };

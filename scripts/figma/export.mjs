@@ -81,7 +81,7 @@ function collect() {
       const fill = parseColor(cs.fill); const stroke = parseColor(cs.stroke);
       c.setAttribute('fill', fill ? fill.hex : 'none'); if (fill && fill.a < 1) c.setAttribute('fill-opacity', fill.a);
       if (stroke && parseFloat(cs.strokeWidth) > 0) { c.setAttribute('stroke', stroke.hex); c.setAttribute('stroke-width', parseFloat(cs.strokeWidth)); if (cs.strokeDasharray !== 'none') c.setAttribute('stroke-dasharray', cs.strokeDasharray.replace(/px/g, '')); if (cs.strokeDashoffset !== '0px') c.setAttribute('stroke-dashoffset', parseFloat(cs.strokeDashoffset)); }
-      if (sh.tagName === 'text') { c.setAttribute('font-family', 'Montserrat'); c.setAttribute('font-weight', cs.fontWeight); c.setAttribute('font-size', parseFloat(cs.fontSize)); c.setAttribute('text-anchor', cs.textAnchor); }
+      if (sh.tagName === 'text') { c.setAttribute('font-family', 'Inter'); c.setAttribute('font-weight', cs.fontWeight); c.setAttribute('font-size', parseFloat(cs.fontSize)); c.setAttribute('text-anchor', cs.textAnchor); }
       const title = sh.querySelector('title');
       if (title) c.setAttribute('id', title.textContent);
       parts.push(c.outerHTML);
@@ -207,8 +207,8 @@ function collect() {
       push(`<ellipse id="Bullet" cx="${fmt(li.getBoundingClientRect().left - fs * 0.75)}" cy="${fmt(r0.top + SC + r0.height / 2)}" rx="${fmt(fs * 0.17)}" ry="${fmt(fs * 0.17)}" fill="${col.hex}"/>`);
     } else if (lst === 'decimal') {
       const idx = [...parent.children].filter(c => c.tagName === 'LI').indexOf(li) + (parseInt(parent.getAttribute('start') || '1'));
-      const bl = r0.top + SC + r0.height * (968 / 1219);
-      push(`<text id="T§w=700§s=${fs}§al=r§n=${idx}." x="${fmt(li.getBoundingClientRect().left - 6)}" y="${fmt(bl)}" text-anchor="end" font-family="Montserrat" font-weight="700" font-size="${fs}" fill="${col.hex}">${idx}.</text>`);
+      const bl = r0.top + SC + r0.height * (1984 / 2478);
+      push(`<text id="T§w=700§s=${fs}§al=r§n=${idx}." x="${fmt(li.getBoundingClientRect().left - 6)}" y="${fmt(bl)}" text-anchor="end" font-family="Inter" font-weight="700" font-size="${fs}" fill="${col.hex}">${idx}.</text>`);
     }
   };
 
@@ -262,14 +262,14 @@ function collect() {
     const bb = blk.getBoundingClientRect();
     const full = lines.map(l => l.text).join(' ');
     const meta = `T§w=${w}§s=${fs}§lh=${fmt(lh)}§ls=${fmt(ls)}§al=${al}§it=${it}§bx=${fmt(bb.left)}§bw=${fmt(bb.width)}§n=${esc(nameOf(fixCase(full), 60))}`;
-    const spans = lines.map(l => `<tspan x="${fmt(al === 'c' ? (l.left + l.right) / 2 : al === 'r' ? l.right : l.left)}" y="${fmt(l.top + SC + l.h * (968 / 1219))}">${esc(fixCase(l.text))}</tspan>`).join('');
+    const spans = lines.map(l => `<tspan x="${fmt(al === 'c' ? (l.left + l.right) / 2 : al === 'r' ? l.right : l.left)}" y="${fmt(l.top + SC + l.h * (1984 / 2478))}">${esc(fixCase(l.text))}</tspan>`).join('');
     const anchor = al === 'c' ? ' text-anchor="middle"' : al === 'r' ? ' text-anchor="end"' : '';
-    push(`<text id="${meta}" font-family="Montserrat" font-weight="${w}" font-size="${fs}"${it ? ' font-style="italic"' : ''} fill="${col.hex}"${col.a < 1 ? ` fill-opacity="${col.a}"` : ''}${anchor}>${spans}</text>`);
+    push(`<text id="${meta}" font-family="Inter" font-weight="${w}" font-size="${fs}"${it ? ' font-style="italic"' : ''} fill="${col.hex}"${col.a < 1 ? ` fill-opacity="${col.a}"` : ''}${anchor}>${spans}</text>`);
     // underline for prose links
     const dec = cs.textDecorationLine;
     if (dec && dec.includes('underline')) {
       const dcol = parseColor(cs.textDecorationColor) || col; const th = parseFloat(cs.textDecorationThickness) || 1; const off = parseFloat(cs.textUnderlineOffset) || 2;
-      lines.forEach(l => rectEl({ x: l.left, y: l.top + SC + l.h * (968 / 1219) + off, w: l.right - l.left, h: th }, dcol, { name: 'Underline' }));
+      lines.forEach(l => rectEl({ x: l.left, y: l.top + SC + l.h * (1984 / 2478) + off, w: l.right - l.left, h: th }, dcol, { name: 'Underline' }));
     }
   };
 
@@ -281,7 +281,7 @@ function collect() {
     if (!t) return;
     const fs = parseFloat(cs.fontSize); const pl = parseFloat(cs.paddingLeft);
     const col = grey ? '#808285' : (parseColor(cs.color)?.hex || '#262626');
-    push(`<text id="T§w=${cs.fontWeight}§s=${fs}§al=l§n=${esc(t)}" x="${fmt(b.x + pl)}" y="${fmt(b.y + b.h / 2 + fs * 0.36)}" font-family="Montserrat" font-weight="${cs.fontWeight}" font-size="${fs}" fill="${col}">${esc(t)}</text>`);
+    push(`<text id="T§w=${cs.fontWeight}§s=${fs}§al=l§n=${esc(t)}" x="${fmt(b.x + pl)}" y="${fmt(b.y + b.h / 2 + fs * 0.36)}" font-family="Inter" font-weight="${cs.fontWeight}" font-size="${fs}" fill="${col}">${esc(t)}</text>`);
     if (el.tagName === 'SELECT') iconFromSymbol('i-chevron', { x: b.x + b.w - 30, y: b.y + b.h / 2 - 9, w: 18, h: 18 }, '#262626');
   };
 
