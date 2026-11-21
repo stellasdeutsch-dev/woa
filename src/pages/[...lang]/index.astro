@@ -58,7 +58,7 @@ const ACTIONS = [
   </section>
 
   <!-- 4. Three doors -->
-  <section class="section-tight home-doors-wrap">
+  <section class="section bg-grey home-doors-wrap">
     <div class="container">
       <ul class="home-doors">
         {doors.map(d => (
@@ -89,7 +89,7 @@ const ACTIONS = [
   </section>
 
   <!-- 6. Ways to take part -->
-  <section class="section-tight">
+  <section class="section">
     <div class="container">
       <ul class="home-actions">
         {ACTIONS.map(x => <li><a class={`act act-${x.tone}`} href={loc(x.href)}><svg class="icon act-icon"><use href={`#i-${x.icon}`} /></svg><span class="act-label">{x.label}</span><svg class="icon act-arrow"><use href="#i-arrow" /></svg></a></li>)}
@@ -98,7 +98,7 @@ const ACTIONS = [
   </section>
 
   <!-- 7. News -->
-  <section class="section home-news">
+  <section class="section bg-grey home-news">
     <div class="container">
       <div class="section-head"><h2>{newsLabel}</h2><a class="link-arrow" href={loc('/news/')}>{tr.more}<svg class="icon"><use href="#i-arrow" /></svg></a></div>
       <a class="news-lead" href={url(lead.path)}>

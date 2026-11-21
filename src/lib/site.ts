@@ -109,6 +109,12 @@ export function prose(html: string, opts: { toc?: boolean; visual?: boolean; leg
     });
   }
   r.find('a[href="#"]').each((_, a) => { $(a).replaceWith($(a).contents()); });
+  // important information, made from the original's own markers ("Please note", "Important", ...): a quiet box with an icon
+  r.find('p').each((_, el) => {
+    const p = $(el); if (p.closest('td, th, li, .callout, summary, form').length) return;
+    const t = p.text().replace(/\s+/g, ' ').trim();
+    if (/^(please note|important|note:|attention|veuillez noter|attention :|remarque|tenga en cuenta|importante|nota:)/i.test(t)) p.wrap('<div class="callout"></div>');
+  });
   r.find('img').attr('loading', 'lazy').attr('decoding', 'async');
   r.find('a[target="_blank"]').attr('rel', 'noopener');
   r.find('table').each((_, t) => {

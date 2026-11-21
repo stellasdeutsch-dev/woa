@@ -152,7 +152,7 @@ const extraDocs = p.downloads.filter(d => !bodyHrefs.has(b(d.href))).map(d => ({
   .me-factors { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-4); grid-template-columns: repeat(2, minmax(0, 1fr)); }
   @media (min-width: 1024px) { .me-factors { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
   .me-factors a { position: relative; display: grid; justify-items: center; gap: var(--sp-4); padding: var(--sp-7) var(--sp-4) var(--sp-6); border: 1px solid var(--c-grey-200); border-radius: var(--radius-lg); text-align: center; transition: border-color var(--t), transform var(--t); }
-  .me-factors a:hover { border-color: var(--c-black); transform: translateY(-2px); }
+  .me-factors a:hover { border-color: var(--c-gold); box-shadow: var(--shadow-hover); }
   .me-factors .vb-num { position: absolute; top: var(--sp-4); left: var(--sp-4); width: 32px; height: 32px; font-size: .9375rem; }
   .me-factors .vb-ico { width: 72px; height: 72px; }
   .me-factors .vb-ico .icon { width: 64px; height: 64px; stroke-width: 1.2; }
@@ -162,7 +162,7 @@ const extraDocs = p.downloads.filter(d => !bodyHrefs.has(b(d.href))).map(d => ({
   .me-multi:hover { transform: none; border-color: var(--c-grey-200); }
   .me-files { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-top: var(--sp-2); }
   .me-files a { display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 4px 12px; border: 1px solid var(--c-grey-200); border-radius: 999px; font-size: var(--fs-small); transition: border-color var(--t); }
-  .me-files a:hover { border-color: var(--c-black); }
+  .me-files a:hover { border-color: var(--c-gold); box-shadow: var(--shadow-hover); }
   .me-files .icon { width: 16px; height: 16px; }
   .me-pair { margin-top: var(--sp-6); }
   @media (max-width: 639px) { .me-pair :global(.vb-tip) { grid-template-columns: minmax(0, 1fr); } }

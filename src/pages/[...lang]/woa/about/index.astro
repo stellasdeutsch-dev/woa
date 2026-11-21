@@ -119,19 +119,19 @@ const facts = (s: string) => s.replace(/(over [\d,]+ living Olympians|\d+ Nation
   @media (min-width: 640px) { .goals { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (min-width: 1024px) { .goals { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
   .goals li { display: grid; gap: var(--sp-4); align-content: start; padding: var(--sp-5); border: 1px solid var(--c-grey-200); border-radius: var(--radius-lg); transition: border-color var(--t), transform var(--t); }
-  .goals li:hover { border-color: var(--c-black); transform: translateY(-2px); }
+  .goals li:hover { border-color: var(--c-gold); box-shadow: var(--shadow-hover); }
   .goal-num { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: var(--c-gold); color: var(--c-black); font-weight: 700; font-size: 1.25rem; line-height: 1; }
   .goals p { font-weight: 600; line-height: 1.4; hyphens: manual; }
   .values { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-4); grid-template-columns: repeat(2, minmax(0, 1fr)); }
   @media (min-width: 834px) { .values { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
   @media (min-width: 1200px) { .values { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
   .values li { display: grid; justify-items: center; gap: var(--sp-4); padding: var(--sp-6) var(--sp-4); background: var(--c-white); border: 1px solid var(--c-grey-200); border-radius: var(--radius-lg); text-align: center; transition: border-color var(--t), transform var(--t); }
-  .values li:hover { border-color: var(--c-black); transform: translateY(-2px); }
+  .values li:hover { border-color: var(--c-gold); box-shadow: var(--shadow-hover); }
   .values .icon { color: var(--c-gold); }
   .values h3 { font-size: var(--fs-h4); }
   .history-banner { display: grid; gap: var(--sp-5); align-items: center; grid-template-columns: minmax(0, 1fr); padding: clamp(24px, 4vw, 48px); border: 1px solid var(--c-grey-200); border-radius: var(--radius-lg); transition: border-color var(--t), box-shadow var(--t); }
   @media (min-width: 834px) { .history-banner { grid-template-columns: auto minmax(0, 1fr) auto; gap: var(--sp-7); } }
-  .history-banner:hover { border-color: var(--c-black); box-shadow: var(--shadow); }
+  .history-banner:hover { border-color: var(--c-gold); box-shadow: var(--shadow-hover); }
   .history-banner .icon-xl { color: var(--c-gold); }
   .history-banner h2 { font-size: var(--fs-h2); }
   .hist-years { display: flex; align-items: center; gap: var(--sp-4); margin-top: var(--sp-3); font-size: var(--fs-h3); font-weight: 700; }

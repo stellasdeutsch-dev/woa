@@ -26,7 +26,7 @@ const p = page('/woa/contact-us/');
   .contact { display: grid; gap: var(--sp-7); grid-template-columns: minmax(0, 1fr); align-items: start; }
   @media (min-width: 1024px) { .contact { grid-template-columns: minmax(0, 1fr) 380px; gap: var(--sp-8); } }
   .c-card { display: flex; gap: var(--sp-4); align-items: center; padding: var(--sp-5); border: 1px solid var(--c-grey-200); border-radius: var(--radius-lg); transition: border-color var(--t), background var(--t); }
-  .c-card:hover { border-color: var(--c-black); background: var(--c-grey-50); }
+  .c-card:hover { border-color: var(--c-gold); box-shadow: var(--shadow-hover); }
   .c-card .topic-icon { display: inline-grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; border: 1.5px solid var(--c-gold); flex: none; }
   .c-label { display: block; font-size: var(--fs-xs); font-weight: 600; color: var(--c-grey-600); }
   .c-val { display: block; font-weight: 700; overflow-wrap: anywhere; }

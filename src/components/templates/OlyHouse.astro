@@ -79,7 +79,7 @@ const recent = lastH4.length && !lastH4.next('ul').length && lastH4.find('a').le
   .oh-top { display: grid; gap: var(--sp-5); grid-template-columns: minmax(0, 1fr); margin-bottom: var(--sp-5); }
   @media (min-width: 834px) { .oh-top { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); } }
   .oh-logo { display: grid; place-items: center; padding: var(--sp-6); border: 1px solid var(--c-grey-200); border-radius: var(--radius-lg); transition: border-color var(--t); }
-  .oh-logo:hover { border-color: var(--c-black); }
+  .oh-logo:hover { border-color: var(--c-gold); box-shadow: var(--shadow-hover); }
   .oh-logo img { max-height: 220px; width: auto; }
   .oh-feature { display: grid; gap: var(--sp-4); align-content: center; justify-items: start; padding: clamp(24px, 4vw, 48px); background: var(--c-black); color: var(--c-white); border-radius: var(--radius-lg); transition: background var(--t); }
   .oh-feature:hover { background: var(--c-ink); }
@@ -92,6 +92,6 @@ const recent = lastH4.length && !lastH4.next('ul').length && lastH4.find('a').le
   .oh-img img { width: 100%; height: auto; }
   .past { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-4); grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); }
   .past a { display: grid; place-items: center; height: 180px; padding: var(--sp-5); background: var(--c-white); border: 1px solid var(--c-grey-200); border-radius: var(--radius-lg); transition: border-color var(--t), transform var(--t); }
-  .past a:hover { border-color: var(--c-black); transform: translateY(-2px); }
+  .past a:hover { border-color: var(--c-gold); box-shadow: var(--shadow-hover); }
   .past img { max-height: 130px; width: auto; }
 </style>
