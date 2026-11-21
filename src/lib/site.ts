@@ -1,4 +1,5 @@
 import * as cheerio from 'cheerio';
+import { timelineVisual, agendaVisual } from './visual-extra';
 import { visualize, foldLongRuns } from './visual';
 import fs from 'node:fs';
 import { type Lang, t as uiFor } from './i18n';
@@ -137,6 +138,7 @@ export function prose(html: string, opts: { toc?: boolean; visual?: boolean; leg
   });
   tidyForms($, r);
   if (opts.visual) visualize($, r, { legal: opts.legal, faq: opts.faq });
+  if (opts.visual && !opts.legal) { timelineVisual($, r); agendaVisual($, r); }
   if (opts.visual || opts.fold) { const ui = uiFor(opts.lang || 'en'); foldLongRuns($, r, { more: ui.readMore, less: ui.showLess }); }
   const toc: Toc = [];
   const used = new Set<string>();
