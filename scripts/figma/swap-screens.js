@@ -50,8 +50,24 @@ for (const [oldId, newId] of PAIRS) {
   }
   report.push({ name: n.name, links: done.size });
 }
-// 4. flows
-page.flowStartingPoints = page.flowStartingPoints.map(f => ({ nodeId: oldToNew.get(f.nodeId) || f.nodeId, name: f.name }));
+// 3b. links in every other frame of the page that lead to an old frame now lead to its new frame.
+// This must happen before the old frames leave the page: Figma drops links whose destination is on another page.
+let redirected = 0;
+const oldIds = new Set(PAIRS.map(p => p[0]));
+for (const n of page.findAll(n => n.reactions && n.reactions.length)) {
+  let changed = false;
+  const rs = n.reactions.map(r => {
+    const acts = (r.actions || (r.action ? [r.action] : [])).map(a => {
+      if (a && a.type === 'NODE' && oldIds.has(a.destinationId)) { changed = true; return { ...a, destinationId: oldToNew.get(a.destinationId) }; }
+      return a;
+    });
+    const { action, ...rest } = r; return { ...rest, actions: acts };
+  });
+  if (changed) { await n.setReactionsAsync(rs); redirected++; }
+}
+// 4. flows (one starting point per frame: Figma refuses duplicates)
+const seen = new Set();
+page.flowStartingPoints = page.flowStartingPoints.map(f => ({ nodeId: oldToNew.get(f.nodeId) || f.nodeId, name: f.name })).filter(f => !seen.has(f.nodeId) && seen.add(f.nodeId));
 // 5. archive old frames
 const arch = figma.root.children.find(p => p.name === 'Архив');
 await figma.setCurrentPageAsync(arch);
@@ -64,4 +80,4 @@ for (const [oldId] of PAIRS) {
 }
 let mb = 0; for (const c of sec.children) mb = Math.max(mb, c.y + c.height);
 sec.resizeWithoutConstraints(cx, mb + 80);
-return { links, report };
+return { links, redirected, report };
