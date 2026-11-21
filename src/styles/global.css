@@ -984,3 +984,81 @@ dialog::backdrop { opacity: var(--swipe-bd, 1); }
     @keyframes tl-line { from { border-left-color: transparent; } to { border-left-color: var(--c-grey-200); } }
   }
 }
+
+/* ---------- NOA Guide visuals (guide-visual.ts) ---------- */
+.prose :is(.gd-topics, .gd-props, .gd-grants, .gd-costs, .gd-aims) { margin: var(--sp-5) 0 var(--sp-7); padding: 0; list-style: none; }
+.prose :is(.gd-topics, .gd-props, .gd-grants, .gd-costs, .gd-aims) > li { margin: 0; }
+.prose :is(.gd-topics, .gd-props, .gd-grants, .gd-costs, .gd-aims) > li::marker { content: none; }
+.vb-card .vb-ico, .gd-stage .vb-ico { width: 44px; height: 44px; }
+/* topic areas: whole card opens the chapter */
+.gd-topics > li { display: grid; }
+.gd-topic { position: relative; color: inherit; display: flex; flex-direction: column; }
+.gd-topic-top { display: flex; align-items: center; justify-content: space-between; }
+.gd-topic-n { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--c-grey-100); font-weight: 700; font-size: .875rem; line-height: 1; font-variant-numeric: tabular-nums; transition: background-color 180ms ease; }
+.gd-topic:hover .gd-topic-n { background: var(--c-gold); }
+.gd-topic h3 { margin: 0; }
+.gd-topic p { margin: 0; }
+.gd-go { margin-top: auto; flex: none; width: 22px; height: 22px; color: var(--c-gold-dark); transition: transform 180ms ease; }
+.gd-topic:hover .gd-go { transform: translateX(4px); }
+/* Olympic properties: compact icon tiles */
+@media (min-width: 1024px) { .gd-props { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.gd-prop { grid-template-columns: 44px minmax(0, 1fr); align-items: center; gap: var(--sp-3); padding: var(--sp-4) var(--sp-5); }
+.gd-prop p { margin: 0; font-weight: 600; color: var(--c-black); line-height: 1.35; }
+/* logo rules: do and don't */
+.gd-dodont > li { transition: border-color 180ms ease, background-color 180ms ease; }
+.gd-mark { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; }
+.gd-mark .icon { width: 16px; height: 16px; stroke-width: 2.5; }
+.gd-do .gd-mark { background: #dcefdf; color: #1f6b33; }
+.gd-dont .gd-mark { background: #f7dcdc; color: #a12626; }
+.gd-do:hover { border-color: #8fc59b; }
+.gd-dont:hover { border-color: #e2a1a1; }
+/* grants: amount large, one coin per grant */
+.gd-grant h3 { margin: 0; }
+.gd-grant p { margin: 0; color: var(--c-grey-700); }
+.gd-amt { display: block; margin-bottom: 4px; font-size: clamp(1.75rem, 1.2rem + 1.6vw, 2.5rem); line-height: 1.1; letter-spacing: -0.02em; color: var(--c-black); font-variant-numeric: tabular-nums; }
+.gd-coins { display: flex; flex-wrap: wrap; gap: 6px; }
+.gd-coins i { width: 22px; height: 22px; border-radius: 50%; background: var(--c-gold); box-shadow: inset 0 0 0 3px #d4c6a2; }
+/* Executive Committee figures (same cards as the History figures) */
+.prose .gd-figs { margin: var(--sp-2) 0 var(--sp-4); }
+@media (min-width: 640px) { .prose .gd-figs { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 1024px) { .prose .gd-figs { grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); } }
+.vb-panel .vb-tl-fig { background: var(--c-white); }
+/* running costs */
+@media (min-width: 1024px) { .gd-costs { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.gd-cost h3, .gd-cost p, .gd-aim p { margin: 0; }
+.gd-aim p { font-weight: 600; color: var(--c-black); font-size: var(--fs-lead); line-height: 1.35; }
+/* funding sources: one tile each, the NOC tile spans with its own list */
+.prose .gd-sources { list-style: none; padding: 0; margin: var(--sp-4) 0 var(--sp-6); display: grid; gap: var(--sp-3); grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 640px) { .prose .gd-sources { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1024px) { .prose .gd-sources { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.prose .gd-sources > li { margin: 0; padding: var(--sp-4) var(--sp-5); background: var(--c-white); border: 1px solid var(--c-grey-200); border-radius: var(--radius-lg); font-weight: 600; line-height: 1.4; transition: border-color 180ms ease, box-shadow 180ms ease; }
+.prose .gd-sources > li::marker { content: none; }
+.prose .gd-sources > li:hover { border-color: var(--c-gold); box-shadow: var(--shadow-hover); }
+@media (min-width: 640px) { .prose .gd-sources > li.gd-src-wide { grid-row: span 2; } }
+.prose .gd-src-wide { background: var(--c-grey-50); }
+.prose .gd-src-sub { margin: var(--sp-3) 0 0; padding: 0; list-style: none; display: grid; gap: 6px; font-weight: 400; }
+.prose .gd-src-sub > li { margin: 0; padding-left: 18px; position: relative; }
+.prose .gd-src-sub > li::marker { content: none; }
+.prose .gd-src-sub > li > .gd-dot { position: absolute; left: 0; top: .55em; width: 8px; height: 8px; border-radius: 50%; background: var(--c-gold); }
+/* relationship stages: build, then strengthen */
+.gd-stages { grid-column: 1 / -1; display: grid; gap: var(--sp-3); grid-template-columns: minmax(0, 1fr); align-items: stretch; }
+@media (min-width: 1024px) { .gd-stages { grid-template-columns: minmax(0, 1fr) 40px minmax(0, 1fr); } }
+.gd-stage-arrow { display: grid; place-items: center; color: var(--c-gold-dark); }
+.gd-stage-arrow .icon { width: 28px; height: 28px; transform: rotate(90deg); }
+@media (min-width: 1024px) { .gd-stage-arrow .icon { transform: none; } }
+.gd-stage-list > li { grid-template-columns: 28px minmax(0, 1fr); }
+.gd-n { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--c-gold); color: var(--c-black); font-weight: 700; font-size: .875rem; line-height: 1; font-variant-numeric: tabular-nums; }
+.gd-stage-list > li { transition: border-color 180ms ease; }
+.gd-stage-list > li:hover { border-color: var(--c-gold); }
+@media (prefers-reduced-motion: no-preference) {
+  html.js:not(.still):not(.lite) .gd-coins i { animation: gd-coin both cubic-bezier(.2, .7, .1, 1); animation-timeline: view(); animation-range: entry 10% cover 35%; }
+  html.js:not(.still):not(.lite) .gd-coins i:nth-child(2) { animation-range: entry 14% cover 37%; }
+  html.js:not(.still):not(.lite) .gd-coins i:nth-child(3) { animation-range: entry 18% cover 39%; }
+  html.js:not(.still):not(.lite) .gd-coins i:nth-child(4) { animation-range: entry 22% cover 41%; }
+  html.js:not(.still):not(.lite) .gd-coins i:nth-child(5) { animation-range: entry 26% cover 43%; }
+}
+@supports not (animation-timeline: view()) { .gd-coins i { animation: none !important; } }
+@keyframes gd-coin { from { opacity: 0; transform: translateY(-10px) scale(.6); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .gd-go, .gd-topic-n { transition: none; } .gd-topic:hover .gd-go { transform: none; } }
+.prose .gd-wide { margin-top: var(--sp-4); }
+.prose .gd-wide + .vb-panels { margin-top: var(--sp-4); }

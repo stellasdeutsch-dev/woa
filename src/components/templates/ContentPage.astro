@@ -4,6 +4,7 @@ import PageHero from '../PageHero.astro';
 import Tabs from '../Tabs.astro';
 import Docs from '../Docs.astro';
 import { prose, b, BASE } from '../../lib/site';
+import { guideVisual } from '../../lib/guide-visual';
 import { crumbsFor, type Page } from '../../lib/data';
 import { langOf, t } from '../../lib/i18n';
 interface Props { page: Page }
@@ -29,6 +30,13 @@ if (/\/olympian-org-email\//.test(page.path)) {
     else { const html0 = p0.html() || ''; const cut = parts.slice(0, 3).join(' '); p0.html(html0.replace(/\s+/g, ' ').startsWith(cut) ? html0.replace(/\s+/g, ' ').slice(cut.length).trim() : html0); }
     html = $.html();
   }
+}
+// NOA Guide chapters: visuals from the chapter's own text (topic cards, grant cards, figures, stages…)
+const guide = page.path.match(/\/noas\/noa-guide\/([a-z-]*)\/?$/);
+if (guide && guide[1] !== 'best-practices') {
+  const $ = cheerio.load(html, null, false);
+  guideVisual($, guide[1], page.tabs.map(t => ({ href: b(t.href), label: t.label })));
+  html = $.html();
 }
 const current = BASE + page.path;
 const isDoc = (h: string) => /\.(pdf|docx?|xlsx?|pptx?|zip)(\?|$)/i.test(h) || /\/library\//.test(h);
