@@ -94,20 +94,20 @@ const isCur = (href: string, children?: { href: string }[]) => {
 </dialog>
 
 <style>
-  .site-header { position: sticky; top: 0; z-index: 50; background: var(--c-white); border-bottom: 1px solid var(--c-grey-200); }
+  .site-header { position: sticky; top: 0; z-index: 50; background: #fbfbfd; border-bottom: 1px solid var(--c-grey-200); }
   .header-row { display: flex; align-items: center; gap: var(--sp-5); height: var(--header-h); }
   .logo { flex: none; display: block; transition: opacity var(--t); }
   .logo:hover { opacity: .75; }
-  .logo img { height: 64px; width: auto; }
+  .logo img { height: 46px; width: auto; }
   .main-nav { flex: 1; display: none; }
   .main-nav > ul { display: flex; justify-content: center; gap: 2px; list-style: none; margin: 0; padding: 0; }
   .main-nav > ul > li { display: flex; align-items: center; height: var(--header-h); }
-  .main-nav > ul > li > a { display: inline-flex; align-items: center; gap: 6px; height: 44px; padding: 0 16px; border-radius: var(--radius); font-weight: 600; font-size: 1rem; white-space: nowrap; transition: background var(--t), color var(--t); }
-  .main-nav > ul > li > a .icon { transition: transform var(--t); }
-  .main-nav > ul > li > a:hover, .main-nav li.has-sub:hover > a, .main-nav li.has-sub:focus-within > a { background: var(--c-grey-50); }
-  .main-nav > ul > li > a[aria-current="page"] { box-shadow: inset 0 -3px 0 var(--c-gold); }
+  .main-nav > ul > li > a { display: inline-flex; align-items: center; gap: 4px; height: 36px; padding: 0 14px; border-radius: 980px; font-weight: 500; font-size: .875rem; color: var(--c-ink); white-space: nowrap; transition: background var(--t), color var(--t); }
+  .main-nav > ul > li > a .icon { width: 16px; height: 16px; transition: transform var(--t); }
+  .main-nav > ul > li > a:hover, .main-nav li.has-sub:hover > a, .main-nav li.has-sub:focus-within > a { background: var(--c-grey-200); }
+  .main-nav > ul > li > a[aria-current="page"] { box-shadow: inset 0 -2px 0 var(--c-gold); border-radius: 0; }
   .main-nav li.has-sub:hover > a .icon, .main-nav li.has-sub:focus-within > a .icon { transform: rotate(180deg); }
-  .mega { position: absolute; left: 0; right: 0; top: 100%; background: var(--c-white); border-top: 1px solid var(--c-grey-200); border-bottom: 1px solid var(--c-grey-200); box-shadow: 0 24px 40px rgba(0, 0, 0, .08); opacity: 0; visibility: hidden; transform: translateY(-6px); transition: opacity var(--t), transform var(--t), visibility var(--t); }
+  .mega { position: absolute; left: 0; right: 0; top: 100%; background: #fbfbfd; border-top: 1px solid var(--c-grey-200); border-bottom: 1px solid var(--c-grey-200); box-shadow: 0 24px 40px rgba(0, 0, 0, .08); opacity: 0; visibility: hidden; transform: translateY(-6px); transition: opacity var(--t), transform var(--t), visibility var(--t); }
   .has-sub:hover .mega, .has-sub:focus-within .mega { opacity: 1; visibility: visible; transform: none; }
   .mega-inner { display: grid; grid-template-columns: 420px minmax(0, 1fr); gap: var(--sp-8); padding-block: var(--sp-6) var(--sp-7); }
   .mega-feature { display: grid; grid-template-columns: 140px minmax(0, 1fr); grid-template-rows: auto 1fr; gap: 6px var(--sp-4); align-items: start; padding: var(--sp-3); margin: calc(var(--sp-3) * -1); border-radius: var(--radius-lg); transition: background var(--t); }
@@ -115,17 +115,17 @@ const isCur = (href: string, children?: { href: string }[]) => {
   .mega-photo { grid-row: span 2; aspect-ratio: 1; border-radius: var(--radius); overflow: hidden; }
   .mega-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease, ease); }
   .mega-feature:hover .mega-photo img { transform: scale(1.06); }
-  .mega-title { display: inline-flex; align-items: center; gap: 10px; font-size: 1.75rem; font-weight: 700; line-height: 1.1; }
+  .mega-title { display: inline-flex; align-items: center; gap: 10px; font-size: 1.75rem; font-weight: 600; letter-spacing: -0.022em; line-height: 1.1; }
   .mega-title .icon { transition: transform var(--t); }
   .mega-feature:hover .mega-title .icon { transform: translateX(4px); }
   .mega-lead { font-size: var(--fs-small); line-height: 1.5; color: var(--c-grey-700); }
   .mega-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px var(--sp-5); align-content: start; }
-  .mega-list a { display: flex; align-items: center; gap: 14px; min-height: 56px; padding: 8px 14px; border-radius: var(--radius); font-weight: 600; transition: background var(--t); }
+  .mega-list a { display: flex; align-items: center; gap: 14px; min-height: 56px; padding: 8px 14px; border-radius: var(--radius); font-weight: 500; transition: background var(--t); }
   .mega-list a .icon { width: 30px; height: 30px; flex: none; }
-  .mega-list a:hover, .mega-list a[aria-current="page"] { background: var(--c-grey-50); }
+  .mega-list a:hover, .mega-list a[aria-current="page"] { background: var(--c-grey-200); }
   .lang-switch { position: relative; }
   .lang-btn { display: inline-flex; align-items: center; gap: 6px; height: 44px; padding: 0 10px; border: 0; border-radius: var(--radius); background: transparent; font: inherit; font-weight: 700; font-size: var(--fs-small); color: inherit; cursor: pointer; transition: background var(--t); }
-  .lang-btn:hover, .lang-switch:focus-within .lang-btn { background: var(--c-grey-50); }
+  .lang-btn:hover, .lang-switch:focus-within .lang-btn { background: var(--c-grey-200); }
   .lang-menu { position: absolute; right: 0; top: 100%; min-width: 160px; margin: 0; padding: 6px; list-style: none; background: var(--c-white); border: 1px solid var(--c-grey-200); border-radius: var(--radius-lg); box-shadow: var(--shadow); opacity: 0; visibility: hidden; transform: translateY(4px); transition: opacity var(--t), transform var(--t), visibility var(--t); z-index: 5; }
   .lang-switch:hover .lang-menu, .lang-switch:focus-within .lang-menu { opacity: 1; visibility: visible; transform: none; }
   .lang-menu a { display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: var(--radius); font-weight: 600; font-size: var(--fs-small); transition: background var(--t); }
@@ -140,17 +140,17 @@ const isCur = (href: string, children?: { href: string }[]) => {
   .header-actions { margin-left: auto; display: flex; align-items: center; gap: var(--sp-2); }
   .header-cta { display: none; }
   @media (min-width: 640px) { .header-cta { display: inline-flex; } }
-  @media (min-width: 1200px) { .main-nav { display: block; } .menu-btn { display: none; } .header-actions { margin-left: 0; } .logo img { height: 72px; } }
-  @media (max-width: 1199px) { :global(:root) { --header-h: 76px; } }
+  @media (min-width: 1200px) { .main-nav { display: block; } .menu-btn { display: none; } .header-actions { margin-left: 0; } .logo img { height: 48px; } }
+  @media (max-width: 1199px) { :global(:root) { --header-h: 60px; } }
 
   .mobile-menu { margin: 0; width: 100%; max-width: 100%; height: 100%; max-height: 100%; padding: 0; border: 0; background: var(--c-white); color: var(--c-ink); overflow-y: auto; }
   .mobile-menu[open] { display: flex; flex-direction: column; }
   .mobile-menu::backdrop { background: rgba(0, 0, 0, .4); }
   .mm-head { flex: none; display: flex; align-items: center; justify-content: space-between; height: var(--header-h); padding-inline: var(--gutter); border-bottom: 1px solid var(--c-grey-200); }
-  .mm-head .logo img { height: 56px; }
+  .mm-head .logo img { height: 44px; }
   .mm-list { flex: none; list-style: none; margin: 0; padding: var(--sp-3) var(--gutter); }
   .mm-list > li { border-bottom: 1px solid var(--c-grey-200); }
-  .mm-list summary, .mm-top { display: flex; align-items: center; justify-content: space-between; min-height: 60px; font-size: 1.25rem; font-weight: 700; cursor: pointer; list-style: none; transition: color var(--t); }
+  .mm-list summary, .mm-top { display: flex; align-items: center; justify-content: space-between; min-height: 60px; font-size: 1.75rem; font-weight: 600; letter-spacing: -0.022em; cursor: pointer; list-style: none; transition: color var(--t); }
   .mm-list summary::-webkit-details-marker { display: none; }
   .mm-list summary:hover, .mm-top:hover { color: var(--c-grey-600); }
   .mm-list summary .icon { transition: transform var(--t); }
