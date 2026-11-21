@@ -17,7 +17,6 @@ const doors = ['olympians', 'noas', 'woa'].map(k => SX.SECTIONS.find(s => s.key 
 const more = latest.slice(0, 3);
 const OLY = SX.OLYMPIANS.oly;
 const newsLabel = navLabel('/news/', 'News', lang);
-const ticker = D.news.slice(0, 3);
 // ways to take part: links and their labels as they already appear on the site
 const SUBMIT = { en: 'To submit a best practice, click here', fr: 'Pour soumettre une bonne pratique, cliquez ici', es: 'Para enviar una buena práctica, haz click aquí' }[lang];
 const ACTIONS = [
@@ -39,19 +38,6 @@ const ACTIONS = [
         <a class="btn btn-outline btn-lg" href={loc('/woa/')}>WOA<svg class="icon icon-arrow"><use href="#i-arrow" /></svg></a>
       </div>
     </div>
-    <nav class="home-ticker" aria-label={newsLabel}>
-      <div class="container ticker-row">
-        <a class="ticker-head" href={loc('/news/')}><svg class="icon"><use href="#i-news" /></svg>{newsLabel}<svg class="icon icon-arrow"><use href="#i-arrow" /></svg></a>
-        <ul class="ticker-list">
-          {ticker.map(n => (
-            <li><a href={url(n.path)}>
-              {imgOk(n.img) && <img src={b(n.img)} srcset={srcset(n.img)} style={phColor(n.img)} sizes="72px" alt="" loading="lazy" width="72" height="72" />}
-              <span><time datetime={n.date}>{fmtDateL(n.date, lang)}</time><strong>{n.title}</strong></span>
-            </a></li>
-          ))}
-        </ul>
-      </div>
-    </nav>
   </section>
 
   <!-- 2. Numbers -->
@@ -111,7 +97,24 @@ const ACTIONS = [
     </div>
   </section>
 
-  <!-- 7. OLY House -->
+  <!-- 7. News -->
+  <section class="section home-news">
+    <div class="container">
+      <div class="section-head"><h2>{newsLabel}</h2><a class="link-arrow" href={loc('/news/')}>{tr.more}<svg class="icon"><use href="#i-arrow" /></svg></a></div>
+      <a class="news-lead" href={url(lead.path)}>
+        <span class="news-lead-photo">{imgOk(lead.img) && <img src={b(lead.img)} srcset={srcset(lead.img)} style={phColor(lead.img)} sizes="(min-width: 1024px) 60vw, 100vw" alt="" loading="lazy" />}</span>
+        <span class="news-lead-body">
+          <span class="news-date"><svg class="icon icon-sm"><use href="#i-calendar" /></svg><time datetime={lead.date}>{fmtDateL(lead.date, lang)}</time></span>
+          <strong class="news-lead-title">{lead.title}</strong>
+          {lead.excerpt && <span class="news-lead-text">{lead.excerpt}</span>}
+          <span class="link-arrow">{tr.readMore}<svg class="icon"><use href="#i-arrow" /></svg></span>
+        </span>
+      </a>
+      <div class="grid grid-3 news-more">{more.map(n => <StoryCard item={n} showExcerpt={false} />)}</div>
+    </div>
+  </section>
+
+  <!-- 8. OLY House -->
   <section class="hero ld-band home-house">
     <div class="hero-bg"><img src={b('{{BASE}}/backgrounds/63.webp')} srcset={srcset('{{BASE}}/backgrounds/63.webp')} style={phColor('{{BASE}}/backgrounds/63.webp')} sizes="100vw" alt="" loading="lazy" /></div>
     <div class="container ld-band-inner">
@@ -133,22 +136,6 @@ const ACTIONS = [
   .home-open-lead { max-width: 44ch; font-size: var(--fs-lead); line-height: 1.45; color: #f0f0f0; }
   .home-open { flex-direction: column; justify-content: flex-end; align-items: stretch; }
   .home-open-inner { padding-bottom: var(--sp-7) !important; }
-  .home-ticker { position: relative; background: rgba(0, 0, 0, .62); border-top: 1px solid rgba(255, 255, 255, .18); }
-  .ticker-row { display: grid; gap: var(--sp-4) var(--sp-6); grid-template-columns: minmax(0, 1fr); align-items: center; padding-block: var(--sp-5); }
-  @media (min-width: 1024px) { .ticker-row { grid-template-columns: auto minmax(0, 1fr); } }
-  .ticker-head { display: inline-flex; align-items: center; min-height: 44px; gap: 10px; font-weight: 700; color: var(--c-gold); transition: color var(--t); }
-  .ticker-head:hover { color: var(--c-white); }
-  .ticker-head:hover .icon-arrow { transform: translateX(4px); }
-  .ticker-head .icon-arrow { transition: transform var(--t); }
-  .ticker-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-4); grid-template-columns: minmax(0, 1fr); }
-  @media (min-width: 834px) { .ticker-list { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--sp-5); } }
-  @media (max-width: 833px) { .ticker-list li:nth-child(n+2) { display: none; } }
-  .ticker-list a { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: var(--sp-3); align-items: start; color: var(--c-white); }
-  .ticker-list img { width: 72px; height: 72px; object-fit: cover; border-radius: var(--radius); }
-  .ticker-list span { display: grid; gap: 4px; }
-  .ticker-list time { font-size: var(--fs-xs); color: #cfcfcf; }
-  .ticker-list strong { font-size: var(--fs-small); line-height: 1.35; transition: color var(--t); }
-  .ticker-list a:hover strong { color: var(--c-gold); }
   .home-actions { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-4); grid-template-columns: minmax(0, 1fr); }
   @media (min-width: 640px) { .home-actions { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (min-width: 1200px) { .home-actions { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
@@ -170,7 +157,6 @@ const ACTIONS = [
   .act-black:hover .act-icon, .act-ink:hover .act-icon { color: var(--c-black); }
   .act-light:hover { background: var(--c-black); color: var(--c-white); }
   @media (max-width: 639px) { .act { min-height: 0; grid-template-rows: none; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: var(--sp-4); padding: var(--sp-5); } .act-icon { width: 36px; height: 36px; } .act-label { align-self: center; font-size: var(--fs-h4); } }
-  @media (prefers-reduced-motion: reduce) { .act:hover, .act:hover .act-arrow, .ticker-head:hover .icon-arrow { transform: none; } }
   .home-scroll { position: absolute; left: 50%; bottom: 20px; translate: -50% 0; display: grid; place-items: center; width: 48px; height: 48px; border: 1px solid rgba(255, 255, 255, .5); border-radius: 50%; color: var(--c-white); transition: background var(--t), color var(--t); }
   .home-scroll:hover { background: var(--c-white); color: var(--c-black); }
   .stats-band { padding-block: clamp(96px, 60px + 8vw, 200px); }
@@ -206,7 +192,7 @@ const ACTIONS = [
   .news-lead-title { font-size: var(--fs-h2); line-height: 1.12; letter-spacing: -0.02em; transition: color var(--t); }
   .news-lead:hover .news-lead-title { color: var(--c-grey-600); }
   .news-lead:hover .link-arrow { gap: 12px; }
-  .news-lead-text { color: var(--c-grey-700); font-size: var(--fs-lead); line-height: 1.5; }
+  .news-lead-text { color: var(--c-grey-700); font-size: var(--fs-lead); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
   @media (min-width: 834px) { .news-more { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
   .house-mark { display: inline-block; padding: 16px 20px; background: var(--c-white); border-radius: var(--radius-lg); }
   .house-mark img { display: block; width: 220px; height: auto; }
