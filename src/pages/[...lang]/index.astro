@@ -2,7 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import StoryCard from '../../components/StoryCard.astro';
 import { dataFor } from '../../lib/data';
-import { url, b, srcset, phColor, words, imgOk } from '../../lib/site';
+import { url, b, srcset, phColor, words, imgOk, vt } from '../../lib/site';
 import { sections } from '../../lib/sections';
 import { LANG_PARAMS, pageLang, t, L, navLabel, fmtDateL, fmtNum } from '../../lib/i18n';
 export function getStaticPaths() { return LANG_PARAMS; }
@@ -63,7 +63,7 @@ const ACTIONS = [
       <ul class="home-doors">
         {doors.map(d => (
           <li><a class="door" href={url(d.href)}>
-            <span class="door-photo"><img src={b(d.img)} srcset={srcset(d.img)} style={phColor(d.img)} sizes="(min-width: 1024px) 33vw, 100vw" alt="" loading="lazy" /></span>
+            <span class="door-photo"><img src={b(d.img)} srcset={srcset(d.img)} style={[phColor(d.img), vt('sec-' + d.key)].filter(Boolean).join(';')} sizes="(min-width: 1024px) 33vw, 100vw" alt="" loading="lazy" /></span>
             <span class="door-body">
               <strong class="door-title">{d.title}<svg class="icon"><use href="#i-arrow" /></svg></strong>
               <span class="door-lead">{d.lead}</span>
@@ -102,7 +102,7 @@ const ACTIONS = [
     <div class="container">
       <div class="section-head"><h2>{newsLabel}</h2><a class="link-arrow" href={loc('/news/')}>{tr.more}<svg class="icon"><use href="#i-arrow" /></svg></a></div>
       <a class="news-lead" href={url(lead.path)}>
-        <span class="news-lead-photo">{imgOk(lead.img) && <img src={b(lead.img)} srcset={srcset(lead.img)} style={phColor(lead.img)} sizes="(min-width: 1024px) 60vw, 100vw" alt="" loading="lazy" />}</span>
+        <span class="news-lead-photo">{imgOk(lead.img) && <img src={b(lead.img)} srcset={srcset(lead.img)} style={[phColor(lead.img), vt(lead.path)].filter(Boolean).join(';')} sizes="(min-width: 1024px) 60vw, 100vw" alt="" loading="lazy" />}</span>
         <span class="news-lead-body">
           <span class="news-date"><svg class="icon icon-sm"><use href="#i-calendar" /></svg><time datetime={lead.date}>{fmtDateL(lead.date, lang)}</time></span>
           <strong class="news-lead-title">{lead.title}</strong>

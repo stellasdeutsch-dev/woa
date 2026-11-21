@@ -1,6 +1,6 @@
 ---
 import StoryCard from '../StoryCard.astro';
-import { prose, b, fmtDate, url, ORIGIN, imgOk } from '../../lib/site';
+import { prose, b, fmtDate, url, ORIGIN, imgOk, vt } from '../../lib/site';
 import { crumbsFor, type Story } from '../../lib/data';
 import { langOf, L, t, fmtDateL, navLabel } from '../../lib/i18n';
 interface Props { story: Story; related: Story[]; kind: 'News' | 'Best Practice'; listHref: string; prev?: Story; next?: Story }
@@ -32,7 +32,7 @@ const crumbs = crumbsFor(story, lang);
       </div>
     </div>
   </header>
-  {img && <figure class="container art-figure"><img src={img} alt="" fetchpriority="high" /></figure>}
+  {img && <figure class="container art-figure"><img src={img} alt="" fetchpriority="high" style={vt(story.path)} /></figure>}
   <div class="container art-body">
     <div class="prose" set:html={html} />
   </div>

@@ -1,6 +1,6 @@
 ---
 // Full-screen opening of a section landing: photo, section name, one verbatim sentence, links to its pages.
-import { url, b, srcset, phColor } from '../../lib/site';
+import { url, b, srcset, phColor, vt } from '../../lib/site';
 import type { Section } from '../../lib/sections';
 import { langOf, L, t } from '../../lib/i18n';
 interface Props { s: Section }
@@ -8,7 +8,7 @@ const { s } = Astro.props;
 const lang = langOf(Astro.url.pathname); const tr = t(lang);
 ---
 <section class="hero ld-hero">
-  <div class="hero-bg"><img src={b(s.img)} srcset={srcset(s.img)} style={phColor(s.img)} sizes="100vw" alt="" fetchpriority="high" /></div>
+  <div class="hero-bg"><img src={b(s.img)} srcset={srcset(s.img)} style={[phColor(s.img), vt('sec-' + s.key)].filter(Boolean).join(';')} sizes="100vw" alt="" fetchpriority="high" /></div>
   <div class="container ld-hero-inner">
     <nav class="crumbs" aria-label={tr.breadcrumb}><a href={url(L('/', lang))}>{tr.home}</a><svg class="icon"><use href="#i-chevron" /></svg><span>{s.title}</span></nav>
     <h1 class="ld-title">{s.title}</h1>

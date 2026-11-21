@@ -182,6 +182,8 @@ export const srcset = (src?: string | null) => {
   return parts.length ? [...parts, `${b(src)} ${w}w`].join(', ') : undefined;
 };
 export const LOGO = `${BASE}/_img/logo-144.png`;
+// name that pairs the same photo on two pages, so it can travel from one to the other (view transitions, global.css)
+export const vt = (key: string) => { let h = 5381; for (const c of key) h = (h * 33 ^ c.charCodeAt(0)) >>> 0; return `--vt:vt-${h.toString(36)}`; };
 
 // Split a sentence into word spans for the scroll "light up" effect (text stays one readable line for screen readers).
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');

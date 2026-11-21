@@ -96,18 +96,51 @@ const original = ORIGIN + (origPath ?? stripLang(current));
         el.style.transitionDelay = `${(i % 6) * 60}ms`;
         el.classList.add('rv'); io.observe(el);
       }
-      // numbers grow to their final value (the final value is already in the HTML)
+      // big numbers roll into place digit by digit (the final value is already in the HTML and is what screen readers get)
       const nums = document.querySelectorAll<HTMLElement>('[data-count]');
       const co = new IntersectionObserver(entries => {
         for (const e of entries) {
           if (!e.isIntersecting) continue;
           const el = e.target as HTMLElement; co.unobserve(el);
-          const end = +el.dataset.count!; const suffix = el.dataset.suffix || ''; const t0 = performance.now(); const D = 1200;
-          const step = (t: number) => { const k = Math.min(1, (t - t0) / D); const v = Math.round(end * (1 - Math.pow(1 - k, 3))); el.textContent = v.toLocaleString({ fr: 'fr-FR', es: 'es-ES' }[el.dataset.locale || ''] || 'en-GB') + suffix; if (k < 1) requestAnimationFrame(step); };
-          requestAnimationFrame(step);
+          const final = el.textContent!.trim(); const lh = getComputedStyle(el).lineHeight;
+          el.style.setProperty('--lh', lh === 'normal' ? '1.2em' : lh);
+          el.setAttribute('aria-label', final);
+          let col = 0; const strips: [HTMLElement, number][] = [];
+          el.innerHTML = '';
+          for (const ch of final) {
+            if (!/\d/.test(ch)) { const s = document.createElement('span'); s.textContent = ch; s.setAttribute('aria-hidden', 'true'); el.append(s); continue; }
+            const od = document.createElement('span'); od.className = 'od'; od.setAttribute('aria-hidden', 'true');
+            const strip = document.createElement('span');
+            for (let k = 0; k < 20; k++) { const d = document.createElement('span'); d.textContent = String(k % 10); strip.append(d); }
+            strip.style.setProperty('--d', `${1500 + col * 110}ms`);
+            od.append(strip); el.append(od); strips.push([strip, 10 + +ch]); col++;
+          }
+          requestAnimationFrame(() => requestAnimationFrame(() => { for (const [st, n] of strips) st.style.translate = `0 calc(var(--lh) * -${n})`; }));
+          setTimeout(() => { el.textContent = final; el.removeAttribute('aria-label'); }, 1700 + col * 110);
         }
       }, { threshold: 0.6 });
       nums.forEach(n => co.observe(n));
+      // section titles: words rise out of their own masks when the title comes into view
+      const titles = [...document.querySelectorAll<HTMLElement>('.section-head h2, .ld-copy h2, .vb-title h2, .ld-band h2, .vb-step-head h2')].filter(h => !h.children.length && h.textContent!.trim());
+      const to = new IntersectionObserver(entries => {
+        for (const e of entries) { if (e.isIntersecting || e.boundingClientRect.top < 0) { e.target.classList.add('mw-in'); to.unobserve(e.target); } }
+      }, { rootMargin: '0px 0px -10% 0px' });
+      for (const h of titles) {
+        const parts = h.textContent!.trim().split(/\s+/);
+        h.innerHTML = parts.map((w, i) => `<span class="mw"><span style="--i:${i}">${w.replace(/&/g, '&amp;').replace(/</g, '&lt;')}</span></span>`).join(' ');
+        to.observe(h);
+      }
+      // call-to-action buttons lean towards the pointer (mouse and trackpad only)
+      if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        for (const btn of document.querySelectorAll<HTMLElement>('.hero-actions .btn, .ld-copy .btn, .ld-band-inner .btn, .header-cta')) {
+          btn.classList.add('mag');
+          btn.addEventListener('pointermove', ev => {
+            const r = btn.getBoundingClientRect(); const k = (v: number) => Math.max(-8, Math.min(8, v * .25));
+            btn.classList.add('mag-move'); btn.style.translate = `${k(ev.clientX - r.left - r.width / 2)}px ${k(ev.clientY - r.top - r.height / 2)}px`;
+          });
+          btn.addEventListener('pointerleave', () => { btn.classList.remove('mag-move'); btn.style.translate = ''; });
+        }
+      }
     }
   </script>
   <script>
