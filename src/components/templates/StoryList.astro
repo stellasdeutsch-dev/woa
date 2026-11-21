@@ -38,7 +38,10 @@ const crumbs = year ? [{ label: title, href: base }, { label: year }] : [];
   </div>
 </section>
 <style>
-  .year-pills { margin-top: var(--sp-3); justify-content: center; }
+  .year-pills { margin-top: var(--sp-3); }
+  .year-pills .pill { background: transparent; color: var(--c-white); border-color: rgba(255, 255, 255, .35); }
+  .year-pills .pill:hover { border-color: var(--c-white); }
+  .year-pills .pill[aria-current="page"] { background: var(--c-white); color: var(--c-black); border-color: var(--c-white); }
   .lead-story { margin-bottom: var(--sp-5); }
   .pager-gap { align-self: center; color: var(--c-grey-600); padding: 0 4px; }
 </style>
