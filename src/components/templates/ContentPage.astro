@@ -4,7 +4,9 @@ import PageHero from '../PageHero.astro';
 import Tabs from '../Tabs.astro';
 import Docs from '../Docs.astro';
 import { prose, b, BASE } from '../../lib/site';
-import { guideVisual } from '../../lib/guide-visual';
+import { guideVisual, bestPractices } from '../../lib/guide-visual';
+import { dataFor } from '../../lib/data';
+import { realFlag } from '../../lib/site';
 import { crumbsFor, type Page } from '../../lib/data';
 import { langOf, t } from '../../lib/i18n';
 interface Props { page: Page }
@@ -33,7 +35,16 @@ if (/\/olympian-org-email\//.test(page.path)) {
 }
 // NOA Guide chapters: visuals from the chapter's own text (topic cards, grant cards, figures, stages…)
 const guide = page.path.match(/\/noas\/noa-guide\/([a-z-]*)\/?$/);
-if (guide && guide[1] !== 'best-practices') {
+if (guide && guide[1] === 'best-practices') {
+  // country names in all three languages (plus the short forms the page uses) -> flag
+  const fold = (x: string) => x.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+  const codes = new Map<string, string>();
+  for (const l of ['en', 'fr', 'es'] as const) for (const n of dataFor(l).noas as any[]) codes.set(fold(n.country), n.code);
+  for (const [a, c] of [['usa', 'US'], ['eeuu', 'US'], ['taipei chinois', 'TW'], ['taipei chino', 'TW'], ['philippine', 'PH'], ['inde', 'IN'], ['allemagne', 'DE'], ['australie', 'AU'], ['suisse', 'CH'], ['malaisie', 'MY'], ['singapour', 'SG'], ['lituanie', 'LT'], ['japon', 'JP'], ['chili', 'CL'], ['zambie', 'ZM'], ['slovenie', 'SI'], ['georgie', 'GE'], ['pologne', 'PL'], ['namibie', 'NA'], ['colombie', 'CO'], ['nouvelle-zelande', 'NZ']] as const) if (!codes.has(a)) codes.set(a, c);
+  const $ = cheerio.load(html, null, false);
+  bestPractices($, (name: string) => { const c = codes.get(fold(name)); const f = c ? realFlag(c, 20) : null; return f ? { src: f.src, w: f.w, h: f.h } : null; });
+  html = $.html();
+} else if (guide) {
   const $ = cheerio.load(html, null, false);
   guideVisual($, guide[1], page.tabs.map(t => ({ href: b(t.href), label: t.label })));
   html = $.html();

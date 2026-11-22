@@ -180,3 +180,90 @@ function stakeholders($: CheerioAPI, r: any) {
     break;
   }
 }
+
+// Best Practices: the six groups get an index with counts and a heading with an icon; every practice becomes a card
+// with its photo (or an icon for its kind), the country with its flag, the text, "Label: value" lines as figures,
+// and its documents and links. All words stay as written.
+export type FlagFor = (name: string) => { src: string; w: number; h: number } | null;
+const SECTION_ICON = ['chat', 'design', 'target', 'leadership', 'grant', 'friendship'];
+const KIND: [RegExp, string][] = [
+  [/twitter/i, 'x'], [/facebook/i, 'facebook'], [/whats\s?app/i, 'chat'],
+  [/newsletter|bulletin|hoja informativa/i, 'newsletter'], [/magazine|revista|newspaper|journal|diario/i, 'news'],
+  [/website|site internet|sitio/i, 'website'], [/\bOLY\b/, 'oly'],
+  [/olympic day|journée olympique|día olímpico/i, 'torch'],
+  [/society|société|sociedad/i, 'heart'], [/service to olympians|aux olympiens|atletas olímpicos|initiatives|iniciativas/i, 'life'],
+  [/network|réseautage|comunicaciones/i, 'forum'], [/regional|régionaux|regionales/i, 'globe'],
+  [/terms of reference|termes de référence|términos de referencia/i, 'letter'], [/charity|caritatif|caridad/i, 'gift'],
+  [/membership|cotisation|cuotas/i, 'directory'], [/donation|dons|donaciones/i, 'grant'],
+  [/social enterprise|entreprise sociale|emprendimiento/i, 'skills'], [/corporate|entreprise|empresa/i, 'alliance'],
+  [/\bAC\b|\bCA\b/, 'excellence'], [/shared resources|ressources|recursos/i, 'columns'],
+  [/government|gouvernement|gobierno|ministry|ministère|ministerio/i, 'integrity'],
+  [/NOC|CNO|CON/, 'friendship'],
+];
+
+export function bestPractices($: CheerioAPI, flagFor: FlagFor) {
+  const r = $.root();
+  const groups: { id: string; title: string; n: number; icon: string }[] = [];
+  r.contents().toArray().forEach((node: any) => {
+    if (node.type !== 'text') return;
+    const title = plain(node.data || ''); if (!title) return;
+    const ul = $(node).nextAll().first(); if (!ul.is('ul')) return;
+    const i = groups.length; const id = `bp-${i + 1}`;
+    const items = ul.children('li').toArray();
+    groups.push({ id, title, n: items.length, icon: SECTION_ICON[i] || 'practice' });
+    $(node).replaceWith(`<h2 class="bp-head" id="${id}"><span class="vb-ico">${icon(SECTION_ICON[i] || 'practice')}</span><span>${esc(title)}</span><span class="bp-count">${items.length}</span></h2>`);
+    const cards = items.map((li: any) => card($, $(li), flagFor)).join('');
+    ul.replaceWith(`<ul class="bp-grid">${cards}</ul>`);
+  });
+  if (groups.length >= 2) {
+    const nav = `<nav class="bp-index" aria-label="${esc(groups.map(g => g.title).join(' · ')).slice(0, 120)}">${groups.map(g => `<a class="vb-bp-chip" href="#${g.id}"><span class="vb-ico">${icon(g.icon)}</span><span class="bp-chip-t">${esc(g.title)}</span><span class="bp-count">${g.n}</span></a>`).join('')}</nav>`;
+    r.find('h2.bp-head').first().before(nav);
+  }
+}
+
+function flagsOf(where: string, flagFor: FlagFor) {
+  const parts = where.split(/\s*,\s*|\s+and\s+|\s+et\s+|\s+y\s+/).filter(Boolean);
+  const found: { src: string; w: number; h: number }[] = [];
+  for (const p of parts) {
+    const f = flagFor(p);
+    if (f) { found.push(f); continue; }
+    // names written one after another without commas ("Japon Canada Nouvelle-Zélande")
+    const words = p.split(/\s+/);
+    for (let a = 0; a < words.length;) {
+      let hit = 0;
+      for (let b = words.length; b > a; b--) { const g = flagFor(words.slice(a, b).join(' ')); if (g) { found.push(g); hit = b - a; break; } }
+      a += hit || 1;
+    }
+  }
+  return found.slice(0, 4);
+}
+
+function card($: CheerioAPI, li: any, flagFor: FlagFor) {
+  li.find('.vb-check').remove();
+  const box = li.children('.vb-li').length ? li.children('.vb-li') : li;
+  const img = box.find('img').first();
+  const heads = box.find('h1,h2,h3,h4,h5,h6').toArray();
+  const kind = heads[0] ? plain($(heads[0]).text()) : '';
+  const where = heads[1] ? plain($(heads[1]).text()) : '';
+  // a table that only repeats the paragraph above it is left out
+  box.find('table').each((_: number, t: any) => { const tt = plain($(t).text()); if (box.find('p').toArray().some((p: any) => !$(p).closest('table').length && plain($(p).text()) === tt)) $(t).remove(); });
+  const paras: string[] = []; const stats: [string, string][] = [];
+  box.find('p').each((_: number, p: any) => {
+    if ($(p).closest('table').length) return;
+    const lines = ($(p).html() || '').split(/<br\s*\/?>/i).map(h => h.trim()).filter(h => plain($('<i>' + h + '</i>').text()));
+    const keep: string[] = [];
+    for (const h of lines) { const t = plain($('<i>' + h + '</i>').text()); const m = t.match(/^([^:]{2,28}):\s*(.+)$/); if (m && !/<a\b/.test(h)) stats.push([m[1], m[2]]); else keep.push(h); }
+    if (keep.length) paras.push(keep.join('<br>'));
+  });
+  const extra = box.find('table').length ? $.html(box.find('table')) : '';
+  const docs = box.find('a.doc').toArray().map((a: any) => `<li><a class="vb-bp-doc" href="${esc($(a).attr('href') || '')}" target="_blank" rel="noopener">${icon('doc', 'icon icon-sm')}<span>${esc(plain($(a).text()))}</span></a></li>`).join('');
+  const links = box.find('a').not('.doc').toArray().filter((a: any) => !$(a).closest('p').length).map((a: any) => `<a class="vb-bp-link" href="${esc($(a).attr('href') || '')}"${$(a).attr('target') ? ' target="_blank" rel="noopener"' : ''}><span>${esc(plain($(a).text()))}</span>${icon('arrow', 'icon icon-sm')}</a>`).join('');
+  const k = KIND.find(([rx]) => rx.test(kind))?.[1] || 'practice';
+  const flags = where ? flagsOf(where, flagFor) : [];
+  const media = img.length ? `<div class="bp-media"><img src="${esc(img.attr('src') || '')}" alt="" loading="lazy"></div>` : '';
+  return `<li class="bp-card${media ? ' has-img' : ''}">${media}<div class="bp-body"><p class="bp-kind"><span class="bp-kind-ico">${icon(k)}</span><span>${esc(kind)}</span></p>`
+    + (where ? `<p class="bp-where">${flags.map(f => `<img class="bp-flag" src="${f.src}" alt="" width="${f.w}" height="${f.h}" loading="lazy">`).join('')}<span>${esc(where)}</span></p>` : '')
+    + paras.map(p => `<p class="bp-text">${p}</p>`).join('') + extra
+    + (stats.length ? `<dl class="bp-stats">${stats.map(([a, b]) => `<div><dt>${esc(a)}</dt><dd>${esc(b)}</dd></div>`).join('')}</dl>` : '')
+    + (docs ? `<ul class="bp-docs">${docs}</ul>` : '') + (links ? `<p class="bp-links">${links}</p>` : '') + `</div></li>`;
+}
