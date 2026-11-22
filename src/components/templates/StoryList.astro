@@ -4,6 +4,7 @@ import StoryCard from '../StoryCard.astro';
 import { url } from '../../lib/site';
 import type { Story } from '../../lib/data';
 import { langOf, L, t } from '../../lib/i18n';
+import { storyFlags } from '../../lib/countries';
 interface Props { title: string; base: string; all: Story[]; items: Story[]; page?: number; pages?: number; year?: string; bg?: string; intro?: any }
 const { title, all, items, page = 1, pages = 1, year, bg } = Astro.props;
 const lang = langOf(Astro.url.pathname); const tr = t(lang);
@@ -11,6 +12,11 @@ const base = L(Astro.props.base, lang);
 const years = [...new Set(all.map(s => s.date!.slice(0, 4)))].sort().reverse();
 const [first, ...rest] = items;
 const pageHref = (n: number) => url(n === 1 ? base : `${base}page/${n}/`);
+// Best Practices: a flag for the country each practice names, and a bar per year that opens that year
+const isBP = Astro.props.base === '/best-practices/';
+const flagsOf = (s: Story) => (isBP ? storyFlags(s, lang) : []);
+const perYear = isBP ? [...years].reverse().map(y => ({ y, n: all.filter(s => s.date!.startsWith(y)).length })) : [];
+const maxYear = Math.max(1, ...perYear.map(p => p.n));
 const crumbs = year ? [{ label: title, href: base }, { label: year }] : [];
 ---
 <PageHero title={year ? `${title} ${year}` : title} crumbs={crumbs} bg={bg} compact>
@@ -22,9 +28,14 @@ const crumbs = year ? [{ label: title, href: base }, { label: year }] : [];
 <section class="section-tight">
   <div class="container">
     <slot />
-    {page === 1 && first && <div class="lead-story"><StoryCard item={first} size="lg" headingLevel="h2" /></div>}
+    {isBP && page === 1 && (
+      <nav class="bp-years" aria-label={tr.year}>
+        {perYear.map(p => <a class="vb-bp-year" href={url(`${base}year/${p.y}/`)} aria-current={p.y === year ? 'page' : undefined} style={`--h:${(p.n / maxYear).toFixed(4)}`}><span class="bp-year-n">{p.n}</span><span class="bp-year-bar" aria-hidden="true" /><span class="bp-year-y">{p.y}</span></a>)}
+      </nav>
+    )}
+    {page === 1 && first && <div class="lead-story"><StoryCard item={first} size="lg" headingLevel="h2" flags={flagsOf(first)} /></div>}
     <div class="grid grid-3">
-      {(page === 1 ? rest : items).map(s => <StoryCard item={s} headingLevel="h2" />)}
+      {(page === 1 ? rest : items).map(s => <StoryCard item={s} headingLevel="h2" flags={flagsOf(s)} />)}
     </div>
     {pages > 1 && (
       <nav class="pager" aria-label={tr.pages}>
@@ -38,6 +49,20 @@ const crumbs = year ? [{ label: title, href: base }, { label: year }] : [];
   </div>
 </section>
 <style>
+  .bp-years { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); align-items: end; gap: 6px; height: 180px; margin-bottom: var(--sp-7); padding: var(--sp-4) var(--sp-4) var(--sp-3); border: 1px solid var(--c-grey-200); border-radius: var(--radius-lg); }
+  .vb-bp-year { display: grid; grid-template-rows: auto 1fr auto; justify-items: center; align-items: end; gap: 6px; height: 100%; padding: 4px 0; border-radius: var(--radius); color: var(--c-black); transition: background-color 180ms ease; }
+  .vb-bp-year:hover { background: var(--c-grey-50); }
+  .bp-year-n { font-weight: 700; font-size: var(--fs-small); font-variant-numeric: tabular-nums; line-height: 1; }
+  .bp-year-bar { display: block; width: min(100%, 36px); height: calc(var(--h) * 100%); min-height: 4px; border-radius: 4px 4px 0 0; background: var(--c-gold); transform-origin: bottom; transition: background-color 180ms ease; }
+  .vb-bp-year:hover .bp-year-bar, .vb-bp-year[aria-current] .bp-year-bar { background: var(--c-black); }
+  .bp-year-y { font-size: var(--fs-xs); color: var(--c-grey-700); font-variant-numeric: tabular-nums; line-height: 1; }
+  @media (max-width: 639px) { .bp-years { height: 150px; gap: 2px; padding-inline: var(--sp-2); } .bp-year-y { font-size: 10px; letter-spacing: -0.02em; } .bp-year-n { font-size: 11px; } }
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      :global(html.js:not(.still):not(.lite)) .bp-year-bar { animation: bp-grow both cubic-bezier(.2, .7, .1, 1); animation-timeline: view(); animation-range: entry 10% cover 40%; }
+    }
+  }
+  @keyframes bp-grow { from { transform: scaleY(0); } to { transform: none; } }
   .year-pills { margin-top: var(--sp-3); }
   .year-pills .pill { background: transparent; color: var(--c-white); border-color: rgba(255, 255, 255, .35); }
   .year-pills .pill:hover { border-color: var(--c-white); }

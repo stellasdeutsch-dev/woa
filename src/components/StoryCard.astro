@@ -1,20 +1,23 @@
 ---
 import { b, imgOk, srcset, phColor, vt } from '../lib/site';
 import { langOf, fmtDateL } from '../lib/i18n';
-interface Props { item: { path: string; title: string; date?: string | null; img?: string | null; excerpt?: string }; size?: 'lg' | 'md'; showExcerpt?: boolean; headingLevel?: 'h2' | 'h3' }
-const { item, size = 'md', showExcerpt = true, headingLevel = 'h3' } = Astro.props;
+interface Props { item: { path: string; title: string; date?: string | null; img?: string | null; excerpt?: string }; size?: 'lg' | 'md'; showExcerpt?: boolean; headingLevel?: 'h2' | 'h3'; flags?: { src: string; w: number; h: number; name: string }[] }
+const { item, size = 'md', showExcerpt = true, headingLevel = 'h3', flags = [] } = Astro.props;
 const H = headingLevel;
 const lang = langOf(Astro.url.pathname);
 ---
 <article class:list={['card', 'story', `story-${size}`]}>
   <div class="card-media">{imgOk(item.img) ? <img src={b(item.img)} srcset={srcset(item.img)} style={[phColor(item.img), vt(item.path)].filter(Boolean).join(';')} sizes={size === 'lg' ? '(min-width: 834px) 60vw, 100vw' : '(min-width: 1200px) 384px, (min-width: 640px) 50vw, 100vw'} alt="" loading="lazy" decoding="async" /> : <span class="media-ph"><img src={b('{{BASE}}/images/world-olympians-association-logo-v2.png')} alt="" loading="lazy" /></span>}</div>
   <div class="card-body">
-    {item.date && <p class="card-meta"><svg class="icon"><use href="#i-calendar" /></svg><time datetime={item.date}>{fmtDateL(item.date, lang)}</time></p>}
+    {item.date && <p class="card-meta"><svg class="icon"><use href="#i-calendar" /></svg><time datetime={item.date}>{fmtDateL(item.date, lang)}</time>{flags.length > 0 && <span class="card-flags">{flags.map(f => <img src={f.src} alt="" width={f.w} height={f.h} loading="lazy" />)}<span>{flags.map(f => f.name).join(', ')}</span></span>}</p>}
     <H class="card-title"><a class="card-link" href={b('{{BASE}}' + item.path)}>{item.title}</a></H>
     {showExcerpt && item.excerpt && <p class="card-text">{item.excerpt}</p>}
   </div>
 </article>
 <style>
+  .card-flags { display: inline-flex; align-items: center; gap: 5px; margin-left: 6px; padding-left: 10px; border-left: 1px solid var(--c-grey-200); min-width: 0; }
+  .card-flags img { width: auto; height: 13px; border-radius: 2px; box-shadow: 0 0 0 1px rgba(0, 0, 0, .12); }
+  .card-flags span { margin-left: 2px; font-weight: 600; color: var(--c-gold-dark); }
   .story-lg .card-title { font-size: var(--fs-h3); }
   @media (min-width: 834px) { .story-lg { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); } .story-lg .card-media { aspect-ratio: auto; min-height: 380px; } .story-lg .card-body { padding: var(--sp-7); justify-content: center; } }
 </style>
