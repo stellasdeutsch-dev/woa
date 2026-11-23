@@ -4,6 +4,7 @@
 // Leadership: the Executive Committee numbers as figures. Finance: running costs as cards, funding sources as tiles.
 // Stakeholders: the three aims as cards, the two relationship lists as numbered stages with an arrow between them.
 import type { CheerioAPI } from 'cheerio';
+import { srcset } from './site';
 
 const icon = (id: string, cls = 'icon') => `<svg class="${cls}" aria-hidden="true"><use href="#i-${id}"/></svg>`;
 const plain = (s: string) => s.replace(/ /g, ' ').replace(/\s+/g, ' ').trim();
@@ -260,7 +261,9 @@ function card($: CheerioAPI, li: any, flagFor: FlagFor) {
   const links = box.find('a').not('.doc').toArray().filter((a: any) => !$(a).closest('p').length).map((a: any) => `<a class="vb-bp-link" href="${esc($(a).attr('href') || '')}"${$(a).attr('target') ? ' target="_blank" rel="noopener"' : ''}><span>${esc(plain($(a).text()))}</span>${icon('arrow', 'icon icon-sm')}</a>`).join('');
   const k = KIND.find(([rx]) => rx.test(kind))?.[1] || 'practice';
   const flags = where ? flagsOf(where, flagFor) : [];
-  const media = img.length ? `<div class="bp-media"><img src="${esc(img.attr('src') || '')}" alt="" loading="lazy"></div>` : '';
+  // smaller WebP copies (480/960 px) instead of the original files, some of which are 4000+ px wide
+  const src = img.attr('src') || ''; const set = srcset(src);
+  const media = img.length ? `<div class="bp-media"><img src="${esc(src)}"${set ? ` srcset="${esc(set)}" sizes="(min-width: 1024px) 384px, (min-width: 640px) 50vw, 100vw"` : ''} alt="" loading="lazy" decoding="async"></div>` : '';
   return `<li class="bp-card${media ? ' has-img' : ''}">${media}<div class="bp-body"><p class="bp-kind"><span class="bp-kind-ico">${icon(k)}</span><span>${esc(kind)}</span></p>`
     + (where ? `<p class="bp-where">${flags.map(f => `<img class="bp-flag" src="${f.src}" alt="" width="${f.w}" height="${f.h}" loading="lazy">`).join('')}<span>${esc(where)}</span></p>` : '')
     + paras.map(p => `<p class="bp-text">${p}</p>`).join('') + extra

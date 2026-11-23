@@ -6,13 +6,13 @@ import { LANG_PARAMS, pageLang, t as tFor, L as Lx } from '../../../../lib/i18n'
 export function getStaticPaths() { return LANG_PARAMS; }
 const lang = pageLang(Astro.params); const tr = tFor(lang); const D = dataFor(lang);
 const page = D.page; const leadership = D.leadership;
-import { b, prose, imgOk } from '../../../../lib/site';
+import { b, prose, imgOk, pageDesc } from '../../../../lib/site';
 
 const p = page('/woa/leadership/');
 const split = (n: string) => n.replace(/\s+OLY$/, '');
 const hasOly = (n: string) => /\sOLY$/.test(n);
 ---
-<Base title={p.title} origPath={p.orig} image={b(p.bg)}>
+<Base title={p.title} origPath={p.orig} description={pageDesc(p)} image={b(p.bg)}>
   <PageHero title={p.title} crumbs={[{ label: 'WOA', href: '/woa/' }, { label: p.title }]} bg={b(p.bg)} />
   <section class="section-tight">
     <div class="container">

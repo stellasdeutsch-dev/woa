@@ -29,7 +29,7 @@ const crumbs = year ? [{ label: title, href: base }, { label: year }] : [];
   <div class="container">
     <slot />
     {isBP && page === 1 && (
-      <nav class="bp-years" aria-label={tr.year}>
+      <nav class="bp-years" aria-label={`${title}: ${tr.year}`}>
         {perYear.map(p => <a class="vb-bp-year" href={url(`${base}year/${p.y}/`)} aria-current={p.y === year ? 'page' : undefined} style={`--h:${(p.n / maxYear).toFixed(4)}`}><span class="bp-year-n">{p.n}</span><span class="bp-year-bar" aria-hidden="true" /><span class="bp-year-y">{p.y}</span></a>)}
       </nav>
     )}

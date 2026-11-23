@@ -10,10 +10,11 @@ import { LANG_PARAMS, pageLang, t as tFor, L as Lx } from '../../../../../lib/i1
 export function getStaticPaths() { return LANG_PARAMS; }
 const lang = pageLang(Astro.params); const tr = tFor(lang); const D = dataFor(lang);
 const page = D.page;
-import { b, url, BASE } from '../../../../../lib/site';
+import { b, url, BASE, fixLinks } from '../../../../../lib/site';
 
 const p = page('/oly-house/a-message-from-president-joel-bouzou/2020/');
 const $ = cheerio.load(b(p.body), null, false);
+fixLinks($, $.root());
 const kicker = $('h3').first().text().trim();
 const heading = $('h2').first().html()!.trim();
 const ps = $('p').toArray();

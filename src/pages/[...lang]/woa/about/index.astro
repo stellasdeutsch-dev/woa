@@ -17,7 +17,7 @@ const tab = (enPath: string, en: string) => page('/woa/about/').tabs.find(x => s
 const aboutTitle = navLabel('/woa/about/', 'About', lang);
 const STATS = sections(lang).STATS;
 const loc = (h: string) => url(Lx(h, lang));
-import { b, url, prose, BASE } from '../../../../lib/site';
+import { b, url, prose, BASE, pageDesc } from '../../../../lib/site';
 
 const p = page('/woa/about/');
 const $ = cheerio.load(p.body);
@@ -37,7 +37,7 @@ const stat1 = leadText.match(/over ([\d,]+) living Olympians/);
 const stat2 = paras[0]?.match(/There are (\d+) National Olympians Associations/);
 const facts = (s: string) => s.replace(/(over [\d,]+ living Olympians|\d+ National Olympians Associations \(NOAs\))/g, '<strong class="fact">$1</strong>');
 ---
-<Base title={aboutTitle} origPath={p.orig} image={b(p.bg)}>
+<Base title={aboutTitle} origPath={p.orig} description={pageDesc(p)} image={b(p.bg)}>
   <PageHero title={aboutTitle} crumbs={[{ label: 'WOA', href: '/woa/' }, { label: aboutTitle }]} bg={b(p.bg)} lead={leadText} />
   <Tabs tabs={p.tabs} current={BASE + Lx('/woa/about/', lang)} />
 

@@ -66,5 +66,37 @@
  {
   "from": "/olympians/oly-art/",
   "to": "/olympians/oly-arts/"
+ },
+ {
+  "from": "/olympians-party/",
+  "to": "/news/1010/join-woa-s-oly-celebration-in-pyeongchang/"
+ },
+ {
+  "from": "/development-grants/",
+  "to": "/grants/development-grants/"
+ },
+ {
+  "from": "/oly-house/a-message-from-president-joel-bouzou/",
+  "to": "/oly-house/a-message-from-president-joel-bouzou/2020/"
+ },
+ {
+  "from": "/e-oly-house-milano-cortina-2026/",
+  "to": "/oly-house/"
+ },
+ {
+  "from": "/oly-house-milano-cortina-2026-hub/",
+  "to": "/oly-house/"
+ },
+ {
+  "from": "/oly-house-milano-cortina-2026/",
+  "to": "/oly-house/"
+ },
+ {
+  "from": "/registration-oly-house-milano-cortina-2026/",
+  "to": "/oly-house/"
+ },
+ {
+  "from": "/join-us-milano-cortina-2026/home-oly-house-paris-2024/",
+  "to": "/oly-house/2024/"
  }
 ]

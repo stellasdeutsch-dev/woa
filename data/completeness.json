@@ -12,11 +12,30 @@
   ]
  },
  {
+  "original": "/olympians/wof/",
+  "target": "/olympians/wof/",
+  "exists": true,
+  "missing": [
+   "time",
+   "location"
+  ]
+ },
+ {
+  "original": "/olympians/wof/?tab=agenda",
+  "target": "/olympians/wof/",
+  "exists": true,
+  "missing": [
+   "time",
+   "location"
+  ]
+ },
+ {
   "original": "/olympians/wof/?tab=e-wof",
   "target": "/olympians/wof/e-wof/",
   "exists": true,
   "missing": [
-   "e -wof"
+   "e -wof",
+   "location"
   ]
  },
  {
@@ -29,6 +48,16 @@
    "2. channel",
    "3. message",
    "4. frequency"
+  ]
+ },
+ {
+  "original": "/noas/noa-guide/project-delivery/",
+  "target": "/noas/noa-guide/project-delivery/",
+  "exists": true,
+  "missing": [
+   "noa development - $1,000 usd grants per annum",
+   "service to olympians - 5 x $5,000 usd grants per annum",
+   "service to society - 5 x $5,000 usd grants per annum"
   ]
  },
  {

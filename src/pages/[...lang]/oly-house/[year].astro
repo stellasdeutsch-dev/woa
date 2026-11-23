@@ -1,4 +1,5 @@
 ---
+import { pageDesc } from '../../../lib/site';
 import Base from '../../../layouts/Base.astro';
 import OlyHouse from '../../../components/templates/OlyHouse.astro';
 import { dataFor } from '../../../lib/data';
@@ -8,4 +9,4 @@ const lang = pageLang(Astro.params);
 const year = Astro.params.year!;
 const p = dataFor(lang).page(`/oly-house/${year}/`);
 ---
-<Base title={`${p.title} ${year}`} origPath={p.orig}><OlyHouse page={p} year={year} /></Base>
+<Base title={`${p.title} ${year}`} origPath={p.orig} description={pageDesc(p)}><OlyHouse page={p} year={year} /></Base>

@@ -6,7 +6,7 @@ import { LANG_PARAMS, pageLang, t as tFor, L as Lx, navLabel } from '../../../..
 export function getStaticPaths() { return LANG_PARAMS; }
 const lang = pageLang(Astro.params); const tr = tFor(lang); const D = dataFor(lang);
 const page = D.page; const noas = D.noas;
-import { b, realFlag } from '../../../../lib/site';
+import { b, realFlag, pageDesc } from '../../../../lib/site';
 
 const p = page('/noas/noa-directory/');
 // French and Spanish names: alphabetical in that language, "États-Unis" under E
@@ -19,7 +19,7 @@ const isPhone = (l: string) => /^(Phone|Téléphone|Teléfono)$/.test(l);
 const W = { en: { contact: 'Contact Details', order: 'in alphabetical order' }, fr: { contact: 'Coordonnées', order: 'par ordre alphabétique' }, es: { contact: 'Información de contacto', order: 'en orden alfabético' } }[lang];
 const telHref = (v: string) => 'tel:' + v.replace(/[^\d+]/g, '');
 ---
-<Base title={p.title} origPath={p.orig} image={b(p.bg)}>
+<Base title={p.title} origPath={p.orig} description={pageDesc(p)} image={b(p.bg)}>
   <PageHero title={p.title} crumbs={[{ label: navLabel('/noas/', 'NOAs', lang), href: '/noas/' }, { label: p.title }]} bg={b(p.bg)} compact>
     <div class="dir-search">
       <svg class="icon"><use href="#i-search" /></svg>

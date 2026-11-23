@@ -7,7 +7,7 @@ import { LANG_PARAMS, pageLang, t as tFor, L as Lx } from '../../../../lib/i18n'
 export function getStaticPaths() { return LANG_PARAMS; }
 const lang = pageLang(Astro.params); const tr = tFor(lang); const D = dataFor(lang);
 const page = D.page;
-import { b, prose } from '../../../../lib/site';
+import { b, prose, pageDesc } from '../../../../lib/site';
 
 const p = page('/olympians/health/');
 const $ = cheerio.load(b(p.body), null, false);
@@ -31,7 +31,7 @@ const kids = $.root().children().toArray(); const ulIdx = kids.findIndex(e => (e
 const rest = kids.slice(ulIdx >= 0 ? ulIdx + 1 : 3).map(e => $.html(e)).join('');
 const { html: restHtml } = prose(rest, { lang });
 ---
-<Base title={p.title} origPath={p.orig} image={b(p.bg)}>
+<Base title={p.title} origPath={p.orig} description={pageDesc(p)} image={b(p.bg)}>
   <PageHero title={p.title} crumbs={[{ label: navLabel('/olympians/', 'Olympians', lang), href: '/olympians/' }, { label: 'Health' }]} bg={b(p.bg)} />
   <section class="section">
     <div class="container">

@@ -10,10 +10,12 @@ import { url, BASE, ORIGIN } from '../lib/site';
 import { altPath } from '../lib/data';
 import { langOf, t, LANGS, stripLang } from '../lib/i18n';
 
-interface Props { title: string; description?: string; current?: string; image?: string | null; origPath?: string; type?: string; noindex?: boolean; search?: boolean }
-const { title, description = 'The member organisation of Olympians - for Olympians. Bringing Olympic values to life.', current = Astro.url.pathname.replace(BASE, ''), image, origPath, type = 'Page', noindex = false, search = true } = Astro.props;
+interface Props { title: string; canonical?: string; description?: string; current?: string; image?: string | null; origPath?: string; type?: string; noindex?: boolean; search?: boolean }
+const { title, canonical, description = 'The member organisation of Olympians - for Olympians. Bringing Olympic values to life.', current = Astro.url.pathname.replace(BASE, ''), image, origPath, type = 'Page', noindex = false, search = true } = Astro.props;
 const lang = langOf(Astro.url.pathname); const tr = t(lang);
-const fullTitle = title === 'World Olympians Association' || title === tr.org ? title : `${title} | ${tr.org}`;
+// long titles drop the organisation name so search results show the title itself
+const fullTitle = title === 'World Olympians Association' || title === tr.org || title.length + tr.org.length > 67 ? title : `${title} | ${tr.org}`;
+const canonicalHref = new URL(canonical ? url(canonical) : Astro.url.pathname, Astro.site).href;
 const alternates = LANGS.map(l => ({ l, href: new URL(url(altPath(current, lang, l)), Astro.site).href }));
 const ogImage = image ? new URL(image, Astro.site).href : new URL(url('/images/og-image-logo.jpg'), Astro.site).href;
 const original = ORIGIN + (origPath ?? stripLang(current));
@@ -35,9 +37,12 @@ const original = ORIGIN + (origPath ?? stripLang(current));
   <meta property="og:description" content={description} />
   <meta property="og:image" content={ogImage} />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonicalHref} />
+  <link rel="canonical" href={canonicalHref} />
   <meta name="theme-color" content="#ffffff" />
   {noindex && <meta name="robots" content="noindex" />}
   {alternates.length > 1 && alternates.map(a => <link rel="alternate" hreflang={a.l} href={a.href} />)}
+  {alternates.length > 1 && <link rel="alternate" hreflang="x-default" href={alternates[0].href} />}
   <link rel="icon" type="image/png" sizes="32x32" href={url('/favicon-32x32.png')} />
   <link rel="icon" type="image/png" sizes="16x16" href={url('/favicon-16x16.png')} />
   <link rel="apple-touch-icon" sizes="180x180" href={url('/apple-touch-icon.png')} />

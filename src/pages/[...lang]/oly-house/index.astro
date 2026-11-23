@@ -1,4 +1,5 @@
 ---
+import { pageDesc } from '../../../lib/site';
 import Base from '../../../layouts/Base.astro';
 import OlyHouse from '../../../components/templates/OlyHouse.astro';
 import { dataFor } from '../../../lib/data';
@@ -7,4 +8,4 @@ export function getStaticPaths() { return LANG_PARAMS; }
 const lang = pageLang(Astro.params);
 const p = dataFor(lang).page('/oly-house/');
 ---
-<Base title={p.title} origPath={p.orig}><OlyHouse page={p} /></Base>
+<Base title={p.title} origPath={p.orig} description={pageDesc(p)}><OlyHouse page={p} /></Base>

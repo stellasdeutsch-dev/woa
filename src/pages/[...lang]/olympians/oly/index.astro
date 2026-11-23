@@ -7,7 +7,7 @@ import { LANG_PARAMS, pageLang, t as tFor, L as Lx } from '../../../../lib/i18n'
 export function getStaticPaths() { return LANG_PARAMS; }
 const lang = pageLang(Astro.params); const tr = tFor(lang); const D = dataFor(lang);
 const page = D.page;
-import { b, url, prose, tidyFormHtml } from '../../../../lib/site';
+import { b, url, prose, tidyFormHtml, pageDesc } from '../../../../lib/site';
 
 const p = page('/olympians/oly/');
 const $ = cheerio.load(b(p.body), null, false);
@@ -39,7 +39,7 @@ const longJoin = join.replace(/<[^>]+>/g, '').length > 160;
 import { navLabel } from '../../../../lib/i18n';
 import OlyChart from '../../../../components/OlyChart.astro';
 ---
-<Base title={p.title} origPath={p.orig} image={b(p.bg)}>
+<Base title={p.title} origPath={p.orig} description={pageDesc(p)} image={b(p.bg)}>
   <PageHero title={p.title} crumbs={[{ label: navLabel('/olympians/', 'Olympians', lang), href: '/olympians/' }, { label: 'OLY' }]} bg={b(p.bg)}>
     {!longJoin && <p class="lead" set:html={join} />}
     <div><a class="btn btn-gold" href="#register"><svg class="icon"><use href="#i-oly" /></svg>{legend}</a></div>

@@ -46,7 +46,9 @@ export type Toc = { id: string; text: string }[];
 const HALF = /name|first|last|e-?mail|phone|tel|date/i;
 const NOT_HALF = /position|organi[sz]|venue|title|project|company|user/i;
 export function tidyFormHtml(html: string) { const $ = cheerio.load(`<div id="r">${html}</div>`, null, false); tidyForms($, $('#r')); return $('#r').html()!; }
+const plainText = (t: string) => t.replace(/\s+/g, ' ').replace(/[:*\s]+$/, '').trim();
 function tidyForms($: cheerio.CheerioAPI, r: cheerio.Cheerio<any>) {
+  const ids = new Set<string>(r.find('[id]').map((_, e) => $(e).attr('id')).get());
   r.find('form').each((_, f) => {
     const $f = $(f);
     $f.find('label').each((_, l) => {
@@ -59,8 +61,24 @@ function tidyForms($: cheerio.CheerioAPI, r: cheerio.Cheerio<any>) {
       const half = next.is('input') && /^(text|email|tel|date|)$/.test(next.attr('type') || '') && HALF.test(key) && !NOT_HALF.test(key);
       const field = $(`<div class="field${half ? ' field-half' : ''}"></div>`);
       $l.before(field); field.append($l, next);
+      // the label names its control (screen readers, clicking the label focuses the field); date parts get their own names
+      const ctrls = next.is('ul') ? next.find('select') : next;
+      const base = 'f-' + (String(ctrls.first().attr('name') || $l.text()).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 40) || 'field');
+      let id = base; for (let k = 2; ids.has(id); k++) id = `${base}-${k}`; ids.add(id);
+      $l.attr('id', `${id}-label`);
+      ctrls.each((k, c) => { const $c = $(c); if (!$c.attr('id')) $c.attr('id', k ? `${id}-${k + 1}` : id); if (k) { const o = plainText($c.find('option').first().text()); $c.attr('aria-label', o ? `${plainText($l.text())} ${o}` : plainText($l.text())); } });
+      $l.attr('for', ctrls.first().attr('id'));
     });
     $f.find('br').remove();
+    // controls left without a label ("Other" boxes, extra photo uploads): named by their placeholder or the field above
+    $f.find('input,select,textarea').each((_, c) => {
+      const $c = $(c); const t = $c.attr('type');
+      if (['hidden', 'submit', 'button', 'checkbox', 'radio'].includes(t || '') || $c.attr('aria-label') || $c.closest('label').length) return;
+      const id = $c.attr('id'); if (id && $f.find(`label[for="${id}"]`).length) return;
+      const prevLabel = $c.prevAll('.field, ul').first().find('label').first().text() || $c.parent().prevAll('.field').first().find('label').first().text() || $f.find('.field label').last().text();
+      const name = $c.attr('placeholder') || plainText(prevLabel);
+      if (name) $c.attr('aria-label', name);
+    });
     // runs of fields, checkboxes and the button (directly in the form or in a fieldset) -> one grid
     $f.find('fieldset').add($f).each((_, box) => {
       const kids = $(box).children().toArray();
@@ -85,10 +103,22 @@ function tidyForms($: cheerio.CheerioAPI, r: cheerio.Cheerio<any>) {
   });
 }
 
+// links from the original text: a stray quote before "mailto:", renamed files, new tabs that can't reach back
+export function fixLinks($: cheerio.CheerioAPI, r: cheerio.Cheerio<any>) {
+  r.find('a[href]').each((_, a) => {
+    const $a = $(a); let h = $a.attr('href')!;
+    if (/[“”"]mailto:\/?$/.test(h) && /^\S+@\S+$/.test($a.text().trim())) h = 'mailto:' + $a.text().trim();
+    h = h.replace(/^[\s"'“”‘’]+/, '').replace(/\/library\/noa_guide\/noa_start_up_guide\.pdf$/, '/library/noa_guide/noa_start_up_guide_en.pdf');
+    $a.attr('href', h);
+    if ($a.attr('target') === '_blank' && !/noopener/.test($a.attr('rel') || '')) $a.attr('rel', (($a.attr('rel') || '') + ' noopener').trim());
+  });
+}
+
 // Post-process an extracted body: base paths, videos, tables, headings ids, lazy images.
 export function prose(html: string, opts: { toc?: boolean; visual?: boolean; legal?: boolean; faq?: boolean; lang?: Lang; fold?: boolean } = {}): { html: string; toc: Toc } {
   const $ = cheerio.load(`<div id="r">${b(html)}</div>`, null, false);
   const r = $('#r');
+  fixLinks($, r);
   r.find('div.video[data-yt]').each((_, el) => { $(el).replaceWith(videoHtml($(el).attr('data-yt')!, opts.lang)); });
   r.find('div.video[data-fb]').each((_, el) => {
     const src = decodeURIComponent($(el).attr('data-fb')!);
@@ -161,6 +191,10 @@ export function prose(html: string, opts: { toc?: boolean; visual?: boolean; leg
 }
 
 export const textOf = (html: string) => cheerio.load(html).text().replace(/\s+/g, ' ').trim();
+// summary for search results: the page's own one, or the first sentences of its text cut at a word (~155 characters)
+export const summaryOf = (html: string) => { const t = textOf(html); if (t.length <= 155) return t || undefined; const cut = t.slice(0, 155); return cut.slice(0, cut.lastIndexOf(' ')).replace(/[,;:–-]$/, '') + '…'; };
+// a few scraped summaries start with the original site's "Skip to main content" link text: those fall back to the text
+export const pageDesc = (p: { desc?: string; body: string }) => (p.desc && !/skip to main content/i.test(p.desc) ? p.desc.trim() : summaryOf(p.body)?.replace(/^skip to main content\s*/i, ''));
 
 // Some files on olympians.org are missing (the server answers with an error page); skip those images.
 export const imgOk = (src?: string | null) => {

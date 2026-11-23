@@ -13,6 +13,8 @@ const root = $.root();
 const gamesLink = root.children('a').first();
 const gamesLogo = gamesLink.find('img').attr('src');
 const gamesHref = gamesLink.attr('href');
+// logo links have no text: name them after the Games in the address ("milano-cortina-2026" -> "Milano Cortina 2026")
+const gamesName = (gamesHref || '').replace(/\/$/, '').split('/').pop()!.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
 const pastTitle = $('h4').last().text().trim();
 const past = $('h4').last().next('ul').find('a').map((_, a) => ({ href: $(a).attr('href'), img: $(a).find('img').attr('src') })).get();
 // icons follow the meaning of each tile title; nothing fits -> no icon
@@ -38,7 +40,7 @@ const recent = lastH4.length && !lastH4.next('ul').length && lastH4.find('a').le
 <section class="section">
   <div class="container">
     <div class="oh-top">
-      {gamesLogo && <a class="oh-logo" href={gamesHref} target="_blank" rel="noopener"><img src={gamesLogo} alt="" /></a>}
+      {gamesLogo && <a class="oh-logo" href={gamesHref} target="_blank" rel="noopener"><img src={gamesLogo} alt={gamesName} /></a>}
       {first && (
         <a class="oh-feature" href={first.href ?? undefined} target={first.ext ? '_blank' : undefined} rel="noopener">
           <span class="topic-icon"><svg class="icon icon-lg"><use href="#i-house" /></svg></span>
@@ -71,7 +73,7 @@ const recent = lastH4.length && !lastH4.next('ul').length && lastH4.find('a').le
   <section class="section bg-grey">
     <div class="container">
       <div class="section-head"><h2>{pastTitle}</h2></div>
-      <ul class="past">{past.map(x => <li><a href={x.href}><img src={x.img} alt="" loading="lazy" /></a></li>)}</ul>
+      <ul class="past">{past.map(x => <li><a href={x.href}><img src={x.img} alt={`OLY House ${(x.href || '').match(/(\d{4})\/?$/)?.[1] ?? ''}`.trim()} loading="lazy" /></a></li>)}</ul>
     </div>
   </section>
 )}

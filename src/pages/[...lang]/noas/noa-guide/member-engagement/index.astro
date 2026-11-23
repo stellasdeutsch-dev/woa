@@ -11,10 +11,11 @@ import { LANG_PARAMS, pageLang, t as tFor, L as Lx } from '../../../../../lib/i1
 export function getStaticPaths() { return LANG_PARAMS; }
 const lang = pageLang(Astro.params); const tr = tFor(lang); const D = dataFor(lang);
 const page = D.page;
-import { b, BASE } from '../../../../../lib/site';
+import { b, BASE, fixLinks } from '../../../../../lib/site';
 
 const p = page('/noas/noa-guide/member-engagement/');
 const $ = cheerio.load(b(p.body), null, false);
+fixLinks($, $.root());
 type Sub = { title: string; nodes: AnyNode[] };
 type Sec = { title: string; lead: AnyNode[]; subs: Sub[] };
 const secs: Sec[] = [];

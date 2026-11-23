@@ -6,10 +6,10 @@ import { LANG_PARAMS, pageLang, t as tFor, L as Lx, navLabel } from '../../../..
 export function getStaticPaths() { return LANG_PARAMS; }
 const lang = pageLang(Astro.params); const tr = tFor(lang); const D = dataFor(lang);
 const page = D.page;
-import { b, url, EMAIL, SOCIAL, tidyFormHtml } from '../../../../lib/site';
+import { b, url, EMAIL, SOCIAL, tidyFormHtml, pageDesc } from '../../../../lib/site';
 const p = page('/woa/contact-us/');
 ---
-<Base title={p.title} origPath={p.orig} image={b(p.bg)}>
+<Base title={p.title} origPath={p.orig} description={pageDesc(p)} image={b(p.bg)}>
   <PageHero title={p.title} crumbs={[{ label: 'WOA', href: '/woa/' }, { label: p.title }]} bg={b(p.bg)} compact />
   <section class="section">
     <div class="container contact">

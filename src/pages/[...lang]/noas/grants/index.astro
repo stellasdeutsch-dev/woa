@@ -7,7 +7,7 @@ import { LANG_PARAMS, pageLang, t as tFor, L as Lx, navLabel } from '../../../..
 export function getStaticPaths() { return LANG_PARAMS; }
 const lang = pageLang(Astro.params); const tr = tFor(lang); const D = dataFor(lang);
 const page = D.page;
-import { b, url } from '../../../../lib/site';
+import { b, url, pageDesc } from '../../../../lib/site';
 
 const p = page('/noas/grants/');
 const $ = cheerio.load(b(p.body), null, false);
@@ -30,7 +30,7 @@ const ideasNote = $('p').map((_, el) => $(el).text().trim()).get().find(t => /su
 const OLYMPIAN = { en: 'Olympian', fr: 'Olympien', es: 'Atleta olímpico' }[lang];
 const amountFor = (t: string) => { const a = amounts.find(x => x.includes(t.replace(' Grants', ''))); return a ? (a.split(/\s[–-]\s/)[1] || '') : ''; };
 ---
-<Base title={`${p.section} | ${title}`} origPath={p.orig} image={b(p.bg)}>
+<Base title={`${p.section} | ${title}`} origPath={p.orig} description={pageDesc(p)} image={b(p.bg)}>
   <PageHero title={p.section} crumbs={[{ label: navLabel('/noas/', 'NOAs', lang), href: '/noas/' }, { label: p.section }]} bg={b(p.bg)}>
     <div class="lead" set:html={aim} />
   </PageHero>
